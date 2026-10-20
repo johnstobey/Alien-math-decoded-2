@@ -2,3 +2,7 @@ import IndependentDuodenary.ModularCore
 import IndependentDuodenary.BinaryStructure
 import IndependentDuodenary.MappingBoundary
 import IndependentDuodenary.BinaryBridge
+import IndependentDuodenary.SourceKeys
+import IndependentDuodenary.SourceReduction
+import IndependentDuodenary.SourceProjection
+import IndependentDuodenary.SourceFactorization

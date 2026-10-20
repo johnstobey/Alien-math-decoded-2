@@ -38,18 +38,16 @@ No native evaluator or additional logical assumptions are used.
 
 ## Scope and remaining work
 
-This proves a restricted additive bridge and a precise obstruction to a full
-additive identification. It does not define a paper's question spaces,
-permitted projections, exact keys, intercept translation action, orbit
-representatives, or restored-answer function. The attached specification is
-mathematical context, not a machine-verified source model. Its claims about
-an external paper have not been independently validated in this change.
+The restricted bridges and obstruction are proved. A separate coefficient
+model now formalizes the primary source section's permitted projections,
+support reduction, folding, and key sharing; see [SOURCE_MODEL.md](SOURCE_MODEL.md).
+That model uses explicit occurrence data and a complement splitting. The full
+paper construction and Unique Games Theorem remain outside the formalization.
 
-A source-specific proof still needs a frozen primary source and a faithful
-formal definition of those operations, followed by the source folding,
-key-sharing, and appropriate equivariance or pullback-compatibility proofs.
-The obstruction above rules out a surjective additive bridge under the stated
-exponent-two hypothesis; it does not rule out other precisely typed comparisons.
+The obstruction rules out a surjective additive bridge under the stated
+exponent-two hypothesis. It does not rule out other precisely typed comparisons.
+The residue observables are equivariant after a functional and labeling have
+been chosen; they do not establish a faithful or full ring correspondence.
 
 ## Input provenance
 

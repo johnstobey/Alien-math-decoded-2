@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: five modules; 52 theorem declarations.
+- Project library: nine modules; 92 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -24,13 +24,16 @@ against the exact pushed commit at
 <https://github.com/johnstobey/Alien-math-decoded-2/actions>.
 A workflow file or a successful local build alone is not CI certification.
 
-## Open mathematical obligations
+## Mathematical scope and remaining obligations
 
-No formal external source structure or paper-to-model correspondence has been supplied.
-The restricted binary bridge and its obstruction are now proved; see `BRIDGE_SCOPE.md`.
-Such a claim requires separately specified source operations, an explicit map,
-and operation-preservation proofs. `conditional_closure` assumes preservation,
-source closure, and the specified image characterization. `conditional_level_return`
-assumes exactly 12 levels and step 3. Neither theorem establishes those hypotheses
-for an external construction. There are no incomplete proof obligations within
-the 52 stated Lean theorems.
+The source coefficient model now proves support factorization and uniqueness,
+permitted-projection key compatibility, the free translation action, canonical
+representatives, folding, and key sharing. See `SOURCE_MODEL.md` for the exact
+primary-source pin, assumptions, and theorem inventory. The restricted binary
+bridges and their non-surjectivity obstruction remain proved (`BRIDGE_SCOPE.md`).
+
+The complete Unique Games construction and its theorem remain outside this
+formalization. A faithful or surjective map to the full residue rings is not
+established; a surjective additive map from an exponent-two source is ruled out.
+The level-return theorem still assumes the supplied level and step values.
+There are no incomplete obligations inside the 92 stated Lean theorems.

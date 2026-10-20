@@ -14,13 +14,19 @@ No predecessor project is a source or dependency.
 - `BinaryBridge`: explicit additive binary-to-residue maps, exact two-element
   images, injectivity conditions, and obstructions to surjective additive maps
   and unital ring maps. See [the bridge scope](verification/BRIDGE_SCOPE.md).
+- `SourceKeys`, `SourceReduction`, `SourceProjection`, `SourceFactorization`:
+  exact-key translation, canonical representatives, homogeneous permitted
+  projections, support factorization and uniqueness, folding, and key sharing.
+  See [the pinned source and proof scope](verification/SOURCE_MODEL.md).
 - `MappingBoundary`: an explicit internal map from natural addition to modular
   addition; a general image-closure theorem **assuming** operation preservation;
   and a level-return statement **assuming** the stated level and step values.
 
-No external paper-to-model map is defined or claimed. Establishing one would
-require precise source operations, an explicit map, and a preservation proof.
-The conditional theorems do not establish those hypotheses for any external source.
+The cited source section now has an explicit coefficient model with proved
+projection, reduction, folding, and key-sharing identities. The full paper
+construction and its Unique Games result are not formalized. Residue-valued
+observables require a chosen functional and labeling; no full ring identification
+is claimed. Conditional level assumptions are not established for an external source.
 
 ## Reproduce
 

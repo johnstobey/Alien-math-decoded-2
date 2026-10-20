@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 52 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 92 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `bitToTwelve_values`
 
@@ -772,3 +772,650 @@ Proof method: Kernel-checked decidable computation (decide).
 Axioms: `propext, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES zero_divisor_mod_144` and the printed proof in the machine-generated audit.
+
+## `sourceSupportBlock_pullback`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem sourceSupportBlock_pullback [Zero V] [DecidableEq V] (b : FullBlock E X V) :
+    pullbackBlock (sourceSupportBlock b) = b
+```
+
+Proof method: Case analysis over zero and equal slopes reconstructs the original coefficient pair.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES sourceSupportBlock_pullback` and the printed proof in the machine-generated audit.
+
+## `sourceSupportBlock_correction`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem sourceSupportBlock_correction [Zero V] [DecidableEq V] (b : FullBlock E X V) :
+    pullbackCorrection (sourceSupportBlock b) = (reduceFullBlock b).2
+```
+
+Proof method: Case analysis identifies the support projection correction with the reduced intercept correction.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES sourceSupportBlock_correction` and the printed proof in the machine-generated audit.
+
+## `pullback_reducedSourceTable`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem pullback_reducedSourceTable [AddCommMonoid V] [DecidableEq V]
+    (hDouble : ∀ v : V, v + v = 0) (t : FullTable k E X V) :
+    pullbackTable (reducedSourceTable t) = t
+```
+
+Proof method: Reconstruct block slopes; the exponent-two hypothesis cancels the duplicate sum of corrections.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES pullback_reducedSourceTable` and the printed proof in the machine-generated audit.
+
+## `binary_module_double_zero`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_module_double_zero [AddCommMonoid V] [Module (ZMod 2) V] (v : V) :
+    v + v = 0
+```
+
+Proof method: Rewrite self-addition as scalar multiplication by 1+1=0 in ZMod 2.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_module_double_zero` and the printed proof in the machine-generated audit.
+
+## `binary_module_add_eq_zero_iff`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_module_add_eq_zero_iff [AddCommMonoid V] [Module (ZMod 2) V]
+    (a d : V) : a + d = 0 ↔ a = d
+```
+
+Proof method: Add the second summand and use binary_module_double_zero.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_module_add_eq_zero_iff` and the printed proof in the machine-generated audit.
+
+## `binary_single_slope_injective`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_single_slope_injective [AddCommMonoid V] [Module (ZMod 2) V]
+    (a : V) (ha : a ≠ 0) : Function.Injective (fun z : ZMod 2 => z • a)
+```
+
+Proof method: Finite binary-scalar cases, with nonzero slope hypothesis.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_single_slope_injective` and the printed proof in the machine-generated audit.
+
+## `binary_pair_slopes_injective`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_pair_slopes_injective [AddCommMonoid V] [Module (ZMod 2) V]
+    (a d : V) (ha : a ≠ 0) (hd : d ≠ 0) (had : a ≠ d) :
+    Function.Injective (fun xy : ZMod 2 × ZMod 2 => xy.1 • a + xy.2 • d)
+```
+
+Proof method: Finite scalar kernel cases and characteristic-two cancellation establish injectivity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_pair_slopes_injective` and the printed proof in the machine-generated audit.
+
+## `source_reduction_factorization`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem source_reduction_factorization [AddCommMonoid V] [Module (ZMod 2) V]
+    [DecidableEq V] (t : FullTable k E X V)
+    (p : ZMod 2 × (Fin k → ZMod 2 × ZMod 2)) :
+    evaluateFullTable t p = evaluateProjectedTable (reducedSourceTable t)
+      (permittedProjection (reducedSourceTable t) p)
+```
+
+Proof method: source_table_pullback_evaluation and pullback_reducedSourceTable with module-derived cancellation.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_reduction_factorization` and the printed proof in the machine-generated audit.
+
+## `source_reduction_projection_surjective`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem source_reduction_projection_surjective [AddCommMonoid V] [DecidableEq V]
+    (t : FullTable k E X V) :
+    Function.Surjective (permittedProjection (reducedSourceTable t))
+```
+
+Proof method: Instantiate permittedProjection_surjective on the explicit support table.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_reduction_projection_surjective` and the printed proof in the machine-generated audit.
+
+## `source_reduction_unique`
+
+Source: `IndependentDuodenary/SourceFactorization.lean`. Compilation: **passed**.
+
+```lean
+theorem source_reduction_unique [AddCommMonoid V] [Module (ZMod 2) V]
+    [DecidableEq V] (t : FullTable k E X V)
+    (g : (ZMod 2 × ((i : Fin k) → ProjectedCoordinates ((reducedSourceTable t).blocks i))) → V)
+    (hg : ∀ p, g (permittedProjection (reducedSourceTable t) p) = evaluateFullTable t p) :
+    g = evaluateProjectedTable (reducedSourceTable t)
+```
+
+Proof method: Use a preimage of every support point; both functions agree by the factorization identities.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_reduction_unique` and the printed proof in the machine-generated audit.
+
+## `translateKey_zero`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem translateKey_zero [AddZeroClass K] (q : ExactKey M K W) :
+    translateKey 0 q = q
+```
+
+Proof method: Unfold translation and use addition by zero.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES translateKey_zero` and the printed proof in the machine-generated audit.
+
+## `translateKey_add`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem translateKey_add [AddSemigroup K] (h g : K) (q : ExactKey M K W) :
+    translateKey g (translateKey h q) = translateKey (h + g) q
+```
+
+Proof method: Associativity of intercept addition.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES translateKey_add` and the printed proof in the machine-generated audit.
+
+## `translateKey_free`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem translateKey_free [AddCancelMonoid K] (h g : K) (q : ExactKey M K W) :
+    translateKey h q = translateKey g q ↔ h = g
+```
+
+Proof method: Project equality to the intercept and cancel its fixed left summand.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES translateKey_free` and the printed proof in the machine-generated audit.
+
+## `translateKey_vertex`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem translateKey_vertex [Add K] (h : K) (q : ExactKey M K W) :
+    keyVertex (translateKey h q) = keyVertex q
+```
+
+Proof method: Definitional equality: translation leaves vertex fields unchanged.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES translateKey_vertex` and the printed proof in the machine-generated audit.
+
+## `canonicalKey_translate`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem canonicalKey_translate [AddZeroClass K] (h : K) (q : ExactKey M K W) :
+    canonicalKey (translateKey h q) = canonicalKey q
+```
+
+Proof method: Definitional equality after discarding the translated intercept.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonicalKey_translate` and the printed proof in the machine-generated audit.
+
+## `canonicalKey_idempotent`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem canonicalKey_idempotent [Zero K] (q : ExactKey M K W) :
+    canonicalKey (canonicalKey q) = canonicalKey q
+```
+
+Proof method: Definitional equality of zeroing the intercept twice.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonicalKey_idempotent` and the printed proof in the machine-generated audit.
+
+## `canonicalKey_reconstruct`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem canonicalKey_reconstruct [AddZeroClass K] (q : ExactKey M K W) :
+    translateKey q.binaryIntercept (canonicalKey q) = q
+```
+
+Proof method: Add the removed intercept back to zero.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonicalKey_reconstruct` and the printed proof in the machine-generated audit.
+
+## `keyOrbit_iff_vertex_eq`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem keyOrbit_iff_vertex_eq [AddGroup K] (q r : ExactKey M K W) :
+    SameKeyOrbit q r ↔ keyVertex q = keyVertex r
+```
+
+Proof method: Project orbit equality to metadata; construct translation by minus the old intercept plus the new one.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES keyOrbit_iff_vertex_eq` and the printed proof in the machine-generated audit.
+
+## `canonicalKey_unique`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem canonicalKey_unique [AddGroup K] (q r : ExactKey M K W)
+    (horbit : SameKeyOrbit q r) (hz : r.binaryIntercept = 0) :
+    r = canonicalKey q
+```
+
+Proof method: Orbit equality fixes metadata and complement; the stated zero intercept fixes the representative.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonicalKey_unique` and the printed proof in the machine-generated audit.
+
+## `source_folding`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem source_folding [AddSemigroup K] (label : M × W → K)
+    (h : K) (q : ExactKey M K W) :
+    restoredAnswer label (translateKey h q) = restoredAnswer label q + h
+```
+
+Proof method: Associativity applied to the explicit restored-answer formula.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_folding` and the printed proof in the machine-generated audit.
+
+## `exact_key_answers_equal`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_answers_equal [Add K] (label : M × W → K)
+    (q r : ExactKey M K W) (h : q = r) :
+    restoredAnswer label q = restoredAnswer label r
+```
+
+Proof method: Congruence under the restored-answer function.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_answers_equal` and the printed proof in the machine-generated audit.
+
+## `residue_folding_twelve`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem residue_folding_twelve [AddMonoid K] (χ : K →+ ZMod 2)
+    (label : M × W → ZMod 12) (h : K) (q : ExactKey M K W) :
+    residueAnswerTwelve χ label (translateKey h q) =
+      residueAnswerTwelve χ label q + bridgeTwelve χ h
+```
+
+Proof method: Addition preservation of bridgeTwelve and associativity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES residue_folding_twelve` and the printed proof in the machine-generated audit.
+
+## `residue_folding_144`
+
+Source: `IndependentDuodenary/SourceKeys.lean`. Compilation: **passed**.
+
+```lean
+theorem residue_folding_144 [AddMonoid K] (χ : K →+ ZMod 2)
+    (label : M × W → ZMod 144) (h : K) (q : ExactKey M K W) :
+    residueAnswer144 χ label (translateKey h q) =
+      residueAnswer144 χ label q + bridge144 χ h
+```
+
+Proof method: Addition preservation of bridge144 and associativity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES residue_folding_144` and the printed proof in the machine-generated audit.
+
+## `sourceBlockProjection_lift`
+
+Source: `IndependentDuodenary/SourceProjection.lean`. Compilation: **passed**.
+
+```lean
+theorem sourceBlockProjection_lift (b : ProjectedBlock E X V) (t₀ : ZMod 2)
+    (z : ProjectedCoordinates b) :
+    sourceBlockProjection b t₀ (sourceBlockLift b t₀ z) = z
+```
+
+Proof method: Explicit local right inverse for every block/position; third position subtracts the homogeneous correction.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES sourceBlockProjection_lift` and the printed proof in the machine-generated audit.
+
+## `sourceBlockProjection_surjective`
+
+Source: `IndependentDuodenary/SourceProjection.lean`. Compilation: **passed**.
+
+```lean
+theorem sourceBlockProjection_surjective (b : ProjectedBlock E X V) (t₀ : ZMod 2) :
+    Function.Surjective (sourceBlockProjection b t₀)
+```
+
+Proof method: Use sourceBlockLift as a preimage.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES sourceBlockProjection_surjective` and the printed proof in the machine-generated audit.
+
+## `permittedProjection_preserves_homogeneous`
+
+Source: `IndependentDuodenary/SourceProjection.lean`. Compilation: **passed**.
+
+```lean
+theorem permittedProjection_preserves_homogeneous (t : ProjectedTable k E X V)
+    (p : ZMod 2 × (Fin k → ZMod 2 × ZMod 2)) :
+    (permittedProjection t p).1 = p.1
+```
+
+Proof method: Definitional equality of the homogeneous coordinate.
+
+Axioms: `propext,
+ Classical.choice,
+ Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES permittedProjection_preserves_homogeneous` and the printed proof in the machine-generated audit.
+
+## `permittedProjection_surjective`
+
+Source: `IndependentDuodenary/SourceProjection.lean`. Compilation: **passed**.
+
+```lean
+theorem permittedProjection_surjective (t : ProjectedTable k E X V) :
+    Function.Surjective (permittedProjection t)
+```
+
+Proof method: Choose each local right inverse independently and preserve the common homogeneous bit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES permittedProjection_surjective` and the printed proof in the machine-generated audit.
+
+## `source_block_pullback_evaluation`
+
+Source: `IndependentDuodenary/SourceProjection.lean`. Compilation: **passed**.
+
+```lean
+theorem source_block_pullback_evaluation (b : ProjectedBlock E X V)
+    (t₀ : ZMod 2) (xy : ZMod 2 × ZMod 2) :
+    evaluateFullBlock (pullbackBlock b) xy + t₀ • pullbackCorrection b =
+      evaluateProjectedBlock b (sourceBlockProjection b t₀ xy)
+```
+
+Proof method: Case analysis, distributivity of scalar multiplication, and the third-position correction.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_block_pullback_evaluation` and the printed proof in the machine-generated audit.
+
+## `source_table_pullback_evaluation`
+
+Source: `IndependentDuodenary/SourceProjection.lean`. Compilation: **passed**.
+
+```lean
+theorem source_table_pullback_evaluation (t : ProjectedTable k E X V)
+    (p : ZMod 2 × (Fin k → ZMod 2 × ZMod 2)) :
+    evaluateFullTable (pullbackTable t) p =
+      evaluateProjectedTable t (permittedProjection t p)
+```
+
+Proof method: Distribute scalar multiplication and finite sums; apply the block evaluation identity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_table_pullback_evaluation` and the printed proof in the machine-generated audit.
+
+## `pullback_block_metadata`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem pullback_block_metadata [AddZeroClass V] [DecidableEq V]
+    (b : ProjectedBlock E X V) :
+    (reduceFullBlock (pullbackBlock b)).1 = (reduceProjectedBlock b).1
+```
+
+Proof method: Case analysis over block and position, then zero/nonzero slope simplification.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES pullback_block_metadata` and the printed proof in the machine-generated audit.
+
+## `pullback_block_intercept`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem pullback_block_intercept [AddZeroClass V] [DecidableEq V]
+    (hDouble : ∀ v : V, v + v = 0) (b : ProjectedBlock E X V) :
+    pullbackCorrection b + (reduceFullBlock (pullbackBlock b)).2 =
+      (reduceProjectedBlock b).2
+```
+
+Proof method: Case analysis; the explicit exponent-two hypothesis cancels duplicate third-position corrections.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES pullback_block_intercept` and the printed proof in the machine-generated audit.
+
+## `pullback_reduced_intercept`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem pullback_reduced_intercept [AddCommMonoid V] [DecidableEq V]
+    (hDouble : ∀ v : V, v + v = 0) (t : ProjectedTable k E X V) :
+    fullReducedIntercept (pullbackTable t) = projectedReducedIntercept t
+```
+
+Proof method: Distribute the finite sum and apply pullback_block_intercept at each position.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES pullback_reduced_intercept` and the printed proof in the machine-generated audit.
+
+## `permitted_pullback_exact_key`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem permitted_pullback_exact_key [AddCommMonoid K] [AddCommMonoid W]
+    [DecidableEq K] [DecidableEq W] (hDouble : ∀ v : K × W, v + v = 0)
+    (t : ProjectedTable k E X (K × W)) :
+    fullExactKey (pullbackTable t) = projectedExactKey t
+```
+
+Proof method: Combine pullback_block_metadata and pullback_reduced_intercept.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES permitted_pullback_exact_key` and the printed proof in the machine-generated audit.
+
+## `projected_exact_key_translate`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem projected_exact_key_translate [AddCommMonoid K] [AddCommMonoid W]
+    [DecidableEq K] [DecidableEq W] (h : K) (t : ProjectedTable k E X (K × W)) :
+    projectedExactKey (translateProjectedTable h t) = translateKey h (projectedExactKey t)
+```
+
+Proof method: Expand intercept sums and commute the added constant to the intercept component.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES projected_exact_key_translate` and the printed proof in the machine-generated audit.
+
+## `source_key_translation_representable`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem source_key_translation_representable [AddCommMonoid K] [AddCommMonoid W]
+    [DecidableEq K] [DecidableEq W] (h : K) (t : ProjectedTable k E X (K × W)) :
+    ∃ s : ProjectedTable k E X (K × W),
+      projectedExactKey s = translateKey h (projectedExactKey t)
+```
+
+Proof method: Witness the table with translated intercept; projected_exact_key_translate.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_key_translation_representable` and the printed proof in the machine-generated audit.
+
+## `source_canonical_key_representable`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem source_canonical_key_representable [AddCommGroup K] [AddCommMonoid W]
+    [DecidableEq K] [DecidableEq W] (t : ProjectedTable k E X (K × W)) :
+    ∃ s : ProjectedTable k E X (K × W),
+      projectedExactKey s = canonicalKey (projectedExactKey t)
+```
+
+Proof method: Translate the table by the negative removed intercept.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_canonical_key_representable` and the printed proof in the machine-generated audit.
+
+## `source_table_folding`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem source_table_folding [AddCommMonoid K] [AddCommMonoid W]
+    [DecidableEq K] [DecidableEq W]
+    (label : (Fin k → ReducedBlock E X (K × W)) × W → K)
+    (h : K) (t : ProjectedTable k E X (K × W)) :
+    restoredAnswer label (projectedExactKey (translateProjectedTable h t)) =
+      restoredAnswer label (projectedExactKey t) + h
+```
+
+Proof method: projected_exact_key_translate followed by source_folding.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_table_folding` and the printed proof in the machine-generated audit.
+
+## `source_key_sharing`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem source_key_sharing [AddCommMonoid K] [AddCommMonoid W]
+    [DecidableEq K] [DecidableEq W] (hDouble : ∀ v : K × W, v + v = 0)
+    (label : (Fin k → ReducedBlock E X (K × W)) × W → K)
+    (t : ProjectedTable k E X (K × W)) :
+    restoredAnswer label (fullExactKey (pullbackTable t)) =
+      restoredAnswer label (projectedExactKey t)
+```
+
+Proof method: Rewrite using the proved permitted_pullback_exact_key.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_key_sharing` and the printed proof in the machine-generated audit.
+
+## `split_binary_double_zero`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem split_binary_double_zero {ℓ d : ℕ}
+    (v : (Fin ℓ → ZMod 2) × (Fin d → ZMod 2)) : v + v = 0
+```
+
+Proof method: Product extensionality and coordinatewise binary_vector_double_zero.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES split_binary_double_zero` and the printed proof in the machine-generated audit.
+
+## `binary_source_key_sharing`
+
+Source: `IndependentDuodenary/SourceReduction.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_source_key_sharing {ℓ d : ℕ}
+    (label : (Fin k → ReducedBlock E X ((Fin ℓ → ZMod 2) × (Fin d → ZMod 2))) ×
+      (Fin d → ZMod 2) → (Fin ℓ → ZMod 2))
+    (t : ProjectedTable k E X ((Fin ℓ → ZMod 2) × (Fin d → ZMod 2))) :
+    restoredAnswer label (fullExactKey (pullbackTable t)) =
+      restoredAnswer label (projectedExactKey t)
+```
+
+Proof method: Discharge source_key_sharing cancellation with split_binary_double_zero.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_source_key_sharing` and the printed proof in the machine-generated audit.
