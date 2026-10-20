@@ -1,0 +1,26 @@
+name: Lean proof build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: true
+          test: false
+          lint: false
+          use-mathlib-cache: true
+      - name: Check theorem inventory and axioms
+        run: python3 scripts/audit.py
+      - name: Ensure dependency lockfile stayed unchanged
+        run: git diff --exit-code -- lake-manifest.json lean-toolchain

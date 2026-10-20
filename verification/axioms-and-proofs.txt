@@ -1,0 +1,892 @@
+theorem IndependentDuodenary.binary_nonzero_eq_one : ∀ (x : ZMod 2), x ≠ 0 → x = 1 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.binary_nonzero_eq_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES binary_nonzero_eq_one: [instDecidableNot,
+ Semiring.toOne,
+ of_decide_eq_true,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ id,
+ forall_prop_decidable,
+ Ne,
+ instOfNatNat,
+ Field.toSemifield,
+ ZMod,
+ Bool.true,
+ ZMod.instField,
+ Semifield.toDivisionSemiring,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat.fact_prime_two,
+ Nat,
+ Semifield.toCommGroupWithZero,
+ DivisionSemiring.toSemiring,
+ Bool,
+ One.toOfNat1,
+ Fintype.decidableForallFintype,
+ Zero.toOfNat0,
+ Eq.refl,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.bitWeight_le : ∀ (v : IndependentDuodenary.BinaryVector),
+  IndependentDuodenary.bitWeight v ≤ 12 :=
+fun v => Finset.card_le_univ (IndependentDuodenary.support v)
+'IndependentDuodenary.bitWeight_le' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES bitWeight_le: [instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.bitWeight,
+ Fin.fintype,
+ Finset.card_le_univ,
+ Nat,
+ IndependentDuodenary.support,
+ IndependentDuodenary.BinaryVector,
+ OfNat.ofNat,
+ Fin]
+theorem IndependentDuodenary.maximum_weight_iff : ∀ (v : IndependentDuodenary.BinaryVector),
+  IndependentDuodenary.bitWeight v = 12 ↔ ∀ (i : Fin 12), v i = 1 :=
+fun v =>
+  {
+    mp := fun h i =>
+      let_fun hs := Finset.eq_univ_of_card (IndependentDuodenary.support v) h;
+      let_fun hi := Eq.mpr (id (congrArg (fun _a => i ∈ _a) hs)) (Finset.mem_univ i);
+      IndependentDuodenary.binary_nonzero_eq_one (v i) (Finset.mem_filter.mp hi).right,
+    mpr := fun h =>
+      let_fun hs :=
+        Finset.ext fun i =>
+          of_eq_true
+            (Eq.trans
+              (congr
+                (congrArg Iff
+                  (Eq.trans Mathlib.Data.Finset.Filter._auxLemma.2
+                    (Eq.trans
+                      (congr (congrArg And (Mathlib.Data.Fintype.Basic._auxLemma.1 i))
+                        (Eq.trans
+                          (congrArg Not (Eq.trans (congrArg (fun x => x = 0) (h i)) Mathlib.Algebra.NeZero._auxLemma.3))
+                          not_false_eq_true))
+                      (and_self True))))
+                (Mathlib.Data.Fintype.Basic._auxLemma.1 i))
+              (iff_self True));
+      of_eq_true
+        (Eq.trans (congrArg (fun x => x = 12) (Eq.trans (congrArg Finset.card hs) (Fintype.card_fin 12)))
+          (eq_self 12)) }
+'IndependentDuodenary.maximum_weight_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES maximum_weight_iff: [Finset.mem_univ,
+ Eq.mpr,
+ instDecidableNot,
+ False,
+ Fintype.card_fin,
+ NeZero.one,
+ Semiring.toOne,
+ Finset.univ,
+ congrArg,
+ and_self,
+ Finset,
+ ZMod.decidableEq,
+ Finset.ext,
+ Finset.eq_univ_of_card,
+ Membership.mem,
+ Mathlib.Data.Finset.Filter._auxLemma.2,
+ id,
+ Ne,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ Finset.instMembership,
+ IndependentDuodenary.bitWeight,
+ Field.toSemifield,
+ ZMod,
+ Nat.Prime.one_lt',
+ Fin.fintype,
+ iff_self,
+ And,
+ ZMod.instField,
+ Iff,
+ Semifield.toDivisionSemiring,
+ And.right,
+ CommMonoidWithZero.toZero,
+ Nat.fact_prime_two,
+ Nat,
+ ZMod.nontrivial,
+ congr,
+ Semifield.toCommGroupWithZero,
+ True,
+ IndependentDuodenary.binary_nonzero_eq_one,
+ Iff.intro,
+ eq_self,
+ Iff.mp,
+ Finset.card,
+ DivisionSemiring.toSemiring,
+ of_eq_true,
+ Mathlib.Algebra.NeZero._auxLemma.3,
+ One.toOfNat1,
+ IndependentDuodenary.support,
+ Zero.toOfNat0,
+ Finset.mem_filter,
+ IndependentDuodenary.BinaryVector,
+ Mathlib.Data.Fintype.Basic._auxLemma.1,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ not_false_eq_true,
+ Fin,
+ Finset.filter,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Not,
+ letFun,
+ Eq.trans]
+theorem IndependentDuodenary.weightLayer_card : ∀ (k : ℕ),
+  (IndependentDuodenary.weightLayer k).card = Nat.choose 12 k :=
+fun k =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => (IndependentDuodenary.weightLayer k).card = _a.choose k)
+        (Eq.symm
+          (let_fun this := rfl;
+          this))))
+    (Eq.mpr
+      (id (congrArg (fun _a => (IndependentDuodenary.weightLayer k).card = _a.choose k) (Eq.symm Finset.card_univ)))
+      (Eq.mpr
+        (id
+          (congrArg (fun _a => (IndependentDuodenary.weightLayer k).card = _a)
+            (Eq.symm (Finset.card_powersetCard k Finset.univ))))
+        (Finset.card_bij (fun v x => IndependentDuodenary.support v)
+          (fun v hv =>
+            Eq.mpr (id IndependentDuodenary.BinaryStructure._auxLemma.1)
+              ⟨Finset.subset_univ (IndependentDuodenary.support v), (Finset.mem_filter.mp hv).right⟩)
+          (fun v hv w hw heq =>
+            funext fun i =>
+              let_fun hi :=
+                let_fun hm := Finset.ext_iff.mp heq i;
+                id
+                  (Eq.mp
+                    (congr
+                      (congrArg Iff
+                        (Eq.trans Mathlib.Data.Finset.Filter._auxLemma.2
+                          (Eq.trans (congrArg (fun x => x ∧ ¬v i = 0) (Mathlib.Data.Fintype.Basic._auxLemma.1 i))
+                            (true_and ¬v i = 0))))
+                      (Eq.trans Mathlib.Data.Finset.Filter._auxLemma.2
+                        (Eq.trans (congrArg (fun x => x ∧ ¬w i = 0) (Mathlib.Data.Fintype.Basic._auxLemma.1 i))
+                          (true_and ¬w i = 0))))
+                    hm);
+              if h : v i = 0 then
+                let_fun hw0 := Decidable.byContradiction fun hn => hi.mpr hn h;
+                Eq.mpr (id (congrArg (fun _a => _a = w i) h))
+                  (Eq.mpr (id (congrArg (fun _a => 0 = _a) hw0)) (Eq.refl 0))
+              else
+                Eq.mpr (id (congrArg (fun _a => _a = w i) (IndependentDuodenary.binary_nonzero_eq_one (v i) h)))
+                  (Eq.mpr
+                    (id (congrArg (fun _a => 1 = _a) (IndependentDuodenary.binary_nonzero_eq_one (w i) (hi.mp h))))
+                    (Eq.refl 1)))
+          fun s hs =>
+          let v := fun i => if i ∈ s then 1 else 0;
+          let_fun hv :=
+            Finset.ext fun i =>
+              of_eq_true
+                (Eq.trans
+                  (congrArg (fun x => i ∈ x ↔ i ∈ s)
+                    (Eq.trans
+                      ((fun {α} p p_1 e_p =>
+                          @Eq.rec (α → Prop) p
+                            (fun p_2 e_p =>
+                              ∀ {inst : DecidablePred p} [inst_1 : DecidablePred p_2] (s s_1 : Finset α),
+                                s = s_1 → Finset.filter p s = Finset.filter p_2 s_1)
+                            (fun {inst} [inst_1 : DecidablePred p] =>
+                              Eq.ndrec (motive := fun [DecidablePred p] =>
+                                ∀ (s s_1 : Finset α), s = s_1 → Finset.filter p s = Finset.filter p s_1)
+                                (fun s s_1 e_s => e_s ▸ Eq.refl (Finset.filter p s)) (Subsingleton.elim inst inst_1))
+                            p_1 e_p)
+                        (fun i => v i ≠ 0) (fun i => i ∈ s)
+                        (funext fun i =>
+                          Eq.trans
+                            (congrArg Not
+                              (Eq.trans Init.PropLemmas._auxLemma.66
+                                (Eq.trans (implies_congr (Eq.refl (i ∈ s)) Mathlib.Algebra.NeZero._auxLemma.3)
+                                  Init.Core._auxLemma.5)))
+                            Init.PropLemmas._auxLemma.52)
+                        Finset.univ Finset.univ (Eq.refl Finset.univ))
+                      (Finset.filter_univ_mem s)))
+                  (iff_self (i ∈ s)));
+          Exists.intro v
+            (Exists.intro
+              (Eq.mpr
+                (id
+                  (Eq.trans IndependentDuodenary.BinaryStructure._auxLemma.2
+                    (Eq.trans
+                      (congrArg (fun x => x ∧ IndependentDuodenary.bitWeight v = k)
+                        (IndependentDuodenary.BinaryStructure._auxLemma.3 v))
+                      (true_and (IndependentDuodenary.bitWeight v = k)))))
+                (let_fun this :=
+                  Eq.mpr (id (congrArg (fun _a => _a.card = k) hv)) (Finset.mem_powersetCard.mp hs).right;
+                this))
+              hv))))
+'IndependentDuodenary.weightLayer_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES weightLayer_card: [Iff.mpr,
+ Finset.card_univ,
+ Eq.mpr,
+ instDecidableNot,
+ False,
+ Nat.choose,
+ NeZero.one,
+ Semiring.toOne,
+ instSubsingletonDecidable,
+ Finset.univ,
+ congrArg,
+ Finset,
+ IndependentDuodenary.BinaryStructure._auxLemma.1,
+ ZMod.fintype,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ Decidable,
+ Finset.ext,
+ Finset.filter_univ_mem,
+ Membership.mem,
+ Exists,
+ Eq.rec,
+ Mathlib.Data.Finset.Filter._auxLemma.2,
+ Eq.mp,
+ Fintype.card,
+ id,
+ Pi.instSubsingleton,
+ HasSubset.Subset,
+ Ne,
+ Finset.ext_iff,
+ Finset.card_bij,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ Finset.instMembership,
+ IndependentDuodenary.bitWeight,
+ Field.toSemifield,
+ ZMod,
+ Finset.mem_powersetCard,
+ Nat.Prime.one_lt',
+ dite,
+ Fin.fintype,
+ iff_self,
+ Init.PropLemmas._auxLemma.52,
+ funext,
+ And,
+ ZMod.instField,
+ Iff,
+ Semifield.toDivisionSemiring,
+ And.right,
+ CommMonoidWithZero.toZero,
+ implies_congr,
+ Nat.fact_prime_two,
+ Finset.powersetCard,
+ IndependentDuodenary.BinaryStructure._auxLemma.3,
+ DecidablePred,
+ Nat,
+ Init.Core._auxLemma.5,
+ ZMod.nontrivial,
+ And.intro,
+ congr,
+ Semifield.toCommGroupWithZero,
+ True,
+ IndependentDuodenary.binary_nonzero_eq_one,
+ Exists.intro,
+ Iff.mp,
+ Decidable.byContradiction,
+ Finset.instHasSubset,
+ Finset.card,
+ DivisionSemiring.toSemiring,
+ Pi.fintype,
+ of_eq_true,
+ Eq.ndrec,
+ Init.PropLemmas._auxLemma.66,
+ Mathlib.Algebra.NeZero._auxLemma.3,
+ One.toOfNat1,
+ IndependentDuodenary.support,
+ Zero.toOfNat0,
+ Finset.mem_filter,
+ Eq.refl,
+ instDecidableEqNat,
+ Finset.card_powersetCard,
+ IndependentDuodenary.BinaryVector,
+ Mathlib.Data.Fintype.Basic._auxLemma.1,
+ Subsingleton.elim,
+ Finset.decidableMem,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Finset.filter,
+ IndependentDuodenary.weightLayer,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ IndependentDuodenary.weightLayer.proof_1,
+ Not,
+ letFun,
+ rfl,
+ IndependentDuodenary.BinaryStructure._auxLemma.2,
+ true_and,
+ Finset.subset_univ,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.single_bit_count : (IndependentDuodenary.weightLayer 1).card = 12 :=
+Eq.mpr (id (congrArg (fun _a => _a = 12) (IndependentDuodenary.weightLayer_card 1)))
+  (of_decide_eq_true (id (Eq.refl true)))
+'IndependentDuodenary.single_bit_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES single_bit_count: [IndependentDuodenary.weightLayer_card,
+ Eq.mpr,
+ Nat.choose,
+ of_decide_eq_true,
+ congrArg,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ Finset.card,
+ Bool,
+ Eq.refl,
+ instDecidableEqNat,
+ IndependentDuodenary.BinaryVector,
+ OfNat.ofNat,
+ IndependentDuodenary.weightLayer,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.all_bits_count : (IndependentDuodenary.weightLayer 12).card = 1 :=
+Eq.mpr (id (congrArg (fun _a => _a = 1) (IndependentDuodenary.weightLayer_card 12)))
+  (of_decide_eq_true (id (Eq.refl true)))
+'IndependentDuodenary.all_bits_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES all_bits_count: [IndependentDuodenary.weightLayer_card,
+ Eq.mpr,
+ Nat.choose,
+ of_decide_eq_true,
+ congrArg,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ Finset.card,
+ Bool,
+ Eq.refl,
+ instDecidableEqNat,
+ IndependentDuodenary.BinaryVector,
+ OfNat.ofNat,
+ IndependentDuodenary.weightLayer,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.zero_bits_count : (IndependentDuodenary.weightLayer 0).card = 1 :=
+Eq.mpr (id (congrArg (fun _a => _a = 1) (IndependentDuodenary.weightLayer_card 0)))
+  (of_decide_eq_true (id (Eq.refl true)))
+'IndependentDuodenary.zero_bits_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES zero_bits_count: [IndependentDuodenary.weightLayer_card,
+ Eq.mpr,
+ Nat.choose,
+ of_decide_eq_true,
+ congrArg,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ Finset.card,
+ Bool,
+ Eq.refl,
+ instDecidableEqNat,
+ IndependentDuodenary.BinaryVector,
+ OfNat.ofNat,
+ IndependentDuodenary.weightLayer,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.conditional_level_return : ∀ (levels step : ℕ),
+  levels = 12 → step = 3 → IndependentDuodenary.station (step * levels) = 0 :=
+fun levels step hLevels hStep => Eq.symm hLevels ▸ Eq.symm hStep ▸ IndependentDuodenary.three_times_twelve_returns
+'IndependentDuodenary.conditional_level_return' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES conditional_level_return: [HMul.hMul,
+ ZMod.commRing,
+ IndependentDuodenary.three_times_twelve_returns,
+ CommSemiring.toCommMonoidWithZero,
+ instMulNat,
+ instOfNatNat,
+ ZMod,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Eq.ndrec,
+ Zero.toOfNat0,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ IndependentDuodenary.station,
+ instHMul]
+theorem IndependentDuodenary.stationMap_preserves_addition : IndependentDuodenary.PreservesOperation Nat.add
+  (fun x y => x + y) IndependentDuodenary.stationMap :=
+fun x y => IndependentDuodenary.station_add x y
+'IndependentDuodenary.stationMap_preserves_addition' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES stationMap_preserves_addition: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.station_add,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.PreservesOperation,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ IndependentDuodenary.stationMap,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ OfNat.ofNat,
+ Nat.add]
+theorem IndependentDuodenary.conditional_closure.{u_1, u_2} : ∀ {A : Type u_1} {B : Type u_2} (sourceOp : A → A → A)
+  (targetOp : B → B → B) (f : A → B) (S : Set A) (T : Set B),
+  IndependentDuodenary.PreservesOperation sourceOp targetOp f →
+    (∀ x ∈ S, ∀ y ∈ S, sourceOp x y ∈ S) → (∀ (b : B), b ∈ T ↔ ∃ a ∈ S, f a = b) → ∀ x ∈ T, ∀ y ∈ T, targetOp x y ∈ T :=
+fun {A} {B} sourceOp targetOp f S T hpres hclosed himage x hx y hy =>
+  Exists.casesOn ((himage x).mp hx) fun a h =>
+    And.casesOn h fun ha right =>
+      Eq.ndrec (motive := fun x => x ∈ T → targetOp x y ∈ T)
+        (fun hx =>
+          Exists.casesOn ((himage y).mp hy) fun b h =>
+            And.casesOn h fun hb right =>
+              Eq.ndrec (motive := fun y => y ∈ T → targetOp (f a) y ∈ T)
+                (fun hy =>
+                  (himage (targetOp (f a) (f b))).mpr (Exists.intro (sourceOp a b) ⟨hclosed a ha b hb, hpres a b⟩))
+                right hy)
+        right hx
+'IndependentDuodenary.conditional_closure' does not depend on any axioms
+DIRECT DEPENDENCIES conditional_closure: [Iff.mpr,
+ Membership.mem,
+ Exists,
+ IndependentDuodenary.PreservesOperation,
+ And.casesOn,
+ And,
+ Iff,
+ Exists.casesOn,
+ And.intro,
+ Exists.intro,
+ Iff.mp,
+ Eq.ndrec,
+ Eq,
+ Set.instMembership,
+ Set]
+theorem IndependentDuodenary.twelve_returns : IndependentDuodenary.station 12 = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.twelve_returns' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES twelve_returns: [of_decide_eq_true,
+ ZMod.commRing,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.station]
+theorem IndependentDuodenary.predecessor_is_nonzero : IndependentDuodenary.station 11 ≠ 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.predecessor_is_nonzero' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES predecessor_is_nonzero: [instDecidableNot,
+ of_decide_eq_true,
+ ZMod.commRing,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.station]
+theorem IndependentDuodenary.predecessor_successor_returns : IndependentDuodenary.station (11 + 1) = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.predecessor_successor_returns' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES predecessor_successor_returns: [of_decide_eq_true,
+ ZMod.commRing,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ instAddNat,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.station]
+theorem IndependentDuodenary.three_times_twelve_returns : IndependentDuodenary.station (3 * 12) = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.three_times_twelve_returns' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES three_times_twelve_returns: [HMul.hMul,
+ of_decide_eq_true,
+ ZMod.commRing,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ instMulNat,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.station,
+ instHMul]
+theorem IndependentDuodenary.twelve_squared_returns : IndependentDuodenary.superstation (12 * 12) = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.twelve_squared_returns' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES twelve_squared_returns: [HMul.hMul,
+ of_decide_eq_true,
+ ZMod.commRing,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ instMulNat,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.superstation,
+ Bool.true,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instHMul]
+theorem IndependentDuodenary.twelve_nonzero_mod_144 : IndependentDuodenary.superstation 12 ≠ 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.twelve_nonzero_mod_144' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES twelve_nonzero_mod_144: [instDecidableNot,
+ of_decide_eq_true,
+ ZMod.commRing,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.superstation,
+ Bool.true,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.number_372_multiple : 372 = 12 * 31 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.number_372_multiple' does not depend on any axioms
+DIRECT DEPENDENCIES number_372_multiple: [HMul.hMul,
+ of_decide_eq_true,
+ id,
+ instMulNat,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ Bool,
+ Eq.refl,
+ instDecidableEqNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instHMul]
+theorem IndependentDuodenary.number_719_predecessor : IndependentDuodenary.station 719 = 11 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.number_719_predecessor' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES number_719_predecessor: [Semiring.toNatCast,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Nat,
+ Bool,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ IndependentDuodenary.station]
+theorem IndependentDuodenary.number_10800_multiple : IndependentDuodenary.superstation 10800 = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.number_10800_multiple' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES number_10800_multiple: [of_decide_eq_true,
+ ZMod.commRing,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.superstation,
+ Bool.true,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.station_add : ∀ (m n : ℕ),
+  IndependentDuodenary.station (m + n) = IndependentDuodenary.station m + IndependentDuodenary.station n :=
+fun m n => Nat.cast_add m n
+'IndependentDuodenary.station_add' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_add: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddGroupWithOne.toAddMonoidWithOne,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ Nat.cast_add,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Eq,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.station]
+theorem IndependentDuodenary.superstation_add : ∀ (m n : ℕ),
+  IndependentDuodenary.superstation (m + n) =
+    IndependentDuodenary.superstation m + IndependentDuodenary.superstation n :=
+fun m n => Nat.cast_add m n
+'IndependentDuodenary.superstation_add' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES superstation_add: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddGroupWithOne.toAddMonoidWithOne,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.superstation,
+ Nat.cast_add,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Eq,
+ Ring.toAddGroupWithOne]
+theorem IndependentDuodenary.predecessor_add_one : 11 + 1 = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.predecessor_add_one' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES predecessor_add_one: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ instHAdd,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo]
+theorem IndependentDuodenary.predecessor_eq_neg_one : 11 = -1 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.predecessor_eq_neg_one' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES predecessor_eq_neg_one: [Semiring.toNatCast,
+ Semiring.toOne,
+ of_decide_eq_true,
+ ZMod.commRing,
+ Ring.toNeg,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Nat,
+ Bool,
+ One.toOfNat1,
+ Eq.refl,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ Neg.neg]
+theorem IndependentDuodenary.station_add_closed : ∀ (m n : ℕ),
+  ∃ k, IndependentDuodenary.station m + IndependentDuodenary.station n = IndependentDuodenary.station k :=
+fun m n => Exists.intro (m + n) (Eq.symm (IndependentDuodenary.station_add m n))
+'IndependentDuodenary.station_add_closed' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_add_closed: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.station_add,
+ Exists,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ Exists.intro,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ IndependentDuodenary.station]
+theorem IndependentDuodenary.superstation_add_closed : ∀ (m n : ℕ),
+  ∃ k,
+    IndependentDuodenary.superstation m + IndependentDuodenary.superstation n = IndependentDuodenary.superstation k :=
+fun m n => Exists.intro (m + n) (Eq.symm (IndependentDuodenary.superstation_add m n))
+'IndependentDuodenary.superstation_add_closed' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES superstation_add_closed: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ Exists,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.superstation,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ IndependentDuodenary.superstation_add,
+ Exists.intro,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq]
+theorem IndependentDuodenary.zero_divisors_mod_twelve : 3 ≠ 0 ∧ 4 ≠ 0 ∧ 3 * 4 = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.zero_divisors_mod_twelve' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES zero_divisors_mod_twelve: [Semiring.toNatCast,
+ instDecidableNot,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ And,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ CommMonoidWithZero.toZero,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ instDecidableAnd,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ instHMul]
+theorem IndependentDuodenary.zero_divisor_mod_144 : 12 ≠ 0 ∧ 12 * 12 = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.zero_divisor_mod_144' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES zero_divisor_mod_144: [Semiring.toNatCast,
+ instDecidableNot,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ And,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ CommMonoidWithZero.toZero,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ instDecidableAnd,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ instHMul]
+AUDIT PASSED: 27 theorem declarations; only standard Lean axioms permitted.
