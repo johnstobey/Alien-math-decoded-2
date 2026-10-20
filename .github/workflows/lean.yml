@@ -74,9 +74,13 @@ jobs:
             lake env lean "$proof_file" 2>&1 | tee .lake/millennium-check.log
             test ! -s .lake/millennium-check.log
           done
-      - name: Export reproducible source audit bundle
+      - name: Install monograph compiler
         run: |
-          scripts/export_proof_bundle.sh --output dist
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends texlive-latex-base texlive-latex-recommended
+      - name: Export source audit bundle with translation monograph
+        run: |
+          scripts/perfect_claim_bundle.sh --output dist
           cd dist
           sha256sum --check *.sha256
       - uses: actions/upload-artifact@v4

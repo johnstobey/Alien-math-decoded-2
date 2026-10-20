@@ -16,3 +16,8 @@ example : Nat.card (RegisterState 0) = 1 := by
 #guard majoritySymbolBudget 2 = 102
 #guard prizePolynomialBound 3 2 4 = 75
 #guard prizeEncodePair [false] [true] = [1, 3, 2]
+
+example {r : ℕ} (h : RegisterTranslation r) (q x : RegisterState r) :
+    (∃ n : ℕ, ((registerStep h)^[n]) q = x) ↔
+      ∃ k : Fin 12, ((registerStep h)^[k.val]) q = x :=
+  protocol_reachability_iff_bounded_search h q x

@@ -5201,6 +5201,51 @@ DIRECT DEPENDENCIES protocol_orbit_candidates_complete: [Iff.mpr,
  Finset.image,
  rfl,
  IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.protocol_reachability_iff_bounded_search : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (q x : IndependentDuodenary.RegisterState r),
+  (∃ n, (IndependentDuodenary.registerStep h)^[n] q = x) ↔ ∃ k, (IndependentDuodenary.registerStep h)^[↑k] q = x :=
+fun {r} h q x =>
+  {
+    mp := fun a =>
+      Exists.casesOn a fun n hn =>
+        Exists.intro ⟨n % 12, Nat.mod_lt n (of_decide_eq_true (id (Eq.refl true)))⟩
+          (Eq.trans (Eq.symm (IndependentDuodenary.protocol_iterate_mod_twelve h n q)) hn),
+    mpr := fun a => Exists.casesOn a fun k hk => Exists.intro (↑k) hk }
+'IndependentDuodenary.protocol_reachability_iff_bounded_search' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+DIRECT DEPENDENCIES protocol_reachability_iff_bounded_search: [IndependentDuodenary.registerStep,
+ of_decide_eq_true,
+ IndependentDuodenary.RegisterTranslation,
+ Exists,
+ Fin.mk,
+ id,
+ Nat.instMod,
+ instHMod,
+ instOfNatNat,
+ Fin.val,
+ Nat.iterate,
+ Nat.mod_lt,
+ IndependentDuodenary.RegisterState,
+ Bool.true,
+ GT.gt,
+ HMod.hMod,
+ Iff,
+ Exists.casesOn,
+ Nat,
+ Iff.intro,
+ Exists.intro,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ IndependentDuodenary.protocol_iterate_mod_twelve,
+ instLTNat,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Decidable.decide,
+ Eq,
+ Eq.trans]
 theorem IndependentDuodenary.complete_key_cardinality : Nat.card IndependentDuodenary.RepresentedKey = 49152 :=
 Eq.mpr (id (congrArg (fun _a => _a = 49152) (Nat.card_congr IndependentDuodenary.keyCoefficientEquiv)))
   (of_eq_true
@@ -20553,4 +20598,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 349 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 350 theorem declarations; only standard Lean axioms permitted.

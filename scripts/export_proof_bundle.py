@@ -135,6 +135,7 @@ def vendor(stage, manifest):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--output', type=Path, default=ROOT / 'dist')
+    ap.add_argument('--translation', action='store_true', help='compile and include the LaTeX audit monograph')
     ap.add_argument('--vendor', action='store_true', help='include pinned dependency sources and available build caches')
     ap.add_argument('--ci-url', help='capture successful public CI evidence for exactly HEAD')
     ap.add_argument('--allow-dirty', action='store_true', help='development archives only; recorded in metadata')
@@ -149,6 +150,8 @@ def main():
     output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix='proof-export-') as temp:
         name = f'independent-duodenary-{commit[:12]}' + ('-vendor' if args.vendor else '-source')
+        if args.translation:
+            name += '-translation'
         stage = Path(temp) / name
         stage.mkdir()
         files = subprocess.check_output(['git', 'ls-files', '-z', '--cached', '--others', '--exclude-standard'], cwd=ROOT).decode().split('\0')
@@ -167,6 +170,9 @@ def main():
             (['lake', 'env', 'lean', 'examples/MillenniumBoundary.lean'], 'boundary.log', True),
             (['lake', 'exe', 'verifyPipeline'], 'pipeline.log', False)]:
             records.append(checked_command(cmd, logs / filename, strict))
+        if args.translation:
+            records.append(checked_command(['python3', 'scripts/build_translation.py', '--output',
+                                            str(stage / 'publication')], logs / 'translation.log'))
         audit = (logs / 'audit.log').read_text()
         match = re.search(r'AUDIT PASSED: (\d+) theorem declarations', audit)
         if not match:
@@ -177,7 +183,8 @@ def main():
         metadata = {'format': 1, 'source_commit': commit, 'source_dirty': dirty,
                     'toolchain': (ROOT / 'lean-toolchain').read_text().strip(),
                     'vendor_dependencies': args.vendor, 'dependency_build_caches_included': args.vendor,
-                    'toolchain_included': False, 'theorem_count': int(match[1]),
+                    'toolchain_included': False, 'translation_included': args.translation,
+                    'institutional_submission_performed': False, 'theorem_count': int(match[1]),
                     'verification': records, 'prize_alignment': json.loads((ROOT / 'packaging/problem_alignment.json').read_text()),
                     'ci': None}
         write_json(stage / 'DEPENDENCIES.json', json.loads((ROOT / 'lake-manifest.json').read_text()))

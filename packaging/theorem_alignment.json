@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "count": 349,
+  "count": 350,
   "audit_evidence": "verification/axioms-and-proofs.txt",
   "theorems": [
     {
@@ -830,31 +830,38 @@
       "external_prize_implication_established": false
     },
     {
+      "name": "IndependentDuodenary.protocol_reachability_iff_bounded_search",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 30,
+      "external_prize_implication_established": false
+    },
+    {
       "name": "IndependentDuodenary.complete_key_cardinality",
-      "module": "MillenniumBridge",
-      "source": "IndependentDuodenary/MillenniumBridge.lean",
-      "line": 35,
-      "external_prize_implication_established": false
-    },
-    {
-      "name": "IndependentDuodenary.complete_register_cardinality",
-      "module": "MillenniumBridge",
-      "source": "IndependentDuodenary/MillenniumBridge.lean",
-      "line": 40,
-      "external_prize_implication_established": false
-    },
-    {
-      "name": "IndependentDuodenary.majority_symbol_budget_linear",
       "module": "MillenniumBridge",
       "source": "IndependentDuodenary/MillenniumBridge.lean",
       "line": 47,
       "external_prize_implication_established": false
     },
     {
-      "name": "IndependentDuodenary.protected_frame_width",
+      "name": "IndependentDuodenary.complete_register_cardinality",
       "module": "MillenniumBridge",
       "source": "IndependentDuodenary/MillenniumBridge.lean",
       "line": 52,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.majority_symbol_budget_linear",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 59,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protected_frame_width",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 64,
       "external_prize_implication_established": false
     },
     {

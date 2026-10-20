@@ -92,3 +92,7 @@ workflow alone is not evidence of a successful remote run.
 
 [Formal alignment and reproducible audit bundles](verification/MILLENNIUM_BRIDGE.md)
 state the finite bounds, unproved complexity obligation and release procedure.
+
+The [LaTeX translation monograph](MillenniumPrizeTranslation.tex) and
+`scripts/perfect_claim_bundle.sh` provide a PDF audit archive with a complete
+theorem index. This does not certify or file a Millennium Prize claim.

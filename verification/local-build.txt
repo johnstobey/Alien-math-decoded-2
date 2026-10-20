@@ -3782,10 +3782,7 @@ note: this linter can be disabled with `set_option linter.docPrime false`
 warning: ././.lake/packages/mathlib/././Mathlib/GroupTheory/Exponent.lean:471:8: `Monoid.exponent_eq_iSup_orderOf'` is missing a doc-string, please add one.
 Declarations whose name ends with a `'` are expected to contain an explanation for the presence of a `'` in their doc-string. This may consist of discussion of the difference relative to the unprimed version, or an explanation as to why no better naming scheme is possible.
 note: this linter can be disabled with `set_option linter.docPrime false`
-✔ [1085/1091] Built Mathlib.Data.List.GetD
-✔ [1086/1091] Built Mathlib.Data.Rel
-✔ [1087/1091] Built Mathlib.Data.PFun
-⚠ [1088/1091] Built Mathlib.Computability.TuringMachine
+⚠ [1085/1091] Replayed Mathlib.Computability.TuringMachine
 warning: ././.lake/packages/mathlib/././Mathlib/Computability/TuringMachine.lean:517:8: `Turing.Tape.exists_mk'` is missing a doc-string, please add one.
 Declarations whose name ends with a `'` are expected to contain an explanation for the presence of a `'` in their doc-string. This may consist of discussion of the difference relative to the unprimed version, or an explanation as to why no better naming scheme is possible.
 note: this linter can be disabled with `set_option linter.docPrime false`

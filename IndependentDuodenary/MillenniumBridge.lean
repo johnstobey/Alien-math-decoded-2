@@ -26,6 +26,18 @@ theorem protocol_orbit_candidates_complete {r : ℕ} (h : RegisterTranslation r)
   rw [protocol_iterate_mod_twelve]
   exact Finset.mem_image.mpr ⟨⟨n % 12, Nat.mod_lt _ (by decide)⟩, Finset.mem_univ _, rfl⟩
 
+/-- Reachability for this fixed protocol is exactly a twelve-candidate search. -/
+theorem protocol_reachability_iff_bounded_search {r : ℕ} (h : RegisterTranslation r)
+    (q x : RegisterState r) :
+    (∃ n : ℕ, ((registerStep h)^[n]) q = x) ↔
+      ∃ k : Fin 12, ((registerStep h)^[k.val]) q = x := by
+  constructor
+  · rintro ⟨n, hn⟩
+    exact ⟨⟨n % 12, Nat.mod_lt _ (by decide)⟩,
+      (protocol_iterate_mod_twelve h n q).symm.trans hn⟩
+  · rintro ⟨k, hk⟩
+    exact ⟨k.val, hk⟩
+
 def keyCoefficientEquiv : RepresentedKey ≃ CanonicalCoefficients where
   toFun q := (q.metadata, q.binaryIntercept, q.complementIntercept)
   invFun c := ⟨c.1, c.2.1, c.2.2⟩

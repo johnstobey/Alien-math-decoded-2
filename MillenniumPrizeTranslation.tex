@@ -1,0 +1,169 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage[hidelinks]{hyperref}
+\input{theorem-count.tex}
+\title{Finite Protocol Verification and the Boundary of a Complexity Claim}
+\author{Independent Duodenary Verification Project}
+\date{}
+\begin{document}
+\maketitle
+\begin{abstract}
+This monograph accompanies a Lean 4 library of \AuditedTheoremCount{} named
+kernel-checked theorem declarations. It translates the precise finite algebraic,
+encoding and recovery results into conventional mathematical statements. The
+associated P-versus-NP question is identified, but neither a resolution of that
+question nor an equivalence between the protocol and general polynomial
+verification is proved. This document is an independent audit specification,
+not a claim of Clay Mathematics Institute acceptance or eligibility.
+\end{abstract}
+
+\section{Objects and exact representation}
+Let $B=\mathbb Z/2\mathbb Z$, $C=\mathbb Z/12\mathbb Z$, and let
+\[
+ K=\operatorname{Fin}(3)\times B^{\operatorname{Fin}(2)}
+       \times B^C,\qquad Q_r=K^{\operatorname{Fin}(r)}.
+\]
+The Lean types are \texttt{RepresentedKey} and \texttt{RegisterState r}.
+The explicit coefficient equivalence gives
+\[
+ |K|=3\,2^2\,2^{12}=49152,\qquad |Q_r|=49152^r.
+\]
+Theorems \texttt{complete\_key\_cardinality} and
+\texttt{complete\_register\_cardinality} establish these identities.
+Thus the full family of state spaces grows exponentially in $r$.
+No polynomial bound on full-state enumeration is asserted.
+
+\section{A proved bounded-search equivalence}
+Fix a register translation parameter $h$. Let $S_h$ denote the previously
+defined composition of coordinate rotation and binary translation. Its proved
+global period satisfies $S_h^{12}=\operatorname{id}$. For every $q$ and $n$,
+\[
+ S_h^n(q)=S_h^{n\bmod 12}(q).
+\]
+Consequently the following equivalence holds with no heuristic premise:
+\begin{equation}\label{eq:bounded}
+ (\exists n\in\mathbb N,\ S_h^n(q)=x)
+ \quad\Longleftrightarrow\quad
+ (\exists k\in\operatorname{Fin}(12),\ S_h^k(q)=x).
+\end{equation}
+For the forward direction choose $k=n\bmod12$ and use the period identity.
+For the reverse direction take the natural value of $k$.
+This is \texttt{protocol\_reachability\_iff\_bounded\_search}.
+The explicit candidate set has at most twelve elements and contains every
+iterate. Some orbits are shorter; the empty register product is included.
+
+Equation~\eqref{eq:bounded} is an equivalence for reachability under one fixed
+operator, with fixed $h$ and initial state $q$. It does not encode arbitrary
+search problems, arbitrary operator sequences, Boolean satisfiability, or
+arbitrary certificate-verifiable languages. Its finite candidate bound does
+not establish a Turing-machine running-time bound.
+
+\section{Encoding, operations and recovery}
+Each exact key is encoded as seventeen symbols of $C$, with explicit framing.
+The decoder is a total function into an option type and is a left inverse on
+valid encodings. Its rejection conditions remain part of the specification.
+Register encodings retain all metadata and binary coordinates. Phase projection
+alone is noninjective and is not identified with the full representation.
+
+Validated station expressions denote permutations of $C$. A finite station
+program has a proved compositional semantics and an explicit inverse. Triple
+repetition replaces each transmitted symbol by three symbols; majority recovery
+corrects at most one substitution per aligned triple. Thus a protected frame has
+$3\cdot17=51$ symbol positions per register, for $51r$ positions overall.
+This is a symbol budget, not a proof of polynomial-time machine simulation.
+
+For known $h,n$ and a validated station program $p$, the theorem
+\texttt{pipeline\_master\_composition} states that the specified inverse and
+decoder recover the initial full canonical state from every received word
+satisfying the aligned per-triple noise bound. Insertions, deletions, arbitrary
+misalignment and two errors in a triple are outside this guarantee. The noise
+condition is a channel assumption, not an assumed decoder-success conclusion.
+The executable guard checks thirteen concrete boundaries; universal correctness
+rests on the proof terms, not on the number of fixtures.
+
+\section{Alignment with the P-versus-NP question}
+The recognized complexity question asks whether $\mathrm P=\mathrm{NP}$:
+whether every language with polynomially bounded, polynomial-time verifiable
+certificates has a deterministic polynomial-time decision procedure. The
+inequality $\mathrm P\ne\mathrm{NP}$ is one possible resolution, not an
+established fact of this library.
+
+The bridge defines finite Post--Turing machines using Mathlib's TM0, binary
+input words encoded over a four-symbol alphabet, a certificate separator,
+Boolean outputs and time bounds $c(n+1)^d$. It defines
+\texttt{PrizeDeterministicPolynomial} and
+\texttt{PrizeCertificatePolynomial}. The proposition
+\texttt{PVersusNPConjecture} asserts inequality of these language classes in
+that explicit model. It is defined without a proof. Equivalence to other
+standard complexity models has not been formalized here.
+
+There is no proved reduction from arbitrary languages in the verifier class to
+this finite protocol, no representation-size theorem for such a reduction, and
+no proved polynomial-time simulation or class separation. The bounded orbit
+identity cannot supply these missing statements. No topological or analytic
+Millennium conjecture is formalized by renaming a protocol invariant.
+
+\section{Foundations and verification evidence}
+The original 349 declarations are retained and the bounded-search equivalence
+adds one declaration. The generated appendix inventories the current library.
+Exact propositions, proof terms, direct dependencies and transitive foundational
+requirements are in the accompanying \texttt{verification/THEOREMS.md} and
+\texttt{verification/axioms-and-proofs.txt}.
+
+The audit permits only Lean's standard \texttt{propext},
+\texttt{Classical.choice} and \texttt{Quot.sound}. No custom foundational axioms
+or proof placeholders are introduced. This is not a claim that the existing
+library is entirely constructive: standard classical reasoning and quotients
+remain in its audited foundations. Eliminating them would require a separate
+constructive redevelopment, not a metadata change.
+
+The toolchain is Lean 4.14.0, with Mathlib pinned at Git revision
+\begin{center}\texttt{4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84}\end{center}
+New declarations are checked
+with zero diagnostics. Full builds retain existing upstream Mathlib
+\texttt{docPrime} warnings; they are recorded rather than suppressed.
+
+\section{Archival and public-record specification}
+The claim-bundle script builds the library, audits every named theorem, runs
+the thirteen-check guard, compiles this monograph twice, hashes payload files,
+and emits a compressed archive and a separate SHA-256 sidecar. A release export
+requires a clean committed checkout. Development exports are marked dirty.
+Exact-commit successful CI evidence may be included explicitly. The manifest
+identifies public HTML evidence separately from raw CI logs.
+
+Source-only bundles require dependency retrieval when caches are absent.
+Vendor bundles include pinned dependency sources and available build caches,
+with local-path build configuration and preserved upstream configuration.
+Lean/Lake, Python and a native compiler/linker remain external requirements.
+Monograph compilation additionally requires pdfLaTeX and its listed packages.
+The package is not dependency-free. Hashes establish integrity relative to the
+manifest; they are neither third-party signatures nor institutional approval.
+
+A public repository commit records source publication. It is not an
+institutional deposit receipt, a DOI, peer-review acceptance, a proof of prize
+eligibility, or a filing with CMI. No institutional submission is performed by
+the bundle script. The official CMI rules endpoint returned HTTP 403 during
+the recorded check, so its current text was not audited. Institutional claim
+readiness remains unestablished while the problem equivalence and prize proof
+are missing.
+
+\begin{thebibliography}{9}
+\bibitem{cmi} Clay Mathematics Institute, \emph{P vs NP},
+\url{https://www.claymath.org/millennium/p-vs-np/}.
+This identifies the named question; no verbatim official statement is reproduced.
+\bibitem{rules} Clay Mathematics Institute, \emph{Rules for the Millennium Prizes},
+\url{https://www.claymath.org/millennium-problems/rules/}.
+Current rules text not retrieved in the recorded HTTP-403 check.
+\bibitem{mathlib} The mathlib community, \emph{Mathlib}, pinned revision specified
+above, including \texttt{Mathlib.Computability.TuringMachine}.
+\end{thebibliography}
+
+\appendix
+\section{Complete declaration-to-module inventory}
+All names have namespace \texttt{IndependentDuodenary}. Module membership maps
+them to their actual mathematical domain; it does not assert an implication to
+a prize conjecture. The machine-readable catalog supplies source paths and
+line numbers. This appendix contains \AuditedTheoremCount{} entries.
+\input{theorem-index.tex}
+\end{document}

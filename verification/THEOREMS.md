@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 349 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 350 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -1833,6 +1833,25 @@ Proof method: Reduce the exponent modulo twelve and supply its Fin 12 witness.
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES protocol_orbit_candidates_complete` and the printed proof in the machine-generated audit.
+
+## `protocol_reachability_iff_bounded_search`
+
+Source: `IndependentDuodenary/MillenniumBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem protocol_reachability_iff_bounded_search {r : ℕ} (h : RegisterTranslation r)
+    (q x : RegisterState r) :
+    (∃ n : ℕ, ((registerStep h)^[n]) q = x) ↔
+      ∃ k : Fin 12, ((registerStep h)^[k.val]) q = x
+```
+
+Proof method: Reduce an arbitrary iterate modulo twelve for the forward implication; use the finite witness value for the reverse implication.
+
+Axioms: `propext,
+ Classical.choice,
+ Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protocol_reachability_iff_bounded_search` and the printed proof in the machine-generated audit.
 
 ## `complete_key_cardinality`
 

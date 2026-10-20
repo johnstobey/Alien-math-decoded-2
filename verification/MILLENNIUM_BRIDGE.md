@@ -107,3 +107,30 @@ No CMI compliance certification, acceptance, publication status or prize
 eligibility is asserted. This package is suitable for independent inspection of
 its stated finite mathematics; a complete Millennium submission remains
 unestablished.
+
+## S/T monograph and claim-audit export
+
+`../MillenniumPrizeTranslation.tex` states the finite mathematics, the exact
+bounded-reachability equivalence and the unresolved P-versus-NP bridge. Its
+appendix is generated from the complete source-matched theorem catalog. Build
+and archive it with:
+
+```sh
+python3 scripts/build_translation.py
+scripts/perfect_claim_bundle.sh --output dist
+```
+
+The build needs pdfLaTeX with amsmath, amssymb, geometry and hyperref (on Ubuntu,
+`texlive-latex-base texlive-latex-recommended`). Two passes resolve references;
+undefined references and overfull boxes fail the builder. `--vendor` and
+`--ci-url` retain the exporter's existing meanings. The resulting filename ends
+in `-translation.tar.gz`. The archive contains `publication/` with the PDF,
+all generated TeX inputs, source, compilation logs and a translation manifest.
+The ordinary build manifests remain pinned and unchanged.
+
+The new equivalence has domain `RegisterState r` for a fixed `registerStep h`.
+It reduces its unbounded iteration count to Fin 12. It is not an equivalence to
+a Clay conjecture. The public repository is a source record only: no deposit
+receipt, DOI, peer review, institutional submission or prize registration is
+asserted or produced. The audit package is ready for inspection of its stated
+finite results; an institutional prize claim is not established.

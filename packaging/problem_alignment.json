@@ -14,5 +14,9 @@
     "url": "https://www.claymath.org/millennium-problems/rules/",
     "retrieved": false,
     "http_status": 403
-  }
+  },
+  "institutional_submission_performed": false,
+  "institutional_deposit_receipt": null,
+  "constructive_only_foundations": false,
+  "public_record_kind": "Git repository publication; no institutional registration asserted"
 }
