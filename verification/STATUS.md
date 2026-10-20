@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: four modules; 27 theorem declarations.
+- Project library: five modules; 52 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -26,10 +26,11 @@ A workflow file or a successful local build alone is not CI certification.
 
 ## Open mathematical obligations
 
-No external source structure or paper-to-model correspondence has been supplied.
+No formal external source structure or paper-to-model correspondence has been supplied.
+The restricted binary bridge and its obstruction are now proved; see `BRIDGE_SCOPE.md`.
 Such a claim requires separately specified source operations, an explicit map,
 and operation-preservation proofs. `conditional_closure` assumes preservation,
 source closure, and the specified image characterization. `conditional_level_return`
 assumes exactly 12 levels and step 3. Neither theorem establishes those hypotheses
 for an external construction. There are no incomplete proof obligations within
-the 27 stated Lean theorems.
+the 52 stated Lean theorems.

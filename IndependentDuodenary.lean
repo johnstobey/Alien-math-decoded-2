@@ -1,3 +1,4 @@
 import IndependentDuodenary.ModularCore
 import IndependentDuodenary.BinaryStructure
 import IndependentDuodenary.MappingBoundary
+import IndependentDuodenary.BinaryBridge

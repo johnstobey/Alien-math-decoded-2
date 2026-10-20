@@ -1,6 +1,385 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 27 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 52 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+
+## `bitToTwelve_values`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bitToTwelve_values : bitToTwelve 0 = 0 ∧ bitToTwelve 1 = 6
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bitToTwelve_values` and the printed proof in the machine-generated audit.
+
+## `bitTo144_values`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bitTo144_values : bitTo144 0 = 0 ∧ bitTo144 1 = 72
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bitTo144_values` and the printed proof in the machine-generated audit.
+
+## `bitToTwelve_injective`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bitToTwelve_injective : Function.Injective bitToTwelve
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bitToTwelve_injective` and the printed proof in the machine-generated audit.
+
+## `bitTo144_injective`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bitTo144_injective : Function.Injective bitTo144
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bitTo144_injective` and the printed proof in the machine-generated audit.
+
+## `binary_double_zero`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_double_zero : ∀ x : ZMod 2, x + x = 0
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_double_zero` and the printed proof in the machine-generated audit.
+
+## `twelve_two_torsion`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem twelve_two_torsion :
+    ∀ x : ZMod 12, x + x = 0 ↔ x = 0 ∨ x = 6
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES twelve_two_torsion` and the printed proof in the machine-generated audit.
+
+## `mod144_two_torsion`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem mod144_two_torsion :
+    ∀ x : ZMod 144, x + x = 0 ↔ x = 0 ∨ x = 72
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES mod144_two_torsion` and the printed proof in the machine-generated audit.
+
+## `binary_vector_double_zero`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_vector_double_zero {ℓ : ℕ} (v : Fin ℓ → ZMod 2) : v + v = 0
+```
+
+Proof method: Function extensionality and binary_double_zero at each coordinate.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_vector_double_zero` and the printed proof in the machine-generated audit.
+
+## `image_double_zero`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem image_double_zero {K B : Type*} [AddMonoid K] [AddMonoid B]
+    (hK : ∀ x : K, x + x = 0) (f : K →+ B) (x : K) : f x + f x = 0
+```
+
+Proof method: Preservation of addition and zero; the explicit source exponent-two hypothesis.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES image_double_zero` and the printed proof in the machine-generated audit.
+
+## `image_in_two_stations`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem image_in_two_stations {K : Type*} [AddMonoid K]
+    (hK : ∀ x : K, x + x = 0) (f : K →+ ZMod 12) (x : K) :
+    f x = 0 ∨ f x = 6
+```
+
+Proof method: image_double_zero followed by twelve_two_torsion.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES image_in_two_stations` and the printed proof in the machine-generated audit.
+
+## `image_in_two_superstations`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem image_in_two_superstations {K : Type*} [AddMonoid K]
+    (hK : ∀ x : K, x + x = 0) (f : K →+ ZMod 144) (x : K) :
+    f x = 0 ∨ f x = 72
+```
+
+Proof method: image_double_zero followed by mod144_two_torsion.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES image_in_two_superstations` and the printed proof in the machine-generated audit.
+
+## `binary_map_not_surjective_twelve`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_map_not_surjective_twelve {K : Type*} [AddMonoid K]
+    (hK : ∀ x : K, x + x = 0) (f : K →+ ZMod 12) :
+    ¬ Function.Surjective f
+```
+
+Proof method: A hypothetical preimage of 1 contradicts image_in_two_stations.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_map_not_surjective_twelve` and the printed proof in the machine-generated audit.
+
+## `binary_map_not_surjective_144`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem binary_map_not_surjective_144 {K : Type*} [AddMonoid K]
+    (hK : ∀ x : K, x + x = 0) (f : K →+ ZMod 144) :
+    ¬ Function.Surjective f
+```
+
+Proof method: A hypothetical preimage of 1 contradicts image_in_two_superstations.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binary_map_not_surjective_144` and the printed proof in the machine-generated audit.
+
+## `binaryCoordinate_surjective`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem binaryCoordinate_surjective {ℓ : ℕ} (i : Fin ℓ) :
+    Function.Surjective (binaryCoordinate i)
+```
+
+Proof method: The constant vector with value b is a preimage of every b.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binaryCoordinate_surjective` and the printed proof in the machine-generated audit.
+
+## `binaryCoordinate_not_injective`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem binaryCoordinate_not_injective {ℓ : ℕ} (i j : Fin ℓ) (hij : i ≠ j) :
+    ¬ Function.Injective (binaryCoordinate i)
+```
+
+Proof method: A nonzero vector supported on a different coordinate maps to zero.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES binaryCoordinate_not_injective` and the printed proof in the machine-generated audit.
+
+## `bridgeTwelve_preserves_addition`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bridgeTwelve_preserves_addition {K : Type*} [AddMonoid K]
+    (χ : K →+ ZMod 2) :
+    PreservesOperation (fun x y : K => x + y)
+      (fun x y : ZMod 12 => x + y) (bridgeTwelve χ)
+```
+
+Proof method: Addition law of the composite AddMonoidHom.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bridgeTwelve_preserves_addition` and the printed proof in the machine-generated audit.
+
+## `bridge144_preserves_addition`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bridge144_preserves_addition {K : Type*} [AddMonoid K]
+    (χ : K →+ ZMod 2) :
+    PreservesOperation (fun x y : K => x + y)
+      (fun x y : ZMod 144 => x + y) (bridge144 χ)
+```
+
+Proof method: Addition law of the composite AddMonoidHom.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bridge144_preserves_addition` and the printed proof in the machine-generated audit.
+
+## `bridgeTwelve_range`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bridgeTwelve_range {K : Type*} [AddMonoid K]
+    (χ : K →+ ZMod 2) (hχ : Function.Surjective χ) (y : ZMod 12) :
+    (∃ x, bridgeTwelve χ x = y) ↔ y = 0 ∨ y = 6
+```
+
+Proof method: Binary image classification and preimages supplied by the explicit surjectivity hypothesis.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bridgeTwelve_range` and the printed proof in the machine-generated audit.
+
+## `bridge144_range`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bridge144_range {K : Type*} [AddMonoid K]
+    (χ : K →+ ZMod 2) (hχ : Function.Surjective χ) (y : ZMod 144) :
+    (∃ x, bridge144 χ x = y) ↔ y = 0 ∨ y = 72
+```
+
+Proof method: Binary image classification and preimages supplied by the explicit surjectivity hypothesis.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bridge144_range` and the printed proof in the machine-generated audit.
+
+## `bridgeTwelve_injective_iff`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bridgeTwelve_injective_iff {K : Type*} [AddMonoid K]
+    (χ : K →+ ZMod 2) :
+    Function.Injective (bridgeTwelve χ) ↔ Function.Injective χ
+```
+
+Proof method: Injectivity of bitToTwelve and injectivity of function composition.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bridgeTwelve_injective_iff` and the printed proof in the machine-generated audit.
+
+## `bridge144_injective_iff`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem bridge144_injective_iff {K : Type*} [AddMonoid K]
+    (χ : K →+ ZMod 2) :
+    Function.Injective (bridge144 χ) ↔ Function.Injective χ
+```
+
+Proof method: Injectivity of bitTo144 and injectivity of function composition.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bridge144_injective_iff` and the printed proof in the machine-generated audit.
+
+## `coordinate_bridgeTwelve_range`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem coordinate_bridgeTwelve_range {ℓ : ℕ} (i : Fin ℓ) (y : ZMod 12) :
+    (∃ v, bridgeTwelve (binaryCoordinate i) v = y) ↔ y = 0 ∨ y = 6
+```
+
+Proof method: bridgeTwelve_range with the proved binaryCoordinate_surjective.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES coordinate_bridgeTwelve_range` and the printed proof in the machine-generated audit.
+
+## `coordinate_bridge144_range`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem coordinate_bridge144_range {ℓ : ℕ} (i : Fin ℓ) (y : ZMod 144) :
+    (∃ v, bridge144 (binaryCoordinate i) v = y) ↔ y = 0 ∨ y = 72
+```
+
+Proof method: bridge144_range with the proved binaryCoordinate_surjective.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES coordinate_bridge144_range` and the printed proof in the machine-generated audit.
+
+## `no_binary_ring_hom_twelve`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem no_binary_ring_hom_twelve : ¬ Nonempty (ZMod 2 →+* ZMod 12)
+```
+
+Proof method: Preservation of addition, 1 and 0 would force the nonzero target 1+1 to be zero.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES no_binary_ring_hom_twelve` and the printed proof in the machine-generated audit.
+
+## `no_binary_ring_hom_144`
+
+Source: `IndependentDuodenary/BinaryBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem no_binary_ring_hom_144 : ¬ Nonempty (ZMod 2 →+* ZMod 144)
+```
+
+Proof method: Preservation of addition, 1 and 0 would force the nonzero target 1+1 to be zero.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES no_binary_ring_hom_144` and the printed proof in the machine-generated audit.
 
 ## `binary_nonzero_eq_one`
 

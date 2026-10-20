@@ -11,6 +11,9 @@ No predecessor project is a source or dependency.
 - `BinaryStructure`: vectors `Fin 12 → ZMod 2`, Hamming weight, the bound 12,
   maximum weight exactly when every coordinate is 1, and the general layer
   cardinality `Nat.choose 12 k` (including weights 0, 1, and 12).
+- `BinaryBridge`: explicit additive binary-to-residue maps, exact two-element
+  images, injectivity conditions, and obstructions to surjective additive maps
+  and unital ring maps. See [the bridge scope](verification/BRIDGE_SCOPE.md).
 - `MappingBoundary`: an explicit internal map from natural addition to modular
   addition; a general image-closure theorem **assuming** operation preservation;
   and a level-return statement **assuming** the stated level and step values.
