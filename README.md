@@ -3,6 +3,9 @@
 An independent Lean 4 project about finite residue rings and binary vectors.
 No predecessor project is a source or dependency.
 
+[Proof dependency map and next obligation](verification/PROOF_DEPENDENCY_MAP.md)
+connects the supplied claims to the checked results and identifies the remaining gaps.
+
 ## Mathematical scope
 
 - `ModularCore`: reduction into `ZMod 12` and `ZMod 144`, addition preservation

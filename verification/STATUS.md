@@ -54,3 +54,9 @@ model, normalized implementation proof, five source fixtures, a noninjectivity
 proof, and a lossless protected result codec. See `CIPHER_VALIDATOR.md` for the
 source hash, rule mapping and numerical/interpretive boundaries. Both the Lean
 cipher walkthrough (nine guards) and five isolated JavaScript fixtures passed.
+
+The [proof dependency map](PROOF_DEPENDENCY_MAP.md) separates the proved
+restricted correspondence from the obstructed fixed-fold/twelve-cycle proposal,
+the unidentified alternative source operator, and the unformulated external
+theorem implication. It proposes lossless structured key encoding as a concrete
+continuation. This documentation milestone adds no Lean declarations.
