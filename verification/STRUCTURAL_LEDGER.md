@@ -48,14 +48,14 @@ The variable-length construction proves unbounded representational capacity by
 an actual left inverse. It makes no efficiency claim: an integer n is encoded
 as n zero symbols. Fixed-length capacity remains bounded by `12^n`.
 
-## Next mathematical breadcrumb
+## Grammar extension
 
-The finite structure, exact-decoding conditions, and a concrete error-correcting
-codec are now available. A source-specific relational grammar still requires
-explicit expression constructors, a specified meaning space, actual encoding
-and decoding maps, and proofs that the sourced rules preserve those meanings.
-Those objects must be supplied or independently constructed from a definite
-corpus; neither cyclic symmetry nor the generic codec establishes them.
+The constructed station-operation grammar now supplies actual expression
+constructors, permutation semantics, a semantic quotient, exact E/D functions,
+and operation-preserving wire procedures. It also has a concrete bounded-error
+semantic recovery path. See `STATION_CODEC.md` for the worked example and proofs.
+A source-specific rule-to-operation interpretation for a natural-language
+corpus remains a separate obligation.
 
 The earlier coefficient model and binary-bridge obstruction remain proved.
 This extension makes no new claim about the full Unique Games Theorem or a

@@ -22,5 +22,7 @@ jobs:
           use-mathlib-cache: true
       - name: Check theorem inventory and axioms
         run: python3 scripts/audit.py
+      - name: Run station codec walkthrough
+        run: lake env lean examples/StationWalkthrough.lean
       - name: Ensure dependency lockfile stayed unchanged
         run: git diff --exit-code -- lake-manifest.json lean-toolchain

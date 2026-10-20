@@ -22,6 +22,10 @@ No predecessor project is a source or dependency.
   explicit inverse, the complete cyclic-isometry classification, the 48-element
   affine permutation group, exact-decoding capacity, and a concrete single-error
   correcting repetition codec. See [the structural ledger](verification/STRUCTURAL_LEDGER.md).
+- `StationGrammar`, `StationCodec`: a typed operation language with complete
+  permutation semantics, exact encoding/decoding on semantic classes, wire
+  composition and inverse, and bounded-error recovery. See the
+  [worked grammar and codec](verification/STATION_CODEC.md).
 - `MappingBoundary`: an explicit internal map from natural addition to modular
   addition; a general image-closure theorem **assuming** operation preservation;
   and a level-return statement **assuming** the stated level and step values.

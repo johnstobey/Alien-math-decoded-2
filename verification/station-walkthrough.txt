@@ -1,0 +1,7 @@
+("reflection-code", 1, 11)
+("reflection-input-output", [(0, 11), (1, 0), (2, 1), (6, 5), (11, 10)])
+("scale-after-shift-code", 5, 3)
+("received-triples", [1, 5, 1], [11, 11, 0])
+("recovered-code", 1, 11)
+("decoded-action-at-2", some 1)
+("nonunit-code", "rejected")

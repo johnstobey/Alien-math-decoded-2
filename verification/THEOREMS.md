@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 150 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 191 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -1834,6 +1834,625 @@ Proof method: Discharge source_key_sharing cancellation with split_binary_double
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES binary_source_key_sharing` and the printed proof in the machine-generated audit.
+
+## `parse_station_unit_roundtrip`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem parse_station_unit_roundtrip : ∀ u : (ZMod 12)ˣ,
+    parseStationUnit (u : ZMod 12) = some u
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES parse_station_unit_roundtrip` and the printed proof in the machine-generated audit.
+
+## `parse_station_unit_sound`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem parse_station_unit_sound : ∀ x : ZMod 12, ∀ u : (ZMod 12)ˣ,
+    parseStationUnit x = some u → (u : ZMod 12) = x
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES parse_station_unit_sound` and the printed proof in the machine-generated audit.
+
+## `parse_station_parameter_roundtrip`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem parse_station_parameter_roundtrip (p : AffineStationParameter) :
+    parseStationParameter (encodeStationParameter p) = some p
+```
+
+Proof method: The finite unit parser round trip followed by pairing the unchanged offset.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES parse_station_parameter_roundtrip` and the printed proof in the machine-generated audit.
+
+## `encode_parsed_station_parameter`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem encode_parsed_station_parameter (c : StationWireCode) (p : AffineStationParameter)
+    (h : parseStationParameter c = some p) : encodeStationParameter p = c
+```
+
+Proof method: Case analysis on the unit parser, its soundness theorem, and equality of the parsed pair.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES encode_parsed_station_parameter` and the printed proof in the machine-generated audit.
+
+## `station_expression_decode_encode`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem station_expression_decode_encode (e : StationExpr) :
+    decodeStationExpression (encodeStationExpression e) = some (normalizeStation e)
+```
+
+Proof method: Parser round trip and the definition of canonical normalization.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_expression_decode_encode` and the printed proof in the machine-generated audit.
+
+## `station_meaning_decode_encode`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem station_meaning_decode_encode (q : StationMeaningClass) :
+    decodeStationMeaning (encodeStationMeaning q) = some q
+```
+
+Proof method: Parser round trip and the semantic quotient round trip.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_meaning_decode_encode` and the printed proof in the machine-generated audit.
+
+## `station_expression_semantic_roundtrip`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem station_expression_semantic_roundtrip (e : StationExpr) :
+    decodeStationMeaning (encodeStationExpression e) = some (Quotient.mk stationSemanticSetoid e)
+```
+
+Proof method: Instantiate station_meaning_decode_encode with the expression semantic class.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_expression_semantic_roundtrip` and the printed proof in the machine-generated audit.
+
+## `station_parameter_encoding_injective`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem station_parameter_encoding_injective : Function.Injective encodeStationParameter
+```
+
+Proof method: Project code equality to both fields and use Units.ext.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_parameter_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `station_code_collision_iff`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem station_code_collision_iff (e f : StationExpr) :
+    encodeStationExpression e = encodeStationExpression f ↔ stationMeaning e = stationMeaning f
+```
+
+Proof method: Injectivity of parameter encoding and the compiler characterization of meaning.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_code_collision_iff` and the printed proof in the machine-generated audit.
+
+## `valid_station_decode_encode`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem valid_station_decode_encode (q : StationMeaningClass) :
+    decodeValidStationMeaning (encodeValidStationMeaning q) = q
+```
+
+Proof method: The unit parser round trip and parameter_meaning_roundtrip.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES valid_station_decode_encode` and the printed proof in the machine-generated audit.
+
+## `valid_station_encode_decode`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem valid_station_encode_decode (c : ValidStationCode) :
+    encodeValidStationMeaning (decodeValidStationMeaning c) = c
+```
+
+Proof method: The semantic-parameter round trip and encode_parsed_station_parameter.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES valid_station_encode_decode` and the printed proof in the machine-generated audit.
+
+## `valid_station_code_card`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem valid_station_code_card : Nat.card ValidStationCode = 48
+```
+
+Proof method: The proved equivalence with semantic classes and station_meaning_class_card.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES valid_station_code_card` and the printed proof in the machine-generated audit.
+
+## `raw_station_code_card`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem raw_station_code_card : Fintype.card StationWireCode = 144
+```
+
+Proof method: Product cardinality of two twelve-element residue types.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES raw_station_code_card` and the printed proof in the machine-generated audit.
+
+## `station_wire_composition`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem station_wire_composition (outer inner : StationExpr) :
+    composeStationWire (encodeStationExpression outer) (encodeStationExpression inner) =
+      some (encodeStationExpression (.compose outer inner))
+```
+
+Proof method: Parse both encoded parameters and expand the composition compiler constructor.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_wire_composition` and the printed proof in the machine-generated audit.
+
+## `station_wire_inverse`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem station_wire_inverse (e : StationExpr) :
+    invertStationWire (encodeStationExpression e) = some (encodeStationExpression (.invert e))
+```
+
+Proof method: Parse the encoded parameter and expand the inverse compiler constructor.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_wire_inverse` and the printed proof in the machine-generated audit.
+
+## `reject_nonunit_station_code`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem reject_nonunit_station_code : parseStationParameter (2, 0) = none
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reject_nonunit_station_code` and the printed proof in the machine-generated audit.
+
+## `reflection_example_wire`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem reflection_example_wire : encodeStationExpression reflectionConjugationExample = (1, 11)
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reflection_example_wire` and the printed proof in the machine-generated audit.
+
+## `scale_shift_example_wire`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem scale_shift_example_wire : encodeStationExpression scaleAfterShiftExample = (5, 3)
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES scale_shift_example_wire` and the printed proof in the machine-generated audit.
+
+## `protected_station_wire_recovery`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem protected_station_wire_recovery (c : StationWireCode) (received : ProtectedStationCode)
+    (hfirst : wordDistance (protectStationWire c).1 received.1 ≤ 1)
+    (hsecond : wordDistance (protectStationWire c).2 received.2 ≤ 1) :
+    recoverStationWire received = c
+```
+
+Proof method: Apply the explicit repetition majority recovery theorem to both triples.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protected_station_wire_recovery` and the printed proof in the machine-generated audit.
+
+## `protected_station_semantic_recovery`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem protected_station_semantic_recovery (e : StationExpr) (received : ProtectedStationCode)
+    (hfirst : wordDistance (protectStationWire (encodeStationExpression e)).1 received.1 ≤ 1)
+    (hsecond : wordDistance (protectStationWire (encodeStationExpression e)).2 received.2 ≤ 1) :
+    decodeStationMeaning (recoverStationWire received) = some (Quotient.mk stationSemanticSetoid e)
+```
+
+Proof method: Recover the original wire pair, then apply station_expression_semantic_roundtrip.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protected_station_semantic_recovery` and the printed proof in the machine-generated audit.
+
+## `reflection_example_corruption_bound`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem reflection_example_corruption_bound :
+    wordDistance (protectStationWire (encodeStationExpression reflectionConjugationExample)).1
+      reflectionExampleCorruption.1 ≤ 1 ∧
+    wordDistance (protectStationWire (encodeStationExpression reflectionConjugationExample)).2
+      reflectionExampleCorruption.2 ≤ 1
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reflection_example_corruption_bound` and the printed proof in the machine-generated audit.
+
+## `reflection_example_corruption_recovery`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem reflection_example_corruption_recovery :
+    decodeStationMeaning (recoverStationWire reflectionExampleCorruption) =
+      some (Quotient.mk stationSemanticSetoid reflectionConjugationExample)
+```
+
+Proof method: Apply the universal recovery theorem with the separately computed concrete error bounds.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reflection_example_corruption_recovery` and the printed proof in the machine-generated audit.
+
+## `worked_examples_same_output_at_two`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem worked_examples_same_output_at_two :
+    stationMeaning reflectionConjugationExample 2 = stationMeaning scaleAfterShiftExample 2
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES worked_examples_same_output_at_two` and the printed proof in the machine-generated audit.
+
+## `worked_examples_different_meanings`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem worked_examples_different_meanings :
+    stationMeaning reflectionConjugationExample ≠ stationMeaning scaleAfterShiftExample
+```
+
+Proof method: Semantic equality would imply equal codes, contradicted by the computed distinct wire pairs.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES worked_examples_different_meanings` and the printed proof in the machine-generated audit.
+
+## `source_shift_expression_add`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem source_shift_expression_add {K : Type*} [AddMonoid K]
+    (χ : K →+ ZMod 2) (h g : K) :
+    stationMeaning (sourceShiftExpression χ (h + g)) =
+      stationMeaning (.compose (sourceShiftExpression χ h) (sourceShiftExpression χ g))
+```
+
+Proof method: Compiler equality, addition preservation of the chosen binary bridge, and additive commutativity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_shift_expression_add` and the printed proof in the machine-generated audit.
+
+## `source_shift_observable_equivariance`
+
+Source: `IndependentDuodenary/StationCodec.lean`. Compilation: **passed**.
+
+```lean
+theorem source_shift_observable_equivariance {M K W : Type*} [AddMonoid K]
+    (χ : K →+ ZMod 2) (label : M × W → ZMod 12) (h : K) (q : ExactKey M K W) :
+    stationMeaning (sourceShiftExpression χ h) (residueAnswerTwelve χ label q) =
+      residueAnswerTwelve χ label (translateKey h q)
+```
+
+Proof method: Evaluate the grammar shift and apply the previously proved residue_folding_twelve.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES source_shift_observable_equivariance` and the printed proof in the machine-generated audit.
+
+## `affine_permutation_compose`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem affine_permutation_compose (p q : AffineStationParameter) :
+    affineStationPermutation (affineStationCompose p q) =
+      affineStationPermutation p * affineStationPermutation q
+```
+
+Proof method: Permutation extensionality and the proved affine composition formula.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES affine_permutation_compose` and the printed proof in the machine-generated audit.
+
+## `affine_permutation_inverse`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem affine_permutation_inverse (p : AffineStationParameter) :
+    affineStationPermutation (affineStationInverse p) = (affineStationPermutation p)⁻¹
+```
+
+Proof method: Permutation extensionality and expansion of the unit-affine inverse.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES affine_permutation_inverse` and the printed proof in the machine-generated audit.
+
+## `station_compile_correct`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem station_compile_correct (e : StationExpr) :
+    affineStationPermutation (compileStation e) = stationMeaning e
+```
+
+Proof method: Structural induction over every grammar constructor; affine composition and inverse laws.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_compile_correct` and the printed proof in the machine-generated audit.
+
+## `compile_parameter_expression`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem compile_parameter_expression (p : AffineStationParameter) :
+    compileStation (expressionFromParameter p) = p
+```
+
+Proof method: Expand the canonical shift/scale expression and simplify its affine parameter.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES compile_parameter_expression` and the printed proof in the machine-generated audit.
+
+## `station_normalization_meaning`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem station_normalization_meaning (e : StationExpr) :
+    stationMeaning (normalizeStation e) = stationMeaning e
+```
+
+Proof method: Compiler correctness followed by compile_parameter_expression.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_normalization_meaning` and the printed proof in the machine-generated audit.
+
+## `station_normalization_idempotent`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem station_normalization_idempotent (e : StationExpr) :
+    normalizeStation (normalizeStation e) = normalizeStation e
+```
+
+Proof method: Compile the canonical expression and simplify the second normalization.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_normalization_idempotent` and the printed proof in the machine-generated audit.
+
+## `station_meaning_iff_compiled`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem station_meaning_iff_compiled (e f : StationExpr) :
+    stationMeaning e = stationMeaning f ↔ compileStation e = compileStation f
+```
+
+Proof method: Compiler correctness and injectivity of the affine permutation parameterization.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_meaning_iff_compiled` and the printed proof in the machine-generated audit.
+
+## `same_station_meaning_correct`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem same_station_meaning_correct (e f : StationExpr) :
+    sameStationMeaning e f = true ↔ stationMeaning e = stationMeaning f
+```
+
+Proof method: The equality decision on compiled parameters is equivalent to equality of whole permutations.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES same_station_meaning_correct` and the printed proof in the machine-generated audit.
+
+## `meaning_parameter_roundtrip`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem meaning_parameter_roundtrip (p : AffineStationParameter) :
+    compileMeaningClass (parameterMeaningClass p) = p
+```
+
+Proof method: compile_parameter_expression instantiated on the semantic class encoder.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES meaning_parameter_roundtrip` and the printed proof in the machine-generated audit.
+
+## `parameter_meaning_roundtrip`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem parameter_meaning_roundtrip (q : StationMeaningClass) :
+    parameterMeaningClass (compileMeaningClass q) = q
+```
+
+Proof method: Quotient induction, normalization preservation and Quotient.sound.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES parameter_meaning_roundtrip` and the printed proof in the machine-generated audit.
+
+## `station_meaning_class_card`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem station_meaning_class_card : Nat.card StationMeaningClass = 48
+```
+
+Proof method: The explicit semantic-class/parameter equivalence and the affine parameter cardinality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_meaning_class_card` and the printed proof in the machine-generated audit.
+
+## `reflection_example_parameters`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem reflection_example_parameters : compileStation reflectionConjugationExample = (1, 11)
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reflection_example_parameters` and the printed proof in the machine-generated audit.
+
+## `reflection_example_meaning`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem reflection_example_meaning :
+    stationMeaning reflectionConjugationExample = stationMeaning (.shift 11)
+```
+
+Proof method: Equality of compiled parameters implies semantic equality.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reflection_example_meaning` and the printed proof in the machine-generated audit.
+
+## `scale_shift_example_parameters`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem scale_shift_example_parameters : compileStation scaleAfterShiftExample = (multiplyFiveParameter.1, 3)
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES scale_shift_example_parameters` and the printed proof in the machine-generated audit.
+
+## `scale_shift_example_at_two`
+
+Source: `IndependentDuodenary/StationGrammar.lean`. Compilation: **passed**.
+
+```lean
+theorem scale_shift_example_at_two : stationMeaning scaleAfterShiftExample 2 = 1
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES scale_shift_example_at_two` and the printed proof in the machine-generated audit.
 
 ## `twelveCRT_bijective`
 

@@ -9048,6 +9048,1716 @@ DIRECT DEPENDENCIES binary_source_key_sharing: [NonUnitalNonAssocCommRing.toNonU
  Eq,
  IndependentDuodenary.split_binary_double_zero,
  Prod.instAddCommMonoid]
+theorem IndependentDuodenary.parse_station_unit_roundtrip : ∀ (u : (ZMod 12)ˣ),
+  IndependentDuodenary.parseStationUnit ↑u = some u :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.parse_station_unit_roundtrip' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES parse_station_unit_roundtrip: [Units.val,
+ Option.instDecidableEq,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Option.some,
+ Units,
+ instFintypeUnitsOfDecidableEq,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ Units.instDecidableEq,
+ MonoidWithZero.toMonoid,
+ IndependentDuodenary.parseStationUnit,
+ Semiring.toMonoidWithZero,
+ Option]
+theorem IndependentDuodenary.parse_station_unit_sound : ∀ (x : ZMod 12) (u : (ZMod 12)ˣ),
+  IndependentDuodenary.parseStationUnit x = some u → ↑u = x :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.parse_station_unit_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES parse_station_unit_sound: [Units.val,
+ Option.instDecidableEq,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Option.some,
+ Units,
+ instFintypeUnitsOfDecidableEq,
+ id,
+ forall_prop_decidable,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ Units.instDecidableEq,
+ MonoidWithZero.toMonoid,
+ IndependentDuodenary.parseStationUnit,
+ Semiring.toMonoidWithZero,
+ Option]
+theorem IndependentDuodenary.parse_station_parameter_roundtrip : ∀ (p : IndependentDuodenary.AffineStationParameter),
+  IndependentDuodenary.parseStationParameter (IndependentDuodenary.encodeStationParameter p) = some p :=
+fun p =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = some p)
+        (Eq.trans (congrArg (Option.map fun u => (u, p.2)) (IndependentDuodenary.parse_station_unit_roundtrip p.1))
+          (congrArg some Prod.mk.eta)))
+      (eq_self (some p)))
+'IndependentDuodenary.parse_station_parameter_roundtrip' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES parse_station_parameter_roundtrip: [Units.val,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ Option.some,
+ Units,
+ Prod.mk,
+ IndependentDuodenary.encodeStationParameter,
+ instOfNatNat,
+ ZMod,
+ Prod.fst,
+ IndependentDuodenary.parseStationParameter,
+ Option.map,
+ CommRing.toCommSemiring,
+ Nat,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ eq_self,
+ Prod.mk.eta,
+ IndependentDuodenary.parse_station_unit_roundtrip,
+ of_eq_true,
+ OfNat.ofNat,
+ Eq,
+ Prod.snd,
+ MonoidWithZero.toMonoid,
+ Eq.trans,
+ IndependentDuodenary.parseStationUnit,
+ Semiring.toMonoidWithZero,
+ Option]
+theorem IndependentDuodenary.encode_parsed_station_parameter : ∀ (c : IndependentDuodenary.StationWireCode)
+  (p : IndependentDuodenary.AffineStationParameter),
+  IndependentDuodenary.parseStationParameter c = some p → IndependentDuodenary.encodeStationParameter p = c :=
+fun c p h =>
+  Prod.casesOn (motive := fun x =>
+    IndependentDuodenary.parseStationParameter x = some p → IndependentDuodenary.encodeStationParameter p = x) c
+    (fun x b h =>
+      Option.casesOn (motive := fun t =>
+        IndependentDuodenary.parseStationUnit x = t → IndependentDuodenary.encodeStationParameter p = (x, b))
+        (IndependentDuodenary.parseStationUnit x)
+        (fun h_1 =>
+          Eq.ndrec (motive := fun x_1 =>
+            IndependentDuodenary.parseStationUnit x = x_1 → IndependentDuodenary.encodeStationParameter p = (x, b))
+            (fun hp =>
+              False.elim
+                (Eq.mp
+                  (Eq.trans (congrArg (fun x => Option.map (fun u => (u, b)) x = some p) hp)
+                    (eq_false' fun h => Option.noConfusion h))
+                  h))
+            (Eq.symm h_1) (Eq.refl (IndependentDuodenary.parseStationUnit x)))
+        (fun u h_1 =>
+          Eq.ndrec (motive := fun x_1 =>
+            IndependentDuodenary.parseStationUnit x = x_1 → IndependentDuodenary.encodeStationParameter p = (x, b))
+            (fun hp =>
+              let_fun heq :=
+                Eq.mp
+                  (Eq.trans (congrArg (fun x => Option.map (fun u => (u, b)) x = some p) hp)
+                    (Option.some.injEq (u, b) p))
+                  h;
+              Eq.ndrec (motive := fun p =>
+                IndependentDuodenary.parseStationParameter (x, b) = some p →
+                  IndependentDuodenary.encodeStationParameter p = (x, b))
+                (fun h => Prod.ext (IndependentDuodenary.parse_station_unit_sound x u hp) rfl) heq h)
+            (Eq.symm h_1) (Eq.refl (IndependentDuodenary.parseStationUnit x)))
+        (Eq.refl (IndependentDuodenary.parseStationUnit x)))
+    h
+'IndependentDuodenary.encode_parsed_station_parameter' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES encode_parsed_station_parameter: [False,
+ ZMod.commRing,
+ Option.noConfusion,
+ congrArg,
+ CommSemiring.toSemiring,
+ False.elim,
+ Option.casesOn,
+ Option.some.injEq,
+ Option.some,
+ Units,
+ Eq.mp,
+ Prod.mk,
+ IndependentDuodenary.encodeStationParameter,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.parseStationParameter,
+ Option.none,
+ Option.map,
+ CommRing.toCommSemiring,
+ Prod.ext,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ IndependentDuodenary.parse_station_unit_sound,
+ Eq.ndrec,
+ Eq.refl,
+ Prod,
+ Prod.casesOn,
+ OfNat.ofNat,
+ Eq.symm,
+ eq_false',
+ Eq,
+ Prod.snd,
+ letFun,
+ MonoidWithZero.toMonoid,
+ rfl,
+ Eq.trans,
+ IndependentDuodenary.parseStationUnit,
+ Semiring.toMonoidWithZero,
+ Option,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.station_expression_decode_encode : ∀ (e : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.decodeStationExpression (IndependentDuodenary.encodeStationExpression e) =
+    some (IndependentDuodenary.normalizeStation e) :=
+fun e =>
+  of_eq_true
+    (Eq.trans
+      (congrArg
+        (fun x =>
+          Option.map IndependentDuodenary.expressionFromParameter x =
+            some (IndependentDuodenary.expressionFromParameter (IndependentDuodenary.compileStation e)))
+        (IndependentDuodenary.parse_station_parameter_roundtrip (IndependentDuodenary.compileStation e)))
+      (eq_self (some (IndependentDuodenary.expressionFromParameter (IndependentDuodenary.compileStation e)))))
+'IndependentDuodenary.station_expression_decode_encode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES station_expression_decode_encode: [congrArg,
+ Option.some,
+ IndependentDuodenary.expressionFromParameter,
+ IndependentDuodenary.encodeStationParameter,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.parseStationParameter,
+ IndependentDuodenary.compileStation,
+ IndependentDuodenary.normalizeStation,
+ Option.map,
+ IndependentDuodenary.decodeStationExpression,
+ IndependentDuodenary.encodeStationExpression,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ eq_self,
+ IndependentDuodenary.parse_station_parameter_roundtrip,
+ of_eq_true,
+ Eq,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.station_meaning_decode_encode : ∀ (q : IndependentDuodenary.StationMeaningClass),
+  IndependentDuodenary.decodeStationMeaning (IndependentDuodenary.encodeStationMeaning q) = some q :=
+fun q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = some q)
+        (Eq.trans
+          (congrArg (Option.map IndependentDuodenary.parameterMeaningClass)
+            (IndependentDuodenary.parse_station_parameter_roundtrip (IndependentDuodenary.compileMeaningClass q)))
+          (congrArg some (IndependentDuodenary.parameter_meaning_roundtrip q))))
+      (eq_self (some q)))
+'IndependentDuodenary.station_meaning_decode_encode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES station_meaning_decode_encode: [IndependentDuodenary.StationMeaningClass,
+ IndependentDuodenary.compileMeaningClass,
+ IndependentDuodenary.parameter_meaning_roundtrip,
+ congrArg,
+ Option.some,
+ IndependentDuodenary.decodeStationMeaning,
+ IndependentDuodenary.encodeStationParameter,
+ IndependentDuodenary.parseStationParameter,
+ Option.map,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ eq_self,
+ IndependentDuodenary.parse_station_parameter_roundtrip,
+ of_eq_true,
+ Eq,
+ IndependentDuodenary.encodeStationMeaning,
+ Eq.trans,
+ Option,
+ IndependentDuodenary.parameterMeaningClass]
+theorem IndependentDuodenary.station_expression_semantic_roundtrip : ∀ (e : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.decodeStationMeaning (IndependentDuodenary.encodeStationExpression e) = some ⟦e⟧ :=
+fun e => IndependentDuodenary.station_meaning_decode_encode ⟦e⟧
+'IndependentDuodenary.station_expression_semantic_roundtrip' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES station_expression_semantic_roundtrip: [IndependentDuodenary.StationMeaningClass,
+ Option.some,
+ IndependentDuodenary.decodeStationMeaning,
+ Quotient.mk,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.station_meaning_decode_encode,
+ Quotient,
+ IndependentDuodenary.encodeStationExpression,
+ IndependentDuodenary.stationSemanticSetoid,
+ Eq,
+ Option]
+theorem IndependentDuodenary.station_parameter_encoding_injective : Function.Injective
+  IndependentDuodenary.encodeStationParameter :=
+fun ⦃p q⦄ h =>
+  let_fun hfirst := congrArg (fun c => c.1) h;
+  let_fun hsecond := congrArg (fun c => c.2) h;
+  Prod.ext (Units.ext hfirst) hsecond
+'IndependentDuodenary.station_parameter_encoding_injective' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_parameter_encoding_injective: [Units.val,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ Units,
+ IndependentDuodenary.encodeStationParameter,
+ instOfNatNat,
+ Units.ext,
+ ZMod,
+ Prod.fst,
+ CommRing.toCommSemiring,
+ Prod.ext,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Function.Injective,
+ OfNat.ofNat,
+ Eq,
+ Prod.snd,
+ letFun,
+ MonoidWithZero.toMonoid,
+ Semiring.toMonoidWithZero,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.station_code_collision_iff : ∀ (e f : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.encodeStationExpression e = IndependentDuodenary.encodeStationExpression f ↔
+    IndependentDuodenary.stationMeaning e = IndependentDuodenary.stationMeaning f :=
+fun e f =>
+  {
+    mp := fun h =>
+      (IndependentDuodenary.station_meaning_iff_compiled e f).mpr
+        (IndependentDuodenary.station_parameter_encoding_injective h),
+    mpr := fun h =>
+      congrArg IndependentDuodenary.encodeStationParameter
+        ((IndependentDuodenary.station_meaning_iff_compiled e f).mp h) }
+'IndependentDuodenary.station_code_collision_iff' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_code_collision_iff: [Iff.mpr,
+ congrArg,
+ IndependentDuodenary.station_meaning_iff_compiled,
+ IndependentDuodenary.encodeStationParameter,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.compileStation,
+ IndependentDuodenary.station_parameter_encoding_injective,
+ Iff,
+ Equiv.Perm,
+ IndependentDuodenary.encodeStationExpression,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Iff.intro,
+ IndependentDuodenary.stationMeaning,
+ Iff.mp,
+ OfNat.ofNat,
+ Eq,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.valid_station_decode_encode : ∀ (q : IndependentDuodenary.StationMeaningClass),
+  IndependentDuodenary.decodeValidStationMeaning (IndependentDuodenary.encodeValidStationMeaning q) = q :=
+fun q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = q)
+        (Eq.trans
+          (congrArg IndependentDuodenary.parameterMeaningClass
+            ((fun {α} o o_1 e_o =>
+                Eq.rec (motive := fun o_2 e_o => ∀ (a : o.isSome = true), o.get a = o_2.get (e_o ▸ a))
+                  (fun a => Eq.refl (o.get a)) e_o)
+              (IndependentDuodenary.parseStationParameter ↑(IndependentDuodenary.encodeValidStationMeaning q))
+              (some (IndependentDuodenary.compileMeaningClass q))
+              (IndependentDuodenary.parse_station_parameter_roundtrip (IndependentDuodenary.compileMeaningClass q))
+              (IndependentDuodenary.decodeValidStationMeaning.proof_1
+                (IndependentDuodenary.encodeValidStationMeaning q))))
+          (IndependentDuodenary.parameter_meaning_roundtrip q)))
+      (eq_self q))
+'IndependentDuodenary.valid_station_decode_encode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES valid_station_decode_encode: [IndependentDuodenary.encodeValidStationMeaning,
+ IndependentDuodenary.StationMeaningClass,
+ IndependentDuodenary.compileMeaningClass,
+ IndependentDuodenary.decodeValidStationMeaning.proof_1,
+ IndependentDuodenary.parameter_meaning_roundtrip,
+ congrArg,
+ Option.some,
+ Eq.rec,
+ IndependentDuodenary.parseStationParameter,
+ Bool.true,
+ Option.get,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ eq_self,
+ IndependentDuodenary.parse_station_parameter_roundtrip,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ Eq.refl,
+ IndependentDuodenary.decodeValidStationMeaning,
+ Option.isSome,
+ Subtype.val,
+ Eq,
+ Eq.trans,
+ Option,
+ IndependentDuodenary.StationWireCode,
+ IndependentDuodenary.parameterMeaningClass]
+theorem IndependentDuodenary.valid_station_encode_decode : ∀ (c : IndependentDuodenary.ValidStationCode),
+  IndependentDuodenary.encodeValidStationMeaning (IndependentDuodenary.decodeValidStationMeaning c) = c :=
+fun c =>
+  Subtype.ext
+    (let_fun this :=
+      Eq.mpr
+        (id
+          (congrArg (fun _a => IndependentDuodenary.encodeStationParameter _a = ↑c)
+            (IndependentDuodenary.meaning_parameter_roundtrip
+              ((IndependentDuodenary.parseStationParameter ↑c).get c.property))))
+        (IndependentDuodenary.encode_parsed_station_parameter (↑c)
+          ((IndependentDuodenary.parseStationParameter ↑c).get c.property) (Eq.symm (Option.some_get c.property)));
+    this)
+'IndependentDuodenary.valid_station_encode_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES valid_station_encode_decode: [Eq.mpr,
+ IndependentDuodenary.encodeValidStationMeaning,
+ IndependentDuodenary.compileMeaningClass,
+ congrArg,
+ Option.some,
+ id,
+ IndependentDuodenary.encodeStationParameter,
+ IndependentDuodenary.parseStationParameter,
+ Option.some_get,
+ Bool.true,
+ Option.get,
+ IndependentDuodenary.AffineStationParameter,
+ IndependentDuodenary.meaning_parameter_roundtrip,
+ Bool,
+ IndependentDuodenary.decodeValidStationMeaning,
+ Option.isSome,
+ IndependentDuodenary.ValidStationCode,
+ Eq.symm,
+ Subtype.val,
+ Eq,
+ letFun,
+ Subtype.property,
+ Subtype.ext,
+ Option,
+ IndependentDuodenary.StationWireCode,
+ IndependentDuodenary.parameterMeaningClass,
+ IndependentDuodenary.encode_parsed_station_parameter]
+theorem IndependentDuodenary.valid_station_code_card : Nat.card IndependentDuodenary.ValidStationCode = 48 :=
+Eq.mpr (id (congrArg (fun _a => _a = 48) (Eq.symm (Nat.card_congr IndependentDuodenary.stationValidCodeEquiv))))
+  (Eq.mpr (id (congrArg (fun _a => _a = 48) IndependentDuodenary.station_meaning_class_card)) (Eq.refl 48))
+'IndependentDuodenary.valid_station_code_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES valid_station_code_card: [Eq.mpr,
+ IndependentDuodenary.StationMeaningClass,
+ congrArg,
+ IndependentDuodenary.stationValidCodeEquiv,
+ IndependentDuodenary.station_meaning_class_card,
+ id,
+ Nat.card,
+ instOfNatNat,
+ Nat.card_congr,
+ Nat,
+ Eq.refl,
+ IndependentDuodenary.ValidStationCode,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq]
+theorem IndependentDuodenary.raw_station_code_card : Fintype.card IndependentDuodenary.StationWireCode = 144 :=
+Eq.mpr (id (congrArg (fun _a => _a = 144) (Fintype.card_prod (ZMod 12) (ZMod 12))))
+  (Eq.mpr (id (congrArg (fun _a => _a * _a = 144) (ZMod.card 12))) (Eq.refl (12 * 12)))
+'IndependentDuodenary.raw_station_code_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES raw_station_code_card: [Eq.mpr,
+ HMul.hMul,
+ congrArg,
+ ZMod.fintype,
+ Fintype.card,
+ id,
+ instMulNat,
+ instOfNatNat,
+ Fintype.card_prod,
+ ZMod,
+ Nat.instNeZeroSucc,
+ Nat,
+ Eq.refl,
+ instFintypeProd,
+ Prod,
+ OfNat.ofNat,
+ Eq,
+ ZMod.card,
+ instHMul,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.station_wire_composition : ∀ (outer inner : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.composeStationWire (IndependentDuodenary.encodeStationExpression outer)
+      (IndependentDuodenary.encodeStationExpression inner) =
+    some (IndependentDuodenary.encodeStationExpression (outer.compose inner)) :=
+fun outer inner =>
+  of_eq_true
+    (Eq.trans
+      (congrArg
+        (fun x =>
+          x =
+            some
+              (IndependentDuodenary.encodeStationParameter
+                (IndependentDuodenary.affineStationCompose (IndependentDuodenary.compileStation outer)
+                  (IndependentDuodenary.compileStation inner))))
+        (congr
+          (congrArg bind
+            (IndependentDuodenary.parse_station_parameter_roundtrip (IndependentDuodenary.compileStation outer)))
+          (funext fun p =>
+            congrArg
+              (fun x => do
+                let q ← x
+                some (IndependentDuodenary.encodeStationParameter (IndependentDuodenary.affineStationCompose p q)))
+              (IndependentDuodenary.parse_station_parameter_roundtrip (IndependentDuodenary.compileStation inner)))))
+      (eq_self
+        (some
+          (IndependentDuodenary.encodeStationParameter
+            (IndependentDuodenary.affineStationCompose (IndependentDuodenary.compileStation outer)
+              (IndependentDuodenary.compileStation inner))))))
+'IndependentDuodenary.station_wire_composition' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES station_wire_composition: [IndependentDuodenary.StationExpr.compose,
+ congrArg,
+ Option.some,
+ IndependentDuodenary.encodeStationParameter,
+ IndependentDuodenary.affineStationCompose,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.parseStationParameter,
+ IndependentDuodenary.compileStation,
+ instMonadOption,
+ funext,
+ IndependentDuodenary.encodeStationExpression,
+ congr,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ eq_self,
+ IndependentDuodenary.parse_station_parameter_roundtrip,
+ of_eq_true,
+ Monad.toBind,
+ Bind.bind,
+ IndependentDuodenary.composeStationWire,
+ Eq,
+ Eq.trans,
+ Option,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.station_wire_inverse : ∀ (e : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.invertStationWire (IndependentDuodenary.encodeStationExpression e) =
+    some (IndependentDuodenary.encodeStationExpression e.invert) :=
+fun e =>
+  of_eq_true
+    (Eq.trans
+      (congrArg
+        (fun x =>
+          (do
+              let p ← x
+              some (IndependentDuodenary.encodeStationParameter (IndependentDuodenary.affineStationInverse p))) =
+            some
+              (IndependentDuodenary.encodeStationParameter
+                (IndependentDuodenary.affineStationInverse (IndependentDuodenary.compileStation e))))
+        (IndependentDuodenary.parse_station_parameter_roundtrip (IndependentDuodenary.compileStation e)))
+      (eq_self
+        (some
+          (IndependentDuodenary.encodeStationParameter
+            (IndependentDuodenary.affineStationInverse (IndependentDuodenary.compileStation e))))))
+'IndependentDuodenary.station_wire_inverse' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES station_wire_inverse: [IndependentDuodenary.invertStationWire,
+ congrArg,
+ Option.some,
+ IndependentDuodenary.encodeStationParameter,
+ IndependentDuodenary.affineStationInverse,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.parseStationParameter,
+ IndependentDuodenary.compileStation,
+ instMonadOption,
+ IndependentDuodenary.StationExpr.invert,
+ IndependentDuodenary.encodeStationExpression,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ eq_self,
+ IndependentDuodenary.parse_station_parameter_roundtrip,
+ of_eq_true,
+ Monad.toBind,
+ Bind.bind,
+ Eq,
+ Eq.trans,
+ Option,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.reject_nonunit_station_code : IndependentDuodenary.parseStationParameter (2, 0) = none :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.reject_nonunit_station_code' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reject_nonunit_station_code: [Semiring.toNatCast,
+ Option.instDecidableEq,
+ of_decide_eq_true,
+ ZMod.commRing,
+ instDecidableEqProd,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ Units,
+ id,
+ Prod.mk,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.parseStationParameter,
+ Bool.true,
+ Option.none,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ CommMonoidWithZero.toZero,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ Units.instDecidableEq,
+ MonoidWithZero.toMonoid,
+ Semiring.toMonoidWithZero,
+ Option]
+theorem IndependentDuodenary.reflection_example_wire : IndependentDuodenary.encodeStationExpression
+    IndependentDuodenary.reflectionConjugationExample =
+  (1, 11) :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.reflection_example_wire' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reflection_example_wire: [Semiring.toNatCast,
+ IndependentDuodenary.reflectionConjugationExample,
+ Semiring.toOne,
+ of_decide_eq_true,
+ ZMod.commRing,
+ instDecidableEqProd,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ id,
+ Prod.mk,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ IndependentDuodenary.encodeStationExpression,
+ Nat,
+ Bool,
+ One.toOfNat1,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.scale_shift_example_wire : IndependentDuodenary.encodeStationExpression
+    IndependentDuodenary.scaleAfterShiftExample =
+  (5, 3) :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.scale_shift_example_wire' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES scale_shift_example_wire: [Semiring.toNatCast,
+ IndependentDuodenary.scaleAfterShiftExample,
+ of_decide_eq_true,
+ ZMod.commRing,
+ instDecidableEqProd,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ id,
+ Prod.mk,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ IndependentDuodenary.encodeStationExpression,
+ Nat,
+ Bool,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.protected_station_wire_recovery : ∀ (c : IndependentDuodenary.StationWireCode)
+  (received : IndependentDuodenary.ProtectedStationCode),
+  IndependentDuodenary.wordDistance (IndependentDuodenary.protectStationWire c).1 received.1 ≤ 1 →
+    IndependentDuodenary.wordDistance (IndependentDuodenary.protectStationWire c).2 received.2 ≤ 1 →
+      IndependentDuodenary.recoverStationWire received = c :=
+fun c received hfirst hsecond =>
+  Prod.ext (IndependentDuodenary.repetition_majority_recovery c.1 received.1 hfirst)
+    (IndependentDuodenary.repetition_majority_recovery c.2 received.2 hsecond)
+'IndependentDuodenary.protected_station_wire_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protected_station_wire_recovery: [ZMod.decidableEq,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ IndependentDuodenary.recoverStationWire,
+ ZMod,
+ Prod.fst,
+ Fin.fintype,
+ Prod.ext,
+ Nat,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Prod.snd,
+ IndependentDuodenary.ProtectedStationCode,
+ IndependentDuodenary.repetition_majority_recovery,
+ IndependentDuodenary.protectStationWire,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.protected_station_semantic_recovery : ∀ (e : IndependentDuodenary.StationExpr)
+  (received : IndependentDuodenary.ProtectedStationCode),
+  IndependentDuodenary.wordDistance
+        (IndependentDuodenary.protectStationWire (IndependentDuodenary.encodeStationExpression e)).1 received.1 ≤
+      1 →
+    IndependentDuodenary.wordDistance
+          (IndependentDuodenary.protectStationWire (IndependentDuodenary.encodeStationExpression e)).2 received.2 ≤
+        1 →
+      IndependentDuodenary.decodeStationMeaning (IndependentDuodenary.recoverStationWire received) = some ⟦e⟧ :=
+fun e received hfirst hsecond =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => IndependentDuodenary.decodeStationMeaning _a = some ⟦e⟧)
+        (IndependentDuodenary.protected_station_wire_recovery (IndependentDuodenary.encodeStationExpression e) received
+          hfirst hsecond)))
+    (IndependentDuodenary.station_expression_semantic_roundtrip e)
+'IndependentDuodenary.protected_station_semantic_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protected_station_semantic_recovery: [Eq.mpr,
+ IndependentDuodenary.StationMeaningClass,
+ congrArg,
+ ZMod.decidableEq,
+ IndependentDuodenary.protected_station_wire_recovery,
+ Option.some,
+ IndependentDuodenary.decodeStationMeaning,
+ id,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ IndependentDuodenary.recoverStationWire,
+ ZMod,
+ Prod.fst,
+ Quotient.mk,
+ IndependentDuodenary.StationExpr,
+ Fin.fintype,
+ IndependentDuodenary.station_expression_semantic_roundtrip,
+ Quotient,
+ IndependentDuodenary.encodeStationExpression,
+ Nat,
+ IndependentDuodenary.stationSemanticSetoid,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Prod.snd,
+ IndependentDuodenary.ProtectedStationCode,
+ IndependentDuodenary.protectStationWire,
+ Option,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.reflection_example_corruption_bound : IndependentDuodenary.wordDistance
+      (IndependentDuodenary.protectStationWire
+          (IndependentDuodenary.encodeStationExpression IndependentDuodenary.reflectionConjugationExample)).1
+      IndependentDuodenary.reflectionExampleCorruption.1 ≤
+    1 ∧
+  IndependentDuodenary.wordDistance
+      (IndependentDuodenary.protectStationWire
+          (IndependentDuodenary.encodeStationExpression IndependentDuodenary.reflectionConjugationExample)).2
+      IndependentDuodenary.reflectionExampleCorruption.2 ≤
+    1 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.reflection_example_corruption_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES reflection_example_corruption_bound: [IndependentDuodenary.reflectionConjugationExample,
+ of_decide_eq_true,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ ZMod,
+ Prod.fst,
+ Fin.fintype,
+ Bool.true,
+ And,
+ IndependentDuodenary.encodeStationExpression,
+ Nat,
+ Bool,
+ Eq.refl,
+ IndependentDuodenary.reflectionExampleCorruption,
+ instDecidableAnd,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ Prod.snd,
+ Nat.decLe,
+ IndependentDuodenary.protectStationWire]
+theorem IndependentDuodenary.reflection_example_corruption_recovery : IndependentDuodenary.decodeStationMeaning
+    (IndependentDuodenary.recoverStationWire IndependentDuodenary.reflectionExampleCorruption) =
+  some ⟦IndependentDuodenary.reflectionConjugationExample⟧ :=
+IndependentDuodenary.protected_station_semantic_recovery IndependentDuodenary.reflectionConjugationExample
+  IndependentDuodenary.reflectionExampleCorruption IndependentDuodenary.reflection_example_corruption_bound.left
+  IndependentDuodenary.reflection_example_corruption_bound.right
+'IndependentDuodenary.reflection_example_corruption_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES reflection_example_corruption_recovery: [IndependentDuodenary.reflectionConjugationExample,
+ IndependentDuodenary.StationMeaningClass,
+ ZMod.decidableEq,
+ Option.some,
+ IndependentDuodenary.decodeStationMeaning,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ IndependentDuodenary.recoverStationWire,
+ ZMod,
+ Prod.fst,
+ Quotient.mk,
+ IndependentDuodenary.protected_station_semantic_recovery,
+ IndependentDuodenary.StationExpr,
+ Fin.fintype,
+ And.right,
+ IndependentDuodenary.reflection_example_corruption_bound,
+ Quotient,
+ And.left,
+ IndependentDuodenary.encodeStationExpression,
+ Nat,
+ IndependentDuodenary.stationSemanticSetoid,
+ IndependentDuodenary.reflectionExampleCorruption,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Prod.snd,
+ IndependentDuodenary.protectStationWire,
+ Option]
+theorem IndependentDuodenary.worked_examples_same_output_at_two : (IndependentDuodenary.stationMeaning
+      IndependentDuodenary.reflectionConjugationExample)
+    2 =
+  (IndependentDuodenary.stationMeaning IndependentDuodenary.scaleAfterShiftExample) 2 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.worked_examples_same_output_at_two' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES worked_examples_same_output_at_two: [Semiring.toNatCast,
+ IndependentDuodenary.reflectionConjugationExample,
+ Equiv.instFunLike,
+ IndependentDuodenary.scaleAfterShiftExample,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Equiv.Perm,
+ Nat,
+ IndependentDuodenary.stationMeaning,
+ Bool,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ DFunLike.coe,
+ instOfNatAtLeastTwo]
+theorem IndependentDuodenary.worked_examples_different_meanings : IndependentDuodenary.stationMeaning
+    IndependentDuodenary.reflectionConjugationExample ≠
+  IndependentDuodenary.stationMeaning IndependentDuodenary.scaleAfterShiftExample :=
+fun h =>
+  let_fun hc :=
+    (IndependentDuodenary.station_code_collision_iff IndependentDuodenary.reflectionConjugationExample
+          IndependentDuodenary.scaleAfterShiftExample).mpr
+      h;
+  of_decide_eq_true (id (Eq.refl true)) hc
+'IndependentDuodenary.worked_examples_different_meanings' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES worked_examples_different_meanings: [Iff.mpr,
+ instDecidableNot,
+ False,
+ IndependentDuodenary.reflectionConjugationExample,
+ IndependentDuodenary.scaleAfterShiftExample,
+ of_decide_eq_true,
+ instDecidableEqProd,
+ ZMod.decidableEq,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Equiv.Perm,
+ IndependentDuodenary.encodeStationExpression,
+ Nat,
+ IndependentDuodenary.stationMeaning,
+ Bool,
+ Eq.refl,
+ IndependentDuodenary.station_code_collision_iff,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ letFun,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.source_shift_expression_add.{u_1} : ∀ {K : Type u_1} [inst : AddMonoid K] (χ : K →+ ZMod 2)
+  (h g : K),
+  IndependentDuodenary.stationMeaning (IndependentDuodenary.sourceShiftExpression χ (h + g)) =
+    IndependentDuodenary.stationMeaning
+      ((IndependentDuodenary.sourceShiftExpression χ h).compose (IndependentDuodenary.sourceShiftExpression χ g)) :=
+fun {K} [AddMonoid K] χ h g =>
+  (IndependentDuodenary.station_meaning_iff_compiled (IndependentDuodenary.sourceShiftExpression χ (h + g))
+        ((IndependentDuodenary.sourceShiftExpression χ h).compose (IndependentDuodenary.sourceShiftExpression χ g))).mpr
+    (of_eq_true
+      (Eq.trans
+        (congr (congrArg (fun x => Eq (1, x)) (map_add (IndependentDuodenary.bridgeTwelve χ) h g))
+          (congr (congrArg Prod.mk (mul_one 1))
+            (Eq.trans
+              (congrArg (fun x => x + (IndependentDuodenary.bridgeTwelve χ) h)
+                (one_mul ((IndependentDuodenary.bridgeTwelve χ) g)))
+              (add_comm ((IndependentDuodenary.bridgeTwelve χ) g) ((IndependentDuodenary.bridgeTwelve χ) h)))))
+        (eq_self (1, (IndependentDuodenary.bridgeTwelve χ) h + (IndependentDuodenary.bridgeTwelve χ) g))))
+'IndependentDuodenary.source_shift_expression_add' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES source_shift_expression_add: [Iff.mpr,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.sourceShiftExpression,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ AddMonoidHom.instAddMonoidHomClass,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddMonoid.toAddSemigroup,
+ IndependentDuodenary.StationExpr.compose,
+ MulOneClass.toMul,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.station_meaning_iff_compiled,
+ Field.toDivisionRing,
+ Units,
+ map_add,
+ Distrib.toAdd,
+ Prod.mk,
+ DivisionRing.toRing,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ add_comm,
+ ZMod,
+ Units.instOne,
+ MulZeroOneClass.toMulOneClass,
+ IndependentDuodenary.compileStation,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ instHAdd,
+ AddSemigroup.toAdd,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ IndependentDuodenary.bridgeTwelve,
+ Equiv.Perm,
+ AddMonoidHomClass.toAddHomClass,
+ Nat.fact_prime_two,
+ Nat,
+ congr,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ MulOneClass.toOne,
+ eq_self,
+ AddMonoid,
+ IndependentDuodenary.stationMeaning,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ AddCommSemigroup.toAddCommMagma,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ mul_one,
+ AddMonoidHom,
+ Prod,
+ AddMonoidHom.instFunLike,
+ OfNat.ofNat,
+ AddCommMonoid.toAddCommSemigroup,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ DFunLike.coe,
+ Ring.toAddGroupWithOne,
+ one_mul,
+ MonoidWithZero.toMonoid,
+ Eq.trans,
+ Units.instMulOneClass,
+ AddCommMagma.toAdd,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.source_shift_observable_equivariance.{u_1, u_2, u_3} : ∀ {M : Type u_1} {K : Type u_2}
+  {W : Type u_3} [inst : AddMonoid K] (χ : K →+ ZMod 2) (label : M × W → ZMod 12) (h : K)
+  (q : IndependentDuodenary.ExactKey M K W),
+  (IndependentDuodenary.stationMeaning (IndependentDuodenary.sourceShiftExpression χ h))
+      (IndependentDuodenary.residueAnswerTwelve χ label q) =
+    IndependentDuodenary.residueAnswerTwelve χ label (IndependentDuodenary.translateKey h q) :=
+fun {M} {K} {W} [AddMonoid K] χ label h q =>
+  let_fun this :=
+    Eq.mpr
+      (id
+        (congrArg
+          (fun x =>
+            x + (IndependentDuodenary.bridgeTwelve χ) h =
+              IndependentDuodenary.residueAnswerTwelve χ label (IndependentDuodenary.translateKey h q))
+          (one_mul (IndependentDuodenary.residueAnswerTwelve χ label q))))
+      (Eq.symm (IndependentDuodenary.residue_folding_twelve χ label h q));
+  this
+'IndependentDuodenary.source_shift_observable_equivariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES source_shift_observable_equivariance: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ Equiv.instFunLike,
+ IndependentDuodenary.sourceShiftExpression,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.residueAnswerTwelve,
+ AddMonoid.toAddSemigroup,
+ MulOneClass.toMul,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ Field.toDivisionRing,
+ Units,
+ id,
+ Distrib.toAdd,
+ Prod.mk,
+ DivisionRing.toRing,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ IndependentDuodenary.residue_folding_twelve,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.translateKey,
+ Units.instOne,
+ MulZeroOneClass.toMulOneClass,
+ instHAdd,
+ AddSemigroup.toAdd,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ IndependentDuodenary.bridgeTwelve,
+ Equiv.Perm,
+ Nat.fact_prime_two,
+ Nat,
+ MulOneClass.toOne,
+ AddMonoid,
+ IndependentDuodenary.stationMeaning,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ AddMonoidWithOne.toAddMonoid,
+ IndependentDuodenary.affineStationApply,
+ CommRing.toRing,
+ AddMonoidHom,
+ Prod,
+ AddMonoidHom.instFunLike,
+ OfNat.ofNat,
+ Eq.symm,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ DFunLike.coe,
+ Ring.toAddGroupWithOne,
+ letFun,
+ one_mul,
+ MonoidWithZero.toMonoid,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.affine_permutation_compose : ∀ (p q : IndependentDuodenary.AffineStationParameter),
+  IndependentDuodenary.affineStationPermutation (IndependentDuodenary.affineStationCompose p q) =
+    IndependentDuodenary.affineStationPermutation p * IndependentDuodenary.affineStationPermutation q :=
+fun p q => Equiv.Perm.ext fun x => IndependentDuodenary.affine_station_composition p q x
+'IndependentDuodenary.affine_permutation_compose' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES affine_permutation_compose: [HMul.hMul,
+ instOfNatNat,
+ IndependentDuodenary.affineStationCompose,
+ ZMod,
+ IndependentDuodenary.affine_station_composition,
+ Equiv.Perm,
+ IndependentDuodenary.affineStationPermutation,
+ Equiv.Perm.instMul,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ OfNat.ofNat,
+ Eq,
+ Equiv.Perm.ext,
+ instHMul]
+theorem IndependentDuodenary.affine_permutation_inverse : ∀ (p : IndependentDuodenary.AffineStationParameter),
+  IndependentDuodenary.affineStationPermutation (IndependentDuodenary.affineStationInverse p) =
+    (IndependentDuodenary.affineStationPermutation p)⁻¹ :=
+fun p =>
+  Equiv.Perm.ext fun x =>
+    let_fun this :=
+      of_eq_true
+        (Eq.trans
+          (congr
+            (congrArg Eq
+              (congr (congrArg (fun x_1 => HAdd.hAdd (↑(p.1⁻¹, x_1).1 * x)) (neg_mul (↑p.1⁻¹) p.2))
+                (congrArg (fun x => (p.1⁻¹, x).2) (neg_mul (↑p.1⁻¹) p.2))))
+            (Eq.trans (Eq.trans (congrArg (HMul.hMul ↑p.1⁻¹) (sub_eq_add_neg x p.2)) (mul_add (↑p.1⁻¹) x (-p.2)))
+              (congrArg (HAdd.hAdd (↑p.1⁻¹ * x)) (mul_neg (↑p.1⁻¹) p.2))))
+          (eq_self (↑p.1⁻¹ * x + -(↑p.1⁻¹ * p.2))));
+    this
+'IndependentDuodenary.affine_permutation_inverse' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES affine_permutation_inverse: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Distrib.leftDistribClass,
+ Units.val,
+ Ring.toSub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ Equiv.Perm.instInv,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ sub_eq_add_neg,
+ HSub.hSub,
+ Units,
+ Distrib.toAdd,
+ Prod.mk,
+ instOfNatNat,
+ IndependentDuodenary.affineStationInverse,
+ ZMod,
+ Prod.fst,
+ NonUnitalNonAssocRing.toHasDistribNeg,
+ SubNegMonoid.toSub,
+ instHAdd,
+ CommRing.toCommSemiring,
+ instHSub,
+ Inv.inv,
+ AddGroup.toSubNegMonoid,
+ HAdd.hAdd,
+ Equiv.Perm,
+ IndependentDuodenary.affineStationPermutation,
+ Nat,
+ congr,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ eq_self,
+ SubNegMonoid.toNeg,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ mul_add,
+ neg_mul,
+ HasDistribNeg.toInvolutiveNeg,
+ SubNegMonoid.toAddMonoid,
+ IndependentDuodenary.affineStationApply,
+ CommRing.toRing,
+ InvolutiveNeg.toNeg,
+ OfNat.ofNat,
+ AddZeroClass.toAdd,
+ Eq,
+ Prod.snd,
+ Units.instInv,
+ Ring.toAddGroupWithOne,
+ letFun,
+ Neg.neg,
+ MonoidWithZero.toMonoid,
+ Equiv.Perm.ext,
+ Eq.trans,
+ mul_neg,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.station_compile_correct : ∀ (e : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.affineStationPermutation (IndependentDuodenary.compileStation e) =
+    IndependentDuodenary.stationMeaning e :=
+fun e =>
+  IndependentDuodenary.StationExpr.rec
+    (Equiv.Perm.ext fun x =>
+      of_eq_true
+        (Eq.trans
+          (congrArg (fun x_1 => x_1 = x)
+            (Eq.trans
+              (congrArg (fun x_1 => x_1 x)
+                ((fun {α β} toFun toFun_1 e_toFun =>
+                    Eq.rec (motive := fun toFun_2 e_toFun =>
+                      ∀ (invFun invFun_1 : β → α) (e_invFun : invFun = invFun_1)
+                        (left_inv : Function.LeftInverse invFun toFun) (right_inv : Function.RightInverse invFun toFun),
+                        { toFun := toFun, invFun := invFun, left_inv := left_inv, right_inv := right_inv } =
+                          { toFun := toFun_2, invFun := invFun_1, left_inv := e_toFun ▸ e_invFun ▸ left_inv,
+                            right_inv := e_toFun ▸ e_invFun ▸ right_inv })
+                      (fun invFun invFun_1 e_invFun =>
+                        Eq.rec (motive := fun invFun_2 e_invFun =>
+                          ∀ (left_inv : Function.LeftInverse invFun toFun)
+                            (right_inv : Function.RightInverse invFun toFun),
+                            { toFun := toFun, invFun := invFun, left_inv := left_inv, right_inv := right_inv } =
+                              { toFun := toFun, invFun := invFun_2, left_inv := Eq.refl toFun ▸ e_invFun ▸ left_inv,
+                                right_inv := Eq.refl toFun ▸ e_invFun ▸ right_inv })
+                          (fun left_inv right_inv =>
+                            Eq.refl { toFun := toFun, invFun := invFun, left_inv := left_inv, right_inv := right_inv })
+                          e_invFun)
+                      e_toFun)
+                  (IndependentDuodenary.affineStationApply
+                    (IndependentDuodenary.compileStation IndependentDuodenary.StationExpr.identity))
+                  (IndependentDuodenary.affineStationApply (1, 0))
+                  (id (Eq.refl (IndependentDuodenary.affineStationApply (1, 0))))
+                  (fun x =>
+                    ↑(IndependentDuodenary.compileStation IndependentDuodenary.StationExpr.identity).1⁻¹ *
+                      (x - (IndependentDuodenary.compileStation IndependentDuodenary.StationExpr.identity).2))
+                  (fun x => x)
+                  (funext fun x => Eq.trans (congr (congrArg (fun x => HMul.hMul ↑x) inv_one) (sub_zero x)) (one_mul x))
+                  (IndependentDuodenary.affineStationPermutation.proof_1
+                    (IndependentDuodenary.compileStation IndependentDuodenary.StationExpr.identity))
+                  (IndependentDuodenary.affineStationPermutation.proof_2
+                    (IndependentDuodenary.compileStation IndependentDuodenary.StationExpr.identity))))
+              (Eq.trans (congrArg (fun x => x + 0) (one_mul x)) (add_zero x))))
+          (eq_self x)))
+    (fun k =>
+      Eq.refl
+        (IndependentDuodenary.affineStationPermutation
+          (IndependentDuodenary.compileStation (IndependentDuodenary.StationExpr.shift k))))
+    (Eq.refl
+      (IndependentDuodenary.affineStationPermutation
+        (IndependentDuodenary.compileStation IndependentDuodenary.StationExpr.reflect)))
+    (fun a =>
+      Eq.refl
+        (IndependentDuodenary.affineStationPermutation
+          (IndependentDuodenary.compileStation (IndependentDuodenary.StationExpr.scale a))))
+    (fun outer inner ho hi =>
+      of_eq_true
+        (Eq.trans
+          (congrArg (fun x => x = IndependentDuodenary.stationMeaning outer * IndependentDuodenary.stationMeaning inner)
+            (Eq.trans
+              (IndependentDuodenary.affine_permutation_compose (IndependentDuodenary.compileStation outer)
+                (IndependentDuodenary.compileStation inner))
+              (congr (congrArg HMul.hMul ho) hi)))
+          (eq_self (IndependentDuodenary.stationMeaning outer * IndependentDuodenary.stationMeaning inner))))
+    (fun body h =>
+      of_eq_true
+        (Eq.trans
+          (congrArg (fun x => x = (IndependentDuodenary.stationMeaning body)⁻¹)
+            (Eq.trans (IndependentDuodenary.affine_permutation_inverse (IndependentDuodenary.compileStation body))
+              (congrArg Inv.inv h)))
+          (eq_self (IndependentDuodenary.stationMeaning body)⁻¹)))
+    e
+'IndependentDuodenary.station_compile_correct' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_compile_correct: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Units.val,
+ Ring.toSub,
+ Function.LeftInverse,
+ Equiv.instFunLike,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ InvOneClass.toOne,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ DivisionCommMonoid.toDivisionMonoid,
+ Equiv.Perm.instInv,
+ ZMod.commRing,
+ DivInvOneMonoid.toInvOneClass,
+ NonUnitalNonAssocRing.toMul,
+ inv_one,
+ MulOneClass.toMul,
+ congrArg,
+ CommSemiring.toSemiring,
+ sub_zero,
+ IndependentDuodenary.affineStationPermutation.proof_1,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ HSub.hSub,
+ CommSemiring.toCommMonoidWithZero,
+ DivisionMonoid.toDivInvOneMonoid,
+ Units,
+ Eq.rec,
+ Equiv.mk,
+ id,
+ Equiv,
+ Distrib.toAdd,
+ Prod.mk,
+ SubtractionMonoid.toSubNegZeroMonoid,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ IndependentDuodenary.affineStationInverse,
+ SubNegZeroMonoid.toSubNegMonoid,
+ CommGroup.toDivisionCommMonoid,
+ SubNegZeroMonoid.toNegZeroClass,
+ SubtractionCommMonoid.toSubtractionMonoid,
+ IndependentDuodenary.affineStationCompose,
+ ZMod,
+ IndependentDuodenary.StationExpr.reflect,
+ Prod.fst,
+ IndependentDuodenary.affine_permutation_inverse,
+ IndependentDuodenary.StationExpr,
+ Units.instOne,
+ MulZeroOneClass.toMulOneClass,
+ IndependentDuodenary.compileStation,
+ SubNegMonoid.toSub,
+ funext,
+ instHAdd,
+ CommRing.toCommSemiring,
+ instHSub,
+ Inv.inv,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Equiv.Perm,
+ IndependentDuodenary.affineStationPermutation,
+ Equiv.Perm.instMul,
+ Ring.toAddCommGroup,
+ Nat,
+ congr,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ True,
+ IndependentDuodenary.StationExpr.rec,
+ MulOneClass.toOne,
+ eq_self,
+ Function.RightInverse,
+ IndependentDuodenary.stationMeaning,
+ of_eq_true,
+ Eq.ndrec,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.StationExpr.scale,
+ InvOneClass.toInv,
+ AddMonoidWithOne.toAddMonoid,
+ IndependentDuodenary.affineStationApply,
+ CommRing.toRing,
+ IndependentDuodenary.StationExpr.shift,
+ IndependentDuodenary.StationExpr.identity,
+ AddCommGroup.toDivisionAddCommMonoid,
+ CommRing.toCommMonoid,
+ add_zero,
+ OfNat.ofNat,
+ NegZeroClass.toZero,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Prod.snd,
+ DFunLike.coe,
+ Units.instInv,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.affineStationPermutation.proof_2,
+ one_mul,
+ MonoidWithZero.toMonoid,
+ Equiv.Perm.ext,
+ Eq.trans,
+ Units.instCommGroupUnits,
+ Semiring.toMonoidWithZero,
+ instHMul,
+ IndependentDuodenary.affine_permutation_compose]
+theorem IndependentDuodenary.compile_parameter_expression : ∀ (p : IndependentDuodenary.AffineStationParameter),
+  IndependentDuodenary.compileStation (IndependentDuodenary.expressionFromParameter p) = p :=
+fun p =>
+  Prod.casesOn p fun a b =>
+    of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x = (a, b))
+          (congr (congrArg Prod.mk (one_mul a)) (Eq.trans (congrArg (fun x => x + b) (mul_zero 1)) (zero_add b))))
+        (eq_self (a, b)))
+'IndependentDuodenary.compile_parameter_expression' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES compile_parameter_expression: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ MulZeroClass.toMul,
+ MulOneClass.toMul,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ NonUnitalNonAssocSemiring.toMulZeroClass,
+ Units,
+ Distrib.toAdd,
+ Prod.mk,
+ IndependentDuodenary.expressionFromParameter,
+ instOfNatNat,
+ zero_add,
+ ZMod,
+ MulZeroClass.mul_zero,
+ IndependentDuodenary.compileStation,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ Nat,
+ congr,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ MulOneClass.toOne,
+ eq_self,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Monoid.toOne,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ Prod,
+ Prod.casesOn,
+ OfNat.ofNat,
+ Eq,
+ Ring.toAddGroupWithOne,
+ one_mul,
+ MonoidWithZero.toMonoid,
+ Eq.trans,
+ MulZeroClass.toZero,
+ Units.instMulOneClass,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.station_normalization_meaning : ∀ (e : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.stationMeaning (IndependentDuodenary.normalizeStation e) =
+    IndependentDuodenary.stationMeaning e :=
+fun e =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => _a = IndependentDuodenary.stationMeaning e)
+        (Eq.symm (IndependentDuodenary.station_compile_correct (IndependentDuodenary.normalizeStation e)))))
+    (Eq.mpr
+      (id
+        (congrArg
+          (fun _a =>
+            IndependentDuodenary.affineStationPermutation (IndependentDuodenary.compileStation _a) =
+              IndependentDuodenary.stationMeaning e)
+          (IndependentDuodenary.normalizeStation.eq_1 e)))
+      (Eq.mpr
+        (id
+          (congrArg (fun _a => IndependentDuodenary.affineStationPermutation _a = IndependentDuodenary.stationMeaning e)
+            (IndependentDuodenary.compile_parameter_expression (IndependentDuodenary.compileStation e))))
+        (Eq.mpr
+          (id
+            (congrArg (fun _a => _a = IndependentDuodenary.stationMeaning e)
+              (IndependentDuodenary.station_compile_correct e)))
+          (Eq.refl (IndependentDuodenary.stationMeaning e)))))
+'IndependentDuodenary.station_normalization_meaning' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_normalization_meaning: [Eq.mpr,
+ congrArg,
+ IndependentDuodenary.normalizeStation.eq_1,
+ IndependentDuodenary.compile_parameter_expression,
+ id,
+ IndependentDuodenary.expressionFromParameter,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.compileStation,
+ IndependentDuodenary.normalizeStation,
+ Equiv.Perm,
+ IndependentDuodenary.affineStationPermutation,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ IndependentDuodenary.stationMeaning,
+ IndependentDuodenary.station_compile_correct,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq]
+theorem IndependentDuodenary.station_normalization_idempotent : ∀ (e : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.normalizeStation (IndependentDuodenary.normalizeStation e) =
+    IndependentDuodenary.normalizeStation e :=
+fun e =>
+  of_eq_true
+    (Eq.trans
+      (congrArg
+        (fun x =>
+          IndependentDuodenary.expressionFromParameter x =
+            IndependentDuodenary.expressionFromParameter (IndependentDuodenary.compileStation e))
+        (IndependentDuodenary.compile_parameter_expression (IndependentDuodenary.compileStation e)))
+      (eq_self (IndependentDuodenary.expressionFromParameter (IndependentDuodenary.compileStation e))))
+'IndependentDuodenary.station_normalization_idempotent' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_normalization_idempotent: [congrArg,
+ IndependentDuodenary.compile_parameter_expression,
+ IndependentDuodenary.expressionFromParameter,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.compileStation,
+ IndependentDuodenary.normalizeStation,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ eq_self,
+ of_eq_true,
+ Eq,
+ Eq.trans]
+theorem IndependentDuodenary.station_meaning_iff_compiled : ∀ (e f : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.stationMeaning e = IndependentDuodenary.stationMeaning f ↔
+    IndependentDuodenary.compileStation e = IndependentDuodenary.compileStation f :=
+fun e f =>
+  {
+    mp := fun h =>
+      IndependentDuodenary.affine_station_permutation_injective
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a => _a = IndependentDuodenary.affineStationPermutation (IndependentDuodenary.compileStation f))
+              (IndependentDuodenary.station_compile_correct e)))
+          (Eq.mpr
+            (id
+              (congrArg (fun _a => IndependentDuodenary.stationMeaning e = _a)
+                (IndependentDuodenary.station_compile_correct f)))
+            (Eq.mpr (id (congrArg (fun _a => _a = IndependentDuodenary.stationMeaning f) h))
+              (Eq.refl (IndependentDuodenary.stationMeaning f))))),
+    mpr := fun h =>
+      Eq.mpr
+        (id
+          (congrArg (fun _a => _a = IndependentDuodenary.stationMeaning f)
+            (Eq.symm (IndependentDuodenary.station_compile_correct e))))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a => IndependentDuodenary.affineStationPermutation (IndependentDuodenary.compileStation e) = _a)
+              (Eq.symm (IndependentDuodenary.station_compile_correct f))))
+          (Eq.mpr
+            (id
+              (congrArg
+                (fun _a =>
+                  IndependentDuodenary.affineStationPermutation _a =
+                    IndependentDuodenary.affineStationPermutation (IndependentDuodenary.compileStation f))
+                h))
+            (Eq.refl (IndependentDuodenary.affineStationPermutation (IndependentDuodenary.compileStation f))))) }
+'IndependentDuodenary.station_meaning_iff_compiled' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_meaning_iff_compiled: [IndependentDuodenary.affine_station_permutation_injective,
+ Eq.mpr,
+ congrArg,
+ id,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.compileStation,
+ Iff,
+ Equiv.Perm,
+ IndependentDuodenary.affineStationPermutation,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Iff.intro,
+ IndependentDuodenary.stationMeaning,
+ IndependentDuodenary.station_compile_correct,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq]
+theorem IndependentDuodenary.same_station_meaning_correct : ∀ (e f : IndependentDuodenary.StationExpr),
+  IndependentDuodenary.sameStationMeaning e f = true ↔
+    IndependentDuodenary.stationMeaning e = IndependentDuodenary.stationMeaning f :=
+fun e f =>
+  of_eq_true
+    (Eq.trans (congr (congrArg Iff decide_eq_true_eq) (IndependentDuodenary.StationGrammar._auxLemma.1 e f))
+      (iff_self (IndependentDuodenary.compileStation e = IndependentDuodenary.compileStation f)))
+'IndependentDuodenary.same_station_meaning_correct' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES same_station_meaning_correct: [IndependentDuodenary.StationGrammar._auxLemma.1,
+ ZMod.commRing,
+ instDecidableEqProd,
+ congrArg,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ Units,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.compileStation,
+ iff_self,
+ Bool.true,
+ CommRing.toCommSemiring,
+ Iff,
+ IndependentDuodenary.sameStationMeaning,
+ Equiv.Perm,
+ Nat,
+ congr,
+ True,
+ IndependentDuodenary.AffineStationParameter,
+ IndependentDuodenary.stationMeaning,
+ Bool,
+ of_eq_true,
+ decide_eq_true_eq,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ Units.instDecidableEq,
+ MonoidWithZero.toMonoid,
+ Eq.trans,
+ Semiring.toMonoidWithZero]
+theorem IndependentDuodenary.meaning_parameter_roundtrip : ∀ (p : IndependentDuodenary.AffineStationParameter),
+  IndependentDuodenary.compileMeaningClass (IndependentDuodenary.parameterMeaningClass p) = p :=
+fun p => IndependentDuodenary.compile_parameter_expression p
+'IndependentDuodenary.meaning_parameter_roundtrip' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES meaning_parameter_roundtrip: [IndependentDuodenary.compileMeaningClass,
+ IndependentDuodenary.compile_parameter_expression,
+ IndependentDuodenary.AffineStationParameter,
+ Eq,
+ IndependentDuodenary.parameterMeaningClass]
+theorem IndependentDuodenary.parameter_meaning_roundtrip : ∀ (q : IndependentDuodenary.StationMeaningClass),
+  IndependentDuodenary.parameterMeaningClass (IndependentDuodenary.compileMeaningClass q) = q :=
+fun q => Quotient.inductionOn q fun e => Quotient.sound (IndependentDuodenary.station_normalization_meaning e)
+'IndependentDuodenary.parameter_meaning_roundtrip' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES parameter_meaning_roundtrip: [IndependentDuodenary.StationMeaningClass,
+ IndependentDuodenary.compileMeaningClass,
+ IndependentDuodenary.expressionFromParameter,
+ IndependentDuodenary.station_normalization_meaning,
+ Quotient.inductionOn,
+ Quotient.mk,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.stationSemanticSetoid,
+ Quotient.sound,
+ Eq,
+ IndependentDuodenary.parameterMeaningClass]
+theorem IndependentDuodenary.station_meaning_class_card : Nat.card IndependentDuodenary.StationMeaningClass = 48 :=
+Eq.mpr (id (congrArg (fun _a => _a = 48) (Nat.card_congr IndependentDuodenary.stationMeaningEquiv)))
+  (Eq.mpr (id (congrArg (fun _a => _a = 48) Nat.card_eq_fintype_card))
+    (Eq.mpr (id (congrArg (fun _a => _a = 48) IndependentDuodenary.affine_station_parameter_card)) (Eq.refl 48)))
+'IndependentDuodenary.station_meaning_class_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES station_meaning_class_card: [Eq.mpr,
+ IndependentDuodenary.StationMeaningClass,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ IndependentDuodenary.affine_station_parameter_card,
+ Units,
+ instFintypeUnitsOfDecidableEq,
+ Fintype.card,
+ id,
+ Nat.card,
+ instOfNatNat,
+ ZMod,
+ Nat.card_congr,
+ CommRing.toCommSemiring,
+ IndependentDuodenary.stationMeaningEquiv,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Eq.refl,
+ instFintypeProd,
+ OfNat.ofNat,
+ Eq,
+ MonoidWithZero.toMonoid,
+ Nat.card_eq_fintype_card,
+ Semiring.toMonoidWithZero]
+theorem IndependentDuodenary.reflection_example_parameters : IndependentDuodenary.compileStation
+    IndependentDuodenary.reflectionConjugationExample =
+  (1, 11) :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.reflection_example_parameters' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reflection_example_parameters: [Semiring.toNatCast,
+ IndependentDuodenary.reflectionConjugationExample,
+ of_decide_eq_true,
+ ZMod.commRing,
+ instDecidableEqProd,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ Units,
+ id,
+ Prod.mk,
+ instOfNatNat,
+ ZMod,
+ Units.instOne,
+ IndependentDuodenary.compileStation,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Bool,
+ One.toOfNat1,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ Units.instDecidableEq,
+ MonoidWithZero.toMonoid,
+ Semiring.toMonoidWithZero]
+theorem IndependentDuodenary.reflection_example_meaning : IndependentDuodenary.stationMeaning
+    IndependentDuodenary.reflectionConjugationExample =
+  IndependentDuodenary.stationMeaning (IndependentDuodenary.StationExpr.shift 11) :=
+(IndependentDuodenary.station_meaning_iff_compiled IndependentDuodenary.reflectionConjugationExample
+      (IndependentDuodenary.StationExpr.shift 11)).mpr
+  IndependentDuodenary.reflection_example_parameters
+'IndependentDuodenary.reflection_example_meaning' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reflection_example_meaning: [Iff.mpr,
+ Semiring.toNatCast,
+ IndependentDuodenary.reflectionConjugationExample,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.station_meaning_iff_compiled,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.compileStation,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Equiv.Perm,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ IndependentDuodenary.stationMeaning,
+ IndependentDuodenary.StationExpr.shift,
+ OfNat.ofNat,
+ IndependentDuodenary.reflection_example_parameters,
+ Eq,
+ instOfNatAtLeastTwo]
+theorem IndependentDuodenary.scale_shift_example_parameters : IndependentDuodenary.compileStation
+    IndependentDuodenary.scaleAfterShiftExample =
+  (IndependentDuodenary.multiplyFiveParameter.1, 3) :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.scale_shift_example_parameters' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES scale_shift_example_parameters: [Semiring.toNatCast,
+ IndependentDuodenary.multiplyFiveParameter,
+ IndependentDuodenary.scaleAfterShiftExample,
+ of_decide_eq_true,
+ ZMod.commRing,
+ instDecidableEqProd,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ Units,
+ id,
+ Prod.mk,
+ instOfNatNat,
+ ZMod,
+ Prod.fst,
+ IndependentDuodenary.compileStation,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Bool,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ Units.instDecidableEq,
+ MonoidWithZero.toMonoid,
+ Semiring.toMonoidWithZero]
+theorem IndependentDuodenary.scale_shift_example_at_two : (IndependentDuodenary.stationMeaning
+      IndependentDuodenary.scaleAfterShiftExample)
+    2 =
+  1 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.scale_shift_example_at_two' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES scale_shift_example_at_two: [Semiring.toNatCast,
+ Equiv.instFunLike,
+ Semiring.toOne,
+ IndependentDuodenary.scaleAfterShiftExample,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Equiv.Perm,
+ Nat,
+ IndependentDuodenary.stationMeaning,
+ Bool,
+ One.toOfNat1,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ DFunLike.coe,
+ instOfNatAtLeastTwo]
 theorem IndependentDuodenary.twelveCRT_bijective : Function.Bijective ⇑IndependentDuodenary.twelveCRT :=
 RingEquiv.bijective IndependentDuodenary.twelveCRT
 'IndependentDuodenary.twelveCRT_bijective' depends on axioms: [propext, Classical.choice, Quot.sound]
@@ -10472,4 +12182,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 150 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 191 theorem declarations; only standard Lean axioms permitted.
