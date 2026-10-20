@@ -114,7 +114,11 @@ orbit-cover bounds. If $N$ orbit seeds cover $Q_r$, surjectivity of the map from
 seed--phase pairs to states proves $49152^r\leq12N$. In particular, one register
 requires at least 4096 seeds. This lower bound concerns explicit orbit covers;
 it is not a lower bound against all algorithms or Turing machines.
-The generated appendix inventories the current library.
+The parser and halted-run extension adds nineteen declarations: total word and
+pair decoders, encoding round trips and injectivity, malformed-input rejection,
+and persistence of halted configurations and their outputs. These discharge
+atomic obligations 1.10--1.12, without supplying a SAT reduction or machine-time
+simulation. The generated appendix inventories the current library.
 Exact propositions, proof terms, direct dependencies and transitive foundational
 requirements are in the accompanying \texttt{verification/THEOREMS.md} and
 \texttt{verification/axioms-and-proofs.txt}.

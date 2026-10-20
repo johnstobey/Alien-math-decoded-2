@@ -170,6 +170,8 @@ def main():
             (['lake', 'env', 'lean', 'examples/MillenniumBoundary.lean'], 'boundary.log', True),
             (['lake', 'env', 'lean', 'IndependentDuodenary/SearchBoundary.lean'], 'search-module.log', True),
             (['lake', 'env', 'lean', 'examples/SearchBoundary.lean'], 'search-fixtures.log', True),
+            (['lake', 'env', 'lean', 'IndependentDuodenary/ComplexityEncoding.lean'], 'parser-module.log', True),
+            (['lake', 'env', 'lean', 'examples/ComplexityParserBoundary.lean'], 'parser-fixtures.log', True),
             (['lake', 'exe', 'verifyPipeline'], 'pipeline.log', False)]:
             records.append(checked_command(cmd, logs / filename, strict))
         if args.translation:

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "count": 354,
+  "count": 373,
   "audit_evidence": "verification/axioms-and-proofs.txt",
   "theorems": [
     {
@@ -645,6 +645,139 @@
       "module": "CipherValidator",
       "source": "IndependentDuodenary/CipherValidator.lean",
       "line": 155,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_word_decode_encode",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 21,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_word_encode_decode",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 29,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_word_encoding_injective",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 50,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_word_decode_blank_rejected",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 55,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_word_decode_separator_rejected",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 58,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_word_decode_prefix",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 61,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_pair_decode_prefix",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 71,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_pair_decode_encode",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 81,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_pair_encode_decode",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 87,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_pair_encoding_injective",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 116,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_pair_missing_separator_rejected",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 122,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_pair_extra_separator_rejected",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 130,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_pair_trailing_blank_rejected",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 135,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_run_succ",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 140,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_halted_run_stable",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 145,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_halted_status_stable",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 157,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_halted_acceptance_stable",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 164,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_halted_boolean_output_stable",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 170,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.prize_accepts_by_bound_iff",
+      "module": "ComplexityEncoding",
+      "source": "IndependentDuodenary/ComplexityEncoding.lean",
+      "line": 176,
       "external_prize_implication_established": false
     },
     {

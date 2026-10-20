@@ -81,6 +81,13 @@ jobs:
             lake env lean "$proof_file" 2>&1 | tee .lake/search-boundary-check.log
             test ! -s .lake/search-boundary-check.log
           done
+      - name: Verify total parsers and halted-run persistence
+        run: |
+          for proof_file in IndependentDuodenary/ComplexityEncoding.lean examples/ComplexityParserBoundary.lean
+          do
+            lake env lean "$proof_file" 2>&1 | tee .lake/complexity-parser-check.log
+            test ! -s .lake/complexity-parser-check.log
+          done
       - name: Verify initial complexity encoding facts and obligation graph
         run: |
           lake env lean examples/ComplexityEncodingBoundary.lean 2>&1 | tee .lake/complexity-encoding-check.log

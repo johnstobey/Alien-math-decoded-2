@@ -21,3 +21,4 @@ import IndependentDuodenary.PipelineHarness
 import IndependentDuodenary.MillenniumBridge
 
 import IndependentDuodenary.SearchBoundary
+import IndependentDuodenary.ComplexityEncoding

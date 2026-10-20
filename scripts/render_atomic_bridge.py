@@ -22,11 +22,11 @@ def visit(identifier):
 
 for identifier in atoms:
     visit(identifier)
-proved = [a for a in atoms.values() if a['status'] == 'proved_in_Lean_example']
-assert len(proved) == 5
+proved = [a for a in atoms.values() if a['status'] in ('proved_in_Lean_example', 'proved_in_library')]
+assert all(a['status'] in ('open', 'proved_in_Lean_example', 'proved_in_library') for a in atoms.values())
 assert all(a['evidence'] and (root / a['evidence']).is_file() for a in proved)
 lines = [data['specification'].rstrip(), '',
-         f"**Register totals:** {len(atoms)} atoms; {len(proved)} proved encoding examples; "
+         f"**Register totals:** {len(atoms)} atoms; {len(proved)} completed obligations; "
          f"{len(atoms)-len(proved)} open obligations. These totals are not library theorem counts.", '']
 for group in data['groups']:
     lines += [f"## Item {group['item']}: {group['title']}", '']
@@ -37,4 +37,4 @@ for group in data['groups']:
         if atom['evidence']:
             lines += [f"Evidence: `{atom['evidence']}`.", '']
 (root / 'verification/ATOMIC_BRIDGE_SPECIFICATION.md').write_text('\n'.join(lines))
-print(f'ATOMIC GRAPH PASS: {len(atoms)} nodes, no cycles; {len(proved)} proved examples')
+print(f'ATOMIC GRAPH PASS: {len(atoms)} nodes, no cycles; {len(proved)} completed obligations')

@@ -115,5 +115,8 @@ packet from its archived revision; current research has its own audit index.
 [Atomic bridge specification](verification/ATOMIC_BRIDGE_SPECIFICATION.md)
 expands the four missing complexity bridges into 77 explicit obligations and
 an acyclic dependency graph. Five initial encoding facts are checked as unnamed
-Lean examples; the library theorem count remains 354. The general SAT reduction
+Lean examples. Nineteen named parser and halting theorems additionally close
+obligations 1.10–1.12; the library now has 373 named declarations. Eight of 77
+atomic obligations are discharged, with 69 open. See the
+[parser and halting report](verification/COMPLEXITY_ENCODING.md). The general SAT reduction
 and polynomial-time machine proof remain absent.

@@ -3,7 +3,7 @@
 This expands the annotated statements about the missing prize bridge and the
 incompleteness of packaging as mathematical proof. It is an obligation register,
 not a completed P-versus-NP proof. The baseline library has 354 named theorem
-declarations. Five additional unnamed encoding examples are checked separately;
+declarations; the parser and halting extension adds 19, for 373 current declarations. Five additional unnamed encoding examples are checked separately;
 they do not increase that library count.
 
 This is one concrete equality-route specification; alternative encodings and
@@ -130,13 +130,13 @@ lower-bound argument; the bound on explicit orbit covers is not one.
 ## Dependency and status interpretation
 
 The machine-readable companion is `packaging/atomic_bridge_obligations.json`.
-Dependencies refer to the numbered atoms, not to assumed Lean facts. The five
-proved entries identify actual checked unnamed Lean examples. Existing library
+Dependencies refer to the numbered atoms, not to assumed Lean facts. Five proved entries identify checked unnamed Lean examples; three additional
+entries identify named parser and halting theorems in the library. Existing library
 reachability correctness and cover bounds are separately listed as verified
 baseline evidence. The dependency graph has no cycles; the absent reduction
 2.21 remains a genuine missing construction rather than a renamed hypothesis.
 
-**Register totals:** 77 atoms; 5 proved encoding examples; 72 open obligations. These totals are not library theorem counts.
+**Register totals:** 77 atoms; 8 completed obligations; 69 open obligations. These totals are not library theorem counts.
 
 ## Item 1: Standard-model correspondence
 
@@ -226,25 +226,31 @@ Evidence: `examples/ComplexityEncodingBoundary.lean`.
 
 Supply a total partial decoder on Fin-4 words, prove decode(encode(x)) = some x and uniqueness, and reject symbols outside {1,2}. A left inverse only on words actually in the image is insufficient for malformed-input handling.
 
-Status: **open**.
+Status: **proved_in_library**.
 
 Prerequisites: 1.07, 1.08, 1.09.
+
+Evidence: `IndependentDuodenary/ComplexityEncoding.lean`.
 
 ### 1.11 — Pair decoder
 
 Supply a total pair parser. Prove its left inverse, uniqueness of the separator split, rejection of absent/multiple separators and invalid bit symbols, and no ignored trailing data.
 
-Status: **open**.
+Status: **proved_in_library**.
 
 Prerequisites: 1.10, 1.09.
+
+Evidence: `IndependentDuodenary/ComplexityEncoding.lean`.
 
 ### 1.12 — Halted-run persistence
 
 Prove the repository saturated iterator freezes configurations after halting: halted at t implies same configuration, halting status and output at every t+s. This connects checking at the exact polynomial bound to halting by that bound.
 
-Status: **open**.
+Status: **proved_in_library**.
 
 Prerequisites: none.
+
+Evidence: `IndependentDuodenary/ComplexityEncoding.lean`.
 
 ### 1.13 — Acceptance convention conversion
 

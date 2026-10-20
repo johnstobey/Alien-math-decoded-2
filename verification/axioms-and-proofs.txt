@@ -4161,6 +4161,2133 @@ DIRECT DEPENDENCIES cipher_orcus_fixture: [IndependentDuodenary.cipherHundredths
  OfNat.ofNat,
  Decidable.decide,
  Eq]
+theorem IndependentDuodenary.prize_word_decode_encode : ∀ (x : IndependentDuodenary.PrizeBinaryWord),
+  IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord x) = some x :=
+fun x =>
+  List.rec (Eq.refl (IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord [])))
+    (fun b x ih =>
+      Bool.casesOn (motive := fun t =>
+        b = t → IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord (b :: x)) = some (b :: x)) b
+        (fun h =>
+          Eq.symm h ▸
+            of_eq_true
+              (Eq.trans
+                (congrArg (fun x_1 => x_1 = some (false :: x))
+                  (Eq.trans
+                    (ite_cond_eq_true
+                      (List.cons false <$>
+                        IndependentDuodenary.prizeDecodeWord (List.map (fun b => if b = true then 2 else 1) x))
+                      (if (fun b => if b = true then 2 else 1) false = 2 then
+                        List.cons true <$>
+                          IndependentDuodenary.prizeDecodeWord (List.map (fun b => if b = true then 2 else 1) x)
+                      else none)
+                      (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_false 2 1 Bool.false_eq_true)) (eq_self 1)))
+                    (congrArg (Functor.map (List.cons false)) ih)))
+                (eq_self (some (false :: x)))))
+        (fun h =>
+          Eq.symm h ▸
+            of_eq_true
+              (Eq.trans
+                (congrArg (fun x_1 => x_1 = some (true :: x))
+                  (Eq.trans
+                    (ite_cond_eq_false
+                      (List.cons false <$>
+                        IndependentDuodenary.prizeDecodeWord (List.map (fun b => if b = true then 2 else 1) x))
+                      (if (fun b => if b = true then 2 else 1) true = 2 then
+                        List.cons true <$>
+                          IndependentDuodenary.prizeDecodeWord (List.map (fun b => if b = true then 2 else 1) x)
+                      else none)
+                      (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_true 2 1 (eq_self true)))
+                        (eq_false_of_decide (Eq.refl false))))
+                    (Eq.trans
+                      (ite_cond_eq_true
+                        (List.cons true <$>
+                          IndependentDuodenary.prizeDecodeWord (List.map (fun b => if b = true then 2 else 1) x))
+                        none (Eq.trans (congrArg (fun x => x = 2) (ite_cond_eq_true 2 1 (eq_self true))) (eq_self 2)))
+                      (congrArg (Functor.map (List.cons true)) ih))))
+                (eq_self (some (true :: x)))))
+        (Eq.refl b))
+    x
+'IndependentDuodenary.prize_word_decode_encode' depends on axioms: [propext]
+DIRECT DEPENDENCIES prize_word_decode_encode: [False,
+ congrArg,
+ List.map,
+ instDecidableEqFin,
+ eq_false_of_decide,
+ Bool.false_eq_true,
+ Option.some,
+ instFunctorOption,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ instOfNatNat,
+ List.rec,
+ ite_cond_eq_true,
+ List.cons,
+ Bool.true,
+ Option.none,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ Bool.casesOn,
+ Nat,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ IndependentDuodenary.prizeDecodeWord.proof_2,
+ Eq.ndrec,
+ IndependentDuodenary.prizeEncodeWord,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ Bool.false,
+ Fin,
+ Eq,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ Eq.trans,
+ IndependentDuodenary.prizeEncodeWord.proof_1,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.prize_word_encode_decode : ∀ (raw : List (Fin 4))
+  (x : IndependentDuodenary.PrizeBinaryWord),
+  IndependentDuodenary.prizeDecodeWord raw = some x → IndependentDuodenary.prizeEncodeWord x = raw :=
+fun raw x h =>
+  List.rec (motive := fun raw =>
+    ∀ (x : IndependentDuodenary.PrizeBinaryWord),
+      IndependentDuodenary.prizeDecodeWord raw = some x → IndependentDuodenary.prizeEncodeWord x = raw)
+    (fun x h =>
+      Eq.symm (Eq.mp (Eq.trans (Option.some.injEq [] x) Init.Data.List.Lemmas._auxLemma.1) h) ▸
+        Eq.refl (IndependentDuodenary.prizeEncodeWord []))
+    (fun a raw ih x h =>
+      List.Mem.casesOn (motive := fun a_1 x_1 =>
+        List.finRange 4 = a_1 → HEq (Fintype.complete a) x_1 → IndependentDuodenary.prizeEncodeWord x = a :: raw)
+        (Fintype.complete a)
+        (fun as h_1 =>
+          List.noConfusion h_1 fun head_eq =>
+            Eq.ndrec (motive := fun a =>
+              IndependentDuodenary.prizeDecodeWord (a :: raw) = some x →
+                ∀ (this : a ∈ Fintype.elems),
+                  (fun x1 x2 => (fun i => i) x1 :: x2) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                        ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                          ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])) =
+                      as →
+                    HEq this (List.Mem.head as) → IndependentDuodenary.prizeEncodeWord x = a :: raw)
+              (fun h this tail_eq =>
+                Eq.ndrec (motive := fun as =>
+                  HEq this (List.Mem.head as) →
+                    IndependentDuodenary.prizeEncodeWord x =
+                      (fun i => i) ⟨0, Nat.le_of_lt (Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4)))⟩ :: raw)
+                  (fun h_2 =>
+                    False.elim
+                      (Eq.mp
+                        (Eq.trans
+                          (congrArg (fun x_1 => x_1 = some x)
+                            (Eq.trans
+                              (ite_cond_eq_false (List.cons false <$> IndependentDuodenary.prizeDecodeWord raw)
+                                (if
+                                    (fun i => i) ⟨0, Nat.le_of_lt (Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4)))⟩ =
+                                      2 then
+                                  List.cons true <$> IndependentDuodenary.prizeDecodeWord raw
+                                else none)
+                                Mathlib.Algebra.NeZero._auxLemma.2)
+                              (ite_cond_eq_false (List.cons true <$> IndependentDuodenary.prizeDecodeWord raw) none
+                                (eq_false_of_decide (Eq.refl false)))))
+                          (eq_false' fun h => Option.noConfusion h))
+                        h))
+                  tail_eq)
+              head_eq h (Fintype.complete a))
+        (fun b {as} a_1 h_1 =>
+          List.noConfusion h_1 fun head_eq =>
+            Eq.ndrec (motive := fun b =>
+              (fun x1 x2 => (fun i => i) x1 :: x2) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                    ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                      ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])) =
+                  as →
+                HEq (Fintype.complete a) (List.Mem.tail b a_1) → IndependentDuodenary.prizeEncodeWord x = a :: raw)
+              (fun tail_eq =>
+                Eq.ndrec (motive := fun {as} =>
+                  ∀ (a_2 : List.Mem a as),
+                    HEq (Fintype.complete a)
+                        (List.Mem.tail ((fun i => i) ⟨0, Nat.le_of_lt (Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4)))⟩)
+                          a_2) →
+                      IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                  (fun a_2 h_2 =>
+                    List.Mem.casesOn (motive := fun a_3 x_1 =>
+                      (fun x1 x2 => (fun i => i) x1 :: x2) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                            ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                              ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])) =
+                          a_3 →
+                        HEq a_2 x_1 → IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                      a_2
+                      (fun as h_3 =>
+                        List.noConfusion h_3 fun head_eq =>
+                          Eq.ndrec (motive := fun a =>
+                            IndependentDuodenary.prizeDecodeWord (a :: raw) = some x →
+                              ∀
+                                (a_3 :
+                                  List.Mem a
+                                    ((fun x1 x2 => (fun i => i) x1 :: x2)
+                                      ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                                      ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                        ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])))),
+                                (fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                      ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []) =
+                                    as →
+                                  HEq a_3 (List.Mem.head as) → IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                            (fun h a tail_eq =>
+                              Eq.ndrec (motive := fun as =>
+                                HEq a (List.Mem.head as) →
+                                  IndependentDuodenary.prizeEncodeWord x =
+                                    (fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ :: raw)
+                                (fun h_4 =>
+                                  Option.casesOn (motive := fun t =>
+                                    IndependentDuodenary.prizeDecodeWord raw = t →
+                                      IndependentDuodenary.prizeEncodeWord x =
+                                        (fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ :: raw)
+                                    (IndependentDuodenary.prizeDecodeWord raw)
+                                    (fun h_5 =>
+                                      Eq.ndrec (motive := fun x_1 =>
+                                        IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                                          IndependentDuodenary.prizeEncodeWord x =
+                                            (fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ :: raw)
+                                        (fun hd =>
+                                          False.elim
+                                            (Eq.mp
+                                              (Eq.trans
+                                                (congrArg (fun x_1 => x_1 = some x)
+                                                  (Eq.trans
+                                                    (ite_cond_eq_true
+                                                      (List.cons false <$> IndependentDuodenary.prizeDecodeWord raw)
+                                                      (if
+                                                          (fun i => i)
+                                                              ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ =
+                                                            2 then
+                                                        List.cons true <$> IndependentDuodenary.prizeDecodeWord raw
+                                                      else none)
+                                                      (eq_self 1))
+                                                    (congrArg (Functor.map (List.cons false)) hd)))
+                                                (eq_false' fun h => Option.noConfusion h))
+                                              h))
+                                        (Eq.symm h_5) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+                                    (fun xs h_5 =>
+                                      Eq.ndrec (motive := fun x_1 =>
+                                        IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                                          IndependentDuodenary.prizeEncodeWord x =
+                                            (fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ :: raw)
+                                        (fun hd =>
+                                          Eq.mp
+                                              (Eq.trans
+                                                (congrArg (fun x_1 => x_1 = some x)
+                                                  (Eq.trans
+                                                    (ite_cond_eq_true
+                                                      (List.cons false <$> IndependentDuodenary.prizeDecodeWord raw)
+                                                      (if
+                                                          (fun i => i)
+                                                              ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ =
+                                                            2 then
+                                                        List.cons true <$> IndependentDuodenary.prizeDecodeWord raw
+                                                      else none)
+                                                      (eq_self 1))
+                                                    (congrArg (Functor.map (List.cons false)) hd)))
+                                                (Option.some.injEq (false :: xs) x))
+                                              h ▸
+                                            Eq.mpr
+                                              (id
+                                                (Eq.trans
+                                                  (Eq.trans
+                                                    (congrArg
+                                                      (fun x =>
+                                                        x :: List.map (fun b => if b = true then 2 else 1) xs =
+                                                          1 :: raw)
+                                                      (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                                                    (List.cons.injEq 1
+                                                      (List.map (fun b => if b = true then 2 else 1) xs) 1 raw))
+                                                  (Eq.trans
+                                                    (congrArg
+                                                      (fun x =>
+                                                        x ∧ List.map (fun b => if b = true then 2 else 1) xs = raw)
+                                                      (eq_self 1))
+                                                    (true_and
+                                                      (List.map (fun b => if b = true then 2 else 1) xs = raw)))))
+                                              (Eq.mp
+                                                (Eq.trans
+                                                  (List.cons.injEq 1 (List.map (fun b => if b = true then 2 else 1) xs)
+                                                    1 raw)
+                                                  (Eq.trans
+                                                    (congrArg
+                                                      (fun x =>
+                                                        x ∧ List.map (fun b => if b = true then 2 else 1) xs = raw)
+                                                      (eq_self 1))
+                                                    (true_and
+                                                      (List.map (fun b => if b = true then 2 else 1) xs = raw))))
+                                                (congrArg (List.cons 1) (ih xs hd))))
+                                        (Eq.symm h_5) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+                                    (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+                                tail_eq)
+                            head_eq h a_2)
+                      (fun b {as} a_3 h_3 =>
+                        List.noConfusion h_3 fun head_eq =>
+                          Eq.ndrec (motive := fun b =>
+                            (fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                  ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []) =
+                                as →
+                              HEq a_2 (List.Mem.tail b a_3) → IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                            (fun tail_eq =>
+                              Eq.ndrec (motive := fun {as} =>
+                                ∀ (a_4 : List.Mem a as),
+                                  HEq a_2
+                                      (List.Mem.tail ((fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩)
+                                        a_4) →
+                                    IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                                (fun a_4 h_4 =>
+                                  List.Mem.casesOn (motive := fun a_5 x_1 =>
+                                    (fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                          ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []) =
+                                        a_5 →
+                                      HEq a_4 x_1 → IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                                    a_4
+                                    (fun as h_5 =>
+                                      List.noConfusion h_5 fun head_eq =>
+                                        Eq.ndrec (motive := fun a =>
+                                          IndependentDuodenary.prizeDecodeWord (a :: raw) = some x →
+                                            ∀
+                                              (a_5 :
+                                                List.Mem a
+                                                  ((fun x1 x2 => (fun i => i) x1 :: x2)
+                                                    ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                                    ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []))),
+                                              (fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [] = as →
+                                                HEq a_5 (List.Mem.head as) →
+                                                  IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                                          (fun h a tail_eq =>
+                                            Eq.ndrec (motive := fun as =>
+                                              HEq a (List.Mem.head as) →
+                                                IndependentDuodenary.prizeEncodeWord x =
+                                                  (fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩ :: raw)
+                                              (fun h_6 =>
+                                                Option.casesOn (motive := fun t =>
+                                                  IndependentDuodenary.prizeDecodeWord raw = t →
+                                                    IndependentDuodenary.prizeEncodeWord x =
+                                                      (fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩ :: raw)
+                                                  (IndependentDuodenary.prizeDecodeWord raw)
+                                                  (fun h_7 =>
+                                                    Eq.ndrec (motive := fun x_1 =>
+                                                      IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                                                        IndependentDuodenary.prizeEncodeWord x =
+                                                          (fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩ :: raw)
+                                                      (fun hd =>
+                                                        False.elim
+                                                          (Eq.mp (Eq.trans ⋯ (eq_false' fun h => Option.noConfusion h))
+                                                            h))
+                                                      (Eq.symm h_7)
+                                                      (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+                                                  (fun xs h_7 =>
+                                                    Eq.ndrec (motive := fun x_1 =>
+                                                      IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                                                        IndependentDuodenary.prizeEncodeWord x =
+                                                          (fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩ :: raw)
+                                                      (fun hd => Eq.mp ⋯ h ▸ Eq.mpr ⋯ ⋯) (Eq.symm h_7)
+                                                      (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+                                                  (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+                                              tail_eq)
+                                          head_eq h a_4)
+                                    (fun b {as} a_5 h_5 =>
+                                      List.noConfusion h_5 fun head_eq =>
+                                        Eq.ndrec (motive := fun b =>
+                                          (fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [] = as →
+                                            HEq a_4 (List.Mem.tail b a_5) →
+                                              IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                                          (fun tail_eq =>
+                                            Eq.ndrec (motive := fun {as} =>
+                                              ∀ (a_6 : List.Mem a as),
+                                                HEq a_4
+                                                    (List.Mem.tail ((fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩)
+                                                      a_6) →
+                                                  IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                                              (fun a_6 h_6 =>
+                                                List.Mem.casesOn (motive := fun a_7 x_1 =>
+                                                  (fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [] = a_7 →
+                                                    HEq a_6 x_1 → IndependentDuodenary.prizeEncodeWord x = a :: raw)
+                                                  a_6
+                                                  (fun as h_7 =>
+                                                    List.noConfusion h_7 fun head_eq =>
+                                                      Eq.ndrec (motive := ⋯) ⋯ head_eq h a_6)
+                                                  (fun b {as} a_7 h => List.noConfusion h ⋯)
+                                                  (Eq.refl ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []))
+                                                  (HEq.refl a_6))
+                                              tail_eq a_5)
+                                          head_eq)
+                                    (Eq.refl
+                                      ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                        ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])))
+                                    (HEq.refl a_4))
+                                tail_eq a_3)
+                            head_eq)
+                      (Eq.refl
+                        ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                          ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                            ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []))))
+                      (HEq.refl a_2))
+                  tail_eq a_1)
+              head_eq)
+        (Eq.refl (List.finRange 4)) (HEq.refl (Fintype.complete a)))
+    raw x h
+'IndependentDuodenary.prize_word_encode_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES prize_word_encode_decode: [Eq.mpr,
+ False,
+ Fintype.elems,
+ NeZero.one,
+ Semiring.toOne,
+ Nat.le_refl,
+ Option.noConfusion,
+ congrArg,
+ CommSemiring.toSemiring,
+ Fin.instCommRing,
+ HEq.refl,
+ Finset,
+ List.Mem.tail,
+ List.map,
+ False.elim,
+ instDecidableEqFin,
+ Fin.nontrivial,
+ eq_false_of_decide,
+ Option.casesOn,
+ Bool.false_eq_true,
+ Option.some.injEq,
+ Option.some,
+ CommSemiring.toCommMonoidWithZero,
+ Membership.mem,
+ Eq.mp,
+ Fin.mk,
+ instFunctorOption,
+ id,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ List.rec,
+ Finset.instMembership,
+ ite_cond_eq_true,
+ Nat.le_of_lt,
+ Fintype.complete,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ Fin.fintype,
+ List.cons,
+ List.cons.injEq,
+ Bool.true,
+ Option.none,
+ List,
+ instHAdd,
+ IndependentDuodenary.prizeDecodeWord,
+ And,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Init.Data.List.Lemmas._auxLemma.1,
+ Nat,
+ True,
+ eq_self,
+ List.Mem.head,
+ List.noConfusion,
+ Bool,
+ IndependentDuodenary.prizeDecodeWord.proof_2,
+ Eq.ndrec,
+ IndependentDuodenary.prizeEncodeWord,
+ instAddNat,
+ Eq.refl,
+ HEq,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ Bool.false,
+ eq_false',
+ Fin,
+ List.Mem,
+ List.finRange,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ List.Mem.casesOn,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ true_and,
+ Eq.trans,
+ IndependentDuodenary.prizeEncodeWord.proof_1,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.prize_word_encoding_injective : Function.Injective IndependentDuodenary.prizeEncodeWord :=
+fun ⦃x y⦄ h =>
+  let_fun hd := congrArg IndependentDuodenary.prizeDecodeWord h;
+  Eq.mp
+    (Eq.trans
+      (congr (congrArg Eq (IndependentDuodenary.prize_word_decode_encode x))
+        (IndependentDuodenary.prize_word_decode_encode y))
+      (Option.some.injEq x y))
+    hd
+'IndependentDuodenary.prize_word_encoding_injective' depends on axioms: [propext]
+DIRECT DEPENDENCIES prize_word_encoding_injective: [congrArg,
+ Option.some.injEq,
+ Option.some,
+ Eq.mp,
+ instOfNatNat,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ Nat,
+ congr,
+ IndependentDuodenary.prizeEncodeWord,
+ IndependentDuodenary.prize_word_decode_encode,
+ Function.Injective,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.PrizeBinaryWord,
+ letFun,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.prize_word_decode_blank_rejected : ∀ (raw : List (Fin 4)),
+  IndependentDuodenary.prizeDecodeWord (0 :: raw) = none :=
+fun raw =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = none)
+        (Eq.trans
+          (ite_cond_eq_false (List.cons false <$> IndependentDuodenary.prizeDecodeWord raw)
+            (if 0 = 2 then List.cons true <$> IndependentDuodenary.prizeDecodeWord raw else none)
+            Mathlib.Algebra.NeZero._auxLemma.2)
+          (ite_cond_eq_false (List.cons true <$> IndependentDuodenary.prizeDecodeWord raw) none
+            (eq_false_of_decide (Eq.refl false)))))
+      (eq_self none))
+'IndependentDuodenary.prize_word_decode_blank_rejected' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_word_decode_blank_rejected: [NeZero.one,
+ Semiring.toOne,
+ congrArg,
+ CommSemiring.toSemiring,
+ Fin.instCommRing,
+ instDecidableEqFin,
+ Fin.nontrivial,
+ eq_false_of_decide,
+ CommSemiring.toCommMonoidWithZero,
+ instFunctorOption,
+ Fin.instOfNat,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ List.cons,
+ Bool.true,
+ Option.none,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ IndependentDuodenary.prizeDecodeWord.proof_2,
+ Eq.refl,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Bool.false,
+ Fin,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ Eq.trans,
+ Option,
+ ite]
+theorem IndependentDuodenary.prize_word_decode_separator_rejected : ∀ (raw : List (Fin 4)),
+  IndependentDuodenary.prizeDecodeWord (3 :: raw) = none :=
+fun raw =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = none)
+        (Eq.trans
+          (ite_cond_eq_false (List.cons false <$> IndependentDuodenary.prizeDecodeWord raw)
+            (if 3 = 2 then List.cons true <$> IndependentDuodenary.prizeDecodeWord raw else none)
+            (eq_false_of_decide (Eq.refl false)))
+          (ite_cond_eq_false (List.cons true <$> IndependentDuodenary.prizeDecodeWord raw) none
+            (eq_false_of_decide (Eq.refl false)))))
+      (eq_self none))
+'IndependentDuodenary.prize_word_decode_separator_rejected' depends on axioms: [propext]
+DIRECT DEPENDENCIES prize_word_decode_separator_rejected: [congrArg,
+ instDecidableEqFin,
+ eq_false_of_decide,
+ instFunctorOption,
+ Fin.instOfNat,
+ instOfNatNat,
+ List.cons,
+ Bool.true,
+ Option.none,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ Nat.instNeZeroSucc,
+ Nat,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ IndependentDuodenary.prizeDecodeWord.proof_2,
+ Eq.refl,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Bool.false,
+ Fin,
+ Eq,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ Eq.trans,
+ Option,
+ ite]
+theorem IndependentDuodenary.prize_word_decode_prefix : ∀ (x : IndependentDuodenary.PrizeBinaryWord)
+  (raw : List (Fin 4)),
+  IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord x ++ raw) =
+    (fun y => x ++ y) <$> IndependentDuodenary.prizeDecodeWord raw :=
+fun x raw =>
+  List.rec
+    (of_eq_true
+      (Eq.trans
+        (congrArg (Eq (IndependentDuodenary.prizeDecodeWord raw)) (id_map' (IndependentDuodenary.prizeDecodeWord raw)))
+        (eq_self (IndependentDuodenary.prizeDecodeWord raw))))
+    (fun b x ih =>
+      Bool.casesOn (motive := fun t =>
+        b = t →
+          IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord (b :: x) ++ raw) =
+            (fun y => b :: x ++ y) <$> IndependentDuodenary.prizeDecodeWord raw)
+        b
+        (fun h =>
+          Eq.symm h ▸
+            Option.casesOn (motive := fun t =>
+              IndependentDuodenary.prizeDecodeWord raw = t →
+                IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord (false :: x) ++ raw) =
+                  (fun y => false :: x ++ y) <$> IndependentDuodenary.prizeDecodeWord raw)
+              (IndependentDuodenary.prizeDecodeWord raw)
+              (fun h =>
+                Eq.ndrec (motive := fun x_1 =>
+                  IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                    IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord (false :: x) ++ raw) =
+                      (fun y => false :: x ++ y) <$> x_1)
+                  (fun hd =>
+                    of_eq_true
+                      (Eq.trans
+                        (congrArg (fun x => x = none)
+                          (Eq.trans
+                            (ite_cond_eq_true
+                              (List.cons false <$>
+                                IndependentDuodenary.prizeDecodeWord
+                                  ((List.map (fun b => if b = true then 2 else 1) x).append raw))
+                              (if (fun b => if b = true then 2 else 1) false = 2 then
+                                List.cons true <$>
+                                  IndependentDuodenary.prizeDecodeWord
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append raw)
+                              else none)
+                              (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                                (eq_self 1)))
+                            (congrArg (Functor.map (List.cons false))
+                              (Eq.trans ih (congrArg (Functor.map fun y => x ++ y) hd)))))
+                        (eq_self none)))
+                  (Eq.symm h) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+              (fun val h =>
+                Eq.ndrec (motive := fun x_1 =>
+                  IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                    IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord (false :: x) ++ raw) =
+                      (fun y => false :: x ++ y) <$> x_1)
+                  (fun hd =>
+                    of_eq_true
+                      (Eq.trans
+                        (congrArg (fun x_1 => x_1 = some (false :: (x ++ val)))
+                          (Eq.trans
+                            (ite_cond_eq_true
+                              (List.cons false <$>
+                                IndependentDuodenary.prizeDecodeWord
+                                  ((List.map (fun b => if b = true then 2 else 1) x).append raw))
+                              (if (fun b => if b = true then 2 else 1) false = 2 then
+                                List.cons true <$>
+                                  IndependentDuodenary.prizeDecodeWord
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append raw)
+                              else none)
+                              (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                                (eq_self 1)))
+                            (congrArg (Functor.map (List.cons false))
+                              (Eq.trans ih (congrArg (Functor.map fun y => x ++ y) hd)))))
+                        (eq_self (some (false :: (x ++ val))))))
+                  (Eq.symm h) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+              (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+        (fun h =>
+          Eq.symm h ▸
+            Option.casesOn (motive := fun t =>
+              IndependentDuodenary.prizeDecodeWord raw = t →
+                IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord (true :: x) ++ raw) =
+                  (fun y => true :: x ++ y) <$> IndependentDuodenary.prizeDecodeWord raw)
+              (IndependentDuodenary.prizeDecodeWord raw)
+              (fun h =>
+                Eq.ndrec (motive := fun x_1 =>
+                  IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                    IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord (true :: x) ++ raw) =
+                      (fun y => true :: x ++ y) <$> x_1)
+                  (fun hd =>
+                    of_eq_true
+                      (Eq.trans
+                        (congrArg (fun x => x = none)
+                          (Eq.trans
+                            (ite_cond_eq_false
+                              (List.cons false <$>
+                                IndependentDuodenary.prizeDecodeWord
+                                  ((List.map (fun b => if b = true then 2 else 1) x).append raw))
+                              (if (fun b => if b = true then 2 else 1) true = 2 then
+                                List.cons true <$>
+                                  IndependentDuodenary.prizeDecodeWord
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append raw)
+                              else none)
+                              (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_true 2 1 (eq_self true)))
+                                (eq_false_of_decide (Eq.refl false))))
+                            (Eq.trans
+                              (ite_cond_eq_true
+                                (List.cons true <$>
+                                  IndependentDuodenary.prizeDecodeWord
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append raw))
+                                none
+                                (Eq.trans (congrArg (fun x => x = 2) (ite_cond_eq_true 2 1 (eq_self true)))
+                                  (eq_self 2)))
+                              (congrArg (Functor.map (List.cons true))
+                                (Eq.trans ih (congrArg (Functor.map fun y => x ++ y) hd))))))
+                        (eq_self none)))
+                  (Eq.symm h) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+              (fun val h =>
+                Eq.ndrec (motive := fun x_1 =>
+                  IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                    IndependentDuodenary.prizeDecodeWord (IndependentDuodenary.prizeEncodeWord (true :: x) ++ raw) =
+                      (fun y => true :: x ++ y) <$> x_1)
+                  (fun hd =>
+                    of_eq_true
+                      (Eq.trans
+                        (congrArg (fun x_1 => x_1 = some (true :: (x ++ val)))
+                          (Eq.trans
+                            (ite_cond_eq_false
+                              (List.cons false <$>
+                                IndependentDuodenary.prizeDecodeWord
+                                  ((List.map (fun b => if b = true then 2 else 1) x).append raw))
+                              (if (fun b => if b = true then 2 else 1) true = 2 then
+                                List.cons true <$>
+                                  IndependentDuodenary.prizeDecodeWord
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append raw)
+                              else none)
+                              (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_true 2 1 (eq_self true)))
+                                (eq_false_of_decide (Eq.refl false))))
+                            (Eq.trans
+                              (ite_cond_eq_true
+                                (List.cons true <$>
+                                  IndependentDuodenary.prizeDecodeWord
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append raw))
+                                none
+                                (Eq.trans (congrArg (fun x => x = 2) (ite_cond_eq_true 2 1 (eq_self true)))
+                                  (eq_self 2)))
+                              (congrArg (Functor.map (List.cons true))
+                                (Eq.trans ih (congrArg (Functor.map fun y => x ++ y) hd))))))
+                        (eq_self (some (true :: (x ++ val))))))
+                  (Eq.symm h) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+              (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+        (Eq.refl b))
+    x
+'IndependentDuodenary.prize_word_decode_prefix' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_word_decode_prefix: [False,
+ congrArg,
+ List.map,
+ instDecidableEqFin,
+ eq_false_of_decide,
+ Option.casesOn,
+ Bool.false_eq_true,
+ Option.some,
+ instFunctorOption,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ instOfNatNat,
+ List.rec,
+ ite_cond_eq_true,
+ List.cons,
+ List.append,
+ Bool.true,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ Bool.casesOn,
+ instLawfulFunctorOption,
+ Nat,
+ True,
+ eq_self,
+ id_map',
+ Bool,
+ of_eq_true,
+ IndependentDuodenary.prizeDecodeWord.proof_2,
+ Eq.ndrec,
+ IndependentDuodenary.prizeEncodeWord,
+ Eq.refl,
+ List.instAppend,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ Bool.false,
+ Fin,
+ Eq,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ HAppend.hAppend,
+ Eq.trans,
+ IndependentDuodenary.prizeEncodeWord.proof_1,
+ Option,
+ ite]
+theorem IndependentDuodenary.prize_pair_decode_prefix : ∀ (x : IndependentDuodenary.PrizeBinaryWord)
+  (raw : List (Fin 4)),
+  IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodeWord x ++ 3 :: raw) =
+    (fun w => (x, w)) <$> IndependentDuodenary.prizeDecodeWord raw :=
+fun x raw =>
+  List.rec
+    (of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x = Option.map (fun w => ([], w)) (IndependentDuodenary.prizeDecodeWord raw))
+          (ite_cond_eq_true ((fun w => ([], w)) <$> IndependentDuodenary.prizeDecodeWord raw)
+            (if 3 = 1 then (fun p => (false :: p.1, p.2)) <$> IndependentDuodenary.prizeDecodePair raw
+            else if 3 = 2 then (fun p => (true :: p.1, p.2)) <$> IndependentDuodenary.prizeDecodePair raw else none)
+            (eq_self 3)))
+        (eq_self (Option.map (fun w => ([], w)) (IndependentDuodenary.prizeDecodeWord raw)))))
+    (fun b x ih =>
+      Bool.casesOn (motive := fun t =>
+        b = t →
+          IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodeWord (b :: x) ++ 3 :: raw) =
+            (fun w => (b :: x, w)) <$> IndependentDuodenary.prizeDecodeWord raw)
+        b
+        (fun h =>
+          Eq.symm h ▸
+            Option.casesOn (motive := fun t =>
+              IndependentDuodenary.prizeDecodeWord raw = t →
+                IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodeWord (false :: x) ++ 3 :: raw) =
+                  (fun w => (false :: x, w)) <$> IndependentDuodenary.prizeDecodeWord raw)
+              (IndependentDuodenary.prizeDecodeWord raw)
+              (fun h =>
+                Eq.ndrec (motive := fun x_1 =>
+                  IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                    IndependentDuodenary.prizeDecodePair
+                        (IndependentDuodenary.prizeEncodeWord (false :: x) ++ 3 :: raw) =
+                      (fun w => (false :: x, w)) <$> x_1)
+                  (fun hd =>
+                    of_eq_true
+                      (Eq.trans
+                        (congrArg (fun x => x = none)
+                          (Eq.trans
+                            (ite_cond_eq_false
+                              ((fun w => ([], w)) <$>
+                                IndependentDuodenary.prizeDecodeWord
+                                  ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                              (if (fun b => if b = true then 2 else 1) false = 1 then
+                                (fun p => (false :: p.1, p.2)) <$>
+                                  IndependentDuodenary.prizeDecodePair
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                              else
+                                if (fun b => if b = true then 2 else 1) false = 2 then
+                                  (fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                                else none)
+                              (Eq.trans (congrArg (fun x => x = 3) (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                                (eq_false_of_decide (Eq.refl false))))
+                            (Eq.trans
+                              (ite_cond_eq_true
+                                ((fun p => (false :: p.1, p.2)) <$>
+                                  IndependentDuodenary.prizeDecodePair
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                                (if (fun b => if b = true then 2 else 1) false = 2 then
+                                  (fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                                else none)
+                                (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                                  (eq_self 1)))
+                              (congrArg (Functor.map fun p => (false :: p.1, p.2))
+                                (Eq.trans ih (congrArg (Functor.map fun w => (x, w)) hd))))))
+                        (eq_self none)))
+                  (Eq.symm h) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+              (fun val h =>
+                Eq.ndrec (motive := fun x_1 =>
+                  IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                    IndependentDuodenary.prizeDecodePair
+                        (IndependentDuodenary.prizeEncodeWord (false :: x) ++ 3 :: raw) =
+                      (fun w => (false :: x, w)) <$> x_1)
+                  (fun hd =>
+                    of_eq_true
+                      (Eq.trans
+                        (congrArg (fun x_1 => x_1 = some (false :: x, val))
+                          (Eq.trans
+                            (ite_cond_eq_false
+                              ((fun w => ([], w)) <$>
+                                IndependentDuodenary.prizeDecodeWord
+                                  ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                              (if (fun b => if b = true then 2 else 1) false = 1 then
+                                (fun p => (false :: p.1, p.2)) <$>
+                                  IndependentDuodenary.prizeDecodePair
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                              else
+                                if (fun b => if b = true then 2 else 1) false = 2 then
+                                  (fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                                else none)
+                              (Eq.trans (congrArg (fun x => x = 3) (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                                (eq_false_of_decide (Eq.refl false))))
+                            (Eq.trans
+                              (ite_cond_eq_true
+                                ((fun p => (false :: p.1, p.2)) <$>
+                                  IndependentDuodenary.prizeDecodePair
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                                (if (fun b => if b = true then 2 else 1) false = 2 then
+                                  (fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                                else none)
+                                (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                                  (eq_self 1)))
+                              (congrArg (Functor.map fun p => (false :: p.1, p.2))
+                                (Eq.trans ih (congrArg (Functor.map fun w => (x, w)) hd))))))
+                        (eq_self (some (false :: x, val)))))
+                  (Eq.symm h) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+              (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+        (fun h =>
+          Eq.symm h ▸
+            Option.casesOn (motive := fun t =>
+              IndependentDuodenary.prizeDecodeWord raw = t →
+                IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodeWord (true :: x) ++ 3 :: raw) =
+                  (fun w => (true :: x, w)) <$> IndependentDuodenary.prizeDecodeWord raw)
+              (IndependentDuodenary.prizeDecodeWord raw)
+              (fun h =>
+                Eq.ndrec (motive := fun x_1 =>
+                  IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                    IndependentDuodenary.prizeDecodePair
+                        (IndependentDuodenary.prizeEncodeWord (true :: x) ++ 3 :: raw) =
+                      (fun w => (true :: x, w)) <$> x_1)
+                  (fun hd =>
+                    of_eq_true
+                      (Eq.trans
+                        (congrArg (fun x => x = none)
+                          (Eq.trans
+                            (ite_cond_eq_false
+                              ((fun w => ([], w)) <$>
+                                IndependentDuodenary.prizeDecodeWord
+                                  ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                              (if (fun b => if b = true then 2 else 1) true = 1 then
+                                (fun p => (false :: p.1, p.2)) <$>
+                                  IndependentDuodenary.prizeDecodePair
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                              else
+                                if (fun b => if b = true then 2 else 1) true = 2 then
+                                  (fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                                else none)
+                              (Eq.trans (congrArg (fun x => x = 3) (ite_cond_eq_true 2 1 (eq_self true)))
+                                (eq_false_of_decide (Eq.refl false))))
+                            (Eq.trans
+                              (ite_cond_eq_false
+                                ((fun p => (false :: p.1, p.2)) <$>
+                                  IndependentDuodenary.prizeDecodePair
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                                (if (fun b => if b = true then 2 else 1) true = 2 then
+                                  (fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                                else none)
+                                (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_true 2 1 (eq_self true)))
+                                  (eq_false_of_decide (Eq.refl false))))
+                              (Eq.trans
+                                (ite_cond_eq_true
+                                  ((fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                                  none
+                                  (Eq.trans (congrArg (fun x => x = 2) (ite_cond_eq_true 2 1 (eq_self true)))
+                                    (eq_self 2)))
+                                (congrArg (Functor.map fun p => (true :: p.1, p.2))
+                                  (Eq.trans ih (congrArg (Functor.map fun w => (x, w)) hd)))))))
+                        (eq_self none)))
+                  (Eq.symm h) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+              (fun val h =>
+                Eq.ndrec (motive := fun x_1 =>
+                  IndependentDuodenary.prizeDecodeWord raw = x_1 →
+                    IndependentDuodenary.prizeDecodePair
+                        (IndependentDuodenary.prizeEncodeWord (true :: x) ++ 3 :: raw) =
+                      (fun w => (true :: x, w)) <$> x_1)
+                  (fun hd =>
+                    of_eq_true
+                      (Eq.trans
+                        (congrArg (fun x_1 => x_1 = some (true :: x, val))
+                          (Eq.trans
+                            (ite_cond_eq_false
+                              ((fun w => ([], w)) <$>
+                                IndependentDuodenary.prizeDecodeWord
+                                  ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                              (if (fun b => if b = true then 2 else 1) true = 1 then
+                                (fun p => (false :: p.1, p.2)) <$>
+                                  IndependentDuodenary.prizeDecodePair
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                              else
+                                if (fun b => if b = true then 2 else 1) true = 2 then
+                                  (fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                                else none)
+                              (Eq.trans (congrArg (fun x => x = 3) (ite_cond_eq_true 2 1 (eq_self true)))
+                                (eq_false_of_decide (Eq.refl false))))
+                            (Eq.trans
+                              (ite_cond_eq_false
+                                ((fun p => (false :: p.1, p.2)) <$>
+                                  IndependentDuodenary.prizeDecodePair
+                                    ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                                (if (fun b => if b = true then 2 else 1) true = 2 then
+                                  (fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw))
+                                else none)
+                                (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_true 2 1 (eq_self true)))
+                                  (eq_false_of_decide (Eq.refl false))))
+                              (Eq.trans
+                                (ite_cond_eq_true
+                                  ((fun p => (true :: p.1, p.2)) <$>
+                                    IndependentDuodenary.prizeDecodePair
+                                      ((List.map (fun b => if b = true then 2 else 1) x).append (3 :: raw)))
+                                  none
+                                  (Eq.trans (congrArg (fun x => x = 2) (ite_cond_eq_true 2 1 (eq_self true)))
+                                    (eq_self 2)))
+                                (congrArg (Functor.map fun p => (true :: p.1, p.2))
+                                  (Eq.trans ih (congrArg (Functor.map fun w => (x, w)) hd)))))))
+                        (eq_self (some (true :: x, val)))))
+                  (Eq.symm h) (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+              (Eq.refl (IndependentDuodenary.prizeDecodeWord raw)))
+        (Eq.refl b))
+    x
+'IndependentDuodenary.prize_pair_decode_prefix' depends on axioms: [propext]
+DIRECT DEPENDENCIES prize_pair_decode_prefix: [False,
+ congrArg,
+ List.map,
+ instDecidableEqFin,
+ eq_false_of_decide,
+ Option.casesOn,
+ Bool.false_eq_true,
+ Option.some,
+ instFunctorOption,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ Prod.mk,
+ instOfNatNat,
+ List.rec,
+ IndependentDuodenary.prizeDecodePair,
+ ite_cond_eq_true,
+ Prod.fst,
+ List.cons,
+ List.append,
+ Bool.true,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ Option.map,
+ IndependentDuodenary.prizeDecodeWord,
+ Bool.casesOn,
+ Nat.instNeZeroSucc,
+ Nat,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ IndependentDuodenary.prizeEncodeWord,
+ Eq.refl,
+ List.instAppend,
+ Prod,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ Bool.false,
+ Fin,
+ Eq,
+ Prod.snd,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ HAppend.hAppend,
+ Eq.trans,
+ IndependentDuodenary.prizeEncodeWord.proof_1,
+ List.nil,
+ Option,
+ IndependentDuodenary.prizeDecodePair.proof_2,
+ ite]
+theorem IndependentDuodenary.prize_pair_decode_encode : ∀ (x w : IndependentDuodenary.PrizeBinaryWord),
+  IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodePair x w) = some (x, w) :=
+fun x w =>
+  Eq.mpr
+    (id
+      (congrArg (fun x_1 => IndependentDuodenary.prizeDecodePair x_1 = some (x, w))
+        (List.append_assoc (IndependentDuodenary.prizeEncodeWord x) [3] (IndependentDuodenary.prizeEncodeWord w))))
+    (Eq.trans (IndependentDuodenary.prize_pair_decode_prefix x (IndependentDuodenary.prizeEncodeWord w))
+      (Eq.mpr
+        (id
+          (congrArg (fun _a => (fun w => (x, w)) <$> _a = some (x, w))
+            (IndependentDuodenary.prize_word_decode_encode w)))
+        (Eq.refl ((fun w => (x, w)) <$> some w))))
+'IndependentDuodenary.prize_pair_decode_encode' depends on axioms: [propext]
+DIRECT DEPENDENCIES prize_pair_decode_encode: [Eq.mpr,
+ List.append_assoc,
+ congrArg,
+ Option.some,
+ instFunctorOption,
+ IndependentDuodenary.prizeEncodePair.proof_1,
+ id,
+ Fin.instOfNat,
+ Prod.mk,
+ instOfNatNat,
+ IndependentDuodenary.prizeDecodePair,
+ List.cons,
+ IndependentDuodenary.prizeEncodePair,
+ instHAppendOfAppend,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.prizeEncodeWord,
+ Eq.refl,
+ IndependentDuodenary.prize_word_decode_encode,
+ List.instAppend,
+ Prod,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.prize_pair_decode_prefix,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ HAppend.hAppend,
+ Eq.trans,
+ List.nil,
+ Option]
+theorem IndependentDuodenary.prize_pair_encode_decode : ∀ (raw : List (Fin 4))
+  (p : IndependentDuodenary.PrizeBinaryWord × IndependentDuodenary.PrizeBinaryWord),
+  IndependentDuodenary.prizeDecodePair raw = some p → IndependentDuodenary.prizeEncodePair p.1 p.2 = raw :=
+fun raw p h =>
+  List.rec (motive := fun raw =>
+    ∀ (p : IndependentDuodenary.PrizeBinaryWord × IndependentDuodenary.PrizeBinaryWord),
+      IndependentDuodenary.prizeDecodePair raw = some p → IndependentDuodenary.prizeEncodePair p.1 p.2 = raw)
+    (fun p h => False.elim (Eq.mp (eq_false' fun h => Option.noConfusion h) h))
+    (fun a raw ih p h =>
+      List.Mem.casesOn (motive := fun a_1 x =>
+        List.finRange 4 = a_1 → HEq (Fintype.complete a) x → IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+        (Fintype.complete a)
+        (fun as h_1 =>
+          List.noConfusion h_1 fun head_eq =>
+            Eq.ndrec (motive := fun a =>
+              IndependentDuodenary.prizeDecodePair (a :: raw) = some p →
+                ∀ (this : a ∈ Fintype.elems),
+                  (fun x1 x2 => (fun i => i) x1 :: x2) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                        ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                          ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])) =
+                      as →
+                    HEq this (List.Mem.head as) → IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+              (fun h this tail_eq =>
+                Eq.ndrec (motive := fun as =>
+                  HEq this (List.Mem.head as) →
+                    IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                      (fun i => i) ⟨0, Nat.le_of_lt (Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4)))⟩ :: raw)
+                  (fun h_2 =>
+                    False.elim
+                      (Eq.mp
+                        (Eq.trans
+                          (congrArg (fun x => x = some p)
+                            (Eq.trans
+                              (ite_cond_eq_false ((fun w => ([], w)) <$> IndependentDuodenary.prizeDecodeWord raw)
+                                (if
+                                    (fun i => i) ⟨0, Nat.le_of_lt (Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4)))⟩ =
+                                      1 then
+                                  (fun p => (false :: p.1, p.2)) <$> IndependentDuodenary.prizeDecodePair raw
+                                else
+                                  if
+                                      (fun i => i) ⟨0, Nat.le_of_lt (Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4)))⟩ =
+                                        2 then
+                                    (fun p => (true :: p.1, p.2)) <$> IndependentDuodenary.prizeDecodePair raw
+                                  else none)
+                                (eq_false_of_decide (Eq.refl false)))
+                              (Eq.trans
+                                (ite_cond_eq_false
+                                  ((fun p => (false :: p.1, p.2)) <$> IndependentDuodenary.prizeDecodePair raw)
+                                  (if
+                                      (fun i => i) ⟨0, Nat.le_of_lt (Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4)))⟩ =
+                                        2 then
+                                    (fun p => (true :: p.1, p.2)) <$> IndependentDuodenary.prizeDecodePair raw
+                                  else none)
+                                  Mathlib.Algebra.NeZero._auxLemma.2)
+                                (ite_cond_eq_false
+                                  ((fun p => (true :: p.1, p.2)) <$> IndependentDuodenary.prizeDecodePair raw) none
+                                  (eq_false_of_decide (Eq.refl false))))))
+                          (eq_false' fun h => Option.noConfusion h))
+                        h))
+                  tail_eq)
+              head_eq h (Fintype.complete a))
+        (fun b {as} a_1 h_1 =>
+          List.noConfusion h_1 fun head_eq =>
+            Eq.ndrec (motive := fun b =>
+              (fun x1 x2 => (fun i => i) x1 :: x2) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                    ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                      ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])) =
+                  as →
+                HEq (Fintype.complete a) (List.Mem.tail b a_1) →
+                  IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+              (fun tail_eq =>
+                Eq.ndrec (motive := fun {as} =>
+                  ∀ (a_2 : List.Mem a as),
+                    HEq (Fintype.complete a)
+                        (List.Mem.tail ((fun i => i) ⟨0, Nat.le_of_lt (Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4)))⟩)
+                          a_2) →
+                      IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                  (fun a_2 h_2 =>
+                    List.Mem.casesOn (motive := fun a_3 x =>
+                      (fun x1 x2 => (fun i => i) x1 :: x2) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                            ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                              ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])) =
+                          a_3 →
+                        HEq a_2 x → IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                      a_2
+                      (fun as h_3 =>
+                        List.noConfusion h_3 fun head_eq =>
+                          Eq.ndrec (motive := fun a =>
+                            IndependentDuodenary.prizeDecodePair (a :: raw) = some p →
+                              ∀
+                                (a_3 :
+                                  List.Mem a
+                                    ((fun x1 x2 => (fun i => i) x1 :: x2)
+                                      ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                                      ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                        ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])))),
+                                (fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                      ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []) =
+                                    as →
+                                  HEq a_3 (List.Mem.head as) → IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                            (fun h a tail_eq =>
+                              Eq.ndrec (motive := fun as =>
+                                HEq a (List.Mem.head as) →
+                                  IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                                    (fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ :: raw)
+                                (fun h_4 =>
+                                  Option.casesOn (motive := fun t =>
+                                    IndependentDuodenary.prizeDecodePair raw = t →
+                                      IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                                        (fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ :: raw)
+                                    (IndependentDuodenary.prizeDecodePair raw)
+                                    (fun h_5 =>
+                                      Eq.ndrec (motive := fun x =>
+                                        IndependentDuodenary.prizeDecodePair raw = x →
+                                          IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                                            (fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ :: raw)
+                                        (fun hd =>
+                                          False.elim
+                                            (Eq.mp
+                                              (Eq.trans
+                                                (congrArg (fun x => x = some p)
+                                                  (Eq.trans
+                                                    (ite_cond_eq_false
+                                                      ((fun w => ([], w)) <$> IndependentDuodenary.prizeDecodeWord raw)
+                                                      (if
+                                                          (fun i => i)
+                                                              ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ =
+                                                            1 then
+                                                        (fun p => (false :: p.1, p.2)) <$>
+                                                          IndependentDuodenary.prizeDecodePair raw
+                                                      else
+                                                        if
+                                                            (fun i => i)
+                                                                ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ =
+                                                              2 then
+                                                          (fun p => (true :: p.1, p.2)) <$>
+                                                            IndependentDuodenary.prizeDecodePair raw
+                                                        else none)
+                                                      (eq_false_of_decide (Eq.refl false)))
+                                                    (Eq.trans
+                                                      (ite_cond_eq_true
+                                                        ((fun p => (false :: p.1, p.2)) <$>
+                                                          IndependentDuodenary.prizeDecodePair raw)
+                                                        (if
+                                                            (fun i => i)
+                                                                ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ =
+                                                              2 then
+                                                          (fun p => (true :: p.1, p.2)) <$>
+                                                            IndependentDuodenary.prizeDecodePair raw
+                                                        else none)
+                                                        (eq_self 1))
+                                                      (congrArg (Functor.map fun p => (false :: p.1, p.2)) hd))))
+                                                (eq_false' fun h => Option.noConfusion h))
+                                              h))
+                                        (Eq.symm h_5) (Eq.refl (IndependentDuodenary.prizeDecodePair raw)))
+                                    (fun pair h_5 =>
+                                      Eq.ndrec (motive := fun x =>
+                                        IndependentDuodenary.prizeDecodePair raw = x →
+                                          IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                                            (fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ :: raw)
+                                        (fun hd =>
+                                          Eq.mp
+                                              (Eq.trans
+                                                (congrArg (fun x => x = some p)
+                                                  (Eq.trans
+                                                    (ite_cond_eq_false
+                                                      ((fun w => ([], w)) <$> IndependentDuodenary.prizeDecodeWord raw)
+                                                      (if
+                                                          (fun i => i)
+                                                              ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ =
+                                                            1 then
+                                                        (fun p => (false :: p.1, p.2)) <$>
+                                                          IndependentDuodenary.prizeDecodePair raw
+                                                      else
+                                                        if
+                                                            (fun i => i)
+                                                                ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ =
+                                                              2 then
+                                                          (fun p => (true :: p.1, p.2)) <$>
+                                                            IndependentDuodenary.prizeDecodePair raw
+                                                        else none)
+                                                      (eq_false_of_decide (Eq.refl false)))
+                                                    (Eq.trans
+                                                      (ite_cond_eq_true
+                                                        ((fun p => (false :: p.1, p.2)) <$>
+                                                          IndependentDuodenary.prizeDecodePair raw)
+                                                        (if
+                                                            (fun i => i)
+                                                                ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩ =
+                                                              2 then
+                                                          (fun p => (true :: p.1, p.2)) <$>
+                                                            IndependentDuodenary.prizeDecodePair raw
+                                                        else none)
+                                                        (eq_self 1))
+                                                      (congrArg (Functor.map fun p => (false :: p.1, p.2)) hd))))
+                                                (Option.some.injEq (false :: pair.1, pair.2) p))
+                                              h ▸
+                                            Eq.mpr
+                                              (id
+                                                (Eq.trans
+                                                  (Eq.trans
+                                                    (congrArg (fun x => x = 1 :: raw)
+                                                      (Eq.trans
+                                                        (congrArg
+                                                          (fun x =>
+                                                            x :: List.map (fun b => if b = true then 2 else 1) pair.1 ++
+                                                                [3] ++
+                                                              List.map (fun b => if b = true then 2 else 1) pair.2)
+                                                          (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                                                        (congrArg (List.cons 1)
+                                                          (List.append_assoc
+                                                            (List.map (fun b => if b = true then 2 else 1) pair.1) [3]
+                                                            (List.map (fun b => if b = true then 2 else 1) pair.2)))))
+                                                    (List.cons.injEq 1
+                                                      (List.map (fun b => if b = true then 2 else 1) pair.1 ++
+                                                        3 :: List.map (fun b => if b = true then 2 else 1) pair.2)
+                                                      1 raw))
+                                                  (Eq.trans
+                                                    (congrArg
+                                                      (fun x =>
+                                                        x ∧
+                                                          List.map (fun b => if b = true then 2 else 1) pair.1 ++
+                                                              3 ::
+                                                                List.map (fun b => if b = true then 2 else 1) pair.2 =
+                                                            raw)
+                                                      (eq_self 1))
+                                                    (true_and
+                                                      (List.map (fun b => if b = true then 2 else 1) pair.1 ++
+                                                          3 :: List.map (fun b => if b = true then 2 else 1) pair.2 =
+                                                        raw)))))
+                                              (Eq.mp
+                                                (Eq.trans
+                                                  (Eq.trans
+                                                    (congrArg (fun x => 1 :: x = 1 :: raw)
+                                                      (List.append_assoc
+                                                        (List.map (fun b => if b = true then 2 else 1) pair.1) [3]
+                                                        (List.map (fun b => if b = true then 2 else 1) pair.2)))
+                                                    (List.cons.injEq 1
+                                                      (List.map (fun b => if b = true then 2 else 1) pair.1 ++
+                                                        3 :: List.map (fun b => if b = true then 2 else 1) pair.2)
+                                                      1 raw))
+                                                  (Eq.trans
+                                                    (congrArg
+                                                      (fun x =>
+                                                        x ∧
+                                                          List.map (fun b => if b = true then 2 else 1) pair.1 ++
+                                                              3 ::
+                                                                List.map (fun b => if b = true then 2 else 1) pair.2 =
+                                                            raw)
+                                                      (eq_self 1))
+                                                    (true_and
+                                                      (List.map (fun b => if b = true then 2 else 1) pair.1 ++
+                                                          3 :: List.map (fun b => if b = true then 2 else 1) pair.2 =
+                                                        raw))))
+                                                (congrArg (List.cons 1) (ih pair hd))))
+                                        (Eq.symm h_5) (Eq.refl (IndependentDuodenary.prizeDecodePair raw)))
+                                    (Eq.refl (IndependentDuodenary.prizeDecodePair raw)))
+                                tail_eq)
+                            head_eq h a_2)
+                      (fun b {as} a_3 h_3 =>
+                        List.noConfusion h_3 fun head_eq =>
+                          Eq.ndrec (motive := fun b =>
+                            (fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                  ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []) =
+                                as →
+                              HEq a_2 (List.Mem.tail b a_3) → IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                            (fun tail_eq =>
+                              Eq.ndrec (motive := fun {as} =>
+                                ∀ (a_4 : List.Mem a as),
+                                  HEq a_2
+                                      (List.Mem.tail ((fun i => i) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩)
+                                        a_4) →
+                                    IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                                (fun a_4 h_4 =>
+                                  List.Mem.casesOn (motive := fun a_5 x =>
+                                    (fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                          ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []) =
+                                        a_5 →
+                                      HEq a_4 x → IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                                    a_4
+                                    (fun as h_5 =>
+                                      List.noConfusion h_5 fun head_eq =>
+                                        Eq.ndrec (motive := fun a =>
+                                          IndependentDuodenary.prizeDecodePair (a :: raw) = some p →
+                                            ∀
+                                              (a_5 :
+                                                List.Mem a
+                                                  ((fun x1 x2 => (fun i => i) x1 :: x2)
+                                                    ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                                    ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []))),
+                                              (fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [] = as →
+                                                HEq a_5 (List.Mem.head as) →
+                                                  IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                                          (fun h a tail_eq =>
+                                            Eq.ndrec (motive := fun as =>
+                                              HEq a (List.Mem.head as) →
+                                                IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                                                  (fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩ :: raw)
+                                              (fun h_6 =>
+                                                Option.casesOn (motive := fun t =>
+                                                  IndependentDuodenary.prizeDecodePair raw = t →
+                                                    IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                                                      (fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩ :: raw)
+                                                  (IndependentDuodenary.prizeDecodePair raw)
+                                                  (fun h_7 =>
+                                                    Eq.ndrec (motive := fun x =>
+                                                      IndependentDuodenary.prizeDecodePair raw = x →
+                                                        IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                                                          (fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩ :: raw)
+                                                      (fun hd =>
+                                                        False.elim
+                                                          (Eq.mp (Eq.trans ⋯ (eq_false' fun h => Option.noConfusion h))
+                                                            h))
+                                                      (Eq.symm h_7)
+                                                      (Eq.refl (IndependentDuodenary.prizeDecodePair raw)))
+                                                  (fun pair h_7 =>
+                                                    Eq.ndrec (motive := fun x =>
+                                                      IndependentDuodenary.prizeDecodePair raw = x →
+                                                        IndependentDuodenary.prizeEncodePair p.1 p.2 =
+                                                          (fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩ :: raw)
+                                                      (fun hd => Eq.mp ⋯ h ▸ Eq.mpr ⋯ ⋯) (Eq.symm h_7)
+                                                      (Eq.refl (IndependentDuodenary.prizeDecodePair raw)))
+                                                  (Eq.refl (IndependentDuodenary.prizeDecodePair raw)))
+                                              tail_eq)
+                                          head_eq h a_4)
+                                    (fun b {as} a_5 h_5 =>
+                                      List.noConfusion h_5 fun head_eq =>
+                                        Eq.ndrec (motive := fun b =>
+                                          (fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [] = as →
+                                            HEq a_4 (List.Mem.tail b a_5) →
+                                              IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                                          (fun tail_eq =>
+                                            Eq.ndrec (motive := fun {as} =>
+                                              ∀ (a_6 : List.Mem a as),
+                                                HEq a_4
+                                                    (List.Mem.tail ((fun i => i) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩)
+                                                      a_6) →
+                                                  IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                                              (fun a_6 h_6 =>
+                                                List.Mem.casesOn (motive := fun a_7 x =>
+                                                  (fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [] = a_7 →
+                                                    HEq a_6 x → IndependentDuodenary.prizeEncodePair p.1 p.2 = a :: raw)
+                                                  a_6
+                                                  (fun as h_7 =>
+                                                    List.noConfusion h_7 fun head_eq =>
+                                                      Eq.ndrec (motive := ⋯) ⋯ head_eq h a_6)
+                                                  (fun b {as} a_7 h => List.noConfusion h ⋯)
+                                                  (Eq.refl ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []))
+                                                  (HEq.refl a_6))
+                                              tail_eq a_5)
+                                          head_eq)
+                                    (Eq.refl
+                                      ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                                        ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ [])))
+                                    (HEq.refl a_4))
+                                tail_eq a_3)
+                            head_eq)
+                      (Eq.refl
+                        ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨1, Nat.le_of_lt (Nat.le_of_lt (Nat.le_refl 4))⟩
+                          ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨2, Nat.le_of_lt (Nat.le_refl 4)⟩
+                            ((fun x1 x2 => (fun i => i) x1 :: x2) ⟨3, Nat.le_refl 4⟩ []))))
+                      (HEq.refl a_2))
+                  tail_eq a_1)
+              head_eq)
+        (Eq.refl (List.finRange 4)) (HEq.refl (Fintype.complete a)))
+    raw p h
+'IndependentDuodenary.prize_pair_encode_decode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES prize_pair_encode_decode: [Eq.mpr,
+ False,
+ Fintype.elems,
+ NeZero.one,
+ Semiring.toOne,
+ Nat.le_refl,
+ List.append_assoc,
+ Option.noConfusion,
+ congrArg,
+ CommSemiring.toSemiring,
+ Fin.instCommRing,
+ HEq.refl,
+ Finset,
+ List.Mem.tail,
+ List.map,
+ False.elim,
+ instDecidableEqFin,
+ Fin.nontrivial,
+ eq_false_of_decide,
+ Option.casesOn,
+ Bool.false_eq_true,
+ Option.some.injEq,
+ Option.some,
+ CommSemiring.toCommMonoidWithZero,
+ Membership.mem,
+ Eq.mp,
+ Fin.mk,
+ instFunctorOption,
+ IndependentDuodenary.prizeEncodePair.proof_1,
+ id,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ Prod.mk,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ List.rec,
+ IndependentDuodenary.prizeDecodePair,
+ Finset.instMembership,
+ ite_cond_eq_true,
+ Nat.le_of_lt,
+ Fintype.complete,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ Prod.fst,
+ Fin.fintype,
+ List.cons,
+ List.cons.injEq,
+ IndependentDuodenary.prizeEncodePair,
+ Bool.true,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ instHAdd,
+ IndependentDuodenary.prizeDecodeWord,
+ And,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ IndependentDuodenary.prize_word_encode_decode,
+ Nat,
+ True,
+ eq_self,
+ List.Mem.head,
+ List.noConfusion,
+ Bool,
+ Eq.ndrec,
+ IndependentDuodenary.prizeEncodeWord,
+ instAddNat,
+ Eq.refl,
+ HEq,
+ List.instAppend,
+ Prod,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ Bool.false,
+ eq_false',
+ Fin,
+ List.Mem,
+ List.finRange,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Prod.snd,
+ List.Mem.casesOn,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ HAppend.hAppend,
+ true_and,
+ Eq.trans,
+ IndependentDuodenary.prizeEncodeWord.proof_1,
+ List.nil,
+ Option,
+ IndependentDuodenary.prizeDecodePair.proof_2,
+ ite]
+theorem IndependentDuodenary.prize_pair_encoding_injective : Function.Injective fun p =>
+  IndependentDuodenary.prizeEncodePair p.1 p.2 :=
+fun ⦃x y⦄ h =>
+  let_fun hd := congrArg IndependentDuodenary.prizeDecodePair h;
+  Eq.mp
+    (Eq.trans
+      (congr
+        (congrArg Eq (Eq.trans (IndependentDuodenary.prize_pair_decode_encode x.1 x.2) (congrArg some Prod.mk.eta)))
+        (Eq.trans (IndependentDuodenary.prize_pair_decode_encode y.1 y.2) (congrArg some Prod.mk.eta)))
+      (Option.some.injEq x y))
+    hd
+'IndependentDuodenary.prize_pair_encoding_injective' depends on axioms: [propext]
+DIRECT DEPENDENCIES prize_pair_encoding_injective: [congrArg,
+ Option.some.injEq,
+ Option.some,
+ Eq.mp,
+ Prod.mk,
+ instOfNatNat,
+ IndependentDuodenary.prizeDecodePair,
+ Prod.fst,
+ IndependentDuodenary.prizeEncodePair,
+ List,
+ Nat,
+ congr,
+ IndependentDuodenary.prize_pair_decode_encode,
+ Prod.mk.eta,
+ Function.Injective,
+ Prod,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Prod.snd,
+ IndependentDuodenary.PrizeBinaryWord,
+ letFun,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.prize_pair_missing_separator_rejected : ∀ (x : IndependentDuodenary.PrizeBinaryWord),
+  IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodeWord x) = none :=
+fun x =>
+  List.rec (Eq.refl (IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodeWord [])))
+    (fun b x ih =>
+      Bool.casesOn (motive := fun t =>
+        b = t → IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodeWord (b :: x)) = none) b
+        (fun h =>
+          Eq.symm h ▸
+            of_eq_true
+              (Eq.trans
+                (congrArg (fun x => x = none)
+                  (Eq.trans
+                    (ite_cond_eq_false
+                      ((fun w => ([], w)) <$>
+                        IndependentDuodenary.prizeDecodeWord (List.map (fun b => if b = true then 2 else 1) x))
+                      (if (fun b => if b = true then 2 else 1) false = 1 then
+                        (fun p => (false :: p.1, p.2)) <$>
+                          IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x)
+                      else
+                        if (fun b => if b = true then 2 else 1) false = 2 then
+                          (fun p => (true :: p.1, p.2)) <$>
+                            IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x)
+                        else none)
+                      (Eq.trans (congrArg (fun x => x = 3) (ite_cond_eq_false 2 1 Bool.false_eq_true))
+                        (eq_false_of_decide (Eq.refl false))))
+                    (Eq.trans
+                      (ite_cond_eq_true
+                        ((fun p => (false :: p.1, p.2)) <$>
+                          IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x))
+                        (if (fun b => if b = true then 2 else 1) false = 2 then
+                          (fun p => (true :: p.1, p.2)) <$>
+                            IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x)
+                        else none)
+                        (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_false 2 1 Bool.false_eq_true)) (eq_self 1)))
+                      (congrArg (Functor.map fun p => (false :: p.1, p.2)) ih))))
+                (eq_self none)))
+        (fun h =>
+          Eq.symm h ▸
+            of_eq_true
+              (Eq.trans
+                (congrArg (fun x => x = none)
+                  (Eq.trans
+                    (ite_cond_eq_false
+                      ((fun w => ([], w)) <$>
+                        IndependentDuodenary.prizeDecodeWord (List.map (fun b => if b = true then 2 else 1) x))
+                      (if (fun b => if b = true then 2 else 1) true = 1 then
+                        (fun p => (false :: p.1, p.2)) <$>
+                          IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x)
+                      else
+                        if (fun b => if b = true then 2 else 1) true = 2 then
+                          (fun p => (true :: p.1, p.2)) <$>
+                            IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x)
+                        else none)
+                      (Eq.trans (congrArg (fun x => x = 3) (ite_cond_eq_true 2 1 (eq_self true)))
+                        (eq_false_of_decide (Eq.refl false))))
+                    (Eq.trans
+                      (ite_cond_eq_false
+                        ((fun p => (false :: p.1, p.2)) <$>
+                          IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x))
+                        (if (fun b => if b = true then 2 else 1) true = 2 then
+                          (fun p => (true :: p.1, p.2)) <$>
+                            IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x)
+                        else none)
+                        (Eq.trans (congrArg (fun x => x = 1) (ite_cond_eq_true 2 1 (eq_self true)))
+                          (eq_false_of_decide (Eq.refl false))))
+                      (Eq.trans
+                        (ite_cond_eq_true
+                          ((fun p => (true :: p.1, p.2)) <$>
+                            IndependentDuodenary.prizeDecodePair (List.map (fun b => if b = true then 2 else 1) x))
+                          none (Eq.trans (congrArg (fun x => x = 2) (ite_cond_eq_true 2 1 (eq_self true))) (eq_self 2)))
+                        (congrArg (Functor.map fun p => (true :: p.1, p.2)) ih)))))
+                (eq_self none)))
+        (Eq.refl b))
+    x
+'IndependentDuodenary.prize_pair_missing_separator_rejected' depends on axioms: [propext]
+DIRECT DEPENDENCIES prize_pair_missing_separator_rejected: [False,
+ congrArg,
+ List.map,
+ instDecidableEqFin,
+ eq_false_of_decide,
+ Bool.false_eq_true,
+ instFunctorOption,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ Prod.mk,
+ instOfNatNat,
+ List.rec,
+ IndependentDuodenary.prizeDecodePair,
+ ite_cond_eq_true,
+ Prod.fst,
+ List.cons,
+ Bool.true,
+ Option.none,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ Bool.casesOn,
+ Nat,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ IndependentDuodenary.prizeEncodeWord,
+ Eq.refl,
+ Prod,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ Bool.false,
+ Fin,
+ Eq,
+ Prod.snd,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ Eq.trans,
+ IndependentDuodenary.prizeEncodeWord.proof_1,
+ List.nil,
+ Option,
+ IndependentDuodenary.prizeDecodePair.proof_2,
+ ite]
+theorem IndependentDuodenary.prize_pair_extra_separator_rejected : ∀ (x w : IndependentDuodenary.PrizeBinaryWord)
+  (raw : List (Fin 4)),
+  IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodePair x w ++ 3 :: raw) = none :=
+fun x w raw =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = none)
+        (Eq.trans
+          (Eq.trans
+            (congrArg IndependentDuodenary.prizeDecodePair
+              (Eq.trans
+                (congrArg (fun x => x ++ 3 :: raw)
+                  (List.append_assoc (IndependentDuodenary.prizeEncodeWord x) [3]
+                    (IndependentDuodenary.prizeEncodeWord w)))
+                (List.append_assoc (IndependentDuodenary.prizeEncodeWord x)
+                  (3 :: IndependentDuodenary.prizeEncodeWord w) (3 :: raw))))
+            (IndependentDuodenary.prize_pair_decode_prefix x (IndependentDuodenary.prizeEncodeWord w ++ 3 :: raw)))
+          (congrArg (Functor.map fun w => (x, w))
+            (Eq.trans (IndependentDuodenary.prize_word_decode_prefix w (3 :: raw))
+              (congrArg (Functor.map fun y => w ++ y)
+                (IndependentDuodenary.prize_word_decode_separator_rejected raw))))))
+      (eq_self none))
+'IndependentDuodenary.prize_pair_extra_separator_rejected' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_pair_extra_separator_rejected: [List.append_assoc,
+ congrArg,
+ instFunctorOption,
+ IndependentDuodenary.prizeEncodePair.proof_1,
+ Fin.instOfNat,
+ Prod.mk,
+ instOfNatNat,
+ IndependentDuodenary.prizeDecodePair,
+ IndependentDuodenary.prize_word_decode_prefix,
+ List.cons,
+ IndependentDuodenary.prizeEncodePair,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ IndependentDuodenary.prize_word_decode_separator_rejected,
+ Nat.instNeZeroSucc,
+ Nat,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ IndependentDuodenary.prizeEncodeWord,
+ List.instAppend,
+ Prod,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.prize_pair_decode_prefix,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ HAppend.hAppend,
+ Eq.trans,
+ List.nil,
+ Option]
+theorem IndependentDuodenary.prize_pair_trailing_blank_rejected : ∀ (x w : IndependentDuodenary.PrizeBinaryWord)
+  (raw : List (Fin 4)),
+  IndependentDuodenary.prizeDecodePair (IndependentDuodenary.prizeEncodePair x w ++ 0 :: raw) = none :=
+fun x w raw =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = none)
+        (Eq.trans
+          (Eq.trans
+            (congrArg IndependentDuodenary.prizeDecodePair
+              (Eq.trans
+                (congrArg (fun x => x ++ 0 :: raw)
+                  (List.append_assoc (IndependentDuodenary.prizeEncodeWord x) [3]
+                    (IndependentDuodenary.prizeEncodeWord w)))
+                (List.append_assoc (IndependentDuodenary.prizeEncodeWord x)
+                  (3 :: IndependentDuodenary.prizeEncodeWord w) (0 :: raw))))
+            (IndependentDuodenary.prize_pair_decode_prefix x (IndependentDuodenary.prizeEncodeWord w ++ 0 :: raw)))
+          (congrArg (Functor.map fun w => (x, w))
+            (Eq.trans (IndependentDuodenary.prize_word_decode_prefix w (0 :: raw))
+              (congrArg (Functor.map fun y => w ++ y) (IndependentDuodenary.prize_word_decode_blank_rejected raw))))))
+      (eq_self none))
+'IndependentDuodenary.prize_pair_trailing_blank_rejected' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_pair_trailing_blank_rejected: [List.append_assoc,
+ congrArg,
+ instFunctorOption,
+ IndependentDuodenary.prizeEncodePair.proof_1,
+ Fin.instOfNat,
+ Prod.mk,
+ instOfNatNat,
+ IndependentDuodenary.prizeDecodePair,
+ IndependentDuodenary.prize_word_decode_prefix,
+ List.cons,
+ IndependentDuodenary.prizeEncodePair,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ IndependentDuodenary.prizeDecodeWord,
+ Nat.instNeZeroSucc,
+ Nat,
+ True,
+ eq_self,
+ IndependentDuodenary.prize_word_decode_blank_rejected,
+ Bool,
+ of_eq_true,
+ IndependentDuodenary.prizeEncodeWord,
+ List.instAppend,
+ Prod,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.prize_pair_decode_prefix,
+ Functor.map,
+ IndependentDuodenary.PrizeBinaryWord,
+ HAppend.hAppend,
+ Eq.trans,
+ List.nil,
+ Option]
+theorem IndependentDuodenary.prize_run_succ : ∀ {states : ℕ} (M : IndependentDuodenary.PrizeMachine states)
+  (input : List (Fin 4)) (t : ℕ),
+  IndependentDuodenary.prizeRun M input (t + 1) =
+    (Turing.TM0.step M (IndependentDuodenary.prizeRun M input t)).getD (IndependentDuodenary.prizeRun M input t) :=
+fun {states} M input t =>
+  Function.iterate_succ_apply' (fun cfg => (Turing.TM0.step M cfg).getD cfg) t (Turing.TM0.init input)
+'IndependentDuodenary.prize_run_succ' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_run_succ: [Function.iterate_succ_apply',
+ Turing.TM0.step,
+ IndependentDuodenary.prizeRun.proof_1,
+ Option.getD,
+ IndependentDuodenary.PrizeMachine,
+ instOfNatNat,
+ IndependentDuodenary.prizeRun,
+ List,
+ instHAdd,
+ Turing.TM0.init,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ Fin.instInhabited,
+ instAddNat,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Turing.TM0.Cfg]
+theorem IndependentDuodenary.prize_halted_run_stable : ∀ {states : ℕ} (M : IndependentDuodenary.PrizeMachine states)
+  (input : List (Fin 4)) (t : ℕ),
+  IndependentDuodenary.prizeHalted M input t →
+    ∀ (s : ℕ), IndependentDuodenary.prizeRun M input (t + s) = IndependentDuodenary.prizeRun M input t :=
+fun {states} M input t halt s =>
+  Nat.recAux
+    (of_eq_true
+      (Eq.trans
+        (congrArg (fun x => IndependentDuodenary.prizeRun M input x = IndependentDuodenary.prizeRun M input t)
+          (add_zero t))
+        (eq_self (IndependentDuodenary.prizeRun M input t))))
+    (fun s ih =>
+      let_fun this :=
+        Eq.mpr
+          (id
+            (congrArg (fun _a => _a = IndependentDuodenary.prizeRun M input t)
+              (IndependentDuodenary.prize_run_succ M input (t + s))))
+          (Eq.mpr
+            (id (congrArg (fun _a => (Turing.TM0.step M _a).getD _a = IndependentDuodenary.prizeRun M input t) ih))
+            (let_fun this :=
+              Eq.mpr
+                (id
+                  (congrArg
+                    (fun _a =>
+                      _a.getD (IndependentDuodenary.prizeRun M input t) = IndependentDuodenary.prizeRun M input t)
+                    halt))
+                (Eq.refl (none.getD (IndependentDuodenary.prizeRun M input t)));
+            this));
+      this)
+    s
+'IndependentDuodenary.prize_halted_run_stable' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_halted_run_stable: [Eq.mpr,
+ Turing.TM0.step,
+ Nat.recAux,
+ congrArg,
+ IndependentDuodenary.prizeHalted.proof_1,
+ AddMonoid.toAddZeroClass,
+ Option.getD,
+ Nat.instAddMonoid,
+ id,
+ IndependentDuodenary.prize_run_succ,
+ IndependentDuodenary.PrizeMachine,
+ instOfNatNat,
+ IndependentDuodenary.prizeRun,
+ Option.none,
+ List,
+ instHAdd,
+ IndependentDuodenary.prizeHalted,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ AddZeroClass.toZero,
+ True,
+ eq_self,
+ Fin.instInhabited,
+ of_eq_true,
+ instAddNat,
+ Zero.toOfNat0,
+ Eq.refl,
+ add_zero,
+ OfNat.ofNat,
+ Fin,
+ AddZeroClass.toAdd,
+ Eq,
+ letFun,
+ Eq.trans,
+ Turing.TM0.Cfg,
+ Option]
+theorem IndependentDuodenary.prize_halted_status_stable : ∀ {states : ℕ} (M : IndependentDuodenary.PrizeMachine states)
+  (input : List (Fin 4)) (t : ℕ),
+  IndependentDuodenary.prizeHalted M input t → ∀ (s : ℕ), IndependentDuodenary.prizeHalted M input (t + s) :=
+fun {states} M input t halt s =>
+  id
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => Turing.TM0.step M _a = none)
+          (IndependentDuodenary.prize_halted_run_stable M input t halt s)))
+      halt)
+'IndependentDuodenary.prize_halted_status_stable' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_halted_status_stable: [IndependentDuodenary.prize_halted_run_stable,
+ Eq.mpr,
+ Turing.TM0.step,
+ congrArg,
+ IndependentDuodenary.prizeHalted.proof_1,
+ id,
+ IndependentDuodenary.PrizeMachine,
+ instOfNatNat,
+ IndependentDuodenary.prizeRun,
+ Option.none,
+ List,
+ instHAdd,
+ IndependentDuodenary.prizeHalted,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ Fin.instInhabited,
+ instAddNat,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Turing.TM0.Cfg,
+ Option]
+theorem IndependentDuodenary.prize_halted_acceptance_stable : ∀ {states : ℕ}
+  (M : IndependentDuodenary.PrizeMachine states) (input : List (Fin 4)) (t : ℕ),
+  IndependentDuodenary.prizeHalted M input t →
+    ∀ (s : ℕ), IndependentDuodenary.prizeAccepts M input (t + s) ↔ IndependentDuodenary.prizeAccepts M input t :=
+fun {states} M input t halt s =>
+  id
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => _a.Tape.head = 1 ↔ (IndependentDuodenary.prizeRun M input t).Tape.head = 1)
+          (IndependentDuodenary.prize_halted_run_stable M input t halt s)))
+      Iff.rfl)
+'IndependentDuodenary.prize_halted_acceptance_stable' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_halted_acceptance_stable: [IndependentDuodenary.prize_halted_run_stable,
+ Eq.mpr,
+ congrArg,
+ Iff.rfl,
+ IndependentDuodenary.prizeAccepts,
+ id,
+ Fin.instOfNat,
+ IndependentDuodenary.PrizeMachine,
+ instOfNatNat,
+ IndependentDuodenary.prizeAccepts.proof_1,
+ IndependentDuodenary.prizeRun,
+ Turing.Tape.head,
+ List,
+ instHAdd,
+ Iff,
+ IndependentDuodenary.prizeHalted,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ Fin.instInhabited,
+ instAddNat,
+ Turing.TM0.Cfg.Tape,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Turing.TM0.Cfg]
+theorem IndependentDuodenary.prize_halted_boolean_output_stable : ∀ {states : ℕ}
+  (M : IndependentDuodenary.PrizeMachine states) (input : List (Fin 4)) (t : ℕ),
+  IndependentDuodenary.prizeHalted M input t →
+    ∀ (s : ℕ),
+      IndependentDuodenary.prizeBooleanOutput M input (t + s) ↔ IndependentDuodenary.prizeBooleanOutput M input t :=
+fun {states} M input t halt s =>
+  id
+    (Eq.mpr
+      (id
+        (congrArg
+          (fun _a =>
+            _a.Tape.head = 1 ∨ _a.Tape.head = 2 ↔
+              (IndependentDuodenary.prizeRun M input t).Tape.head = 1 ∨
+                (IndependentDuodenary.prizeRun M input t).Tape.head = 2)
+          (IndependentDuodenary.prize_halted_run_stable M input t halt s)))
+      Iff.rfl)
+'IndependentDuodenary.prize_halted_boolean_output_stable' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_halted_boolean_output_stable: [IndependentDuodenary.prizeBooleanOutput.proof_1,
+ IndependentDuodenary.prize_halted_run_stable,
+ Eq.mpr,
+ congrArg,
+ Iff.rfl,
+ id,
+ Fin.instOfNat,
+ IndependentDuodenary.PrizeMachine,
+ instOfNatNat,
+ IndependentDuodenary.prizeRun,
+ Turing.Tape.head,
+ List,
+ instHAdd,
+ Iff,
+ IndependentDuodenary.prizeHalted,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.prizeBooleanOutput,
+ Fin.instInhabited,
+ instAddNat,
+ Or,
+ Turing.TM0.Cfg.Tape,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Turing.TM0.Cfg]
+theorem IndependentDuodenary.prize_accepts_by_bound_iff : ∀ {states : ℕ} (M : IndependentDuodenary.PrizeMachine states)
+  (input : List (Fin 4)) (bound : ℕ),
+  IndependentDuodenary.prizeHalted M input bound ∧ IndependentDuodenary.prizeAccepts M input bound ↔
+    ∃ t ≤ bound, IndependentDuodenary.prizeHalted M input t ∧ IndependentDuodenary.prizeAccepts M input t :=
+fun {states} M input bound =>
+  { mp := fun h => Exists.intro bound ⟨le_rfl, h⟩,
+    mpr := fun a =>
+      Exists.casesOn a fun t h =>
+        And.casesOn h fun hle right =>
+          And.casesOn right fun halt accepts =>
+            let_fun stable := IndependentDuodenary.prize_halted_run_stable M input t halt (bound - t);
+            ⟨Eq.mpr
+                (id
+                  (congrArg (fun x => Turing.TM0.step M x = none)
+                    (Eq.mp
+                      (congrArg
+                        (fun _a => IndependentDuodenary.prizeRun M input _a = IndependentDuodenary.prizeRun M input t)
+                        (Nat.add_sub_of_le hle))
+                      stable)))
+                halt,
+              Eq.mpr
+                (id
+                  (congrArg (fun x => x.Tape.head = 1)
+                    (Eq.mp
+                      (congrArg
+                        (fun _a => IndependentDuodenary.prizeRun M input _a = IndependentDuodenary.prizeRun M input t)
+                        (Nat.add_sub_of_le hle))
+                      stable)))
+                accepts⟩ }
+'IndependentDuodenary.prize_accepts_by_bound_iff' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES prize_accepts_by_bound_iff: [IndependentDuodenary.prize_halted_run_stable,
+ Eq.mpr,
+ Turing.TM0.step,
+ le_rfl,
+ congrArg,
+ IndependentDuodenary.prizeHalted.proof_1,
+ HSub.hSub,
+ IndependentDuodenary.prizeAccepts,
+ Exists,
+ Eq.mp,
+ Nat.add_sub_of_le,
+ id,
+ Fin.instOfNat,
+ instSubNat,
+ IndependentDuodenary.PrizeMachine,
+ instOfNatNat,
+ IndependentDuodenary.prizeAccepts.proof_1,
+ LE.le,
+ IndependentDuodenary.prizeRun,
+ instLENat,
+ And.casesOn,
+ Turing.Tape.head,
+ Option.none,
+ List,
+ instHAdd,
+ And,
+ Iff,
+ instHSub,
+ Exists.casesOn,
+ IndependentDuodenary.prizeHalted,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat.instPreorder,
+ Nat,
+ And.intro,
+ Iff.intro,
+ Exists.intro,
+ Fin.instInhabited,
+ instAddNat,
+ Turing.TM0.Cfg.Tape,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ letFun,
+ Turing.TM0.Cfg,
+ Option]
 theorem IndependentDuodenary.semantic_decoder_no_collision.{u_1, u_2} : ∀ {L : Type u_1} {S : Type u_2} (r : Setoid L)
   (encode : L → S) (decode : S → Quotient r),
   (∀ (x : L), decode (encode x) = ⟦x⟧) → ∀ (x y : L), encode x = encode y → r x y :=
@@ -20976,4 +23103,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 354 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 373 theorem declarations; only standard Lean axioms permitted.

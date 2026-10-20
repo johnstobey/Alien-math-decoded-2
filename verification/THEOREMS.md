@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 354 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 373 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -1425,6 +1425,299 @@ Proof method: Kernel-checked decidable computation (decide).
 Axioms: `none`.
 
 Dependencies: see `DIRECT DEPENDENCIES cipher_orcus_fixture` and the printed proof in the machine-generated audit.
+
+## `prize_word_decode_encode`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_word_decode_encode (x : PrizeBinaryWord) :
+    prizeDecodeWord (prizeEncodeWord x) = some x
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_word_decode_encode` and the printed proof in the machine-generated audit.
+
+## `prize_word_encode_decode`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_word_encode_decode (raw : List (Fin 4)) (x : PrizeBinaryWord)
+    (h : prizeDecodeWord raw = some x) : prizeEncodeWord x = raw
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_word_encode_decode` and the printed proof in the machine-generated audit.
+
+## `prize_word_encoding_injective`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_word_encoding_injective : Function.Injective prizeEncodeWord
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_word_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `prize_word_decode_blank_rejected`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_word_decode_blank_rejected (raw : List (Fin 4)) :
+    prizeDecodeWord (0 :: raw) = none
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_word_decode_blank_rejected` and the printed proof in the machine-generated audit.
+
+## `prize_word_decode_separator_rejected`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_word_decode_separator_rejected (raw : List (Fin 4)) :
+    prizeDecodeWord (3 :: raw) = none
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_word_decode_separator_rejected` and the printed proof in the machine-generated audit.
+
+## `prize_word_decode_prefix`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_word_decode_prefix (x : PrizeBinaryWord) (raw : List (Fin 4)) :
+    prizeDecodeWord (prizeEncodeWord x ++ raw) =
+      (fun y => x ++ y) <$> prizeDecodeWord raw
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_word_decode_prefix` and the printed proof in the machine-generated audit.
+
+## `prize_pair_decode_prefix`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_pair_decode_prefix (x : PrizeBinaryWord) (raw : List (Fin 4)) :
+    prizeDecodePair (prizeEncodeWord x ++ 3 :: raw) =
+      (fun w => (x, w)) <$> prizeDecodeWord raw
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_pair_decode_prefix` and the printed proof in the machine-generated audit.
+
+## `prize_pair_decode_encode`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_pair_decode_encode (x w : PrizeBinaryWord) :
+    prizeDecodePair (prizeEncodePair x w) = some (x, w)
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_pair_decode_encode` and the printed proof in the machine-generated audit.
+
+## `prize_pair_encode_decode`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_pair_encode_decode (raw : List (Fin 4)) (p : PrizeBinaryWord × PrizeBinaryWord)
+    (h : prizeDecodePair raw = some p) : prizeEncodePair p.1 p.2 = raw
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_pair_encode_decode` and the printed proof in the machine-generated audit.
+
+## `prize_pair_encoding_injective`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_pair_encoding_injective :
+    Function.Injective (fun p : PrizeBinaryWord × PrizeBinaryWord => prizeEncodePair p.1 p.2)
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_pair_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `prize_pair_missing_separator_rejected`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_pair_missing_separator_rejected (x : PrizeBinaryWord) :
+    prizeDecodePair (prizeEncodeWord x) = none
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_pair_missing_separator_rejected` and the printed proof in the machine-generated audit.
+
+## `prize_pair_extra_separator_rejected`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_pair_extra_separator_rejected (x w : PrizeBinaryWord) (raw : List (Fin 4)) :
+    prizeDecodePair (prizeEncodePair x w ++ 3 :: raw) = none
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_pair_extra_separator_rejected` and the printed proof in the machine-generated audit.
+
+## `prize_pair_trailing_blank_rejected`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_pair_trailing_blank_rejected (x w : PrizeBinaryWord) (raw : List (Fin 4)) :
+    prizeDecodePair (prizeEncodePair x w ++ 0 :: raw) = none
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_pair_trailing_blank_rejected` and the printed proof in the machine-generated audit.
+
+## `prize_run_succ`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_run_succ {states : ℕ} (M : PrizeMachine states) (input : List (Fin 4)) (t : ℕ) :
+    prizeRun M input (t + 1) =
+      (Turing.TM0.step M (prizeRun M input t)).getD (prizeRun M input t)
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_run_succ` and the printed proof in the machine-generated audit.
+
+## `prize_halted_run_stable`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_halted_run_stable {states : ℕ} (M : PrizeMachine states)
+    (input : List (Fin 4)) (t : ℕ) (halt : prizeHalted M input t) (s : ℕ) :
+    prizeRun M input (t + s) = prizeRun M input t
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_halted_run_stable` and the printed proof in the machine-generated audit.
+
+## `prize_halted_status_stable`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_halted_status_stable {states : ℕ} (M : PrizeMachine states)
+    (input : List (Fin 4)) (t : ℕ) (halt : prizeHalted M input t) (s : ℕ) :
+    prizeHalted M input (t + s)
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_halted_status_stable` and the printed proof in the machine-generated audit.
+
+## `prize_halted_acceptance_stable`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_halted_acceptance_stable {states : ℕ} (M : PrizeMachine states)
+    (input : List (Fin 4)) (t : ℕ) (halt : prizeHalted M input t) (s : ℕ) :
+    prizeAccepts M input (t + s) ↔ prizeAccepts M input t
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_halted_acceptance_stable` and the printed proof in the machine-generated audit.
+
+## `prize_halted_boolean_output_stable`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_halted_boolean_output_stable {states : ℕ} (M : PrizeMachine states)
+    (input : List (Fin 4)) (t : ℕ) (halt : prizeHalted M input t) (s : ℕ) :
+    prizeBooleanOutput M input (t + s) ↔ prizeBooleanOutput M input t
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_halted_boolean_output_stable` and the printed proof in the machine-generated audit.
+
+## `prize_accepts_by_bound_iff`
+
+Source: `IndependentDuodenary/ComplexityEncoding.lean`. Compilation: **passed**.
+
+```lean
+theorem prize_accepts_by_bound_iff {states : ℕ} (M : PrizeMachine states)
+    (input : List (Fin 4)) (bound : ℕ) :
+    (prizeHalted M input bound ∧ prizeAccepts M input bound) ↔
+      ∃ t ≤ bound, prizeHalted M input t ∧ prizeAccepts M input t
+```
+
+Proof method: Structural induction, finite alphabet case analysis, or rewriting by the parser and halted-run lemmas; see the exact proof term and direct dependencies below.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES prize_accepts_by_bound_iff` and the printed proof in the machine-generated audit.
 
 ## `semantic_decoder_no_collision`
 
