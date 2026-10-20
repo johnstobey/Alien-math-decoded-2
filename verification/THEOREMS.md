@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 245 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 297 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -1490,6 +1490,836 @@ Proof method: Kernel-checked decidable computation (decide).
 Axioms: `propext, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES zero_divisor_mod_144` and the printed proof in the machine-generated audit.
+
+## `register_decode_encode`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_decode_encode (r : ℕ) (q : RegisterState r) :
+    decodeRegisterWords r (encodeRegisterState q) = some q
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw, simp, simpa, change. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_decode_encode` and the printed proof in the machine-generated audit.
+
+## `register_parse_sound`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_parse_sound (r : ℕ) (words : RegisterWords r) (q : RegisterState r)
+    (h : decodeRegisterWords r words = some q) : words = encodeRegisterState q
+```
+
+Proof method: Kernel-checked tactic proof using induction, cases, funext, simp, simpa, refine, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_parse_sound` and the printed proof in the machine-generated audit.
+
+## `register_encoding_injective`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_encoding_injective {r : ℕ} : Function.Injective (@encodeRegisterState r)
+```
+
+Proof method: Kernel-checked tactic proof using simpa, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `register_reject_malformed`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_reject_malformed {r : ℕ} (words : RegisterWords r)
+    (h : ∀ q : RegisterState r, words ≠ encodeRegisterState q) : decodeRegisterWords r words = none
+```
+
+Proof method: Kernel-checked tactic proof using cases, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_reject_malformed` and the printed proof in the machine-generated audit.
+
+## `register_encoding_projection`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_encoding_projection {r s : ℕ} (select : Fin s → Fin r) (q : RegisterState r) :
+    projectRegisterWords select (encodeRegisterState q) =
+      encodeRegisterState (projectRegisters select q)
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_encoding_projection` and the printed proof in the machine-generated audit.
+
+## `register_transport_encode`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_transport_encode {r : ℕ} (A : RegisterState r → RegisterState r)
+    (q : RegisterState r) :
+    transportRegisterWords A (encodeRegisterState q) = encodeRegisterState (A q)
+```
+
+Proof method: Kernel-checked tactic proof using simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_transport_encode` and the printed proof in the machine-generated audit.
+
+## `register_transport_iterate`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_transport_iterate {r : ℕ} (A : RegisterState r → RegisterState r)
+    (n : ℕ) (q : RegisterState r) :
+    ((transportRegisterWords A)^[n]) (encodeRegisterState q) = encodeRegisterState ((A^[n]) q)
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_transport_iterate` and the printed proof in the machine-generated audit.
+
+## `register_decoded_transport_iterate`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_decoded_transport_iterate {r : ℕ} (A : RegisterState r → RegisterState r)
+    (n : ℕ) (q : RegisterState r) :
+    decodeRegisterWords r (((transportRegisterWords A)^[n]) (encodeRegisterState q)) =
+      some ((A^[n]) q)
+```
+
+Proof method: Kernel-checked tactic proof using rw. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_decoded_transport_iterate` and the printed proof in the machine-generated audit.
+
+## `register_transport_reflects_equality`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_transport_reflects_equality {r : ℕ}
+    (A B : RegisterState r → RegisterState r) (n m : ℕ) (q p : RegisterState r) :
+    ((transportRegisterWords A)^[n]) (encodeRegisterState q) =
+      ((transportRegisterWords B)^[m]) (encodeRegisterState p) ↔ (A^[n]) q = (B^[m]) p
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_transport_reflects_equality` and the printed proof in the machine-generated audit.
+
+## `decoded_register_property_encode`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem decoded_register_property_encode {r : ℕ} (P : RegisterState r → Prop)
+    (q : RegisterState r) : DecodedRegisterProperty P (encodeRegisterState q) ↔ P q
+```
+
+Proof method: Kernel-checked tactic proof using simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES decoded_register_property_encode` and the printed proof in the machine-generated audit.
+
+## `register_inductive_invariant_transport`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_inductive_invariant_transport {r : ℕ}
+    (A : RegisterState r → RegisterState r) (P : RegisterState r → Prop)
+    (hstep : ∀ q, P q → P (A q)) (n : ℕ) (q : RegisterState r) (hq : P q) :
+    DecodedRegisterProperty P (((transportRegisterWords A)^[n]) (encodeRegisterState q))
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_inductive_invariant_transport` and the printed proof in the machine-generated audit.
+
+## `external_relative_equivalence_offset`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem external_relative_equivalence_offset {r : ℕ} (base : Fin r) (a b : RegisterPhase r) :
+    ExternalRelativeEquivalent a b ↔ ∃ c : ZMod 12, ∀ i, b i = a i + c
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES external_relative_equivalence_offset` and the printed proof in the machine-generated audit.
+
+## `external_relative_equivalence_step`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem external_relative_equivalence_step {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) (hq : PhaseRegular q) :
+    ExternalRelativeEquivalent (registerPhases q) (registerPhases (((registerStep h)^[n]) q))
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES external_relative_equivalence_step` and the printed proof in the machine-generated audit.
+
+## `register_word_modular_bridge`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_word_modular_bridge {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) (hq : PhaseRegular q) :
+    DecodedRegisterProperty (fun p => PhaseRegular p ∧
+      ExternalRelativeEquivalent (registerPhases q) (registerPhases p))
+      (((transportRegisterWords (registerStep h))^[n]) (encodeRegisterState q))
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_word_modular_bridge` and the printed proof in the machine-generated audit.
+
+## `register_word_metadata_bridge`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_word_metadata_bridge {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) :
+    DecodedRegisterProperty (fun p => ∀ i, (p i).metadata = (q i).metadata)
+      (((transportRegisterWords (registerStep h))^[n]) (encodeRegisterState q))
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_word_metadata_bridge` and the printed proof in the machine-generated audit.
+
+## `register_word_modular_bridge_phase`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_word_modular_bridge_phase {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (a : RegisterPhase r) :
+    DecodedRegisterProperty (fun p => PhaseRegular p ∧
+      ExternalRelativeEquivalent a (registerPhases p))
+      (((transportRegisterWords (registerStep h))^[n]) (encodeRegisterState (phaseRegisterState a)))
+```
+
+Proof method: Kernel-checked tactic proof using simpa. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_word_modular_bridge_phase` and the printed proof in the machine-generated audit.
+
+## `register_word_projection_bridge`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_word_projection_bridge {r s : ℕ} (select : Fin s → Fin r)
+    (h : RegisterTranslation r) (n : ℕ) (q : RegisterState r) :
+    projectRegisterWords select
+      (((transportRegisterWords (registerStep h))^[n]) (encodeRegisterState q)) =
+    (((transportRegisterWords (registerStep (fun i => h (select i))))^[n])
+      (encodeRegisterState (projectRegisters select q)))
+```
+
+Proof method: Kernel-checked tactic proof using rw. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_word_projection_bridge` and the printed proof in the machine-generated audit.
+
+## `register_word_regular_orbit_injective`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem register_word_regular_orbit_injective {r : ℕ} (base : Fin r)
+    (h : RegisterTranslation r) (q : RegisterState r) (hq : PhaseRegular q) :
+    Function.Injective (fun n : Fin 12 =>
+      ((transportRegisterWords (registerStep h))^[n.val]) (encodeRegisterState q))
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact, change, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_word_regular_orbit_injective` and the printed proof in the machine-generated audit.
+
+## `external_relative_equivalence_not_lossless`
+
+Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem external_relative_equivalence_not_lossless :
+    ∃ q p : RegisterState 1, ExternalRelativeEquivalent (registerPhases q) (registerPhases p) ∧
+      encodeRegisterState q ≠ encodeRegisterState p
+```
+
+Proof method: Kernel-checked tactic proof using rw, refine, exact, change, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext,
+ Classical.choice,
+ Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES external_relative_equivalence_not_lossless` and the printed proof in the machine-generated audit.
+
+## `register_cycle_projection`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_cycle_projection {r s : ℕ} (select : Fin s → Fin r) (q : RegisterState r) :
+    projectRegisters select (registerCycle q) = registerCycle (projectRegisters select q)
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_cycle_projection` and the printed proof in the machine-generated audit.
+
+## `register_translate_projection`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_translate_projection {r s : ℕ} (select : Fin s → Fin r)
+    (h : RegisterTranslation r) (q : RegisterState r) :
+    projectRegisters select (registerTranslate h q) =
+      registerTranslate (fun i => h (select i)) (projectRegisters select q)
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_translate_projection` and the printed proof in the machine-generated audit.
+
+## `register_step_projection`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_projection {r s : ℕ} (select : Fin s → Fin r)
+    (h : RegisterTranslation r) (q : RegisterState r) :
+    projectRegisters select (registerStep h q) =
+      registerStep (fun i => h (select i)) (projectRegisters select q)
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_projection` and the printed proof in the machine-generated audit.
+
+## `register_step_projection_iterate`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_projection_iterate {r s : ℕ} (select : Fin s → Fin r)
+    (h : RegisterTranslation r) (n : ℕ) (q : RegisterState r) :
+    projectRegisters select (((registerStep h)^[n]) q) =
+      (((registerStep (fun i => h (select i)))^[n]) (projectRegisters select q))
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_projection_iterate` and the printed proof in the machine-generated audit.
+
+## `register_relative_projection`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_relative_projection {r s : ℕ} (select : Fin s → Fin r)
+    (q : RegisterState r) (i j : Fin s) :
+    relativePhases (registerPhases (projectRegisters select q)) i j =
+      relativePhases (registerPhases q) (select i) (select j)
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_relative_projection` and the printed proof in the machine-generated audit.
+
+## `register_cycle_commutes_translation`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_cycle_commutes_translation {r : ℕ} (h : RegisterTranslation r)
+    (q : RegisterState r) :
+    registerCycle (registerTranslate h q) = registerTranslate h (registerCycle q)
+```
+
+Proof method: Kernel-checked tactic proof using funext, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_cycle_commutes_translation` and the printed proof in the machine-generated audit.
+
+## `register_translation_vertex_invariant`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_translation_vertex_invariant {r : ℕ} (h : RegisterTranslation r)
+    (q : RegisterState r) (i : Fin r) :
+    keyVertex (registerTranslate h q i) = keyVertex (q i)
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_translation_vertex_invariant` and the printed proof in the machine-generated audit.
+
+## `register_translation_phase_invariant`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_translation_phase_invariant {r : ℕ} (h : RegisterTranslation r)
+    (q : RegisterState r) : registerPhases (registerTranslate h q) = registerPhases q
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_translation_phase_invariant` and the printed proof in the machine-generated audit.
+
+## `register_cycle_iterate`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_cycle_iterate {r : ℕ} (n : ℕ) (q : RegisterState r) (i : Fin r) :
+    ((registerCycle^[n]) q) i = (keyCoordinateCycle^[n]) (q i)
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_cycle_iterate` and the printed proof in the machine-generated audit.
+
+## `register_cycle_period_iff`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_cycle_period_iff {r : ℕ} (hr : 0 < r) (n : ℕ) :
+    (∀ q : RegisterState r, (registerCycle^[n]) q = q) ↔ 12 ∣ n
+```
+
+Proof method: Kernel-checked tactic proof using funext, rw, simpa, exact, apply, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_cycle_period_iff` and the printed proof in the machine-generated audit.
+
+## `register_empty_cycle_period`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_empty_cycle_period (n : ℕ) (q : RegisterState 0) :
+    (registerCycle^[n]) q = q
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_empty_cycle_period` and the printed proof in the machine-generated audit.
+
+## `key_phase_from_one_hot`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem key_phase_from_one_hot (q : RepresentedKey) (a : ZMod 12)
+    (ha : q.complementIntercept = keyOneHot a) : keyPhaseLabel (keyVertex q) = a
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact, change. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_phase_from_one_hot` and the printed proof in the machine-generated audit.
+
+## `key_cycle_one_hot`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_one_hot (q : RepresentedKey) (a : ZMod 12)
+    (ha : q.complementIntercept = keyOneHot a) :
+    (keyCoordinateCycle q).complementIntercept = keyOneHot (a + 1)
+```
+
+Proof method: Kernel-checked tactic proof using funext, simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_one_hot` and the printed proof in the machine-generated audit.
+
+## `phase_register_regular`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem phase_register_regular {r : ℕ} (a : RegisterPhase r) : PhaseRegular (phaseRegisterState a)
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES phase_register_regular` and the printed proof in the machine-generated audit.
+
+## `phase_register_label`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem phase_register_label {r : ℕ} (a : RegisterPhase r) :
+    registerPhases (phaseRegisterState a) = a
+```
+
+Proof method: Kernel-checked tactic proof using funext, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES phase_register_label` and the printed proof in the machine-generated audit.
+
+## `register_regular_cycle`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_regular_cycle {r : ℕ} (q : RegisterState r) (hq : PhaseRegular q) :
+    PhaseRegular (registerCycle q)
+```
+
+Proof method: Kernel-checked tactic proof using exact, intro, obtain. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_regular_cycle` and the printed proof in the machine-generated audit.
+
+## `register_regular_translation`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_regular_translation {r : ℕ} (h : RegisterTranslation r)
+    (q : RegisterState r) (hq : PhaseRegular q) : PhaseRegular (registerTranslate h q)
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_regular_translation` and the printed proof in the machine-generated audit.
+
+## `register_regular_step`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_regular_step {r : ℕ} (h : RegisterTranslation r)
+    (q : RegisterState r) (hq : PhaseRegular q) : PhaseRegular (registerStep h q)
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_regular_step` and the printed proof in the machine-generated audit.
+
+## `register_regular_projection`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_regular_projection {r s : ℕ} (select : Fin s → Fin r)
+    (q : RegisterState r) (hq : PhaseRegular q) : PhaseRegular (projectRegisters select q)
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_regular_projection` and the printed proof in the machine-generated audit.
+
+## `register_cycle_phase`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_cycle_phase {r : ℕ} (q : RegisterState r) (hq : PhaseRegular q) :
+    registerPhases (registerCycle q) = phaseAdvance (registerPhases q)
+```
+
+Proof method: Kernel-checked tactic proof using funext, rw, change, obtain. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_cycle_phase` and the printed proof in the machine-generated audit.
+
+## `register_step_phase`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_phase {r : ℕ} (h : RegisterTranslation r)
+    (q : RegisterState r) (hq : PhaseRegular q) :
+    registerPhases (registerStep h q) = phaseAdvance (registerPhases q)
+```
+
+Proof method: Kernel-checked tactic proof using exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_phase` and the printed proof in the machine-generated audit.
+
+## `register_step_regular_iterate`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_regular_iterate {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) (hq : PhaseRegular q) : PhaseRegular (((registerStep h)^[n]) q)
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_regular_iterate` and the printed proof in the machine-generated audit.
+
+## `register_step_phase_iterate`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_phase_iterate {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) (hq : PhaseRegular q) :
+    registerPhases (((registerStep h)^[n]) q) = fun i => registerPhases q i + (n : ZMod 12)
+```
+
+Proof method: Kernel-checked tactic proof using induction, funext, rw, simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_phase_iterate` and the printed proof in the machine-generated audit.
+
+## `register_step_relative_invariant`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_relative_invariant {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) (hq : PhaseRegular q) (i j : Fin r) :
+    relativePhases (registerPhases (((registerStep h)^[n]) q)) i j =
+      relativePhases (registerPhases q) i j
+```
+
+Proof method: Kernel-checked tactic proof using rw, simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_relative_invariant` and the printed proof in the machine-generated audit.
+
+## `register_step_iterate_formula`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_iterate_formula {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) (i : Fin r) :
+    (((registerStep h)^[n]) q) i = translateKey (n • h i) ((keyCoordinateCycle^[n]) (q i))
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw, simp, change. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_iterate_formula` and the printed proof in the machine-generated audit.
+
+## `register_step_metadata_invariant`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_metadata_invariant {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) (i : Fin r) :
+    (((registerStep h)^[n]) q i).metadata = (q i).metadata
+```
+
+Proof method: Kernel-checked tactic proof using rw. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_metadata_invariant` and the printed proof in the machine-generated audit.
+
+## `register_step_period_twelve`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_period_twelve {r : ℕ} (h : RegisterTranslation r) (q : RegisterState r) :
+    ((registerStep h)^[12]) q = q
+```
+
+Proof method: Kernel-checked tactic proof using funext, rw, exact, change. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_period_twelve` and the printed proof in the machine-generated audit.
+
+## `register_regular_orbit_no_collapse`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_regular_orbit_no_collapse {r : ℕ} (base : Fin r)
+    (h : RegisterTranslation r) (q : RegisterState r) (hq : PhaseRegular q) (n m : ℕ)
+    (heq : ((registerStep h)^[n]) q = ((registerStep h)^[m]) q) :
+    (n : ZMod 12) = (m : ZMod 12)
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_regular_orbit_no_collapse` and the printed proof in the machine-generated audit.
+
+## `register_step_period_iff`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_step_period_iff {r : ℕ} (hr : 0 < r) (h : RegisterTranslation r) (n : ℕ) :
+    (∀ q : RegisterState r, ((registerStep h)^[n]) q = q) ↔ 12 ∣ n
+```
+
+Proof method: Kernel-checked tactic proof using funext, rw, simp, simpa, exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_step_period_iff` and the printed proof in the machine-generated audit.
+
+## `register_regular_orbit_injective`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_regular_orbit_injective {r : ℕ} (base : Fin r)
+    (h : RegisterTranslation r) (q : RegisterState r) (hq : PhaseRegular q) :
+    Function.Injective (fun n : Fin 12 => ((registerStep h)^[n.val]) q)
+```
+
+Proof method: Kernel-checked tactic proof using simpa, apply, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_regular_orbit_injective` and the printed proof in the machine-generated audit.
+
+## `relative_phases_iff_common_offset`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem relative_phases_iff_common_offset {r : ℕ} (base : Fin r) (a b : RegisterPhase r) :
+    (∀ i j, relativePhases b i j = relativePhases a i j) ↔
+      ∃ c : ZMod 12, ∀ i, b i = a i + c
+```
+
+Proof method: Kernel-checked tactic proof using rw, simp, refine, abel, change, calc, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES relative_phases_iff_common_offset` and the printed proof in the machine-generated audit.
+
+## `register_aggregate_phase_formula`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem register_aggregate_phase_formula {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) (hq : PhaseRegular q) :
+    (∑ i : Fin r, registerPhases (((registerStep h)^[n]) q) i) =
+      (∑ i : Fin r, registerPhases q i) + (r : ZMod 12) * (n : ZMod 12)
+```
+
+Proof method: Kernel-checked tactic proof using rw, simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_aggregate_phase_formula` and the printed proof in the machine-generated audit.
+
+## `two_register_sum_collapse`
+
+Source: `IndependentDuodenary/RegisterDynamics.lean`. Compilation: **passed**.
+
+```lean
+theorem two_register_sum_collapse :
+    (∑ i : Fin 2, (fun _ : Fin 2 => (6 : ZMod 12)) i) =
+      (∑ i : Fin 2, (fun _ : Fin 2 => (0 : ZMod 12)) i) ∧
+    (fun _ : Fin 2 => (6 : ZMod 12)) ≠ (fun _ : Fin 2 => (0 : ZMod 12))
+```
+
+Proof method: Kernel-checked finite decision procedure (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES two_register_sum_collapse` and the printed proof in the machine-generated audit.
 
 ## `sourceSupportBlock_pullback`
 

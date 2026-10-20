@@ -34,5 +34,14 @@ jobs:
           test ! -s source-key-check.log
       - name: Verify operator and exact-key directives
         run: lake env lean examples/KeyDirectives.lean
+      - name: Require warning-free register declarations
+        run: |
+          for proof_module in RegisterDynamics RegisterBridge
+          do
+            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee register-check.log
+            test ! -s register-check.log
+          done
+      - name: Verify product dynamics and modular bridge
+        run: lake env lean examples/RegisterDirectives.lean
       - name: Ensure dependency lockfile stayed unchanged
         run: git diff --exit-code -- lake-manifest.json lean-toolchain

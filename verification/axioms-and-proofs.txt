@@ -4084,6 +4084,2529 @@ DIRECT DEPENDENCIES zero_divisor_mod_144: [Semiring.toNatCast,
  Eq,
  instOfNatAtLeastTwo,
  instHMul]
+theorem IndependentDuodenary.register_decode_encode : ∀ (r : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.decodeRegisterWords r (IndependentDuodenary.encodeRegisterState q) = some q :=
+fun r q =>
+  Nat.recAux (motive := fun r =>
+    ∀ (q : IndependentDuodenary.RegisterState r),
+      IndependentDuodenary.decodeRegisterWords r (IndependentDuodenary.encodeRegisterState q) = some q)
+    (fun q =>
+      let_fun hq := Subsingleton.elim q Fin.elim0;
+      of_eq_true (Eq.trans (congrArg (fun x => some Fin.elim0 = some x) hq) (eq_self (some Fin.elim0))))
+    (fun r ih q =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun x =>
+              (do
+                  let q_1 ← x
+                  let qs ←
+                    IndependentDuodenary.decodeRegisterWords r fun i => IndependentDuodenary.encodeExactKey (q i.succ)
+                  pure (Fin.cons q_1 qs)) =
+                some q)
+            (IndependentDuodenary.exact_key_decode_encode (q 0))))
+        (let_fun this :=
+          Eq.mpr
+            (id (congrArg (fun _a => (_a.bind fun qs => some (Fin.cons (q 0) qs)) = some q) (ih fun i => q i.succ)))
+            (Eq.mpr
+              (id
+                (Eq.trans
+                  (congrArg (fun x => x = some q)
+                    (Option.bind_congr' (Eq.refl (some fun i => q i.succ)) fun a a_1 =>
+                      Eq.refl (some (Fin.cons (q 0) a))))
+                  (Option.some.injEq (Fin.cons (q 0) fun i => q i.succ) q)))
+              (Fin.cons_self_tail q));
+        this))
+    r q
+'IndependentDuodenary.register_decode_encode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_decode_encode: [Pure.pure,
+ Eq.mpr,
+ IndependentDuodenary.decodeRegisterWords,
+ instAlternativeOption,
+ Option.bind_congr',
+ Nat.recAux,
+ IndependentDuodenary.exact_key_decode_encode,
+ Fin.succ,
+ congrArg,
+ Option.instMembership,
+ IndependentDuodenary.decodeExactKey,
+ Pi.uniqueOfIsEmpty,
+ Fin.cons,
+ IndependentDuodenary.RepresentedKey,
+ Option.some.injEq,
+ Option.some,
+ Membership.mem,
+ Option.bind,
+ id,
+ Fin.instOfNat,
+ IndependentDuodenary.encodeExactKey,
+ instOfNatNat,
+ Applicative.toPure,
+ Fin.cons_self_tail,
+ IndependentDuodenary.RegisterState,
+ instMonadOption,
+ instHAdd,
+ Unique.instSubsingleton,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ Fin.isEmpty',
+ True,
+ eq_self,
+ of_eq_true,
+ Alternative.toApplicative,
+ instAddNat,
+ Monad.toBind,
+ Eq.refl,
+ Bind.bind,
+ Subsingleton.elim,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ letFun,
+ IndependentDuodenary.encodeRegisterState,
+ Eq.trans,
+ Fin.elim0,
+ Option]
+theorem IndependentDuodenary.register_parse_sound : ∀ (r : ℕ) (words : IndependentDuodenary.RegisterWords r)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.decodeRegisterWords r words = some q → words = IndependentDuodenary.encodeRegisterState q :=
+fun r words q h =>
+  Nat.recAux (motive := fun r =>
+    ∀ (words : IndependentDuodenary.RegisterWords r) (q : IndependentDuodenary.RegisterState r),
+      IndependentDuodenary.decodeRegisterWords r words = some q → words = IndependentDuodenary.encodeRegisterState q)
+    (fun words q h => Subsingleton.elim words (IndependentDuodenary.encodeRegisterState q))
+    (fun r ih words q h =>
+      Option.casesOn (motive := fun t =>
+        IndependentDuodenary.decodeExactKey (words 0) = t → words = IndependentDuodenary.encodeRegisterState q)
+        (IndependentDuodenary.decodeExactKey (words 0))
+        (fun h_1 =>
+          Eq.ndrec (motive := fun x =>
+            IndependentDuodenary.decodeExactKey (words 0) = x → words = IndependentDuodenary.encodeRegisterState q)
+            (fun hh =>
+              False.elim
+                (Eq.mp
+                  (Eq.trans
+                    (congrArg
+                      (fun x =>
+                        (do
+                            let q ← x
+                            (IndependentDuodenary.decodeRegisterWords r fun i => words i.succ).bind fun qs =>
+                                some (Fin.cons q qs)) =
+                          some q)
+                      hh)
+                    (eq_false' fun h => Option.noConfusion h))
+                  h))
+            (Eq.symm h_1) (Eq.refl (IndependentDuodenary.decodeExactKey (words 0))))
+        (fun head h_1 =>
+          Eq.ndrec (motive := fun x =>
+            IndependentDuodenary.decodeExactKey (words 0) = x → words = IndependentDuodenary.encodeRegisterState q)
+            (fun hh =>
+              Option.casesOn (motive := fun t =>
+                (IndependentDuodenary.decodeRegisterWords r fun i => words i.succ) = t →
+                  words = IndependentDuodenary.encodeRegisterState q)
+                (IndependentDuodenary.decodeRegisterWords r fun i => words i.succ)
+                (fun h_2 =>
+                  Eq.ndrec (motive := fun x =>
+                    (IndependentDuodenary.decodeRegisterWords r fun i => words i.succ) = x →
+                      words = IndependentDuodenary.encodeRegisterState q)
+                    (fun ht =>
+                      False.elim
+                        (Eq.mp
+                          (Eq.trans
+                            (congrArg (fun x => x = some q)
+                              (Eq.trans
+                                (congr (congrArg bind hh)
+                                  (funext fun q =>
+                                    congrArg
+                                      (fun x => do
+                                        let qs ← x
+                                        some (Fin.cons q qs))
+                                      ht))
+                                (Option.bind_none (some head))))
+                            (eq_false' fun h => Option.noConfusion h))
+                          h))
+                    (Eq.symm h_2) (Eq.refl (IndependentDuodenary.decodeRegisterWords r fun i => words i.succ)))
+                (fun tail h_2 =>
+                  Eq.ndrec (motive := fun x =>
+                    (IndependentDuodenary.decodeRegisterWords r fun i => words i.succ) = x →
+                      words = IndependentDuodenary.encodeRegisterState q)
+                    (fun ht =>
+                      let_fun hq :=
+                        Eq.mp
+                          (Eq.trans
+                            (congrArg (fun x => x = some q)
+                              (congr (congrArg bind hh)
+                                (funext fun q =>
+                                  congrArg
+                                    (fun x => do
+                                      let qs ← x
+                                      some (Fin.cons q qs))
+                                    ht)))
+                            (Option.some.injEq (Fin.cons head tail) q))
+                          h;
+                      Eq.ndrec (motive := fun q =>
+                        IndependentDuodenary.decodeRegisterWords (r + 1) words = some q →
+                          words = IndependentDuodenary.encodeRegisterState q)
+                        (fun h =>
+                          let_fun hs := ih (fun i => words i.succ) tail ht;
+                          funext fun i =>
+                            Fin.cases (IndependentDuodenary.exact_key_parse_sound (words 0) head hh)
+                              (fun j => congrFun hs j) i)
+                        hq h)
+                    (Eq.symm h_2) (Eq.refl (IndependentDuodenary.decodeRegisterWords r fun i => words i.succ)))
+                (Eq.refl (IndependentDuodenary.decodeRegisterWords r fun i => words i.succ)))
+            (Eq.symm h_1) (Eq.refl (IndependentDuodenary.decodeExactKey (words 0))))
+        (Eq.refl (IndependentDuodenary.decodeExactKey (words 0))))
+    r words q h
+'IndependentDuodenary.register_parse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_parse_sound: [False,
+ IndependentDuodenary.decodeRegisterWords,
+ Nat.recAux,
+ Fin.succ,
+ Option.noConfusion,
+ congrArg,
+ IndependentDuodenary.decodeExactKey,
+ Pi.uniqueOfIsEmpty,
+ False.elim,
+ Option.casesOn,
+ Fin.cons,
+ IndependentDuodenary.RepresentedKey,
+ Option.some.injEq,
+ Option.some,
+ Option.bind,
+ Eq.mp,
+ Fin.instOfNat,
+ instOfNatNat,
+ IndependentDuodenary.exact_key_parse_sound,
+ IndependentDuodenary.RegisterWords,
+ ZMod,
+ IndependentDuodenary.RegisterState,
+ instMonadOption,
+ funext,
+ Option.none,
+ List,
+ instHAdd,
+ Unique.instSubsingleton,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ congrFun,
+ Option.bind_none,
+ Nat,
+ Fin.isEmpty',
+ congr,
+ Eq.ndrec,
+ instAddNat,
+ Monad.toBind,
+ Eq.refl,
+ Fin.cases,
+ Bind.bind,
+ Subsingleton.elim,
+ OfNat.ofNat,
+ Eq.symm,
+ eq_false',
+ Fin,
+ Eq,
+ letFun,
+ IndependentDuodenary.encodeRegisterState,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.register_encoding_injective : ∀ {r : ℕ},
+  Function.Injective IndependentDuodenary.encodeRegisterState :=
+fun {r} ⦃q p⦄ heq =>
+  let_fun hd := congrArg (IndependentDuodenary.decodeRegisterWords r) heq;
+  Eq.mp
+    (Eq.trans
+      (congr (congrArg Eq (IndependentDuodenary.register_decode_encode r q))
+        (IndependentDuodenary.register_decode_encode r p))
+      (Option.some.injEq q p))
+    hd
+'IndependentDuodenary.register_encoding_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_encoding_injective: [IndependentDuodenary.decodeRegisterWords,
+ congrArg,
+ Option.some.injEq,
+ Option.some,
+ Eq.mp,
+ IndependentDuodenary.register_decode_encode,
+ IndependentDuodenary.RegisterWords,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ congr,
+ Function.Injective,
+ Eq,
+ letFun,
+ IndependentDuodenary.encodeRegisterState,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.register_reject_malformed : ∀ {r : ℕ} (words : IndependentDuodenary.RegisterWords r),
+  (∀ (q : IndependentDuodenary.RegisterState r), words ≠ IndependentDuodenary.encodeRegisterState q) →
+    IndependentDuodenary.decodeRegisterWords r words = none :=
+fun {r} words h =>
+  Option.casesOn (motive := fun t =>
+    IndependentDuodenary.decodeRegisterWords r words = t → IndependentDuodenary.decodeRegisterWords r words = none)
+    (IndependentDuodenary.decodeRegisterWords r words)
+    (fun h =>
+      Eq.ndrec (motive := fun x => IndependentDuodenary.decodeRegisterWords r words = x → x = none)
+        (fun hd => Eq.refl none) (Eq.symm h) (Eq.refl (IndependentDuodenary.decodeRegisterWords r words)))
+    (fun q h_1 =>
+      Eq.ndrec (motive := fun x => IndependentDuodenary.decodeRegisterWords r words = x → x = none)
+        (fun hd => False.elim (h q (IndependentDuodenary.register_parse_sound r words q hd))) (Eq.symm h_1)
+        (Eq.refl (IndependentDuodenary.decodeRegisterWords r words)))
+    (Eq.refl (IndependentDuodenary.decodeRegisterWords r words))
+'IndependentDuodenary.register_reject_malformed' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_reject_malformed: [IndependentDuodenary.decodeRegisterWords,
+ False.elim,
+ Option.casesOn,
+ Option.some,
+ IndependentDuodenary.register_parse_sound,
+ Ne,
+ IndependentDuodenary.RegisterWords,
+ IndependentDuodenary.RegisterState,
+ Option.none,
+ Nat,
+ Eq.ndrec,
+ Eq.refl,
+ Eq.symm,
+ Eq,
+ IndependentDuodenary.encodeRegisterState,
+ Option]
+theorem IndependentDuodenary.register_encoding_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.projectRegisterWords select (IndependentDuodenary.encodeRegisterState q) =
+    IndependentDuodenary.encodeRegisterState (IndependentDuodenary.projectRegisters select q) :=
+fun {r s} select q => rfl
+'IndependentDuodenary.register_encoding_projection' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_encoding_projection: [IndependentDuodenary.projectRegisters,
+ IndependentDuodenary.projectRegisterWords,
+ IndependentDuodenary.RegisterWords,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ Fin,
+ Eq,
+ IndependentDuodenary.encodeRegisterState,
+ rfl]
+theorem IndependentDuodenary.register_transport_encode : ∀ {r : ℕ}
+  (A : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.transportRegisterWords A (IndependentDuodenary.encodeRegisterState q) =
+    IndependentDuodenary.encodeRegisterState (A q) :=
+fun {r} A q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg
+        (fun x =>
+          (match x with
+            | none => fun x => []
+            | some q => IndependentDuodenary.encodeRegisterState (A q)) =
+            IndependentDuodenary.encodeRegisterState (A q))
+        (IndependentDuodenary.register_decode_encode r q))
+      (eq_self (IndependentDuodenary.encodeRegisterState (A q))))
+'IndependentDuodenary.register_transport_encode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_transport_encode: [IndependentDuodenary.transportRegisterWords,
+ IndependentDuodenary.decodeRegisterWords,
+ congrArg,
+ Option.some,
+ IndependentDuodenary.register_decode_encode,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ ZMod,
+ IndependentDuodenary.RegisterState,
+ Unit,
+ IndependentDuodenary.transportRegisterWords.match_1,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.encodeRegisterState,
+ Eq.trans,
+ List.nil,
+ Option]
+theorem IndependentDuodenary.register_transport_iterate : ∀ {r : ℕ}
+  (A : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r) (n : ℕ)
+  (q : IndependentDuodenary.RegisterState r),
+  (IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.encodeRegisterState q) =
+    IndependentDuodenary.encodeRegisterState (A^[n] q) :=
+fun {r} A n q =>
+  Nat.recAux
+    (Eq.refl ((IndependentDuodenary.transportRegisterWords A)^[0] (IndependentDuodenary.encodeRegisterState q)))
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg (fun _a => _a = IndependentDuodenary.encodeRegisterState (A^[n + 1] q))
+            (Function.iterate_succ_apply' (IndependentDuodenary.transportRegisterWords A) n
+              (IndependentDuodenary.encodeRegisterState q))))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                IndependentDuodenary.transportRegisterWords A
+                    ((IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.encodeRegisterState q)) =
+                  IndependentDuodenary.encodeRegisterState _a)
+              (Function.iterate_succ_apply' A n q)))
+          (Eq.mpr
+            (id
+              (congrArg
+                (fun _a =>
+                  IndependentDuodenary.transportRegisterWords A _a =
+                    IndependentDuodenary.encodeRegisterState (A (A^[n] q)))
+                ih))
+            (Eq.mpr
+              (id
+                (congrArg (fun _a => _a = IndependentDuodenary.encodeRegisterState (A (A^[n] q)))
+                  (IndependentDuodenary.register_transport_encode A (A^[n] q))))
+              (Eq.refl (IndependentDuodenary.encodeRegisterState (A (A^[n] q))))))))
+    n
+'IndependentDuodenary.register_transport_iterate' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_transport_iterate: [IndependentDuodenary.transportRegisterWords,
+ Function.iterate_succ_apply',
+ Eq.mpr,
+ Nat.recAux,
+ congrArg,
+ id,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ instHAdd,
+ IndependentDuodenary.register_transport_encode,
+ HAdd.hAdd,
+ Nat,
+ instAddNat,
+ Eq.refl,
+ OfNat.ofNat,
+ Nat.succ,
+ Eq,
+ IndependentDuodenary.encodeRegisterState]
+theorem IndependentDuodenary.register_decoded_transport_iterate : ∀ {r : ℕ}
+  (A : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r) (n : ℕ)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.decodeRegisterWords r
+      ((IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.encodeRegisterState q)) =
+    some (A^[n] q) :=
+fun {r} A n q =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => IndependentDuodenary.decodeRegisterWords r _a = some (A^[n] q))
+        (IndependentDuodenary.register_transport_iterate A n q)))
+    (Eq.mpr (id (congrArg (fun _a => _a = some (A^[n] q)) (IndependentDuodenary.register_decode_encode r (A^[n] q))))
+      (Eq.refl (some (A^[n] q))))
+'IndependentDuodenary.register_decoded_transport_iterate' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_decoded_transport_iterate: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ IndependentDuodenary.decodeRegisterWords,
+ congrArg,
+ Option.some,
+ IndependentDuodenary.register_decode_encode,
+ id,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ IndependentDuodenary.register_transport_iterate,
+ Eq.refl,
+ Eq,
+ IndependentDuodenary.encodeRegisterState,
+ Option]
+theorem IndependentDuodenary.register_transport_reflects_equality : ∀ {r : ℕ}
+  (A B : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r) (n m : ℕ)
+  (q p : IndependentDuodenary.RegisterState r),
+  (IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.encodeRegisterState q) =
+      (IndependentDuodenary.transportRegisterWords B)^[m] (IndependentDuodenary.encodeRegisterState p) ↔
+    A^[n] q = B^[m] p :=
+fun {r} A B n m q p =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          _a = (IndependentDuodenary.transportRegisterWords B)^[m] (IndependentDuodenary.encodeRegisterState p) ↔
+            A^[n] q = B^[m] p)
+        (IndependentDuodenary.register_transport_iterate A n q)))
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => IndependentDuodenary.encodeRegisterState (A^[n] q) = _a ↔ A^[n] q = B^[m] p)
+          (IndependentDuodenary.register_transport_iterate B m p)))
+      (Function.Injective.eq_iff IndependentDuodenary.register_encoding_injective))
+'IndependentDuodenary.register_transport_reflects_equality' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_transport_reflects_equality: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ congrArg,
+ Function.Injective.eq_iff,
+ id,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ Iff,
+ IndependentDuodenary.register_encoding_injective,
+ Nat,
+ IndependentDuodenary.register_transport_iterate,
+ Eq,
+ IndependentDuodenary.encodeRegisterState]
+theorem IndependentDuodenary.decoded_register_property_encode : ∀ {r : ℕ}
+  (P : IndependentDuodenary.RegisterState r → Prop) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.DecodedRegisterProperty P (IndependentDuodenary.encodeRegisterState q) ↔ P q :=
+fun {r} P q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x ↔ P q)
+        (Eq.trans
+          (congrArg Exists
+            (funext fun q_1 =>
+              congrArg (fun x => x ∧ P q_1)
+                (Eq.trans (congrArg (fun x => x = some q_1) (IndependentDuodenary.register_decode_encode r q))
+                  (Option.some.injEq q q_1))))
+          Init.PropLemmas._auxLemma.30))
+      (iff_self (P q)))
+'IndependentDuodenary.decoded_register_property_encode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES decoded_register_property_encode: [IndependentDuodenary.DecodedRegisterProperty,
+ IndependentDuodenary.decodeRegisterWords,
+ congrArg,
+ Option.some.injEq,
+ Option.some,
+ Exists,
+ IndependentDuodenary.register_decode_encode,
+ IndependentDuodenary.RegisterState,
+ iff_self,
+ funext,
+ And,
+ Iff,
+ Nat,
+ True,
+ Init.PropLemmas._auxLemma.30,
+ of_eq_true,
+ Eq,
+ IndependentDuodenary.encodeRegisterState,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.register_inductive_invariant_transport : ∀ {r : ℕ}
+  (A : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r)
+  (P : IndependentDuodenary.RegisterState r → Prop),
+  (∀ (q : IndependentDuodenary.RegisterState r), P q → P (A q)) →
+    ∀ (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+      P q →
+        IndependentDuodenary.DecodedRegisterProperty P
+          ((IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.encodeRegisterState q)) :=
+fun {r} A P hstep n q hq =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => IndependentDuodenary.DecodedRegisterProperty P _a)
+        (IndependentDuodenary.register_transport_iterate A n q)))
+    (Eq.mpr (id (congrArg (fun _a => _a) (propext (IndependentDuodenary.decoded_register_property_encode P (A^[n] q)))))
+      (Nat.recAux hq
+        (fun n ih => Eq.mpr (id (congrArg (fun _a => P _a) (Function.iterate_succ_apply' A n q))) (hstep (A^[n] q) ih))
+        n))
+'IndependentDuodenary.register_inductive_invariant_transport' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_inductive_invariant_transport: [IndependentDuodenary.transportRegisterWords,
+ Function.iterate_succ_apply',
+ Eq.mpr,
+ IndependentDuodenary.DecodedRegisterProperty,
+ Nat.recAux,
+ congrArg,
+ id,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ propext,
+ IndependentDuodenary.register_transport_iterate,
+ instAddNat,
+ IndependentDuodenary.decoded_register_property_encode,
+ OfNat.ofNat,
+ Nat.succ,
+ Eq,
+ IndependentDuodenary.encodeRegisterState]
+theorem IndependentDuodenary.external_relative_equivalence_offset : ∀ {r : ℕ},
+  Fin r →
+    ∀ (a b : IndependentDuodenary.RegisterPhase r),
+      IndependentDuodenary.ExternalRelativeEquivalent a b ↔ ∃ c, ∀ (i : Fin r), b i = a i + c :=
+fun {r} base a b => IndependentDuodenary.relative_phases_iff_common_offset base a b
+'IndependentDuodenary.external_relative_equivalence_offset' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES external_relative_equivalence_offset: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.relative_phases_iff_common_offset,
+ Exists,
+ Distrib.toAdd,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ ZMod,
+ instHAdd,
+ Iff,
+ IndependentDuodenary.ExternalRelativeEquivalent,
+ HAdd.hAdd,
+ Nat,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ OfNat.ofNat,
+ Fin,
+ Eq]
+theorem IndependentDuodenary.external_relative_equivalence_step : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    IndependentDuodenary.ExternalRelativeEquivalent (IndependentDuodenary.registerPhases q)
+      (IndependentDuodenary.registerPhases ((IndependentDuodenary.registerStep h)^[n] q)) :=
+fun {r} h n q hq i j => IndependentDuodenary.register_step_relative_invariant h n q hq i j
+'IndependentDuodenary.external_relative_equivalence_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES external_relative_equivalence_step: [IndependentDuodenary.registerStep,
+ IndependentDuodenary.register_step_relative_invariant,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ IndependentDuodenary.ExternalRelativeEquivalent,
+ Nat,
+ IndependentDuodenary.registerPhases,
+ Fin]
+theorem IndependentDuodenary.register_word_modular_bridge : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    IndependentDuodenary.DecodedRegisterProperty
+      (fun p =>
+        IndependentDuodenary.PhaseRegular p ∧
+          IndependentDuodenary.ExternalRelativeEquivalent (IndependentDuodenary.registerPhases q)
+            (IndependentDuodenary.registerPhases p))
+      ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+        (IndependentDuodenary.encodeRegisterState q)) :=
+fun {r} h n q hq =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          IndependentDuodenary.DecodedRegisterProperty
+            (fun p =>
+              IndependentDuodenary.PhaseRegular p ∧
+                IndependentDuodenary.ExternalRelativeEquivalent (IndependentDuodenary.registerPhases q)
+                  (IndependentDuodenary.registerPhases p))
+            _a)
+        (IndependentDuodenary.register_transport_iterate (IndependentDuodenary.registerStep h) n q)))
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => _a)
+          (propext
+            (IndependentDuodenary.decoded_register_property_encode
+              (fun p =>
+                IndependentDuodenary.PhaseRegular p ∧
+                  IndependentDuodenary.ExternalRelativeEquivalent (IndependentDuodenary.registerPhases q)
+                    (IndependentDuodenary.registerPhases p))
+              ((IndependentDuodenary.registerStep h)^[n] q)))))
+      ⟨IndependentDuodenary.register_step_regular_iterate h n q hq,
+        IndependentDuodenary.external_relative_equivalence_step h n q hq⟩)
+'IndependentDuodenary.register_word_modular_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_word_modular_bridge: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ IndependentDuodenary.DecodedRegisterProperty,
+ IndependentDuodenary.registerStep,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ id,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ And,
+ IndependentDuodenary.ExternalRelativeEquivalent,
+ Nat,
+ And.intro,
+ propext,
+ IndependentDuodenary.register_transport_iterate,
+ IndependentDuodenary.register_step_regular_iterate,
+ IndependentDuodenary.decoded_register_property_encode,
+ IndependentDuodenary.registerPhases,
+ Eq,
+ IndependentDuodenary.encodeRegisterState,
+ IndependentDuodenary.external_relative_equivalence_step]
+theorem IndependentDuodenary.register_word_metadata_bridge : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.DecodedRegisterProperty (fun p => ∀ (i : Fin r), (p i).metadata = (q i).metadata)
+    ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+      (IndependentDuodenary.encodeRegisterState q)) :=
+fun {r} h n q =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          IndependentDuodenary.DecodedRegisterProperty (fun p => ∀ (i : Fin r), (p i).metadata = (q i).metadata) _a)
+        (IndependentDuodenary.register_transport_iterate (IndependentDuodenary.registerStep h) n q)))
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => _a)
+          (propext
+            (IndependentDuodenary.decoded_register_property_encode
+              (fun p => ∀ (i : Fin r), (p i).metadata = (q i).metadata)
+              ((IndependentDuodenary.registerStep h)^[n] q)))))
+      fun i => IndependentDuodenary.register_step_metadata_invariant h n q i)
+'IndependentDuodenary.register_word_metadata_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_word_metadata_bridge: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.DecodedRegisterProperty,
+ IndependentDuodenary.registerStep,
+ IndependentDuodenary.register_step_metadata_invariant,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ id,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ propext,
+ IndependentDuodenary.register_transport_iterate,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.decoded_register_property_encode,
+ Fin,
+ Eq,
+ IndependentDuodenary.ExactKey.metadata,
+ IndependentDuodenary.encodeRegisterState,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.register_word_modular_bridge_phase : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (a : IndependentDuodenary.RegisterPhase r),
+  IndependentDuodenary.DecodedRegisterProperty
+    (fun p =>
+      IndependentDuodenary.PhaseRegular p ∧
+        IndependentDuodenary.ExternalRelativeEquivalent a (IndependentDuodenary.registerPhases p))
+    ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+      (IndependentDuodenary.encodeRegisterState (IndependentDuodenary.phaseRegisterState a))) :=
+fun {r} h n a =>
+  let_fun hp :=
+    IndependentDuodenary.register_word_modular_bridge h n (IndependentDuodenary.phaseRegisterState a)
+      (IndependentDuodenary.phase_register_regular a);
+  Eq.mp
+    (congrArg
+      (fun x =>
+        IndependentDuodenary.DecodedRegisterProperty x
+          ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+            (IndependentDuodenary.encodeRegisterState (IndependentDuodenary.phaseRegisterState a))))
+      (funext fun p =>
+        congrArg
+          (fun x =>
+            IndependentDuodenary.PhaseRegular p ∧
+              IndependentDuodenary.ExternalRelativeEquivalent x (IndependentDuodenary.registerPhases p))
+          (IndependentDuodenary.phase_register_label a)))
+    hp
+'IndependentDuodenary.register_word_modular_bridge_phase' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_word_modular_bridge_phase: [IndependentDuodenary.transportRegisterWords,
+ IndependentDuodenary.DecodedRegisterProperty,
+ IndependentDuodenary.registerStep,
+ IndependentDuodenary.phaseRegisterState,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ Eq.mp,
+ IndependentDuodenary.register_word_modular_bridge,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.phase_register_regular,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ funext,
+ And,
+ IndependentDuodenary.ExternalRelativeEquivalent,
+ Nat,
+ IndependentDuodenary.registerPhases,
+ IndependentDuodenary.phase_register_label,
+ letFun,
+ IndependentDuodenary.encodeRegisterState]
+theorem IndependentDuodenary.register_word_projection_bridge : ∀ {r s : ℕ} (select : Fin s → Fin r)
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.projectRegisterWords select
+      ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+        (IndependentDuodenary.encodeRegisterState q)) =
+    (IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep fun i => h (select i)))^[n]
+      (IndependentDuodenary.encodeRegisterState (IndependentDuodenary.projectRegisters select q)) :=
+fun {r s} select h n q =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          IndependentDuodenary.projectRegisterWords select _a =
+            (IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep fun i => h (select i)))^[n]
+              (IndependentDuodenary.encodeRegisterState (IndependentDuodenary.projectRegisters select q)))
+        (IndependentDuodenary.register_transport_iterate (IndependentDuodenary.registerStep h) n q)))
+    (Eq.mpr
+      (id
+        (congrArg
+          (fun _a =>
+            IndependentDuodenary.projectRegisterWords select
+                (IndependentDuodenary.encodeRegisterState ((IndependentDuodenary.registerStep h)^[n] q)) =
+              _a)
+          (IndependentDuodenary.register_transport_iterate (IndependentDuodenary.registerStep fun i => h (select i)) n
+            (IndependentDuodenary.projectRegisters select q))))
+      (Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              _a =
+                IndependentDuodenary.encodeRegisterState
+                  ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
+                    (IndependentDuodenary.projectRegisters select q)))
+            (IndependentDuodenary.register_encoding_projection select ((IndependentDuodenary.registerStep h)^[n] q))))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                IndependentDuodenary.encodeRegisterState _a =
+                  IndependentDuodenary.encodeRegisterState
+                    ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
+                      (IndependentDuodenary.projectRegisters select q)))
+              (IndependentDuodenary.register_step_projection_iterate select h n q)))
+          (Eq.refl
+            (IndependentDuodenary.encodeRegisterState
+              ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
+                (IndependentDuodenary.projectRegisters select q)))))))
+'IndependentDuodenary.register_word_projection_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_word_projection_bridge: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ IndependentDuodenary.registerStep,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.projectRegisters,
+ IndependentDuodenary.register_step_projection_iterate,
+ id,
+ IndependentDuodenary.projectRegisterWords,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ IndependentDuodenary.register_encoding_projection,
+ IndependentDuodenary.register_transport_iterate,
+ Eq.refl,
+ Fin,
+ Eq,
+ IndependentDuodenary.encodeRegisterState]
+theorem IndependentDuodenary.register_word_regular_orbit_injective : ∀ {r : ℕ},
+  Fin r →
+    ∀ (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
+      IndependentDuodenary.PhaseRegular q →
+        Function.Injective fun n =>
+          (IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[↑n]
+            (IndependentDuodenary.encodeRegisterState q) :=
+fun {r} base h q hq ⦃n m⦄ heq =>
+  id
+    (fun heq =>
+      IndependentDuodenary.register_regular_orbit_injective base h q hq
+        (IndependentDuodenary.register_encoding_injective
+          (Eq.mp
+            (congrArg
+              (fun _a => IndependentDuodenary.encodeRegisterState ((IndependentDuodenary.registerStep h)^[↑n] q) = _a)
+              (IndependentDuodenary.register_transport_iterate (IndependentDuodenary.registerStep h) (↑m) q))
+            (Eq.mp
+              (congrArg
+                (fun _a =>
+                  _a =
+                    (IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[↑m]
+                      (IndependentDuodenary.encodeRegisterState q))
+                (IndependentDuodenary.register_transport_iterate (IndependentDuodenary.registerStep h) (↑n) q))
+              heq))))
+    heq
+'IndependentDuodenary.register_word_regular_orbit_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_word_regular_orbit_injective: [IndependentDuodenary.transportRegisterWords,
+ IndependentDuodenary.registerStep,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ Eq.mp,
+ id,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Fin.val,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ IndependentDuodenary.register_encoding_injective,
+ Nat,
+ IndependentDuodenary.register_transport_iterate,
+ Function.Injective,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.encodeRegisterState,
+ IndependentDuodenary.register_regular_orbit_injective]
+theorem IndependentDuodenary.external_relative_equivalence_not_lossless : ∃ q p,
+  IndependentDuodenary.ExternalRelativeEquivalent (IndependentDuodenary.registerPhases q)
+      (IndependentDuodenary.registerPhases p) ∧
+    IndependentDuodenary.encodeRegisterState q ≠ IndependentDuodenary.encodeRegisterState p :=
+let q := fun x => IndependentDuodenary.keyCycleWitness;
+let h := fun x => ![1, 0];
+Exists.intro q
+  (Exists.intro (IndependentDuodenary.registerTranslate h q)
+    ⟨Eq.mpr
+        (id
+          (congrArg
+            (fun _a => IndependentDuodenary.ExternalRelativeEquivalent (IndependentDuodenary.registerPhases q) _a)
+            (IndependentDuodenary.register_translation_phase_invariant h q)))
+        fun x x_1 => rfl,
+      fun heq =>
+      let_fun hqp := IndependentDuodenary.register_encoding_injective heq;
+      let_fun hb := congrArg (fun p => (p 0).binaryIntercept 0) hqp;
+      id (fun hb => of_decide_eq_true (id (Eq.refl true)) hb) hb⟩)
+'IndependentDuodenary.external_relative_equivalence_not_lossless' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+DIRECT DEPENDENCIES external_relative_equivalence_not_lossless: [Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ instDecidableNot,
+ False,
+ IndependentDuodenary.keyCycleWitness,
+ IndependentDuodenary.register_translation_phase_invariant,
+ Semiring.toOne,
+ of_decide_eq_true,
+ congrArg,
+ ZMod.decidableEq,
+ IndependentDuodenary.RegisterTranslation,
+ Exists,
+ id,
+ IndependentDuodenary.registerTranslate,
+ Fin.instOfNat,
+ Ne,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.RegisterWords,
+ Field.toSemifield,
+ ZMod,
+ IndependentDuodenary.relativePhases,
+ IndependentDuodenary.RegisterState,
+ Bool.true,
+ And,
+ ZMod.instField,
+ Semifield.toDivisionSemiring,
+ IndependentDuodenary.ExternalRelativeEquivalent,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat.fact_prime_two,
+ IndependentDuodenary.register_encoding_injective,
+ Nat,
+ And.intro,
+ Semifield.toCommGroupWithZero,
+ Exists.intro,
+ Matrix.vecEmpty,
+ DivisionSemiring.toSemiring,
+ Bool,
+ One.toOfNat1,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.ExactKey.binaryIntercept,
+ IndependentDuodenary.registerPhases,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ Matrix.vecCons,
+ letFun,
+ IndependentDuodenary.encodeRegisterState,
+ rfl,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.register_cycle_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.projectRegisters select (IndependentDuodenary.registerCycle q) =
+    IndependentDuodenary.registerCycle (IndependentDuodenary.projectRegisters select q) :=
+fun {r s} select q => rfl
+'IndependentDuodenary.register_cycle_projection' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_cycle_projection: [IndependentDuodenary.registerCycle,
+ IndependentDuodenary.projectRegisters,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ Fin,
+ Eq,
+ rfl]
+theorem IndependentDuodenary.register_translate_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
+  (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.projectRegisters select (IndependentDuodenary.registerTranslate h q) =
+    IndependentDuodenary.registerTranslate (fun i => h (select i)) (IndependentDuodenary.projectRegisters select q) :=
+fun {r s} select h q => rfl
+'IndependentDuodenary.register_translate_projection' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_translate_projection: [IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.projectRegisters,
+ IndependentDuodenary.registerTranslate,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ Fin,
+ Eq,
+ rfl]
+theorem IndependentDuodenary.register_step_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
+  (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.projectRegisters select (IndependentDuodenary.registerStep h q) =
+    IndependentDuodenary.registerStep (fun i => h (select i)) (IndependentDuodenary.projectRegisters select q) :=
+fun {r s} select h q => rfl
+'IndependentDuodenary.register_step_projection' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_step_projection: [IndependentDuodenary.registerStep,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.projectRegisters,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ Fin,
+ Eq,
+ rfl]
+theorem IndependentDuodenary.register_step_projection_iterate : ∀ {r s : ℕ} (select : Fin s → Fin r)
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.projectRegisters select ((IndependentDuodenary.registerStep h)^[n] q) =
+    (IndependentDuodenary.registerStep fun i => h (select i))^[n] (IndependentDuodenary.projectRegisters select q) :=
+fun {r s} select h n q =>
+  Nat.recAux (Eq.refl (IndependentDuodenary.projectRegisters select ((IndependentDuodenary.registerStep h)^[0] q)))
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              IndependentDuodenary.projectRegisters select _a =
+                (IndependentDuodenary.registerStep fun i => h (select i))^[n + 1]
+                  (IndependentDuodenary.projectRegisters select q))
+            (Function.iterate_succ_apply' (IndependentDuodenary.registerStep h) n q)))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                IndependentDuodenary.projectRegisters select
+                    (IndependentDuodenary.registerStep h ((IndependentDuodenary.registerStep h)^[n] q)) =
+                  _a)
+              (Function.iterate_succ_apply' (IndependentDuodenary.registerStep fun i => h (select i)) n
+                (IndependentDuodenary.projectRegisters select q))))
+          (Eq.mpr
+            (id
+              (congrArg
+                (fun _a =>
+                  _a =
+                    IndependentDuodenary.registerStep (fun i => h (select i))
+                      ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
+                        (IndependentDuodenary.projectRegisters select q)))
+                (IndependentDuodenary.register_step_projection select h ((IndependentDuodenary.registerStep h)^[n] q))))
+            (Eq.mpr
+              (id
+                (congrArg
+                  (fun _a =>
+                    IndependentDuodenary.registerStep (fun i => h (select i)) _a =
+                      IndependentDuodenary.registerStep (fun i => h (select i))
+                        ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
+                          (IndependentDuodenary.projectRegisters select q)))
+                  ih))
+              (Eq.refl
+                (IndependentDuodenary.registerStep (fun i => h (select i))
+                  ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
+                    (IndependentDuodenary.projectRegisters select q))))))))
+    n
+'IndependentDuodenary.register_step_projection_iterate' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_step_projection_iterate: [Function.iterate_succ_apply',
+ Eq.mpr,
+ Nat.recAux,
+ IndependentDuodenary.registerStep,
+ IndependentDuodenary.register_step_projection,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.projectRegisters,
+ id,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ instAddNat,
+ Eq.refl,
+ OfNat.ofNat,
+ Fin,
+ Nat.succ,
+ Eq]
+theorem IndependentDuodenary.register_relative_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
+  (q : IndependentDuodenary.RegisterState r) (i j : Fin s),
+  IndependentDuodenary.relativePhases
+      (IndependentDuodenary.registerPhases (IndependentDuodenary.projectRegisters select q)) i j =
+    IndependentDuodenary.relativePhases (IndependentDuodenary.registerPhases q) (select i) (select j) :=
+fun {r s} select q i j => rfl
+'IndependentDuodenary.register_relative_projection' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_relative_projection: [IndependentDuodenary.projectRegisters,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.relativePhases,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ IndependentDuodenary.registerPhases,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ rfl]
+theorem IndependentDuodenary.register_cycle_commutes_translation : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.registerCycle (IndependentDuodenary.registerTranslate h q) =
+    IndependentDuodenary.registerTranslate h (IndependentDuodenary.registerCycle q) :=
+fun {r} h q => funext fun i => IndependentDuodenary.key_cycle_commutes_translation (h i) (q i)
+'IndependentDuodenary.register_cycle_commutes_translation' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_cycle_commutes_translation: [IndependentDuodenary.registerCycle,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.key_cycle_commutes_translation,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.registerTranslate,
+ IndependentDuodenary.RegisterState,
+ funext,
+ Nat,
+ Fin,
+ Eq]
+theorem IndependentDuodenary.register_translation_vertex_invariant : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r) (i : Fin r),
+  IndependentDuodenary.keyVertex (IndependentDuodenary.registerTranslate h q i) =
+    IndependentDuodenary.keyVertex (q i) :=
+fun {r} h q i => rfl
+'IndependentDuodenary.register_translation_vertex_invariant' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_translation_vertex_invariant: [IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.keyVertex,
+ IndependentDuodenary.registerTranslate,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ IndependentDuodenary.KeyComplement,
+ Prod,
+ Fin,
+ Eq,
+ rfl,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.register_translation_phase_invariant : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.registerPhases (IndependentDuodenary.registerTranslate h q) =
+    IndependentDuodenary.registerPhases q :=
+fun {r} h q => rfl
+'IndependentDuodenary.register_translation_phase_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_translation_phase_invariant: [IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.registerTranslate,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ IndependentDuodenary.registerPhases,
+ Eq,
+ rfl]
+theorem IndependentDuodenary.register_cycle_iterate : ∀ {r : ℕ} (n : ℕ) (q : IndependentDuodenary.RegisterState r)
+  (i : Fin r), IndependentDuodenary.registerCycle^[n] q i = IndependentDuodenary.keyCoordinateCycle^[n] (q i) :=
+fun {r} n q i =>
+  Nat.recAux (Eq.refl (IndependentDuodenary.registerCycle^[0] q i))
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg (fun _a => _a i = IndependentDuodenary.keyCoordinateCycle^[n + 1] (q i))
+            (Function.iterate_succ_apply' IndependentDuodenary.registerCycle n q)))
+        (Eq.mpr
+          (id
+            (congrArg (fun _a => IndependentDuodenary.registerCycle (IndependentDuodenary.registerCycle^[n] q) i = _a)
+              (Function.iterate_succ_apply' IndependentDuodenary.keyCoordinateCycle n (q i))))
+          (congrArg IndependentDuodenary.keyCoordinateCycle ih)))
+    n
+'IndependentDuodenary.register_cycle_iterate' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_cycle_iterate: [Function.iterate_succ_apply',
+ Eq.mpr,
+ Nat.recAux,
+ IndependentDuodenary.registerCycle,
+ congrArg,
+ IndependentDuodenary.RepresentedKey,
+ id,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ instAddNat,
+ Eq.refl,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ Nat.succ,
+ Eq]
+theorem IndependentDuodenary.register_cycle_period_iff : ∀ {r : ℕ},
+  0 < r →
+    ∀ (n : ℕ), (∀ (q : IndependentDuodenary.RegisterState r), IndependentDuodenary.registerCycle^[n] q = q) ↔ 12 ∣ n :=
+fun {r} hr n =>
+  {
+    mp := fun h =>
+      (IndependentDuodenary.key_cycle_period_iff n).mp fun q =>
+        let_fun heq := congrFun (h fun x => q) ⟨0, hr⟩;
+        Eq.mp (congrArg (fun x => x = q) (IndependentDuodenary.register_cycle_iterate n (fun x => q) ⟨0, hr⟩)) heq,
+    mpr := fun h q =>
+      funext fun i =>
+        Eq.mpr (id (congrArg (fun _a => _a = q i) (IndependentDuodenary.register_cycle_iterate n q i)))
+          ((IndependentDuodenary.key_cycle_period_iff n).mpr h (q i)) }
+'IndependentDuodenary.register_cycle_period_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_cycle_period_iff: [Iff.mpr,
+ Eq.mpr,
+ Dvd.dvd,
+ IndependentDuodenary.registerCycle,
+ congrArg,
+ IndependentDuodenary.RepresentedKey,
+ Eq.mp,
+ Fin.mk,
+ id,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ IndependentDuodenary.register_cycle_iterate,
+ funext,
+ Iff,
+ Nat.instDvd,
+ congrFun,
+ Nat,
+ IndependentDuodenary.key_cycle_period_iff,
+ LT.lt,
+ Iff.intro,
+ Iff.mp,
+ instLTNat,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ Eq,
+ letFun]
+theorem IndependentDuodenary.register_empty_cycle_period : ∀ (n : ℕ) (q : IndependentDuodenary.RegisterState 0),
+  IndependentDuodenary.registerCycle^[n] q = q :=
+fun n q => Subsingleton.elim (IndependentDuodenary.registerCycle^[n] q) q
+'IndependentDuodenary.register_empty_cycle_period' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_empty_cycle_period: [IndependentDuodenary.registerCycle,
+ Pi.uniqueOfIsEmpty,
+ IndependentDuodenary.RepresentedKey,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ Unique.instSubsingleton,
+ Nat,
+ Fin.isEmpty',
+ Subsingleton.elim,
+ OfNat.ofNat,
+ Fin,
+ Eq]
+theorem IndependentDuodenary.key_phase_from_one_hot : ∀ (q : IndependentDuodenary.RepresentedKey) (a : ZMod 12),
+  q.complementIntercept = IndependentDuodenary.keyOneHot a →
+    IndependentDuodenary.keyPhaseLabel (IndependentDuodenary.keyVertex q) = a :=
+fun q a ha =>
+  let_fun this :=
+    Eq.mpr (id (congrArg (fun _a => (∑ i : ZMod 12, if _a i = 1 then -i else 0) = a) ha))
+      (IndependentDuodenary.key_one_hot_phase a);
+  this
+'IndependentDuodenary.key_phase_from_one_hot' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_phase_from_one_hot: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ Finset.univ,
+ ZMod.commRing,
+ Ring.toNeg,
+ congrArg,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ IndependentDuodenary.RepresentedKey,
+ CommSemiring.toCommMonoidWithZero,
+ IndependentDuodenary.keyVertex,
+ id,
+ IndependentDuodenary.keyOneHot,
+ instOfNatNat,
+ Field.toSemifield,
+ ZMod,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ Semifield.toDivisionSemiring,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ IndependentDuodenary.keyPhaseLabel,
+ Nat.fact_prime_two,
+ Nat,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ DivisionSemiring.toSemiring,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ Zero.toOfNat0,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.key_one_hot_phase,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Eq,
+ Finset.sum,
+ letFun,
+ Neg.neg,
+ IndependentDuodenary.KeyMetadata,
+ ite]
+theorem IndependentDuodenary.key_cycle_one_hot : ∀ (q : IndependentDuodenary.RepresentedKey) (a : ZMod 12),
+  q.complementIntercept = IndependentDuodenary.keyOneHot a →
+    (IndependentDuodenary.keyCoordinateCycle q).complementIntercept = IndependentDuodenary.keyOneHot (a + 1) :=
+fun q a ha =>
+  funext fun i =>
+    of_eq_true
+      (Eq.trans
+        (congr
+          (congrArg
+            (fun x =>
+              Eq
+                ({ metadata := q.metadata, binaryIntercept := q.binaryIntercept,
+                      complementIntercept := x }.complementIntercept
+                  i))
+            (funext fun i =>
+              Eq.trans (congrFun ha (i + 1))
+                (ite_congr (congrArg (fun x => x = 0) (add_comm (i + 1) a)) (fun a => Eq.refl 1) fun a => Eq.refl 0)))
+          (ite_congr (congrArg (fun x => x = 0) (add_left_comm i a 1)) (fun a => Eq.refl 1) fun a => Eq.refl 0))
+        (eq_self (if a + (i + 1) = 0 then 1 else 0)))
+'IndependentDuodenary.key_cycle_one_hot' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_one_hot: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ add_left_comm,
+ congrArg,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ IndependentDuodenary.RepresentedKey,
+ CommSemiring.toCommMonoidWithZero,
+ IndependentDuodenary.ExactKey.mk,
+ Distrib.toAdd,
+ IndependentDuodenary.keyOneHot,
+ instOfNatNat,
+ add_comm,
+ Field.toSemifield,
+ ZMod,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ funext,
+ instHAdd,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ Semifield.toDivisionSemiring,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ congrFun,
+ Nat.fact_prime_two,
+ Nat,
+ congr,
+ Semifield.toCommGroupWithZero,
+ True,
+ eq_self,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ DivisionSemiring.toSemiring,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.ExactKey.binaryIntercept,
+ AddCommSemigroup.toAddCommMagma,
+ ite_congr,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ AddCommMonoid.toAddCommSemigroup,
+ IndependentDuodenary.keyCoordinateCycle,
+ Eq,
+ IndependentDuodenary.ExactKey.metadata,
+ Not,
+ Eq.trans,
+ AddCommMagma.toAdd,
+ IndependentDuodenary.KeyMetadata,
+ ite]
+theorem IndependentDuodenary.phase_register_regular : ∀ {r : ℕ} (a : IndependentDuodenary.RegisterPhase r),
+  IndependentDuodenary.PhaseRegular (IndependentDuodenary.phaseRegisterState a) :=
+fun {r} a i => Exists.intro (a i) rfl
+'IndependentDuodenary.phase_register_regular' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES phase_register_regular: [IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.phaseRegisterState,
+ IndependentDuodenary.PhaseRegular,
+ IndependentDuodenary.keyOneHot,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ ZMod,
+ Nat,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ Exists.intro,
+ IndependentDuodenary.KeyComplement,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ rfl,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.phase_register_label : ∀ {r : ℕ} (a : IndependentDuodenary.RegisterPhase r),
+  IndependentDuodenary.registerPhases (IndependentDuodenary.phaseRegisterState a) = a :=
+fun {r} a => funext fun i => IndependentDuodenary.key_one_hot_phase (a i)
+'IndependentDuodenary.phase_register_label' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES phase_register_label: [IndependentDuodenary.phaseRegisterState,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ ZMod,
+ funext,
+ Nat,
+ IndependentDuodenary.key_one_hot_phase,
+ IndependentDuodenary.registerPhases,
+ OfNat.ofNat,
+ Fin,
+ Eq]
+theorem IndependentDuodenary.register_regular_cycle : ∀ {r : ℕ} (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q → IndependentDuodenary.PhaseRegular (IndependentDuodenary.registerCycle q) :=
+fun {r} q hq i =>
+  Exists.casesOn (hq i) fun a ha => Exists.intro (a + 1) (IndependentDuodenary.key_cycle_one_hot (q i) a ha)
+'IndependentDuodenary.register_regular_cycle' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_regular_cycle: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.registerCycle,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.PhaseRegular,
+ Exists,
+ Distrib.toAdd,
+ IndependentDuodenary.keyOneHot,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.RegisterState,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Exists.casesOn,
+ HAdd.hAdd,
+ Nat,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ Exists.intro,
+ IndependentDuodenary.key_cycle_one_hot,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.KeyComplement,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.register_regular_translation : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    IndependentDuodenary.PhaseRegular (IndependentDuodenary.registerTranslate h q) :=
+fun {r} h q hq => hq
+'IndependentDuodenary.register_regular_translation' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_regular_translation: [IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ IndependentDuodenary.registerTranslate,
+ IndependentDuodenary.RegisterState,
+ Nat]
+theorem IndependentDuodenary.register_regular_step : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q → IndependentDuodenary.PhaseRegular (IndependentDuodenary.registerStep h q) :=
+fun {r} h q hq =>
+  IndependentDuodenary.register_regular_translation h (IndependentDuodenary.registerCycle q)
+    (IndependentDuodenary.register_regular_cycle q hq)
+'IndependentDuodenary.register_regular_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_regular_step: [IndependentDuodenary.registerStep,
+ IndependentDuodenary.registerCycle,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ IndependentDuodenary.register_regular_cycle,
+ IndependentDuodenary.RegisterState,
+ IndependentDuodenary.register_regular_translation,
+ Nat]
+theorem IndependentDuodenary.register_regular_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    IndependentDuodenary.PhaseRegular (IndependentDuodenary.projectRegisters select q) :=
+fun {r s} select q hq i => hq (select i)
+'IndependentDuodenary.register_regular_projection' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_regular_projection: [IndependentDuodenary.PhaseRegular,
+ IndependentDuodenary.projectRegisters,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ Fin]
+theorem IndependentDuodenary.register_cycle_phase : ∀ {r : ℕ} (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    IndependentDuodenary.registerPhases (IndependentDuodenary.registerCycle q) =
+      IndependentDuodenary.phaseAdvance (IndependentDuodenary.registerPhases q) :=
+fun {r} q hq =>
+  funext fun i =>
+    Exists.casesOn (hq i) fun a ha =>
+      let_fun this :=
+        Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                IndependentDuodenary.keyPhaseLabel
+                    (IndependentDuodenary.keyVertex (IndependentDuodenary.keyCoordinateCycle (q i))) =
+                  _a + 1)
+              (IndependentDuodenary.key_phase_from_one_hot (q i) a ha)))
+          (Eq.mpr
+            (id
+              (congrArg (fun _a => _a = a + 1)
+                (IndependentDuodenary.key_phase_from_one_hot (IndependentDuodenary.keyCoordinateCycle (q i)) (a + 1)
+                  (IndependentDuodenary.key_cycle_one_hot (q i) a ha))))
+            (Eq.refl (a + 1)));
+      this
+'IndependentDuodenary.register_cycle_phase' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_cycle_phase: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.registerCycle,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.PhaseRegular,
+ Exists,
+ IndependentDuodenary.keyVertex,
+ id,
+ Distrib.toAdd,
+ IndependentDuodenary.keyOneHot,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.key_phase_from_one_hot,
+ ZMod,
+ IndependentDuodenary.phaseAdvance,
+ IndependentDuodenary.RegisterState,
+ funext,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Exists.casesOn,
+ HAdd.hAdd,
+ IndependentDuodenary.keyPhaseLabel,
+ Nat,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ IndependentDuodenary.key_cycle_one_hot,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.registerPhases,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ Eq,
+ letFun,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.register_step_phase : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    IndependentDuodenary.registerPhases (IndependentDuodenary.registerStep h q) =
+      IndependentDuodenary.phaseAdvance (IndependentDuodenary.registerPhases q) :=
+fun {r} h q hq => IndependentDuodenary.register_cycle_phase q hq
+'IndependentDuodenary.register_step_phase' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_step_phase: [IndependentDuodenary.registerStep,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.phaseAdvance,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ IndependentDuodenary.registerPhases,
+ Eq,
+ IndependentDuodenary.register_cycle_phase]
+theorem IndependentDuodenary.register_step_regular_iterate : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    IndependentDuodenary.PhaseRegular ((IndependentDuodenary.registerStep h)^[n] q) :=
+fun {r} h n q hq =>
+  Nat.recAux hq
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg (fun _a => IndependentDuodenary.PhaseRegular _a)
+            (Function.iterate_succ_apply' (IndependentDuodenary.registerStep h) n q)))
+        (IndependentDuodenary.register_regular_step h ((IndependentDuodenary.registerStep h)^[n] q) ih))
+    n
+'IndependentDuodenary.register_step_regular_iterate' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_step_regular_iterate: [Function.iterate_succ_apply',
+ Eq.mpr,
+ Nat.recAux,
+ IndependentDuodenary.registerStep,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ id,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ instHAdd,
+ IndependentDuodenary.register_regular_step,
+ HAdd.hAdd,
+ Nat,
+ instAddNat,
+ OfNat.ofNat,
+ Nat.succ,
+ Eq]
+theorem IndependentDuodenary.register_step_phase_iterate : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    IndependentDuodenary.registerPhases ((IndependentDuodenary.registerStep h)^[n] q) = fun i =>
+      IndependentDuodenary.registerPhases q i + ↑n :=
+fun {r} h n q hq =>
+  Nat.recAux
+    (of_eq_true
+      (Eq.trans
+        (congrArg (Eq (IndependentDuodenary.registerPhases q))
+          (funext fun i =>
+            Eq.trans (congrArg (HAdd.hAdd (IndependentDuodenary.registerPhases q i)) Nat.cast_zero)
+              (add_zero (IndependentDuodenary.registerPhases q i))))
+        (eq_self (IndependentDuodenary.registerPhases q))))
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              IndependentDuodenary.registerPhases _a = fun i => IndependentDuodenary.registerPhases q i + ↑(n + 1))
+            (Function.iterate_succ_apply' (IndependentDuodenary.registerStep h) n q)))
+        (Eq.mpr
+          (id
+            (congrArg (fun _a => _a = fun i => IndependentDuodenary.registerPhases q i + ↑(n + 1))
+              (IndependentDuodenary.register_step_phase h ((IndependentDuodenary.registerStep h)^[n] q)
+                (IndependentDuodenary.register_step_regular_iterate h n q hq))))
+          (Eq.mpr
+            (id
+              (congrArg
+                (fun _a =>
+                  IndependentDuodenary.phaseAdvance _a = fun i => IndependentDuodenary.registerPhases q i + ↑(n + 1))
+                ih))
+            (funext fun i =>
+              of_eq_true
+                (Eq.trans
+                  (congr (congrArg Eq (add_assoc (IndependentDuodenary.registerPhases q i) (↑n) 1))
+                    (congrArg (HAdd.hAdd (IndependentDuodenary.registerPhases q i))
+                      (Eq.trans (Nat.cast_add n 1) (congrArg (HAdd.hAdd ↑n) Nat.cast_one))))
+                  (eq_self (IndependentDuodenary.registerPhases q i + (↑n + 1))))))))
+    n
+'IndependentDuodenary.register_step_phase_iterate' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_step_phase_iterate: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Function.iterate_succ_apply',
+ Eq.mpr,
+ Nat.recAux,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddMonoid.toAddSemigroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ add_assoc,
+ AddMonoid.toAddZeroClass,
+ AddMonoid.toZero,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ id,
+ Distrib.toAdd,
+ AddMonoidWithOne.toNatCast,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.phaseAdvance,
+ IndependentDuodenary.RegisterState,
+ Nat.cast_add,
+ AddMonoidWithOne.toOne,
+ funext,
+ instHAdd,
+ AddSemigroup.toAdd,
+ CommRing.toCommSemiring,
+ IndependentDuodenary.register_step_phase,
+ HAdd.hAdd,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ Zero.toOfNat0,
+ IndependentDuodenary.register_step_regular_iterate,
+ IndependentDuodenary.registerPhases,
+ Nat.cast_zero,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ OfNat.ofNat,
+ Fin,
+ Nat.succ,
+ Eq,
+ Nat.cast_one,
+ Ring.toAddGroupWithOne,
+ Eq.trans]
+theorem IndependentDuodenary.register_step_relative_invariant : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    ∀ (i j : Fin r),
+      IndependentDuodenary.relativePhases
+          (IndependentDuodenary.registerPhases ((IndependentDuodenary.registerStep h)^[n] q)) i j =
+        IndependentDuodenary.relativePhases (IndependentDuodenary.registerPhases q) i j :=
+fun {r} h n q hq i j =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          IndependentDuodenary.relativePhases _a i j =
+            IndependentDuodenary.relativePhases (IndependentDuodenary.registerPhases q) i j)
+        (IndependentDuodenary.register_step_phase_iterate h n q hq)))
+    (of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x = IndependentDuodenary.registerPhases q j - IndependentDuodenary.registerPhases q i)
+          (add_sub_add_right_eq_sub (IndependentDuodenary.registerPhases q j) (IndependentDuodenary.registerPhases q i)
+            ↑n))
+        (eq_self (IndependentDuodenary.registerPhases q j - IndependentDuodenary.registerPhases q i))))
+'IndependentDuodenary.register_step_relative_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_step_relative_invariant: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ Ring.toSub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ IndependentDuodenary.RegisterTranslation,
+ HSub.hSub,
+ IndependentDuodenary.PhaseRegular,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.relativePhases,
+ IndependentDuodenary.RegisterState,
+ SubNegMonoid.toSub,
+ instHAdd,
+ CommRing.toCommSemiring,
+ instHSub,
+ AddGroup.toSubNegMonoid,
+ HAdd.hAdd,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.register_step_phase_iterate,
+ IndependentDuodenary.registerPhases,
+ SubNegMonoid.toAddMonoid,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Fin,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ add_sub_add_right_eq_sub,
+ Eq.trans]
+theorem IndependentDuodenary.register_step_iterate_formula : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (q : IndependentDuodenary.RegisterState r) (i : Fin r),
+  (IndependentDuodenary.registerStep h)^[n] q i =
+    IndependentDuodenary.translateKey (n • h i) (IndependentDuodenary.keyCoordinateCycle^[n] (q i)) :=
+fun {r} h n q i =>
+  Nat.recAux
+    (of_eq_true
+      (Eq.trans
+        (congrArg (Eq (q i))
+          (Eq.trans (congrArg (fun x => IndependentDuodenary.translateKey x (q i)) (zero_smul ℕ (h i)))
+            (IndependentDuodenary.translateKey_zero (q i))))
+        (eq_self (q i))))
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              _a i =
+                IndependentDuodenary.translateKey ((n + 1) • h i)
+                  (IndependentDuodenary.keyCoordinateCycle^[n + 1] (q i)))
+            (Function.iterate_succ_apply' (IndependentDuodenary.registerStep h) n q)))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                IndependentDuodenary.registerStep h ((IndependentDuodenary.registerStep h)^[n] q) i =
+                  IndependentDuodenary.translateKey ((n + 1) • h i) _a)
+              (Function.iterate_succ_apply' IndependentDuodenary.keyCoordinateCycle n (q i))))
+          (let_fun this :=
+            Eq.mpr
+              (id
+                (congrArg
+                  (fun _a =>
+                    IndependentDuodenary.translateKey (h i) (IndependentDuodenary.keyCoordinateCycle _a) =
+                      IndependentDuodenary.translateKey ((n + 1) • h i)
+                        (IndependentDuodenary.keyCoordinateCycle (IndependentDuodenary.keyCoordinateCycle^[n] (q i))))
+                  ih))
+              (Eq.mpr
+                (id
+                  (congrArg
+                    (fun _a =>
+                      IndependentDuodenary.translateKey (h i) _a =
+                        IndependentDuodenary.translateKey ((n + 1) • h i)
+                          (IndependentDuodenary.keyCoordinateCycle (IndependentDuodenary.keyCoordinateCycle^[n] (q i))))
+                    (IndependentDuodenary.key_cycle_commutes_translation (n • h i)
+                      (IndependentDuodenary.keyCoordinateCycle^[n] (q i)))))
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        _a =
+                          IndependentDuodenary.translateKey ((n + 1) • h i)
+                            (IndependentDuodenary.keyCoordinateCycle
+                              (IndependentDuodenary.keyCoordinateCycle^[n] (q i))))
+                      (IndependentDuodenary.translateKey_add (n • h i) (h i)
+                        (IndependentDuodenary.keyCoordinateCycle (IndependentDuodenary.keyCoordinateCycle^[n] (q i))))))
+                  (of_eq_true
+                    (Eq.trans
+                      (congr
+                        (congrArg
+                          (fun x =>
+                            Eq
+                              (IndependentDuodenary.translateKey x
+                                (IndependentDuodenary.keyCoordinateCycle
+                                  (IndependentDuodenary.keyCoordinateCycle^[n] (q i)))))
+                          (add_comm (n • h i) (h i)))
+                        (congrArg
+                          (fun x =>
+                            IndependentDuodenary.translateKey x
+                              (IndependentDuodenary.keyCoordinateCycle
+                                (IndependentDuodenary.keyCoordinateCycle^[n] (q i))))
+                          (Eq.trans (succ_nsmul (h i) n) (add_comm (n • h i) (h i)))))
+                      (eq_self
+                        (IndependentDuodenary.translateKey (h i + n • h i)
+                          (IndependentDuodenary.keyCoordinateCycle
+                            (IndependentDuodenary.keyCoordinateCycle^[n] (q i)))))))));
+          this)))
+    n
+'IndependentDuodenary.register_step_iterate_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_step_iterate_formula: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Function.iterate_succ_apply',
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ Nat.recAux,
+ instHSMul,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Pi.addSemigroup,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddMonoid.toAddSemigroup,
+ congrArg,
+ SMulWithZero.toSMulZeroClass,
+ AddMonoid.toAddZeroClass,
+ AddMonoid.toZero,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.key_cycle_commutes_translation,
+ IndependentDuodenary.RepresentedKey,
+ Field.toDivisionRing,
+ id,
+ Distrib.toAdd,
+ DivisionRing.toRing,
+ instOfNatNat,
+ Nat.iterate,
+ add_comm,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.translateKey,
+ IndependentDuodenary.RegisterState,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ instHAdd,
+ AddSemigroup.toAdd,
+ zero_smul,
+ ZMod.instField,
+ Pi.instAdd,
+ HAdd.hAdd,
+ Pi.addZeroClass,
+ Pi.addCommSemigroup,
+ Nat.fact_prime_two,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ AddMonoid.toNatSMul,
+ Zero.toOfNat0,
+ IndependentDuodenary.KeyComplement,
+ HSMul.hSMul,
+ SMulZeroClass.toSMul,
+ AddCommSemigroup.toAddCommMagma,
+ IndependentDuodenary.translateKey_zero,
+ Pi.addMonoid,
+ AddMonoidWithOne.toAddMonoid,
+ Nat.instLinearOrderedCommMonoidWithZero,
+ LinearOrderedCommMonoidWithZero.toZero,
+ IndependentDuodenary.translateKey_add,
+ OfNat.ofNat,
+ AddCommMonoid.toAddCommSemigroup,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ AddZeroClass.toAdd,
+ Nat.succ,
+ Eq,
+ Ring.toAddGroupWithOne,
+ letFun,
+ Eq.trans,
+ AddCommMagma.toAdd,
+ IndependentDuodenary.KeyMetadata,
+ succ_nsmul,
+ AddMonoid.natSMulWithZero]
+theorem IndependentDuodenary.register_step_metadata_invariant : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (q : IndependentDuodenary.RegisterState r) (i : Fin r),
+  ((IndependentDuodenary.registerStep h)^[n] q i).metadata = (q i).metadata :=
+fun {r} h n q i =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => _a.metadata = (q i).metadata) (IndependentDuodenary.register_step_iterate_formula h n q i)))
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => (IndependentDuodenary.translateKey (n • h i) _a).metadata = (q i).metadata)
+          (IndependentDuodenary.key_cycle_iterate n (q i))))
+      (Eq.refl
+        (IndependentDuodenary.translateKey (n • h i)
+            { metadata := (q i).metadata, binaryIntercept := (q i).binaryIntercept,
+              complementIntercept := fun i_1 => (q i).complementIntercept (i_1 + ↑n) }).metadata))
+'IndependentDuodenary.register_step_metadata_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_step_metadata_invariant: [IndependentDuodenary.register_step_iterate_formula,
+ Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ instHSMul,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.RepresentedKey,
+ Field.toDivisionRing,
+ id,
+ IndependentDuodenary.ExactKey.mk,
+ Distrib.toAdd,
+ DivisionRing.toRing,
+ instOfNatNat,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.translateKey,
+ IndependentDuodenary.RegisterState,
+ instHAdd,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ Pi.instAdd,
+ HAdd.hAdd,
+ Nat.fact_prime_two,
+ Nat,
+ IndependentDuodenary.key_cycle_iterate,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ AddMonoid.toNatSMul,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ HSMul.hSMul,
+ IndependentDuodenary.ExactKey.binaryIntercept,
+ Pi.addMonoid,
+ AddMonoidWithOne.toAddMonoid,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ Eq,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.ExactKey.metadata,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.register_step_period_twelve : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (q : IndependentDuodenary.RegisterState r), (IndependentDuodenary.registerStep h)^[12] q = q :=
+fun {r} h q =>
+  funext fun i =>
+    Eq.mpr (id (congrArg (fun _a => _a = q i) (IndependentDuodenary.register_step_iterate_formula h 12 q i)))
+      (Eq.mpr
+        (id
+          (congrArg (fun _a => IndependentDuodenary.translateKey (12 • h i) _a = q i)
+            (IndependentDuodenary.key_cycle_period_twelve (q i))))
+        (let_fun htwelve :=
+          let_fun this :=
+            Eq.mpr (id (congrArg (fun _a => _a = 0) (mul_nsmul (h i) 6 2)))
+              (Eq.mpr (id (congrArg (fun _a => _a = 0) (two_nsmul (6 • h i))))
+                (IndependentDuodenary.binary_vector_double_zero (6 • h i)));
+          this;
+        Eq.mpr (id (congrArg (fun _a => IndependentDuodenary.translateKey _a (q i) = q i) htwelve))
+          (Eq.mpr (id (congrArg (fun _a => _a = q i) (IndependentDuodenary.translateKey_zero (q i)))) (Eq.refl (q i)))))
+'IndependentDuodenary.register_step_period_twelve' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_step_period_twelve: [IndependentDuodenary.register_step_iterate_formula,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ instHSMul,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ congrArg,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.key_cycle_period_twelve,
+ Field.toDivisionRing,
+ id,
+ Distrib.toAdd,
+ Pi.instZero,
+ DivisionRing.toRing,
+ instMulNat,
+ instOfNatNat,
+ Nat.iterate,
+ Field.toSemifield,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.translateKey,
+ mul_nsmul,
+ IndependentDuodenary.RegisterState,
+ funext,
+ instHAdd,
+ ZMod.instField,
+ Pi.instAdd,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Pi.addZeroClass,
+ Nat.fact_prime_two,
+ Nat,
+ AddZeroClass.toZero,
+ Semifield.toCommGroupWithZero,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ AddMonoid.toNatSMul,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ HSMul.hSMul,
+ IndependentDuodenary.translateKey_zero,
+ Pi.addMonoid,
+ AddMonoidWithOne.toAddMonoid,
+ IndependentDuodenary.binary_vector_double_zero,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ letFun,
+ IndependentDuodenary.KeyMetadata,
+ instHMul,
+ two_nsmul]
+theorem IndependentDuodenary.register_regular_orbit_no_collapse : ∀ {r : ℕ},
+  Fin r →
+    ∀ (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
+      IndependentDuodenary.PhaseRegular q →
+        ∀ (n m : ℕ),
+          (IndependentDuodenary.registerStep h)^[n] q = (IndependentDuodenary.registerStep h)^[m] q → ↑n = ↑m :=
+fun {r} base h q hq n m heq =>
+  let_fun hp := congrFun (congrArg IndependentDuodenary.registerPhases heq) base;
+  add_left_cancel
+    (Eq.mp
+      (congrArg (fun _a => (fun i => IndependentDuodenary.registerPhases q i + ↑n) base = _a base)
+        (IndependentDuodenary.register_step_phase_iterate h m q hq))
+      (Eq.mp
+        (congrArg
+          (fun _a => _a base = IndependentDuodenary.registerPhases ((IndependentDuodenary.registerStep h)^[m] q) base)
+          (IndependentDuodenary.register_step_phase_iterate h n q hq))
+        hp))
+'IndependentDuodenary.register_regular_orbit_no_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_regular_orbit_no_collapse: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ IsCancelAdd.toIsLeftCancelAdd,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ AddCancelMonoid.toIsCancelAdd,
+ Eq.mp,
+ Distrib.toAdd,
+ instOfNatNat,
+ add_left_cancel,
+ IndependentDuodenary.RegisterPhase,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.RegisterState,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ congrFun,
+ Nat,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.register_step_phase_iterate,
+ IndependentDuodenary.registerPhases,
+ CommRing.toRing,
+ AddGroup.toAddCancelMonoid,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Ring.toAddGroupWithOne,
+ letFun]
+theorem IndependentDuodenary.register_step_period_iff : ∀ {r : ℕ},
+  0 < r →
+    ∀ (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ),
+      (∀ (q : IndependentDuodenary.RegisterState r), (IndependentDuodenary.registerStep h)^[n] q = q) ↔ 12 ∣ n :=
+fun {r} hr h n =>
+  {
+    mp := fun hp =>
+      let q := IndependentDuodenary.phaseRegisterState 0;
+      let_fun heq := hp q;
+      let_fun hc :=
+        IndependentDuodenary.register_regular_orbit_no_collapse ⟨0, hr⟩ h q
+          (IndependentDuodenary.phase_register_regular 0) n 0 heq;
+      (ZMod.natCast_zmod_eq_zero_iff_dvd n 12).mp (Eq.mp (congrArg (Eq ↑n) Nat.cast_zero) hc),
+    mpr := fun a =>
+      Exists.casesOn (motive := fun x =>
+        ∀ (q : IndependentDuodenary.RegisterState r), (IndependentDuodenary.registerStep h)^[n] q = q) a fun k h_1 =>
+        Eq.ndrec (motive := fun n =>
+          ∀ (q : IndependentDuodenary.RegisterState r), (IndependentDuodenary.registerStep h)^[n] q = q)
+          (fun q =>
+            let_fun hid := funext (IndependentDuodenary.register_step_period_twelve h);
+            Eq.mpr
+              (id (congrArg (fun _a => _a q = q) (Function.iterate_mul (IndependentDuodenary.registerStep h) 12 k)))
+              (Eq.mpr (id (congrArg (fun _a => _a^[k] q = q) hid))
+                (of_eq_true (Eq.trans (congrArg (fun x => x q = q) (Function.iterate_id k)) (eq_self q)))))
+          (Eq.symm h_1) }
+'IndependentDuodenary.register_step_period_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_step_period_iff: [Function.iterate_id,
+ Semiring.toNatCast,
+ Eq.mpr,
+ Dvd.dvd,
+ HMul.hMul,
+ IndependentDuodenary.registerStep,
+ IndependentDuodenary.phaseRegisterState,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toZero,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RegisterTranslation,
+ CommSemiring.toCommMonoidWithZero,
+ Eq.mp,
+ Fin.mk,
+ id,
+ Pi.instZero,
+ AddMonoidWithOne.toNatCast,
+ instMulNat,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.phase_register_regular,
+ IndependentDuodenary.register_regular_orbit_no_collapse,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.RegisterState,
+ funext,
+ CommRing.toCommSemiring,
+ Iff,
+ Exists.casesOn,
+ Function.iterate_mul,
+ Nat.instDvd,
+ CommMonoidWithZero.toZero,
+ Nat,
+ LT.lt,
+ True,
+ Iff.intro,
+ eq_self,
+ Iff.mp,
+ of_eq_true,
+ Eq.ndrec,
+ Zero.toOfNat0,
+ Nat.cast_zero,
+ AddMonoidWithOne.toAddMonoid,
+ instLTNat,
+ CommRing.toRing,
+ ZMod.natCast_zmod_eq_zero_iff_dvd,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Eq,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.register_step_period_twelve,
+ letFun,
+ Eq.trans,
+ instHMul]
+theorem IndependentDuodenary.register_regular_orbit_injective : ∀ {r : ℕ},
+  Fin r →
+    ∀ (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
+      IndependentDuodenary.PhaseRegular q → Function.Injective fun n => (IndependentDuodenary.registerStep h)^[↑n] q :=
+fun {r} base h q hq ⦃n m⦄ heq =>
+  let_fun hp := IndependentDuodenary.register_regular_orbit_no_collapse base h q hq (↑n) (↑m) heq;
+  let_fun hv := congrArg ZMod.val hp;
+  Fin.ext
+    (Eq.mp
+      (congr (congrArg Eq (Eq.trans (ZMod.val_natCast ↑n) (Nat.mod_eq_of_lt n.isLt)))
+        (Eq.trans (ZMod.val_natCast ↑m) (Nat.mod_eq_of_lt m.isLt)))
+      hv)
+'IndependentDuodenary.register_regular_orbit_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_regular_orbit_injective: [Semiring.toNatCast,
+ IndependentDuodenary.registerStep,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ Fin.isLt,
+ Eq.mp,
+ Nat.instMod,
+ instHMod,
+ instOfNatNat,
+ Fin.ext,
+ Nat.mod_eq_of_lt,
+ IndependentDuodenary.register_regular_orbit_no_collapse,
+ Fin.val,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.RegisterState,
+ HMod.hMod,
+ CommRing.toCommSemiring,
+ Nat,
+ ZMod.val_natCast,
+ congr,
+ Function.Injective,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ letFun,
+ Eq.trans,
+ ZMod.val]
+theorem IndependentDuodenary.relative_phases_iff_common_offset : ∀ {r : ℕ},
+  Fin r →
+    ∀ (a b : IndependentDuodenary.RegisterPhase r),
+      (∀ (i j : Fin r), IndependentDuodenary.relativePhases b i j = IndependentDuodenary.relativePhases a i j) ↔
+        ∃ c, ∀ (i : Fin r), b i = a i + c :=
+fun {r} base a b =>
+  {
+    mp := fun h =>
+      Exists.intro (b base - a base) fun i =>
+        let_fun hi := h base i;
+        id
+          (fun hi =>
+            Trans.trans
+              (Trans.trans
+                (Eq.trans (Mathlib.Tactic.Abel.term_atomg (b i))
+                  (Eq.symm
+                    (Mathlib.Tactic.Abel.subst_into_addg (b i - b base) (b base)
+                      (Mathlib.Tactic.Abel.termg 1 (b i) (Mathlib.Tactic.Abel.termg (-1) (b base) 0))
+                      (Mathlib.Tactic.Abel.termg 1 (b base) 0) (Mathlib.Tactic.Abel.termg 1 (b i) 0)
+                      (Mathlib.Tactic.Abel.unfold_sub (b i) (b base)
+                        (Mathlib.Tactic.Abel.termg 1 (b i) (Mathlib.Tactic.Abel.termg (-1) (b base) 0))
+                        (Mathlib.Tactic.Abel.subst_into_addg (b i) (-b base) (Mathlib.Tactic.Abel.termg 1 (b i) 0)
+                          (Mathlib.Tactic.Abel.termg (-1) (b base) 0)
+                          (Mathlib.Tactic.Abel.termg 1 (b i) (Mathlib.Tactic.Abel.termg (-1) (b base) 0))
+                          (Mathlib.Tactic.Abel.term_atomg (b i))
+                          (Mathlib.Tactic.Abel.subst_into_negg (b base) (Mathlib.Tactic.Abel.termg 1 (b base) 0)
+                            (Mathlib.Tactic.Abel.termg (-1) (b base) 0) (Mathlib.Tactic.Abel.term_atomg (b base))
+                            (Mathlib.Tactic.Abel.term_neg 1 (b base) 0 (-1) 0 (Eq.refl (-1)) neg_zero))
+                          (Mathlib.Tactic.Abel.term_add_constg 1 (b i) 0 (Mathlib.Tactic.Abel.termg (-1) (b base) 0)
+                            (Mathlib.Tactic.Abel.termg (-1) (b base) 0)
+                            (zero_add (Mathlib.Tactic.Abel.termg (-1) (b base) 0)))))
+                      (Mathlib.Tactic.Abel.term_atomg (b base))
+                      (Mathlib.Tactic.Abel.term_add_constg 1 (b i) (Mathlib.Tactic.Abel.termg (-1) (b base) 0)
+                        (Mathlib.Tactic.Abel.termg 1 (b base) 0) 0
+                        (Eq.trans
+                          (Mathlib.Tactic.Abel.term_add_termg (-1) (b base) 0 1 0 0 0
+                            (Mathlib.Meta.NormNum.IsNat.to_eq
+                              (Mathlib.Meta.NormNum.IsInt.to_isNat
+                                (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                                  (Mathlib.Meta.NormNum.isInt_neg (Eq.refl Neg.neg)
+                                    (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                      (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                                    (Eq.refl (Int.negOfNat 1)))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                                  (Eq.refl (Int.ofNat 0))))
+                              (Eq.refl 0))
+                            (zero_add 0))
+                          (Mathlib.Tactic.Abel.zero_termg (b base) 0))))))
+                (Eq.mpr (id (congrArg (fun _a => _a + b base = a i - a base + b base) hi))
+                  (Eq.refl (a i - a base + b base))))
+              (Eq.trans
+                (Mathlib.Tactic.Abel.subst_into_addg (a i - a base) (b base)
+                  (Mathlib.Tactic.Abel.termg 1 (a i) (Mathlib.Tactic.Abel.termg (-1) (a base) 0))
+                  (Mathlib.Tactic.Abel.termg 1 (b base) 0)
+                  (Mathlib.Tactic.Abel.termg 1 (a i)
+                    (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0)))
+                  (Mathlib.Tactic.Abel.unfold_sub (a i) (a base)
+                    (Mathlib.Tactic.Abel.termg 1 (a i) (Mathlib.Tactic.Abel.termg (-1) (a base) 0))
+                    (Mathlib.Tactic.Abel.subst_into_addg (a i) (-a base) (Mathlib.Tactic.Abel.termg 1 (a i) 0)
+                      (Mathlib.Tactic.Abel.termg (-1) (a base) 0)
+                      (Mathlib.Tactic.Abel.termg 1 (a i) (Mathlib.Tactic.Abel.termg (-1) (a base) 0))
+                      (Mathlib.Tactic.Abel.term_atomg (a i))
+                      (Mathlib.Tactic.Abel.subst_into_negg (a base) (Mathlib.Tactic.Abel.termg 1 (a base) 0)
+                        (Mathlib.Tactic.Abel.termg (-1) (a base) 0) (Mathlib.Tactic.Abel.term_atomg (a base))
+                        (Mathlib.Tactic.Abel.term_neg 1 (a base) 0 (-1) 0 (Eq.refl (-1)) neg_zero))
+                      (Mathlib.Tactic.Abel.term_add_constg 1 (a i) 0 (Mathlib.Tactic.Abel.termg (-1) (a base) 0)
+                        (Mathlib.Tactic.Abel.termg (-1) (a base) 0)
+                        (zero_add (Mathlib.Tactic.Abel.termg (-1) (a base) 0)))))
+                  (Mathlib.Tactic.Abel.term_atomg (b base))
+                  (Mathlib.Tactic.Abel.term_add_constg 1 (a i) (Mathlib.Tactic.Abel.termg (-1) (a base) 0)
+                    (Mathlib.Tactic.Abel.termg 1 (b base) 0)
+                    (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0))
+                    (Mathlib.Tactic.Abel.term_add_constg (-1) (a base) 0 (Mathlib.Tactic.Abel.termg 1 (b base) 0)
+                      (Mathlib.Tactic.Abel.termg 1 (b base) 0) (zero_add (Mathlib.Tactic.Abel.termg 1 (b base) 0)))))
+                (Eq.symm
+                  (Mathlib.Tactic.Abel.subst_into_addg (a i) (b base - a base) (Mathlib.Tactic.Abel.termg 1 (a i) 0)
+                    (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0))
+                    (Mathlib.Tactic.Abel.termg 1 (a i)
+                      (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0)))
+                    (Mathlib.Tactic.Abel.term_atomg (a i))
+                    (Mathlib.Tactic.Abel.unfold_sub (b base) (a base)
+                      (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0))
+                      (Mathlib.Tactic.Abel.subst_into_addg (b base) (-a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0)
+                        (Mathlib.Tactic.Abel.termg (-1) (a base) 0)
+                        (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0))
+                        (Mathlib.Tactic.Abel.term_atomg (b base))
+                        (Mathlib.Tactic.Abel.subst_into_negg (a base) (Mathlib.Tactic.Abel.termg 1 (a base) 0)
+                          (Mathlib.Tactic.Abel.termg (-1) (a base) 0) (Mathlib.Tactic.Abel.term_atomg (a base))
+                          (Mathlib.Tactic.Abel.term_neg 1 (a base) 0 (-1) 0 (Eq.refl (-1)) neg_zero))
+                        (Mathlib.Tactic.Abel.const_add_termg (Mathlib.Tactic.Abel.termg 1 (b base) 0) (-1) (a base) 0
+                          (Mathlib.Tactic.Abel.termg 1 (b base) 0)
+                          (add_zero (Mathlib.Tactic.Abel.termg 1 (b base) 0)))))
+                    (Mathlib.Tactic.Abel.term_add_constg 1 (a i) 0
+                      (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0))
+                      (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0))
+                      (zero_add (Mathlib.Tactic.Abel.termg (-1) (a base) (Mathlib.Tactic.Abel.termg 1 (b base) 0))))))))
+          hi,
+    mpr := fun a_1 =>
+      Exists.casesOn (motive := fun x =>
+        ∀ (i j : Fin r), IndependentDuodenary.relativePhases b i j = IndependentDuodenary.relativePhases a i j) a_1
+        fun c hc i j =>
+        of_eq_true
+          (Eq.trans
+            (congrArg (fun x => x = a j - a i)
+              (Eq.trans (congr (congrArg HSub.hSub ((fun i => hc i) j)) ((fun i => hc i) i))
+                (add_sub_add_right_eq_sub (a j) (a i) c)))
+            (eq_self (a j - a i))) }
+'IndependentDuodenary.relative_phases_iff_common_offset' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES relative_phases_iff_common_offset: [Mathlib.Tactic.Abel.const_add_termg,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ Mathlib.Tactic.Abel.term_atomg,
+ Ring.toSub,
+ Mathlib.Meta.NormNum.instAddMonoidWithOne,
+ Trans.trans,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Mathlib.Tactic.Abel.zero_termg,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ Ring.toNeg,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ AddCommGroup.toAddCommMonoid,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ HSub.hSub,
+ Mathlib.Tactic.Abel.term_neg,
+ CommSemiring.toCommMonoidWithZero,
+ Exists,
+ id,
+ Distrib.toAdd,
+ Int.instNegInt,
+ Int.ofNat,
+ SubtractionMonoid.toSubNegZeroMonoid,
+ instOfNatNat,
+ Int,
+ Mathlib.Meta.NormNum.isNat_ofNat,
+ IndependentDuodenary.RegisterPhase,
+ Mathlib.Meta.NormNum.isInt_neg,
+ SubNegZeroMonoid.toNegZeroClass,
+ zero_add,
+ SubtractionCommMonoid.toSubtractionMonoid,
+ ZMod,
+ Mathlib.Tactic.Abel.unfold_sub,
+ IndependentDuodenary.relativePhases,
+ instTransEq,
+ SubNegMonoid.toSub,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Iff,
+ instHSub,
+ Exists.casesOn,
+ AddGroup.toSubNegMonoid,
+ instOfNat,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Mathlib.Meta.NormNum.IsInt.to_isNat,
+ Mathlib.Tactic.Abel.term_add_constg,
+ Ring.toAddCommGroup,
+ Int.instRing,
+ Nat,
+ Mathlib.Tactic.Abel.subst_into_addg,
+ congr,
+ True,
+ Iff.intro,
+ eq_self,
+ Mathlib.Meta.NormNum.IsNat.to_eq,
+ Exists.intro,
+ of_eq_true,
+ Int.instAdd,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Mathlib.Meta.NormNum.isInt_add,
+ Eq.refl,
+ Mathlib.Tactic.Abel.termg,
+ AddCommSemigroup.toAddCommMagma,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ AddCommGroup.toDivisionAddCommMonoid,
+ add_zero,
+ OfNat.ofNat,
+ Eq.symm,
+ AddCommMonoid.toAddCommSemigroup,
+ neg_zero,
+ Fin,
+ NegZeroClass.toZero,
+ Eq,
+ Mathlib.Tactic.Abel.subst_into_negg,
+ Ring.toAddGroupWithOne,
+ add_sub_add_right_eq_sub,
+ letFun,
+ Neg.neg,
+ Eq.trans,
+ Int.negOfNat,
+ AddCommMagma.toAdd,
+ Mathlib.Tactic.Abel.term_add_termg,
+ Mathlib.Meta.NormNum.IsNat.to_isInt]
+theorem IndependentDuodenary.register_aggregate_phase_formula : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular q →
+    ∑ i : Fin r, IndependentDuodenary.registerPhases ((IndependentDuodenary.registerStep h)^[n] q) i =
+      ∑ i : Fin r, IndependentDuodenary.registerPhases q i + ↑r * ↑n :=
+fun {r} h n q hq =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => ∑ i : Fin r, _a i = ∑ i : Fin r, IndependentDuodenary.registerPhases q i + ↑r * ↑n)
+        (IndependentDuodenary.register_step_phase_iterate h n q hq)))
+    (of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x = ∑ x : Fin r, IndependentDuodenary.registerPhases q x + ↑r * ↑n)
+          (Eq.trans
+            (Eq.trans
+              (Finset.sum_congr (Eq.refl Finset.univ) fun x a => Eq.refl (IndependentDuodenary.registerPhases q x + ↑n))
+              Finset.sum_add_distrib)
+            (congrArg (HAdd.hAdd (∑ x : Fin r, IndependentDuodenary.registerPhases q x))
+              (Eq.trans (Finset.sum_const ↑n)
+                (Eq.trans (congrArg (fun x => x • ↑n) (Fintype.card_fin r)) (nsmul_eq_mul r ↑n))))))
+        (eq_self (∑ x : Fin r, IndependentDuodenary.registerPhases q x + ↑r * ↑n))))
+'IndependentDuodenary.register_aggregate_phase_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES register_aggregate_phase_formula: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ Fintype.card_fin,
+ instHSMul,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ Finset.univ,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ congrArg,
+ CommSemiring.toSemiring,
+ Finset.sum_add_distrib,
+ Finset,
+ AddMonoid.toAddZeroClass,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ Membership.mem,
+ NonUnitalNonAssocSemiring.toMul,
+ Fintype.card,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ Finset.instMembership,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ Fin.fintype,
+ IndependentDuodenary.RegisterState,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ NonAssocSemiring.toNonUnitalNonAssocSemiring,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ True,
+ eq_self,
+ Finset.card,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ nsmul_eq_mul,
+ NonUnitalNonAssocSemiring.toDistrib,
+ AddMonoid.toNatSMul,
+ IndependentDuodenary.register_step_phase_iterate,
+ Eq.refl,
+ HSMul.hSMul,
+ AddCommMonoid.toAddMonoid,
+ IndependentDuodenary.registerPhases,
+ NonAssocSemiring.toNatCast,
+ OfNat.ofNat,
+ Fin,
+ AddZeroClass.toAdd,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Finset.sum_congr,
+ Finset.sum,
+ Eq.trans,
+ Finset.sum_const,
+ instHMul]
+theorem IndependentDuodenary.two_register_sum_collapse : ∑ i : Fin 2, (fun x => 6) i = ∑ i : Fin 2, (fun x => 0) i ∧
+  (fun x => 6) ≠ fun x => 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.two_register_sum_collapse' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES two_register_sum_collapse: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ instDecidableNot,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ Finset.univ,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Fin.fintype,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ Bool.true,
+ And,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ CommMonoidWithZero.toZero,
+ Fintype.decidablePiFintype,
+ Nat,
+ Bool,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ Zero.toOfNat0,
+ Eq.refl,
+ instDecidableAnd,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ Finset.sum]
 theorem IndependentDuodenary.sourceSupportBlock_pullback.{u_1, u_2, u_3} : ∀ {E : Type u_1} {X : Type u_2}
   {V : Type u_3} [inst : Zero V] [inst_1 : DecidableEq V] (b : IndependentDuodenary.FullBlock E X V),
   IndependentDuodenary.pullbackBlock (IndependentDuodenary.sourceSupportBlock b) = b :=
@@ -15747,4 +18270,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 245 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 297 theorem declarations; only standard Lean axioms permitted.

@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: sixteen modules; 245 theorem declarations.
+- Project library: eighteen modules; 297 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 245 stated Lean theorems.
+There are no incomplete obligations inside the 297 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -70,3 +70,15 @@ malformed-word rejection, and transported binary translation. See
 to elaborate without diagnostics and checks twelve executable guards. Local
 build, all 245 theorem audits, warning-free module elaboration and all twelve
 guards passed.
+
+`RegisterDynamics` and `RegisterBridge` add 52 theorems: exact product
+operator periods, subsystem compatibility, regular-orbit phase preservation,
+noncollapse bounds, product codecs and an inductive modular-invariant bridge.
+The external comparator is explicitly equality of relative phases; it is not
+a full-key equivalence or an unspecified external theorem. See
+[definitions, boundary conditions and dependencies](REGISTER_BRIDGE.md).
+
+For this extension, the local full build and all 297 theorem audits passed.
+Both new modules elaborated with zero diagnostics; all twelve register
+walkthrough guards passed. The CI workflow repeats the warning-free checks
+and walkthrough on the pushed revision.

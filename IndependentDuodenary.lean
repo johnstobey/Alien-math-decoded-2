@@ -13,3 +13,5 @@ import IndependentDuodenary.StationGrammar
 import IndependentDuodenary.StationCodec
 import IndependentDuodenary.CipherValidator
 import IndependentDuodenary.SourceKeyRepresentation
+import IndependentDuodenary.RegisterDynamics
+import IndependentDuodenary.RegisterBridge

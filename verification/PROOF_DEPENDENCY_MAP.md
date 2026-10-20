@@ -36,6 +36,11 @@ The 211-theorem baseline below is retained as provenance; the extension adds
 34 checked statements. It constructs a coordinate cycle without identifying
 that cycle in the external paper.
 
+Product extension: [REGISTER_BRIDGE.md](REGISTER_BRIDGE.md) proves product
+operator periods and exact representation transport to a defined modular
+relative-phase comparator. This discharges an initial typed bridge obligation;
+it does not supply the still-unspecified external theorem implication L.
+
 ## Claims, prerequisites, and evidence
 
 | Node | Precise content | Required inputs | Status and evidence |
@@ -52,6 +57,7 @@ that cycle in the external paper.
 | J: some other genuine source operator has exact period 12 | Identify a source-defined T and prove its twelve iterates return, with no shorter positive period, together with a compatible station map | A different explicitly sourced operator, its carrier, and a preservation equation | Unresolved: no such source operator is identified in the examined material. A's local rotation does not supply it. |
 | J-model: chosen coordinate cycle | Coordinate shift on a twelve-coordinate binary complement has exact operator period 12, distinct from every binary intercept translation | Explicit finite carrier in `SourceKeyRepresentation` | Proved: `key_cycle_period_iff`, `key_cycle_distinct_from_translation`. This is not external-source identification J. |
 | K: lossless source-key representation | Encode complete keys into structured twelve-symbol words with a decoding left inverse and a compatible translated-word operation | Explicit encodings of metadata and both intercept components, framing, decoder | Proved for metadata `Fin 3`, binary intercept dimension 2 and complement dimension 12: `exact_key_decode_encode`, `exact_key_parse_sound`, `exact_key_word_translation`. C and E remain lossy observables. |
+| L-initial: typed modular bridge | Exact word iterations decode to the structural iterations; regular phase initial states preserve external relative-phase equivalence | Known register count; defined state transform; explicitly constructed regular initial state | Proved: `register_transport_iterate`, `register_word_modular_bridge_phase`. Full-key equality is stronger than the comparator. |
 | L: stronger mathematical conclusion | A named external theorem follows from specified source/model properties | Its exact statement, source/model equivalence, and a sufficient implication | Not formulated or proved here. Neither modular closure nor the calculator's zero remainder supplies this implication. |
 
 ## Established connections and missing connections

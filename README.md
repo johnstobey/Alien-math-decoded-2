@@ -35,6 +35,9 @@ connects the supplied claims to the checked results and identifies the remaining
 - `SourceKeyRepresentation`: a chosen binary-coordinate cycle of exact order
   twelve, a lossless framed full-key codec, malformed-word rejection, and
   compatible translated-word operations. See [exact scope](verification/KEY_DIRECTIVES.md).
+- `RegisterDynamics`, `RegisterBridge`: product operators, subsystem
+  projections, exact orbit bounds, and inductive transport of metadata and
+  modular relative-phase invariants. See [formal boundaries and dependencies](verification/REGISTER_BRIDGE.md).
 - `MappingBoundary`: an explicit internal map from natural addition to modular
   addition; a general image-closure theorem **assuming** operation preservation;
   and a level-return statement **assuming** the stated level and step values.
