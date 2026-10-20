@@ -127,8 +127,10 @@ circuits on twelve-position registers. Compilation preserves satisfiability
 and AST node count; certified rewrites preserve meaning. The assignment space
 still has cardinality $2^n$. Conditional AND/OR gates are additional operations;
 they are not supplied by the fixed cyclic operator. No general SAT reduction
-to that operator or polynomial-time SAT decision follows. The generated
-appendix inventories the current library.
+to that operator or polynomial-time SAT decision follows. Acceptance normalization adds twenty-two declarations, closing the finite-control
+output-convention obligation 1.13 with two-way language preservation and exactly
+one extra transition. It does not supply the four-symbol TM0 compiler of 1.14.
+The generated appendix inventories the current library.
 Exact propositions, proof terms, direct dependencies and transitive foundational
 requirements are in the accompanying \texttt{verification/THEOREMS.md} and
 \texttt{verification/axioms-and-proofs.txt}.

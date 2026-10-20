@@ -1,0 +1,607 @@
+{
+  "purpose": "sequential execution register; not a proof of pending entries",
+  "completed_batch": "A",
+  "open_obligations": 64,
+  "rule": "Only checked theorem terms may be dependencies; no pending result is introduced as an axiom.",
+  "batches": [
+    {
+      "batch": "A",
+      "title": "Acceptance convention conversion",
+      "status": "completed",
+      "obligations": [
+        {
+          "id": "1.13",
+          "title": "Acceptance convention conversion",
+          "requires": [
+            "1.02",
+            "1.12"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "B",
+      "title": "Machine compilers and their overhead",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "1.14",
+          "title": "Reference-to-repository simulator",
+          "requires": [
+            "1.01",
+            "1.02",
+            "1.10",
+            "1.13"
+          ]
+        },
+        {
+          "id": "1.15",
+          "title": "Repository-to-reference simulator",
+          "requires": [
+            "1.01",
+            "1.02",
+            "1.12",
+            "1.13"
+          ]
+        },
+        {
+          "id": "1.16",
+          "title": "Simulation polynomial closure",
+          "requires": [
+            "1.05",
+            "1.06",
+            "1.14",
+            "1.15"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "C",
+      "title": "Class equivalences and certificate machines",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "1.17",
+          "title": "Deterministic class equality",
+          "requires": [
+            "1.03",
+            "1.16"
+          ]
+        },
+        {
+          "id": "1.18",
+          "title": "Nondeterministic run to certificate",
+          "requires": [
+            "1.04",
+            "1.11",
+            "1.16"
+          ]
+        },
+        {
+          "id": "1.19",
+          "title": "Certificate to nondeterministic run",
+          "requires": [
+            "1.04",
+            "1.06",
+            "1.16"
+          ]
+        },
+        {
+          "id": "1.20",
+          "title": "Nondeterministic class equality",
+          "requires": [
+            "1.18",
+            "1.19"
+          ]
+        },
+        {
+          "id": "1.21",
+          "title": "P inclusion in NP",
+          "requires": [
+            "1.11",
+            "1.12",
+            "1.16"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "D",
+      "title": "Source syntax, codecs and Boolean semantics",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "2.01",
+          "title": "CNF syntax",
+          "requires": []
+        },
+        {
+          "id": "2.02",
+          "title": "Unary-count parser",
+          "requires": [
+            "2.01"
+          ]
+        },
+        {
+          "id": "2.03",
+          "title": "Formula codec",
+          "requires": [
+            "2.02"
+          ]
+        },
+        {
+          "id": "2.04",
+          "title": "Variable indexing bounds",
+          "requires": [
+            "2.03"
+          ]
+        },
+        {
+          "id": "2.05",
+          "title": "Boolean semantics",
+          "requires": [
+            "2.01"
+          ]
+        },
+        {
+          "id": "2.06",
+          "title": "Finite assignment domain",
+          "requires": [
+            "2.04",
+            "2.05"
+          ]
+        },
+        {
+          "id": "2.07",
+          "title": "Binary SAT language",
+          "requires": [
+            "2.03",
+            "2.06"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "E",
+      "title": "SAT verification and computation tableaux",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "2.08",
+          "title": "SAT verification machine",
+          "requires": [
+            "1.11",
+            "1.16",
+            "2.07"
+          ]
+        },
+        {
+          "id": "2.09",
+          "title": "Clocked source computation",
+          "requires": [
+            "1.04"
+          ]
+        },
+        {
+          "id": "2.10",
+          "title": "Tableau variables",
+          "requires": [
+            "2.09"
+          ]
+        },
+        {
+          "id": "2.11",
+          "title": "Initial and well-formed tableau clauses",
+          "requires": [
+            "2.10"
+          ]
+        },
+        {
+          "id": "2.12",
+          "title": "Transition clauses",
+          "requires": [
+            "2.11"
+          ]
+        },
+        {
+          "id": "2.13",
+          "title": "Acceptance clauses",
+          "requires": [
+            "2.09",
+            "2.12"
+          ]
+        },
+        {
+          "id": "2.14",
+          "title": "Run-to-assignment proof",
+          "requires": [
+            "2.11",
+            "2.12",
+            "2.13"
+          ]
+        },
+        {
+          "id": "2.15",
+          "title": "Assignment-to-run proof",
+          "requires": [
+            "2.11",
+            "2.12",
+            "2.13"
+          ]
+        },
+        {
+          "id": "2.16",
+          "title": "Tableau generator resource proof",
+          "requires": [
+            "2.03",
+            "2.10",
+            "2.14",
+            "2.15"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "F",
+      "title": "Exact protocol input language",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "2.17",
+          "title": "Protocol instance domain",
+          "requires": []
+        },
+        {
+          "id": "2.18",
+          "title": "Protocol binary encoder",
+          "requires": [
+            "2.17"
+          ]
+        },
+        {
+          "id": "2.19",
+          "title": "Protocol decoder and exact length",
+          "requires": [
+            "2.02",
+            "2.18"
+          ]
+        },
+        {
+          "id": "2.20",
+          "title": "Protocol binary language",
+          "requires": [
+            "2.19"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "G",
+      "title": "Actual general SAT reduction and correctness",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "2.21",
+          "title": "Actual SAT-to-protocol construction",
+          "requires": [
+            "2.07",
+            "2.20"
+          ]
+        },
+        {
+          "id": "2.22",
+          "title": "Reduction forward direction",
+          "requires": [
+            "2.21"
+          ]
+        },
+        {
+          "id": "2.23",
+          "title": "Reduction reverse direction",
+          "requires": [
+            "2.21"
+          ]
+        },
+        {
+          "id": "2.24",
+          "title": "Malformed source behavior",
+          "requires": [
+            "2.07",
+            "2.20",
+            "2.21"
+          ]
+        },
+        {
+          "id": "2.25",
+          "title": "Complete many-one reduction",
+          "requires": [
+            "2.22",
+            "2.23",
+            "2.24",
+            "3.11",
+            "3.12"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "H",
+      "title": "Uniform constructor and resource bounds",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "3.01",
+          "title": "Uniform generator",
+          "requires": [
+            "2.21"
+          ]
+        },
+        {
+          "id": "3.02",
+          "title": "Parsing cost",
+          "requires": [
+            "2.03",
+            "3.01"
+          ]
+        },
+        {
+          "id": "3.03",
+          "title": "Register-count computation",
+          "requires": [
+            "3.01",
+            "3.02"
+          ]
+        },
+        {
+          "id": "3.04",
+          "title": "Translation construction",
+          "requires": [
+            "3.03"
+          ]
+        },
+        {
+          "id": "3.05",
+          "title": "Initial-state construction",
+          "requires": [
+            "3.03"
+          ]
+        },
+        {
+          "id": "3.06",
+          "title": "Target-state construction",
+          "requires": [
+            "3.03"
+          ]
+        },
+        {
+          "id": "3.07",
+          "title": "Register bound",
+          "requires": [
+            "2.19",
+            "3.03",
+            "3.04",
+            "3.05",
+            "3.06"
+          ]
+        },
+        {
+          "id": "3.08",
+          "title": "Intermediate-value sizes",
+          "requires": [
+            "3.02",
+            "3.07"
+          ]
+        },
+        {
+          "id": "3.09",
+          "title": "Total generation",
+          "requires": [
+            "2.24",
+            "3.04",
+            "3.05",
+            "3.06"
+          ]
+        },
+        {
+          "id": "3.10",
+          "title": "Generator instruction accounting",
+          "requires": [
+            "1.14",
+            "1.16",
+            "3.08",
+            "3.09"
+          ]
+        },
+        {
+          "id": "3.11",
+          "title": "Exact generator realization",
+          "requires": [
+            "3.10"
+          ]
+        },
+        {
+          "id": "3.12",
+          "title": "Generator polynomial witnesses",
+          "requires": [
+            "3.07",
+            "3.11"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "I",
+      "title": "Protocol machine and runtime verification",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "4.01",
+          "title": "Protocol parsing machine",
+          "requires": [
+            "1.14",
+            "2.19"
+          ]
+        },
+        {
+          "id": "4.02",
+          "title": "Machine storage representation",
+          "requires": [
+            "4.01"
+          ]
+        },
+        {
+          "id": "4.03",
+          "title": "Rotation implementation",
+          "requires": [
+            "4.02"
+          ]
+        },
+        {
+          "id": "4.04",
+          "title": "XOR implementation",
+          "requires": [
+            "4.02"
+          ]
+        },
+        {
+          "id": "4.05",
+          "title": "Metadata copying",
+          "requires": [
+            "4.02"
+          ]
+        },
+        {
+          "id": "4.06",
+          "title": "One-step simulation",
+          "requires": [
+            "4.03",
+            "4.04",
+            "4.05"
+          ]
+        },
+        {
+          "id": "4.07",
+          "title": "Loop initialization",
+          "requires": [
+            "4.02"
+          ]
+        },
+        {
+          "id": "4.08",
+          "title": "Full equality routine",
+          "requires": [
+            "4.02"
+          ]
+        },
+        {
+          "id": "4.09",
+          "title": "Phase-loop invariant",
+          "requires": [
+            "4.06",
+            "4.07"
+          ]
+        },
+        {
+          "id": "4.10",
+          "title": "Successful comparison correctness",
+          "requires": [
+            "4.08",
+            "4.09"
+          ]
+        },
+        {
+          "id": "4.11",
+          "title": "Twelve-failure correctness",
+          "requires": [
+            "4.08",
+            "4.09"
+          ]
+        },
+        {
+          "id": "4.12",
+          "title": "Loop termination and count",
+          "requires": [
+            "4.09"
+          ]
+        },
+        {
+          "id": "4.13",
+          "title": "Malformed-input rejection",
+          "requires": [
+            "4.01"
+          ]
+        },
+        {
+          "id": "4.14",
+          "title": "Output and halting convention",
+          "requires": [
+            "1.12",
+            "1.13",
+            "4.10",
+            "4.11",
+            "4.13"
+          ]
+        },
+        {
+          "id": "4.15",
+          "title": "Protocol-machine polynomial witnesses",
+          "requires": [
+            "4.06",
+            "4.08",
+            "4.12",
+            "4.14"
+          ]
+        }
+      ]
+    },
+    {
+      "batch": "J",
+      "title": "Machine composition and class consequence",
+      "status": "open",
+      "obligations": [
+        {
+          "id": "4.16",
+          "title": "Generator/decider composition",
+          "requires": [
+            "1.14",
+            "3.11",
+            "4.14"
+          ]
+        },
+        {
+          "id": "4.17",
+          "title": "Composed decision correctness",
+          "requires": [
+            "2.25",
+            "4.10",
+            "4.11",
+            "4.13",
+            "4.16"
+          ]
+        },
+        {
+          "id": "4.18",
+          "title": "Composed polynomial time",
+          "requires": [
+            "3.12",
+            "4.15",
+            "4.16"
+          ]
+        },
+        {
+          "id": "4.19",
+          "title": "Class-equality consequence",
+          "requires": [
+            "1.17",
+            "1.20",
+            "1.21",
+            "2.16",
+            "4.17",
+            "4.18"
+          ]
+        }
+      ]
+    }
+  ]
+}

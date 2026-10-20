@@ -81,6 +81,13 @@ jobs:
             lake env lean "$proof_file" 2>&1 | tee .lake/search-boundary-check.log
             test ! -s .lake/search-boundary-check.log
           done
+      - name: Verify acceptance normalization batch
+        run: |
+          for proof_file in IndependentDuodenary/AcceptanceNormalization.lean examples/AcceptanceNormalizationBoundary.lean
+          do
+            lake env lean "$proof_file" 2>&1 | tee .lake/normalization-check.log
+            test ! -s .lake/normalization-check.log
+          done
       - name: Verify anchored phase alignment and arithmetic SAT
         run: |
           lake env lean examples/PhaseAlignmentBridge.lean 2>&1 | tee .lake/phase-alignment-check.log

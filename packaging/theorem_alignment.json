@@ -1,8 +1,162 @@
 {
   "schema_version": 1,
-  "count": 408,
+  "count": 430,
   "audit_evidence": "verification/axioms-and-proofs.txt",
   "theorems": [
+    {
+      "name": "IndependentDuodenary.normalization_control_cardinality",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 57,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_done_stops",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 60,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_halted_iff_done",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 65,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_running_step",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 72,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_finish_head",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 86,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_finish_head_boolean",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 92,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_finish_head_accepts",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 98,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_finish_state_accepts",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 105,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_source_step",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 111,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_halt_step",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 118,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_forward_run",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 125,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_finished_run",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 133,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_reverse_run",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 140,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_exact_overhead",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 168,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_empty_input",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 180,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_state_to_head_language",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 187,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_head_to_state_language",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 202,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_polynomial_overhead",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 218,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_finish_heads_unchanged",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 225,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_head_to_state_tape_unchanged",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 230,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_finish_head_rejects",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 236,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.normalization_finish_state_rejects",
+      "module": "AcceptanceNormalization",
+      "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+      "line": 245,
+      "external_prize_implication_established": false
+    },
     {
       "name": "IndependentDuodenary.affine_station_composition",
       "module": "AffineStations",

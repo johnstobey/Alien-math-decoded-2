@@ -137,3 +137,9 @@ inventory. A 0/1 phase encoding removes conditional gates via ring arithmetic
 and proves an anchored geometric AND criterion. Pairwise zero displacement alone
 expresses equality, not Boolean AND. The fixed-operator and complexity bridges
 remain open. Run `python3 scripts/audit_phase_alignment.py` after `lake build`.
+
+[Acceptance-normalization batch](verification/ACCEPTANCE_NORMALIZATION.md) closes
+entry 1.13 with 22 checked declarations and exact one-transition overhead.
+Current library inventory: 430 declarations, plus 16 separately audited phase
+experiments. Current atomic register: 13 completed, 64 open. The four-symbol
+TM0 compiler (1.14) remains open.

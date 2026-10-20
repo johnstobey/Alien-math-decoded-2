@@ -1,6 +1,373 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 408 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 430 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+
+## `normalization_control_cardinality`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_control_cardinality (s : ℕ) :
+    Fintype.card (Fin (s + 2) × Bool) = 2 * (s + 2)
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_control_cardinality` and the printed proof in the machine-generated audit.
+
+## `normalization_done_stops`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_done_stops {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) (q : NormalizationConfiguration a s k)
+    (done : q.done = true) : normalizationStep M mode q = none
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_done_stops` and the printed proof in the machine-generated audit.
+
+## `normalization_halted_iff_done`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_halted_iff_done {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) (q : NormalizationConfiguration a s k) :
+    normalizationStep M mode q = none ↔ q.done = true
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_halted_iff_done` and the printed proof in the machine-generated audit.
+
+## `normalization_running_step`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_running_step {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) (q : ReferenceConfiguration a s k) :
+    normalizationStep M mode (normalizationLift q) =
+      match referenceDStep M q with
+      | none => some (normalizationFinish mode q)
+      | some q' => some (normalizationLift q')
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_running_step` and the printed proof in the machine-generated audit.
+
+## `normalization_finish_head`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_finish_head {a s k : ℕ} (q : ReferenceConfiguration a s k) :
+    (normalizationFinish .stateToHead q).body.tape 0
+      ((normalizationFinish .stateToHead q).body.head 0) =
+        if q.state = 0 then 1 else 2
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_finish_head` and the printed proof in the machine-generated audit.
+
+## `normalization_finish_head_boolean`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_finish_head_boolean {a s k : ℕ} (q : ReferenceConfiguration a s k) :
+    let out
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_finish_head_boolean` and the printed proof in the machine-generated audit.
+
+## `normalization_finish_head_accepts`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_finish_head_accepts {a s k : ℕ} (q : ReferenceConfiguration a s k) :
+    let out
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_finish_head_accepts` and the printed proof in the machine-generated audit.
+
+## `normalization_finish_state_accepts`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_finish_state_accepts {a s k : ℕ} (q : ReferenceConfiguration a s k) :
+    (normalizationFinish .headToState q).body.state = 0 ↔ q.tape 0 (q.head 0) = 1
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_finish_state_accepts` and the printed proof in the machine-generated audit.
+
+## `normalization_source_step`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_source_step {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) (q q' : ReferenceConfiguration a s k)
+    (step : referenceDEdge M q q') :
+    normalizationEdge M mode (normalizationLift q) (normalizationLift q')
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_source_step` and the printed proof in the machine-generated audit.
+
+## `normalization_halt_step`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_halt_step {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) (q : ReferenceConfiguration a s k)
+    (halt : referenceTerminal q) :
+    normalizationEdge M mode (normalizationLift q) (normalizationFinish mode q)
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_halt_step` and the printed proof in the machine-generated audit.
+
+## `normalization_forward_run`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_forward_run {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) {n : ℕ} {q q' : ReferenceConfiguration a s k}
+    (run : ReferenceRun (referenceDEdge M) n q q') :
+    ReferenceRun (normalizationEdge M mode) n (normalizationLift q) (normalizationLift q')
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_forward_run` and the printed proof in the machine-generated audit.
+
+## `normalization_finished_run`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_finished_run {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) {n : ℕ} {q q' : ReferenceConfiguration a s k}
+    (run : ReferenceRun (referenceDEdge M) n q q') (halt : referenceTerminal q') :
+    ReferenceRun (normalizationEdge M mode) (n + 1)
+      (normalizationLift q) (normalizationFinish mode q')
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_finished_run` and the printed proof in the machine-generated audit.
+
+## `normalization_reverse_run`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_reverse_run {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) (initial : ReferenceConfiguration a s k)
+    {n : ℕ} {out : NormalizationConfiguration a s k}
+    (run : ReferenceRun (normalizationEdge M mode) n (normalizationLift initial) out) :
+    (∃ q, ReferenceRun (referenceDEdge M) n initial q ∧ out = normalizationLift q) ∨
+    (∃ t q, n = t + 1 ∧ ReferenceRun (referenceDEdge M) t initial q ∧
+      referenceTerminal q ∧ out = normalizationFinish mode q)
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_reverse_run` and the printed proof in the machine-generated audit.
+
+## `normalization_exact_overhead`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_exact_overhead {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) (initial : ReferenceConfiguration a s k)
+    {n : ℕ} {out : NormalizationConfiguration a s k}
+    (run : ReferenceRun (normalizationEdge M mode) n (normalizationLift initial) out)
+    (done : out.done = true) :
+    ∃ t q, n = t + 1 ∧ ReferenceRun (referenceDEdge M) t initial q ∧
+      referenceTerminal q ∧ out = normalizationFinish mode q
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_exact_overhead` and the printed proof in the machine-generated audit.
+
+## `normalization_empty_input`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_empty_input {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (mode : AcceptanceConvention) (halt : referenceTerminal (referenceInitial (a
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_empty_input` and the printed proof in the machine-generated audit.
+
+## `normalization_state_to_head_language`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_state_to_head_language {a s k : ℕ}
+    (M : ReferenceDeterministicMachine a s k) (initial : ReferenceConfiguration a s k) :
+    (∃ t q, ReferenceRun (referenceDEdge M) t initial q ∧ referenceTerminal q ∧ q.state = 0) ↔
+      ∃ n out, ReferenceRun (normalizationEdge M .stateToHead) n (normalizationLift initial) out ∧
+        out.done = true ∧ out.body.tape 0 (out.body.head 0) = 1
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_state_to_head_language` and the printed proof in the machine-generated audit.
+
+## `normalization_head_to_state_language`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_head_to_state_language {a s k : ℕ}
+    (M : ReferenceDeterministicMachine a s k) (initial : ReferenceConfiguration a s k) :
+    (∃ t q, ReferenceRun (referenceDEdge M) t initial q ∧ referenceTerminal q ∧
+      q.tape 0 (q.head 0) = 1) ↔
+      ∃ n out, ReferenceRun (normalizationEdge M .headToState) n (normalizationLift initial) out ∧
+        out.done = true ∧ out.body.state = 0
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_head_to_state_language` and the printed proof in the machine-generated audit.
+
+## `normalization_polynomial_overhead`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_polynomial_overhead (c d length time : ℕ)
+    (bound : time ≤ prizePolynomialBound c d length) :
+    time + 1 ≤ prizePolynomialBound (c + 1) d length
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_polynomial_overhead` and the printed proof in the machine-generated audit.
+
+## `normalization_finish_heads_unchanged`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_finish_heads_unchanged {a s k : ℕ} (mode : AcceptanceConvention)
+    (q : ReferenceConfiguration a s k) : (normalizationFinish mode q).body.head = q.head
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_finish_heads_unchanged` and the printed proof in the machine-generated audit.
+
+## `normalization_head_to_state_tape_unchanged`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_head_to_state_tape_unchanged {a s k : ℕ}
+    (q : ReferenceConfiguration a s k) : (normalizationFinish .headToState q).body.tape = q.tape
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_head_to_state_tape_unchanged` and the printed proof in the machine-generated audit.
+
+## `normalization_finish_head_rejects`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_finish_head_rejects {a s k : ℕ} (q : ReferenceConfiguration a s k)
+    (halt : referenceTerminal q) :
+    let out
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_finish_head_rejects` and the printed proof in the machine-generated audit.
+
+## `normalization_finish_state_rejects`
+
+Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **passed**.
+
+```lean
+theorem normalization_finish_state_rejects {a s k : ℕ} (q : ReferenceConfiguration a s k)
+    (boolean : q.tape 0 (q.head 0) = 1 ∨ q.tape 0 (q.head 0) = 2) :
+    (normalizationFinish .headToState q).body.state = 1 ↔ q.tape 0 (q.head 0) = 2
+```
+
+Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES normalization_finish_state_rejects` and the printed proof in the machine-generated audit.
 
 ## `affine_station_composition`
 

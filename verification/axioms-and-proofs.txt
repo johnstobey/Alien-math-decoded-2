@@ -1,3 +1,2864 @@
+theorem IndependentDuodenary.normalization_control_cardinality : ∀ (s : ℕ),
+  Fintype.card (Fin (s + 2) × Bool) = 2 * (s + 2) :=
+fun s =>
+  Eq.mpr
+    (id
+      (congrArg (fun x => x = 2 * (s + 2))
+        (Eq.trans (Fintype.card_prod (Fin (s + 2)) Bool) (congrArg (fun x => x * 2) (Fintype.card_fin (s + 2))))))
+    (Decidable.byContradiction fun a =>
+      Or.casesOn (Nat.lt_or_gt_of_ne a)
+        (fun h =>
+          Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+            (Lean.Omega.tidy_sat
+              (Lean.Omega.Constraint.addInequality_sat
+                (le_of_le_of_eq (Int.sub_nonneg_of_le (Int.add_one_le_of_lt (Lean.Omega.Int.ofNat_lt_of_lt h)))
+                  (Eq.trans
+                    (Lean.Omega.Int.sub_congr
+                      (Eq.trans (Int.ofNat_mul 2 (s + 2))
+                        (Eq.trans
+                          (Lean.Omega.Int.mul_congr (id (Eq.refl ↑2))
+                            (Eq.trans (Int.ofNat_add s 2)
+                              (Eq.trans
+                                (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0)
+                                  (id (Eq.refl ↑2)))
+                                (Eq.symm
+                                  (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [1] }
+                                    { const := 2, coeffs := [] } (Lean.Omega.Coeffs.ofList [↑s]))))))
+                          (Eq.symm
+                            (Lean.Omega.LinearCombo.mul_eval { const := 2, coeffs := [] } { const := 2, coeffs := [1] }
+                              (Lean.Omega.Coeffs.ofList [↑s]) (of_decide_eq_true (id (Eq.refl true)))))))
+                      (Eq.trans
+                        (Lean.Omega.Int.add_congr
+                          (Eq.trans (Int.ofNat_mul (s + 2) 2)
+                            (Eq.trans
+                              (Lean.Omega.Int.mul_congr
+                                (Eq.trans (Int.ofNat_add s 2)
+                                  (Eq.trans
+                                    (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0)
+                                      (id (Eq.refl ↑2)))
+                                    (Eq.symm
+                                      (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [1] }
+                                        { const := 2, coeffs := [] } (Lean.Omega.Coeffs.ofList [↑s])))))
+                                (id (Eq.refl ↑2)))
+                              (Eq.symm
+                                (Lean.Omega.LinearCombo.mul_eval { const := 2, coeffs := [1] }
+                                  { const := 2, coeffs := [] } (Lean.Omega.Coeffs.ofList [↑s])
+                                  (of_decide_eq_true (id (Eq.refl true)))))))
+                          (id (Eq.refl 1)))
+                        (Eq.symm
+                          (Lean.Omega.LinearCombo.add_eval { const := 4, coeffs := [2] } { const := 1, coeffs := [] }
+                            (Lean.Omega.Coeffs.ofList [↑s])))))
+                    (Eq.symm
+                      (Lean.Omega.LinearCombo.sub_eval { const := 4, coeffs := [2] } { const := 5, coeffs := [2] }
+                        (Lean.Omega.Coeffs.ofList [↑s]))))))))
+        fun h =>
+        Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+          (Lean.Omega.tidy_sat
+            (Lean.Omega.Constraint.addInequality_sat
+              (le_of_le_of_eq (Int.sub_nonneg_of_le (Int.add_one_le_of_lt (Lean.Omega.Int.ofNat_lt_of_lt h)))
+                (Eq.trans
+                  (Lean.Omega.Int.sub_congr
+                    (Eq.trans (Int.ofNat_mul (s + 2) 2)
+                      (Eq.trans
+                        (Lean.Omega.Int.mul_congr
+                          (Eq.trans (Int.ofNat_add s 2)
+                            (Eq.trans
+                              (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0)
+                                (id (Eq.refl ↑2)))
+                              (Eq.symm
+                                (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [1] }
+                                  { const := 2, coeffs := [] } (Lean.Omega.Coeffs.ofList [↑s])))))
+                          (id (Eq.refl ↑2)))
+                        (Eq.symm
+                          (Lean.Omega.LinearCombo.mul_eval { const := 2, coeffs := [1] } { const := 2, coeffs := [] }
+                            (Lean.Omega.Coeffs.ofList [↑s]) (of_decide_eq_true (id (Eq.refl true)))))))
+                    (Eq.trans
+                      (Lean.Omega.Int.add_congr
+                        (Eq.trans (Int.ofNat_mul 2 (s + 2))
+                          (Eq.trans
+                            (Lean.Omega.Int.mul_congr (id (Eq.refl ↑2))
+                              (Eq.trans (Int.ofNat_add s 2)
+                                (Eq.trans
+                                  (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0)
+                                    (id (Eq.refl ↑2)))
+                                  (Eq.symm
+                                    (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [1] }
+                                      { const := 2, coeffs := [] } (Lean.Omega.Coeffs.ofList [↑s]))))))
+                            (Eq.symm
+                              (Lean.Omega.LinearCombo.mul_eval { const := 2, coeffs := [] }
+                                { const := 2, coeffs := [1] } (Lean.Omega.Coeffs.ofList [↑s])
+                                (of_decide_eq_true (id (Eq.refl true)))))))
+                        (id (Eq.refl 1)))
+                      (Eq.symm
+                        (Lean.Omega.LinearCombo.add_eval { const := 4, coeffs := [2] } { const := 1, coeffs := [] }
+                          (Lean.Omega.Coeffs.ofList [↑s])))))
+                  (Eq.symm
+                    (Lean.Omega.LinearCombo.sub_eval { const := 4, coeffs := [2] } { const := 5, coeffs := [2] }
+                      (Lean.Omega.Coeffs.ofList [↑s]))))))))
+'IndependentDuodenary.normalization_control_cardinality' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES normalization_control_cardinality: [Eq.mpr,
+ False,
+ Lean.Omega.Constraint.not_sat'_of_isImpossible,
+ Fintype.card_fin,
+ Bool.fintype,
+ HMul.hMul,
+ of_decide_eq_true,
+ le_of_le_of_eq,
+ Lean.Omega.Constraint.mk,
+ congrArg,
+ Int.add_one_le_of_lt,
+ HSub.hSub,
+ Lean.Omega.Int.add_congr,
+ Lean.Omega.LinearCombo.eval,
+ Option.some,
+ Lean.Omega.Coeffs.isZero,
+ Int.instDecidableEq,
+ Fintype.card,
+ id,
+ instDecidableEqBool,
+ Int.instNegInt,
+ Int.sub_nonneg_of_le,
+ instMulNat,
+ instOfNatNat,
+ Int,
+ Lean.Omega.LinearCombo.mul_eval,
+ Fintype.card_prod,
+ List.decidableBAll,
+ Nat.cast,
+ Lean.Omega.Int.sub_congr,
+ Fin.fintype,
+ Or.casesOn,
+ List.cons,
+ Lean.Omega.LinearCombo,
+ Int.instMul,
+ Bool.true,
+ GT.gt,
+ Option.none,
+ instHAdd,
+ Lean.Omega.tidy_sat,
+ instHSub,
+ Lean.Omega.LinearCombo.coordinate_eval_0,
+ instOfNat,
+ HAdd.hAdd,
+ Lean.Omega.LinearCombo.mk,
+ Lean.Omega.Coeffs.ofList,
+ Nat,
+ LT.lt,
+ Lean.Omega.LinearCombo.add_eval,
+ Lean.Omega.LinearCombo.sub_eval,
+ Lean.Omega.LinearCombo.coordinate,
+ Decidable.byContradiction,
+ Bool,
+ Int.instAdd,
+ Lean.Omega.LinearCombo.instAdd,
+ instAddNat,
+ Eq.refl,
+ Lean.Omega.Int.ofNat_lt_of_lt,
+ Int.instSub,
+ instFintypeProd,
+ Int.ofNat_add,
+ instDecidableEqNat,
+ Or,
+ instNatCastInt,
+ instLTNat,
+ Int.ofNat_mul,
+ Lean.Omega.Int.mul_congr,
+ Prod,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Lean.Omega.Constraint.addInequality_sat,
+ Decidable.decide,
+ Eq,
+ instDecidableOr,
+ Lean.Omega.LinearCombo.mul,
+ Lean.Omega.LinearCombo.instSub,
+ Not,
+ Neg.neg,
+ Nat.lt_or_gt_of_ne,
+ Int.instLEInt,
+ Eq.trans,
+ Lean.Omega.Constraint.isImpossible,
+ instHMul,
+ List.nil]
+theorem IndependentDuodenary.normalization_done_stops : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  (q : IndependentDuodenary.NormalizationConfiguration a s k),
+  q.done = true → IndependentDuodenary.normalizationStep M mode q = none :=
+fun {a s k} M mode q done =>
+  of_eq_true
+    (Eq.trans
+      (congrArg
+        (fun x =>
+          Option.map
+              (fun instruction =>
+                { body := IndependentDuodenary.referenceApply q.body instruction.1, done := instruction.2 })
+              x =
+            none)
+        (ite_cond_eq_true none
+          (if (q.body.state, q.done).1 = 0 ∨ (q.body.state, q.done).1 = 1 then
+            some
+              (IndependentDuodenary.normalizationFinishInstruction mode (q.body.state, q.done).1
+                  (IndependentDuodenary.referenceRead q.body),
+                true)
+          else some (M.transition (q.body.state, q.done).1 (IndependentDuodenary.referenceRead q.body), false))
+          (Eq.trans (congrArg (fun x => x = true) done) (eq_self true))))
+      (eq_self none))
+'IndependentDuodenary.normalization_done_stops' depends on axioms: [propext]
+DIRECT DEPENDENCIES normalization_done_stops: [IndependentDuodenary.referenceApply,
+ congrArg,
+ instDecidableEqFin,
+ Option.some,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ IndependentDuodenary.NormalizationConfiguration.mk,
+ Prod.mk,
+ instOfNatNat,
+ IndependentDuodenary.referenceRead,
+ ite_cond_eq_true,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ Prod.fst,
+ IndependentDuodenary.NormalizationConfiguration.done,
+ Bool.true,
+ Option.none,
+ instHAdd,
+ Option.map,
+ IndependentDuodenary.normalizationFinishInstruction,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ IndependentDuodenary.ReferenceDeterministicMachine.transition,
+ Nat,
+ IndependentDuodenary.AcceptanceConvention,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ instAddNat,
+ IndependentDuodenary.normalizationStep,
+ IndependentDuodenary.ReferenceInstruction,
+ Or,
+ IndependentDuodenary.NormalizationConfiguration,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ Prod,
+ OfNat.ofNat,
+ Bool.false,
+ Fin,
+ Eq,
+ Prod.snd,
+ instDecidableOr,
+ Eq.trans,
+ IndependentDuodenary.normalizationTable.proof_1,
+ Option,
+ ite]
+theorem IndependentDuodenary.normalization_halted_iff_done : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  (q : IndependentDuodenary.NormalizationConfiguration a s k),
+  IndependentDuodenary.normalizationStep M mode q = none ↔ q.done = true :=
+fun {a s k} M mode q =>
+  IndependentDuodenary.NormalizationConfiguration.casesOn q fun body done =>
+    Bool.casesOn (motive := fun t =>
+      done = t →
+        (IndependentDuodenary.normalizationStep M mode { body := body, done := done } = none ↔
+          { body := body, done := done }.done = true))
+      done
+      (fun h =>
+        Eq.symm h ▸
+          Eq.mpr
+            (id
+              (Eq.trans
+                (congr
+                  (congrArg Iff
+                    (Eq.trans
+                      (congrArg
+                        (fun x =>
+                          Option.map
+                              (fun instruction =>
+                                { body := IndependentDuodenary.referenceApply body instruction.1,
+                                  done := instruction.2 })
+                              x =
+                            none)
+                        (Eq.trans
+                          (ite_cond_eq_false none
+                            (if
+                                ({ body := body, done := false }.body.state, { body := body, done := false }.done).1 =
+                                    0 ∨
+                                  ({ body := body, done := false }.body.state, { body := body, done := false }.done).1 =
+                                    1 then
+                              some
+                                (IndependentDuodenary.normalizationFinishInstruction mode
+                                    ({ body := body, done := false }.body.state, { body := body, done := false }.done).1
+                                    (IndependentDuodenary.referenceRead { body := body, done := false }.body),
+                                  true)
+                            else
+                              some
+                                (M.transition
+                                    ({ body := body, done := false }.body.state, { body := body, done := false }.done).1
+                                    (IndependentDuodenary.referenceRead { body := body, done := false }.body),
+                                  false))
+                            Bool.false_eq_true)
+                          (ite_congr (Eq.refl (body.state = 0 ∨ body.state = 1))
+                            (fun a_1 =>
+                              Eq.refl
+                                (some
+                                  (IndependentDuodenary.normalizationFinishInstruction mode body.state
+                                      (IndependentDuodenary.referenceRead body),
+                                    true)))
+                            fun a_1 =>
+                            Eq.refl (some (M.transition body.state (IndependentDuodenary.referenceRead body), false)))))
+                      Init.Data.Option.Lemmas._auxLemma.12))
+                  Bool.false_eq_true)
+                (iff_false
+                  ((if body.state = 0 ∨ body.state = 1 then
+                      some
+                        (IndependentDuodenary.normalizationFinishInstruction mode body.state
+                            (IndependentDuodenary.referenceRead body),
+                          true)
+                    else some (M.transition body.state (IndependentDuodenary.referenceRead body), false)) =
+                    none))))
+            (Decidable.casesOn instDecidableOr
+              (fun h =>
+                Eq.mpr (id (congrArg (fun x => ¬x = none) (if_neg h)))
+                  (of_eq_true (Eq.trans (congrArg Not (eq_false' fun h => Option.noConfusion h)) not_false_eq_true)))
+              fun h =>
+              Eq.mpr (id (congrArg (fun x => ¬x = none) (if_pos h)))
+                (of_eq_true (Eq.trans (congrArg Not (eq_false' fun h => Option.noConfusion h)) not_false_eq_true))))
+      (fun h =>
+        Eq.symm h ▸
+          of_eq_true
+            (Eq.trans
+              (congr
+                (congrArg Iff
+                  (Eq.trans
+                    (congrArg
+                      (fun x =>
+                        Option.map
+                            (fun instruction =>
+                              { body := IndependentDuodenary.referenceApply body instruction.1, done := instruction.2 })
+                            x =
+                          none)
+                      (ite_cond_eq_true none
+                        (if
+                            ({ body := body, done := true }.body.state, { body := body, done := true }.done).1 = 0 ∨
+                              ({ body := body, done := true }.body.state, { body := body, done := true }.done).1 =
+                                1 then
+                          some
+                            (IndependentDuodenary.normalizationFinishInstruction mode
+                                ({ body := body, done := true }.body.state, { body := body, done := true }.done).1
+                                (IndependentDuodenary.referenceRead { body := body, done := true }.body),
+                              true)
+                        else
+                          some
+                            (M.transition
+                                ({ body := body, done := true }.body.state, { body := body, done := true }.done).1
+                                (IndependentDuodenary.referenceRead { body := body, done := true }.body),
+                              false))
+                        (eq_self true)))
+                    (eq_self none)))
+                (eq_self true))
+              (iff_self True)))
+      (Eq.refl done)
+'IndependentDuodenary.normalization_halted_iff_done' depends on axioms: [propext]
+DIRECT DEPENDENCIES normalization_halted_iff_done: [IndependentDuodenary.referenceApply,
+ Eq.mpr,
+ False,
+ Decidable.casesOn,
+ iff_false,
+ Option.noConfusion,
+ congrArg,
+ instDecidableEqFin,
+ Decidable,
+ Bool.false_eq_true,
+ Option.some,
+ id,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ IndependentDuodenary.NormalizationConfiguration.mk,
+ Prod.mk,
+ instOfNatNat,
+ IndependentDuodenary.referenceRead,
+ ite_cond_eq_true,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ if_pos,
+ Init.Data.Option.Lemmas._auxLemma.12,
+ Prod.fst,
+ IndependentDuodenary.NormalizationConfiguration.done,
+ iff_self,
+ Bool.true,
+ Option.none,
+ instHAdd,
+ Option.map,
+ Iff,
+ IndependentDuodenary.NormalizationConfiguration.casesOn,
+ Bool.casesOn,
+ IndependentDuodenary.normalizationFinishInstruction,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ IndependentDuodenary.ReferenceDeterministicMachine.transition,
+ Nat,
+ congr,
+ IndependentDuodenary.AcceptanceConvention,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ instAddNat,
+ IndependentDuodenary.normalizationStep,
+ Eq.refl,
+ IndependentDuodenary.ReferenceInstruction,
+ Or,
+ IndependentDuodenary.NormalizationConfiguration,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ Prod,
+ ite_congr,
+ OfNat.ofNat,
+ Eq.symm,
+ not_false_eq_true,
+ ite_cond_eq_false,
+ Bool.false,
+ eq_false',
+ Fin,
+ Eq,
+ Prod.snd,
+ if_neg,
+ instDecidableOr,
+ Not,
+ Eq.trans,
+ IndependentDuodenary.normalizationTable.proof_1,
+ Option,
+ ite]
+theorem IndependentDuodenary.normalization_running_step : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  IndependentDuodenary.normalizationStep M mode (IndependentDuodenary.normalizationLift q) =
+    match IndependentDuodenary.referenceDStep M q with
+    | none => some (IndependentDuodenary.normalizationFinish mode q)
+    | some q' => some (IndependentDuodenary.normalizationLift q') :=
+fun {a s k} M mode q =>
+  if halt : IndependentDuodenary.referenceTerminal q then
+    Eq.mpr
+      (id
+        (congrArg
+          (fun x =>
+            Option.map
+                (fun instruction =>
+                  { body := IndependentDuodenary.referenceApply q instruction.1, done := instruction.2 })
+                x =
+              match
+                if q.state = 0 ∨ q.state = 1 then none
+                else
+                  some
+                    (IndependentDuodenary.referenceApply q
+                      (M.transition q.state (IndependentDuodenary.referenceRead q))) with
+              | none =>
+                some
+                  {
+                    body :=
+                      IndependentDuodenary.referenceApply q
+                        (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                          (IndependentDuodenary.referenceRead q)),
+                    done := true }
+              | some q' => some { body := q', done := false })
+          (Eq.trans
+            (ite_cond_eq_false none
+              (if
+                  ((IndependentDuodenary.normalizationLift q).body.state,
+                          (IndependentDuodenary.normalizationLift q).done).1 =
+                      0 ∨
+                    ((IndependentDuodenary.normalizationLift q).body.state,
+                          (IndependentDuodenary.normalizationLift q).done).1 =
+                      1 then
+                some
+                  (IndependentDuodenary.normalizationFinishInstruction mode
+                      ((IndependentDuodenary.normalizationLift q).body.state,
+                          (IndependentDuodenary.normalizationLift q).done).1
+                      (IndependentDuodenary.referenceRead (IndependentDuodenary.normalizationLift q).body),
+                    true)
+              else
+                some
+                  (M.transition
+                      ((IndependentDuodenary.normalizationLift q).body.state,
+                          (IndependentDuodenary.normalizationLift q).done).1
+                      (IndependentDuodenary.referenceRead (IndependentDuodenary.normalizationLift q).body),
+                    false))
+              Bool.false_eq_true)
+            (ite_congr (Eq.refl (q.state = 0 ∨ q.state = 1))
+              (fun a_1 =>
+                Eq.refl
+                  (some
+                    (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                        (IndependentDuodenary.referenceRead q),
+                      true)))
+              fun a_1 => Eq.refl (some (M.transition q.state (IndependentDuodenary.referenceRead q), false))))))
+      (Or.casesOn halt
+        (fun h =>
+          of_eq_true
+            (Eq.trans
+              (congr
+                (congrArg
+                  (fun x =>
+                    Eq
+                      (Option.map
+                        (fun instruction =>
+                          { body := IndependentDuodenary.referenceApply q instruction.1, done := instruction.2 })
+                        x))
+                  (Eq.trans
+                    (ite_cond_eq_true
+                      (some
+                        (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                            (IndependentDuodenary.referenceRead q),
+                          true))
+                      (some (M.transition q.state (IndependentDuodenary.referenceRead q), false))
+                      (Eq.trans
+                        (congr (congrArg Or (Eq.trans (congrArg (fun x => x = 0) h) (eq_self 0)))
+                          (Eq.trans (congrArg (fun x => x = 1) h) Mathlib.Algebra.NeZero._auxLemma.2))
+                        (or_false True)))
+                    (congrArg
+                      (fun x =>
+                        some
+                          (IndependentDuodenary.normalizationFinishInstruction mode x
+                              (IndependentDuodenary.referenceRead q),
+                            true))
+                      h)))
+                (Eq.trans
+                  (congrArg
+                    (fun x =>
+                      match x with
+                      | none =>
+                        some
+                          {
+                            body :=
+                              IndependentDuodenary.referenceApply q
+                                (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                                  (IndependentDuodenary.referenceRead q)),
+                            done := true }
+                      | some q' => some { body := q', done := false })
+                    (ite_cond_eq_true none
+                      (some
+                        (IndependentDuodenary.referenceApply q
+                          (M.transition q.state (IndependentDuodenary.referenceRead q))))
+                      (Eq.trans
+                        (congr (congrArg Or (Eq.trans (congrArg (fun x => x = 0) h) (eq_self 0)))
+                          (Eq.trans (congrArg (fun x => x = 1) h) Mathlib.Algebra.NeZero._auxLemma.2))
+                        (or_false True))))
+                  (congrArg
+                    (fun x =>
+                      some
+                        {
+                          body :=
+                            IndependentDuodenary.referenceApply q
+                              (IndependentDuodenary.normalizationFinishInstruction mode x
+                                (IndependentDuodenary.referenceRead q)),
+                          done := true })
+                    h)))
+              (eq_self
+                (some
+                  {
+                    body :=
+                      IndependentDuodenary.referenceApply q
+                        (IndependentDuodenary.normalizationFinishInstruction mode 0
+                          (IndependentDuodenary.referenceRead q)),
+                    done := true }))))
+        fun h =>
+        of_eq_true
+          (Eq.trans
+            (congr
+              (congrArg
+                (fun x =>
+                  Eq
+                    (Option.map
+                      (fun instruction =>
+                        { body := IndependentDuodenary.referenceApply q instruction.1, done := instruction.2 })
+                      x))
+                (Eq.trans
+                  (ite_cond_eq_true
+                    (some
+                      (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                          (IndependentDuodenary.referenceRead q),
+                        true))
+                    (some (M.transition q.state (IndependentDuodenary.referenceRead q), false))
+                    (Eq.trans
+                      (congr (congrArg Or (Eq.trans (congrArg (fun x => x = 0) h) Mathlib.Algebra.NeZero._auxLemma.3))
+                        (Eq.trans (congrArg (fun x => x = 1) h) (eq_self 1)))
+                      (or_true False)))
+                  (congrArg
+                    (fun x =>
+                      some
+                        (IndependentDuodenary.normalizationFinishInstruction mode x
+                            (IndependentDuodenary.referenceRead q),
+                          true))
+                    h)))
+              (Eq.trans
+                (congrArg
+                  (fun x =>
+                    match x with
+                    | none =>
+                      some
+                        {
+                          body :=
+                            IndependentDuodenary.referenceApply q
+                              (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                                (IndependentDuodenary.referenceRead q)),
+                          done := true }
+                    | some q' => some { body := q', done := false })
+                  (ite_cond_eq_true none
+                    (some
+                      (IndependentDuodenary.referenceApply q
+                        (M.transition q.state (IndependentDuodenary.referenceRead q))))
+                    (Eq.trans
+                      (congr (congrArg Or (Eq.trans (congrArg (fun x => x = 0) h) Mathlib.Algebra.NeZero._auxLemma.3))
+                        (Eq.trans (congrArg (fun x => x = 1) h) (eq_self 1)))
+                      (or_true False))))
+                (congrArg
+                  (fun x =>
+                    some
+                      {
+                        body :=
+                          IndependentDuodenary.referenceApply q
+                            (IndependentDuodenary.normalizationFinishInstruction mode x
+                              (IndependentDuodenary.referenceRead q)),
+                        done := true })
+                  h)))
+            (eq_self
+              (some
+                {
+                  body :=
+                    IndependentDuodenary.referenceApply q
+                      (IndependentDuodenary.normalizationFinishInstruction mode 1
+                        (IndependentDuodenary.referenceRead q)),
+                  done := true }))))
+  else
+    Eq.mpr
+      (id
+        (congrArg
+          (fun x =>
+            Option.map
+                (fun instruction =>
+                  { body := IndependentDuodenary.referenceApply q instruction.1, done := instruction.2 })
+                x =
+              match
+                if q.state = 0 ∨ q.state = 1 then none
+                else
+                  some
+                    (IndependentDuodenary.referenceApply q
+                      (M.transition q.state (IndependentDuodenary.referenceRead q))) with
+              | none =>
+                some
+                  {
+                    body :=
+                      IndependentDuodenary.referenceApply q
+                        (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                          (IndependentDuodenary.referenceRead q)),
+                    done := true }
+              | some q' => some { body := q', done := false })
+          (Eq.trans
+            (ite_cond_eq_false none
+              (if
+                  ((IndependentDuodenary.normalizationLift q).body.state,
+                          (IndependentDuodenary.normalizationLift q).done).1 =
+                      0 ∨
+                    ((IndependentDuodenary.normalizationLift q).body.state,
+                          (IndependentDuodenary.normalizationLift q).done).1 =
+                      1 then
+                some
+                  (IndependentDuodenary.normalizationFinishInstruction mode
+                      ((IndependentDuodenary.normalizationLift q).body.state,
+                          (IndependentDuodenary.normalizationLift q).done).1
+                      (IndependentDuodenary.referenceRead (IndependentDuodenary.normalizationLift q).body),
+                    true)
+              else
+                some
+                  (M.transition
+                      ((IndependentDuodenary.normalizationLift q).body.state,
+                          (IndependentDuodenary.normalizationLift q).done).1
+                      (IndependentDuodenary.referenceRead (IndependentDuodenary.normalizationLift q).body),
+                    false))
+              Bool.false_eq_true)
+            (ite_congr (Eq.refl (q.state = 0 ∨ q.state = 1))
+              (fun a_1 =>
+                Eq.refl
+                  (some
+                    (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                        (IndependentDuodenary.referenceRead q),
+                      true)))
+              fun a_1 => Eq.refl (some (M.transition q.state (IndependentDuodenary.referenceRead q), false))))))
+      (of_eq_true
+        (Eq.trans
+          (congr
+            (congrArg
+              (fun x =>
+                Eq
+                  (Option.map
+                    (fun instruction =>
+                      { body := IndependentDuodenary.referenceApply q instruction.1, done := instruction.2 })
+                    x))
+              (ite_cond_eq_false
+                (some
+                  (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                      (IndependentDuodenary.referenceRead q),
+                    true))
+                (some (M.transition q.state (IndependentDuodenary.referenceRead q), false))
+                (Eq.trans
+                  (congr (congrArg Or (eq_false (Eq.mp Init.PropLemmas._auxLemma.4 halt).1))
+                    (eq_false (Eq.mp Init.PropLemmas._auxLemma.4 halt).2))
+                  (or_self False))))
+            (congrArg
+              (fun x =>
+                match x with
+                | none =>
+                  some
+                    {
+                      body :=
+                        IndependentDuodenary.referenceApply q
+                          (IndependentDuodenary.normalizationFinishInstruction mode q.state
+                            (IndependentDuodenary.referenceRead q)),
+                      done := true }
+                | some q' => some { body := q', done := false })
+              (ite_cond_eq_false none
+                (some
+                  (IndependentDuodenary.referenceApply q (M.transition q.state (IndependentDuodenary.referenceRead q))))
+                (Eq.trans
+                  (congr (congrArg Or (eq_false (Eq.mp Init.PropLemmas._auxLemma.4 halt).1))
+                    (eq_false (Eq.mp Init.PropLemmas._auxLemma.4 halt).2))
+                  (or_self False)))))
+          (eq_self
+            (some
+              {
+                body :=
+                  IndependentDuodenary.referenceApply q (M.transition q.state (IndependentDuodenary.referenceRead q)),
+                done := false }))))
+'IndependentDuodenary.normalization_running_step' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_running_step: [IndependentDuodenary.referenceApply,
+ IndependentDuodenary.instDecidableReferenceTerminal,
+ Eq.mpr,
+ False,
+ Init.PropLemmas._auxLemma.4,
+ IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.referenceTerminal.proof_1,
+ IndependentDuodenary.referenceTerminal,
+ NeZero.one,
+ Semiring.toOne,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ Fin.instCommRing,
+ instDecidableEqFin,
+ Fin.nontrivial,
+ Bool.false_eq_true,
+ Option.some,
+ CommSemiring.toCommMonoidWithZero,
+ Eq.mp,
+ id,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.NormalizationConfiguration.mk,
+ Prod.mk,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ IndependentDuodenary.normalization_running_step.match_1,
+ IndependentDuodenary.referenceRead,
+ ite_cond_eq_true,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ Prod.fst,
+ dite,
+ Or.casesOn,
+ IndependentDuodenary.NormalizationConfiguration.done,
+ Bool.true,
+ IndependentDuodenary.referenceDStep,
+ Option.none,
+ instHAdd,
+ Option.map,
+ And,
+ Unit,
+ CommRing.toCommSemiring,
+ IndependentDuodenary.normalizationFinishInstruction,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.ReferenceDeterministicMachine.transition,
+ Nat.instNeZeroSucc,
+ Nat,
+ congr,
+ IndependentDuodenary.AcceptanceConvention,
+ True,
+ eq_self,
+ or_self,
+ Bool,
+ of_eq_true,
+ Mathlib.Algebra.NeZero._auxLemma.3,
+ instAddNat,
+ IndependentDuodenary.normalizationStep,
+ Eq.refl,
+ or_false,
+ IndependentDuodenary.ReferenceInstruction,
+ Or,
+ IndependentDuodenary.NormalizationConfiguration,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ Prod,
+ ite_congr,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Bool.false,
+ Fin,
+ or_true,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Prod.snd,
+ instDecidableOr,
+ Not,
+ Eq.trans,
+ IndependentDuodenary.normalizationTable.proof_1,
+ Option,
+ ite]
+theorem IndependentDuodenary.normalization_finish_head : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  (IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.stateToHead q).body.tape 0
+      ((IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.stateToHead q).body.head 0) =
+    if q.state = 0 then 1 else 2 :=
+fun {a s k} q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = if q.state = 0 then 1 else 2)
+        (Eq.trans
+          (congr
+            (congrArg (fun x => { body := x, done := true }.body.tape 0)
+              (congr
+                (congrArg
+                  (IndependentDuodenary.ReferenceConfiguration.mk
+                    (if
+                        IndependentDuodenary.normalizationVerdict IndependentDuodenary.AcceptanceConvention.stateToHead
+                            q.state (IndependentDuodenary.referenceRead q) =
+                          true then
+                      0
+                    else 1))
+                  (funext fun i => add_zero (q.head i)))
+                (funext fun i =>
+                  funext fun j =>
+                    ite_congr (Eq.refl (j = q.head i))
+                      (fun a_1 =>
+                        Eq.refl
+                          (if i = 0 then if q.state = 0 then 1 else 2 else IndependentDuodenary.referenceRead q i))
+                      fun a_1 => Eq.refl (q.tape i j))))
+            (congrArg (fun x => { body := x, done := true }.body.head 0)
+              (congr
+                (congrArg
+                  (IndependentDuodenary.ReferenceConfiguration.mk
+                    (if
+                        IndependentDuodenary.normalizationVerdict IndependentDuodenary.AcceptanceConvention.stateToHead
+                            q.state (IndependentDuodenary.referenceRead q) =
+                          true then
+                      0
+                    else 1))
+                  (funext fun i => add_zero (q.head i)))
+                (funext fun i =>
+                  funext fun j =>
+                    ite_congr (Eq.refl (j = q.head i))
+                      (fun a_1 =>
+                        Eq.refl
+                          (if i = 0 then if q.state = 0 then 1 else 2 else IndependentDuodenary.referenceRead q i))
+                      fun a_1 => Eq.refl (q.tape i j)))))
+          (Eq.trans
+            (ite_cond_eq_true (if 0 = 0 then if q.state = 0 then 1 else 2 else IndependentDuodenary.referenceRead q 0)
+              (q.tape 0 (q.head 0)) (eq_self (q.head 0)))
+            (ite_cond_eq_true (if q.state = 0 then 1 else 2) (IndependentDuodenary.referenceRead q 0) (eq_self 0)))))
+      (eq_self (if q.state = 0 then 1 else 2)))
+'IndependentDuodenary.normalization_finish_head' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_finish_head: [congrArg,
+ AddMonoid.toAddZeroClass,
+ instDecidableEqFin,
+ IndependentDuodenary.ReferenceInstruction.write,
+ IndependentDuodenary.normalizationFinishInstruction.proof_1,
+ Int.instDecidableEq,
+ IndependentDuodenary.normalizationVerdict,
+ IndependentDuodenary.normalizationFinishInstruction.proof_2,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.NormalizationConfiguration.mk,
+ instOfNatNat,
+ Int,
+ Int.instAddMonoid,
+ IndependentDuodenary.referenceRead,
+ ite_cond_eq_true,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ Bool.true,
+ funext,
+ instHAdd,
+ IndependentDuodenary.normalizationFinishInstruction,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.ReferenceConfiguration.mk,
+ congr,
+ AddZeroClass.toZero,
+ True,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ Bool,
+ of_eq_true,
+ instAddNat,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ IndependentDuodenary.AcceptanceConvention.stateToHead,
+ add_zero,
+ ite_congr,
+ OfNat.ofNat,
+ Fin,
+ AddZeroClass.toAdd,
+ Eq,
+ Not,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.normalization_finish_head_boolean : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  let out := (IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.stateToHead q).body;
+  out.tape 0 (out.head 0) = 1 ∨ out.tape 0 (out.head 0) = 2 :=
+fun {a s k} q =>
+  Eq.mpr
+    (id
+      (congr (congrArg (fun x => Or (x = 1)) (IndependentDuodenary.normalization_finish_head q))
+        (congrArg (fun x => x = 2) (IndependentDuodenary.normalization_finish_head q))))
+    (Decidable.casesOn (instDecidableEqFin (s + 2) q.state 0)
+      (fun h =>
+        Eq.mpr (id (congr (congrArg (fun x => Or (x = 1)) (if_neg h)) (congrArg (fun x => x = 2) (if_neg h))))
+          (of_eq_true (Eq.trans (congrArg (Or (2 = 1)) (eq_self 2)) (or_true (2 = 1)))))
+      fun h =>
+      Eq.mpr (id (congr (congrArg (fun x => Or (x = 1)) (if_pos h)) (congrArg (fun x => x = 2) (if_pos h))))
+        (of_eq_true (Eq.trans (congrArg (fun x => x ∨ 1 = 2) (eq_self 1)) (true_or (1 = 2)))))
+'IndependentDuodenary.normalization_finish_head_boolean' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_finish_head_boolean: [Eq.mpr,
+ Decidable.casesOn,
+ congrArg,
+ true_or,
+ instDecidableEqFin,
+ Decidable,
+ id,
+ Fin.instOfNat,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.normalization_finish_head,
+ instOfNatNat,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ if_pos,
+ instHAdd,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ of_eq_true,
+ instAddNat,
+ Or,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ IndependentDuodenary.AcceptanceConvention.stateToHead,
+ OfNat.ofNat,
+ Fin,
+ or_true,
+ Eq,
+ if_neg,
+ Not,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.normalization_finish_head_accepts : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  let out := (IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.stateToHead q).body;
+  out.tape 0 (out.head 0) = 1 ↔ q.state = 0 :=
+fun {a s k} q =>
+  Eq.mpr (id (congrArg (fun x => x = 1 ↔ q.state = 0) (IndependentDuodenary.normalization_finish_head q)))
+    (let_fun h := fun e =>
+      let_fun this := congrArg Fin.val e;
+      False.elim (Eq.mp (Mathlib.Algebra.CharZero.Defs._auxLemma.9 2) this);
+    Decidable.casesOn (instDecidableEqFin (s + 2) q.state 0)
+      (fun h_1 =>
+        Eq.mpr (id (congrArg (fun x => x = 1 ↔ q.state = 0) (if_neg h_1)))
+          (of_eq_true (Eq.trans (congr (congrArg Iff (eq_false (id (id h)))) (eq_false h_1)) (iff_self False))))
+      fun h =>
+      Eq.mpr (id (congrArg (fun x => x = 1 ↔ q.state = 0) (if_pos h)))
+        (of_eq_true
+          (Eq.trans (congr (congrArg Iff (eq_self 1)) (Eq.trans (congrArg (fun x => x = 0) h) (eq_self 0)))
+            (iff_self True))))
+'IndependentDuodenary.normalization_finish_head_accepts' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_finish_head_accepts: [Eq.mpr,
+ False,
+ Decidable.casesOn,
+ eq_false,
+ congrArg,
+ False.elim,
+ instDecidableEqFin,
+ Decidable,
+ Mathlib.Algebra.CharZero.Defs._auxLemma.9,
+ Nat.instCharZero,
+ Eq.mp,
+ id,
+ Fin.instOfNat,
+ IndependentDuodenary.normalizationFinish,
+ AddMonoidWithOne.toNatCast,
+ IndependentDuodenary.normalization_finish_head,
+ Ne,
+ instOfNatNat,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ if_pos,
+ Fin.val,
+ Nat.instAddMonoidWithOne,
+ iff_self,
+ AddMonoidWithOne.toOne,
+ instHAdd,
+ Iff,
+ instNatAtLeastTwo,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ of_eq_true,
+ One.toOfNat1,
+ instAddNat,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ IndependentDuodenary.AcceptanceConvention.stateToHead,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ if_neg,
+ instOfNatAtLeastTwo,
+ Not,
+ letFun,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.normalization_finish_state_accepts : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  (IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.headToState q).body.state = 0 ↔
+    q.tape 0 (q.head 0) = 1 :=
+fun {a s k} q =>
+  let_fun h := Ne.symm IndependentDuodenary.reference_accept_reject_distinct;
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x ↔ q.tape 0 (q.head 0) = 1)
+        (Eq.trans
+          (Eq.trans
+            (congrArg (fun x => { body := x, done := true }.body.state = 0)
+              (congr
+                (congr
+                  (congrArg
+                    (fun x =>
+                      IndependentDuodenary.ReferenceConfiguration.mk
+                        { state := x, write := fun i => q.tape i (q.head i),
+                            move := fun x => IndependentDuodenary.ReferenceMove.stay }.state)
+                    (ite_congr decide_eq_true_eq (fun a => Eq.refl 0) fun a => Eq.refl 1))
+                  (funext fun i =>
+                    congrArg
+                      (fun x =>
+                        q.head i +
+                          IndependentDuodenary.referenceDisplacement
+                            ({ state := x, write := fun i => q.tape i (q.head i),
+                                  move := fun x => IndependentDuodenary.ReferenceMove.stay }.move
+                              i))
+                      (ite_congr decide_eq_true_eq (fun a => Eq.refl 0) fun a => Eq.refl 1)))
+                (funext fun i =>
+                  funext fun j =>
+                    ite_congr (Eq.refl (j = q.head i))
+                      (fun a_1 =>
+                        congrArg
+                          (fun x =>
+                            { state := x, write := fun i => q.tape i (q.head i),
+                                  move := fun x => IndependentDuodenary.ReferenceMove.stay }.write
+                              i)
+                          (ite_congr decide_eq_true_eq (fun a => Eq.refl 0) fun a => Eq.refl 1))
+                      fun a_1 => Eq.refl (q.tape i j))))
+            Init.PropLemmas._auxLemma.65)
+          (Eq.trans (Eq.trans (implies_congr (Eq.refl ¬q.tape 0 (q.head 0) = 1) (eq_false h)) Init.Core._auxLemma.5)
+            Init.PropLemmas._auxLemma.52)))
+      (iff_self (q.tape 0 (q.head 0) = 1)))
+'IndependentDuodenary.normalization_finish_state_accepts' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_finish_state_accepts: [IndependentDuodenary.AcceptanceConvention.headToState,
+ False,
+ eq_false,
+ congrArg,
+ instDecidableEqFin,
+ IndependentDuodenary.ReferenceInstruction.write,
+ IndependentDuodenary.normalizationFinishInstruction.proof_1,
+ IndependentDuodenary.referenceDisplacement,
+ Int.instDecidableEq,
+ IndependentDuodenary.normalizationVerdict,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.NormalizationConfiguration.mk,
+ Ne,
+ Ne.symm,
+ instOfNatNat,
+ Int,
+ IndependentDuodenary.referenceRead,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ IndependentDuodenary.ReferenceInstruction.state,
+ iff_self,
+ Init.PropLemmas._auxLemma.52,
+ IndependentDuodenary.ReferenceMove.stay,
+ Bool.true,
+ funext,
+ instHAdd,
+ Iff,
+ IndependentDuodenary.normalizationFinishInstruction,
+ Init.PropLemmas._auxLemma.65,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ IndependentDuodenary.ReferenceInstruction.mk,
+ implies_congr,
+ IndependentDuodenary.normalizationVerdict.proof_2,
+ Nat,
+ IndependentDuodenary.ReferenceConfiguration.mk,
+ Init.Core._auxLemma.5,
+ congr,
+ True,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ Bool,
+ of_eq_true,
+ Int.instAdd,
+ IndependentDuodenary.ReferenceInstruction.move,
+ instAddNat,
+ Eq.refl,
+ IndependentDuodenary.reference_accept_reject_distinct,
+ decide_eq_true_eq,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ ite_congr,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Not,
+ letFun,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.normalization_source_step : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  (q q' : IndependentDuodenary.ReferenceConfiguration a s k),
+  IndependentDuodenary.referenceDEdge M q q' →
+    IndependentDuodenary.normalizationEdge M mode (IndependentDuodenary.normalizationLift q)
+      (IndependentDuodenary.normalizationLift q') :=
+fun {a s k} M mode q q' step =>
+  id
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => _a = some (IndependentDuodenary.normalizationLift q'))
+          (IndependentDuodenary.normalization_running_step M mode q)))
+      (Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              (match _a with
+                | none => some (IndependentDuodenary.normalizationFinish mode q)
+                | some q' => some (IndependentDuodenary.normalizationLift q')) =
+                some (IndependentDuodenary.normalizationLift q'))
+            step))
+        (Eq.refl
+          (match some q' with
+          | none => some (IndependentDuodenary.normalizationFinish mode q)
+          | some q' => some (IndependentDuodenary.normalizationLift q')))))
+'IndependentDuodenary.normalization_source_step' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_source_step: [Eq.mpr,
+ IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.normalization_running_step,
+ congrArg,
+ Option.some,
+ id,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.normalization_running_step.match_1,
+ IndependentDuodenary.referenceDStep,
+ Unit,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ Nat,
+ IndependentDuodenary.AcceptanceConvention,
+ IndependentDuodenary.normalizationStep,
+ Eq.refl,
+ IndependentDuodenary.NormalizationConfiguration,
+ Eq,
+ IndependentDuodenary.normalizationEdge,
+ IndependentDuodenary.referenceDEdge,
+ Option]
+theorem IndependentDuodenary.normalization_halt_step : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  IndependentDuodenary.referenceTerminal q →
+    IndependentDuodenary.normalizationEdge M mode (IndependentDuodenary.normalizationLift q)
+      (IndependentDuodenary.normalizationFinish mode q) :=
+fun {a s k} M mode q halt =>
+  id
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => _a = some (IndependentDuodenary.normalizationFinish mode q))
+          (IndependentDuodenary.normalization_running_step M mode q)))
+      (Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              (match _a with
+                | none => some (IndependentDuodenary.normalizationFinish mode q)
+                | some q' => some (IndependentDuodenary.normalizationLift q')) =
+                some (IndependentDuodenary.normalizationFinish mode q))
+            ((IndependentDuodenary.reference_dstep_none_iff M q).mpr halt)))
+        (Eq.refl
+          (match none with
+          | none => some (IndependentDuodenary.normalizationFinish mode q)
+          | some q' => some (IndependentDuodenary.normalizationLift q')))))
+'IndependentDuodenary.normalization_halt_step' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_halt_step: [Iff.mpr,
+ Eq.mpr,
+ IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.referenceTerminal,
+ IndependentDuodenary.normalization_running_step,
+ congrArg,
+ IndependentDuodenary.reference_dstep_none_iff,
+ Option.some,
+ id,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.normalization_running_step.match_1,
+ IndependentDuodenary.referenceDStep,
+ Option.none,
+ Unit,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ Nat,
+ IndependentDuodenary.AcceptanceConvention,
+ IndependentDuodenary.normalizationStep,
+ Eq.refl,
+ IndependentDuodenary.NormalizationConfiguration,
+ Eq,
+ IndependentDuodenary.normalizationEdge,
+ Option]
+theorem IndependentDuodenary.normalization_forward_run : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  {n : ℕ} {q q' : IndependentDuodenary.ReferenceConfiguration a s k},
+  IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) n q q' →
+    IndependentDuodenary.ReferenceRun (IndependentDuodenary.normalizationEdge M mode) n
+      (IndependentDuodenary.normalizationLift q) (IndependentDuodenary.normalizationLift q') :=
+fun {a s k} M mode {n} {q q'} run =>
+  IndependentDuodenary.ReferenceRun.rec
+    (fun q => IndependentDuodenary.ReferenceRun.zero (IndependentDuodenary.normalizationLift q))
+    (fun {n} {q q' q''} run step ih =>
+      IndependentDuodenary.ReferenceRun.next ih (IndependentDuodenary.normalization_source_step M mode q' q'' step))
+    run
+'IndependentDuodenary.normalization_forward_run' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_forward_run: [IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.ReferenceRun.rec,
+ IndependentDuodenary.ReferenceRun.zero,
+ IndependentDuodenary.ReferenceRun.next,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ Nat,
+ IndependentDuodenary.AcceptanceConvention,
+ IndependentDuodenary.normalization_source_step,
+ IndependentDuodenary.ReferenceRun,
+ IndependentDuodenary.NormalizationConfiguration,
+ IndependentDuodenary.normalizationEdge,
+ IndependentDuodenary.referenceDEdge]
+theorem IndependentDuodenary.normalization_finished_run : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  {n : ℕ} {q q' : IndependentDuodenary.ReferenceConfiguration a s k},
+  IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) n q q' →
+    IndependentDuodenary.referenceTerminal q' →
+      IndependentDuodenary.ReferenceRun (IndependentDuodenary.normalizationEdge M mode) (n + 1)
+        (IndependentDuodenary.normalizationLift q) (IndependentDuodenary.normalizationFinish mode q') :=
+fun {a s k} M mode {n} {q q'} run halt =>
+  IndependentDuodenary.ReferenceRun.next (IndependentDuodenary.normalization_forward_run M mode run)
+    (IndependentDuodenary.normalization_halt_step M mode q' halt)
+'IndependentDuodenary.normalization_finished_run' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_finished_run: [IndependentDuodenary.normalization_halt_step,
+ IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.referenceTerminal,
+ IndependentDuodenary.normalizationFinish,
+ instOfNatNat,
+ IndependentDuodenary.ReferenceRun.next,
+ instHAdd,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ Nat,
+ IndependentDuodenary.AcceptanceConvention,
+ IndependentDuodenary.normalization_forward_run,
+ instAddNat,
+ IndependentDuodenary.ReferenceRun,
+ IndependentDuodenary.NormalizationConfiguration,
+ OfNat.ofNat,
+ IndependentDuodenary.normalizationEdge,
+ IndependentDuodenary.referenceDEdge]
+theorem IndependentDuodenary.normalization_reverse_run : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  (initial : IndependentDuodenary.ReferenceConfiguration a s k) {n : ℕ}
+  {out : IndependentDuodenary.NormalizationConfiguration a s k},
+  IndependentDuodenary.ReferenceRun (IndependentDuodenary.normalizationEdge M mode) n
+      (IndependentDuodenary.normalizationLift initial) out →
+    (∃ q,
+        IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) n initial q ∧
+          out = IndependentDuodenary.normalizationLift q) ∨
+      ∃ t q,
+        n = t + 1 ∧
+          IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) t initial q ∧
+            IndependentDuodenary.referenceTerminal q ∧ out = IndependentDuodenary.normalizationFinish mode q :=
+fun {a s k} M mode initial {n} {out} run =>
+  IndependentDuodenary.ReferenceRun.rec (motive := fun {n} start {out} run =>
+    IndependentDuodenary.normalizationLift initial = start →
+      (∃ q,
+          IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) n initial q ∧
+            out = IndependentDuodenary.normalizationLift q) ∨
+        ∃ t q,
+          n = t + 1 ∧
+            IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) t initial q ∧
+              IndependentDuodenary.referenceTerminal q ∧ out = IndependentDuodenary.normalizationFinish mode q)
+    (fun q start_eq => Or.inl (Exists.intro initial ⟨IndependentDuodenary.ReferenceRun.zero initial, Eq.symm start_eq⟩))
+    (fun {n} {q q' q''} run step ih start_eq =>
+      Or.casesOn (ih start_eq)
+        (fun h =>
+          Exists.casesOn h fun q h =>
+            And.casesOn h fun source eq =>
+              Option.casesOn (motive := fun t =>
+                IndependentDuodenary.referenceDStep M q = t →
+                  (∃ q,
+                      IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) (n + 1) initial q ∧
+                        q'' = IndependentDuodenary.normalizationLift q) ∨
+                    ∃ t q,
+                      n + 1 = t + 1 ∧
+                        IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) t initial q ∧
+                          IndependentDuodenary.referenceTerminal q ∧
+                            q'' = IndependentDuodenary.normalizationFinish mode q)
+                (IndependentDuodenary.referenceDStep M q)
+                (fun h =>
+                  Eq.ndrec (motive := fun x =>
+                    IndependentDuodenary.referenceDStep M q = x →
+                      (∃ q,
+                          IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) (n + 1) initial q ∧
+                            q'' = IndependentDuodenary.normalizationLift q) ∨
+                        ∃ t q,
+                          n + 1 = t + 1 ∧
+                            IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) t initial q ∧
+                              IndependentDuodenary.referenceTerminal q ∧
+                                q'' = IndependentDuodenary.normalizationFinish mode q)
+                    (fun hs =>
+                      Or.inr
+                        (Exists.intro n
+                          (Exists.intro q
+                            ⟨rfl,
+                              ⟨source,
+                                ⟨(IndependentDuodenary.reference_dstep_none_iff M q).mp hs,
+                                  Eq.symm
+                                    (Eq.mp
+                                      (Eq.trans
+                                        (congrArg
+                                          (fun x =>
+                                            (match x with
+                                              | none => some (IndependentDuodenary.normalizationFinish mode q)
+                                              | some q' => some (IndependentDuodenary.normalizationLift q')) =
+                                              some q'')
+                                          hs)
+                                        (Option.some.injEq (IndependentDuodenary.normalizationFinish mode q) q''))
+                                      (Eq.mp
+                                        (congrArg (fun _a => _a = some q'')
+                                          (IndependentDuodenary.normalization_running_step M mode q))
+                                        (Eq.mp
+                                          (congrArg (fun _a => IndependentDuodenary.normalizationEdge M mode _a q'') eq)
+                                          step)))⟩⟩⟩)))
+                    (Eq.symm h) (Eq.refl (IndependentDuodenary.referenceDStep M q)))
+                (fun q'_1 h =>
+                  Eq.ndrec (motive := fun x =>
+                    IndependentDuodenary.referenceDStep M q = x →
+                      (∃ q,
+                          IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) (n + 1) initial q ∧
+                            q'' = IndependentDuodenary.normalizationLift q) ∨
+                        ∃ t q,
+                          n + 1 = t + 1 ∧
+                            IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) t initial q ∧
+                              IndependentDuodenary.referenceTerminal q ∧
+                                q'' = IndependentDuodenary.normalizationFinish mode q)
+                    (fun hs =>
+                      Or.inl
+                        (Exists.intro q'_1
+                          ⟨IndependentDuodenary.ReferenceRun.next source hs,
+                            Eq.symm
+                              (Eq.mp
+                                (Eq.trans
+                                  (congrArg
+                                    (fun x =>
+                                      (match x with
+                                        | none => some (IndependentDuodenary.normalizationFinish mode q)
+                                        | some q' => some (IndependentDuodenary.normalizationLift q')) =
+                                        some q'')
+                                    hs)
+                                  (Option.some.injEq (IndependentDuodenary.normalizationLift q'_1) q''))
+                                (Eq.mp
+                                  (congrArg (fun _a => _a = some q'')
+                                    (IndependentDuodenary.normalization_running_step M mode q))
+                                  (Eq.mp (congrArg (fun _a => IndependentDuodenary.normalizationEdge M mode _a q'') eq)
+                                    step)))⟩))
+                    (Eq.symm h) (Eq.refl (IndependentDuodenary.referenceDStep M q)))
+                (Eq.refl (IndependentDuodenary.referenceDStep M q)))
+        fun h =>
+        Exists.casesOn h fun t h =>
+          Exists.casesOn h fun q h =>
+            And.casesOn h fun count right =>
+              And.casesOn right fun source right =>
+                And.casesOn right fun halt eq =>
+                  let_fun stopped :=
+                    IndependentDuodenary.normalization_done_stops M mode
+                      (IndependentDuodenary.normalizationFinish mode q) rfl;
+                  Option.noConfusion
+                    (Eq.mp (congrArg (fun _a => _a = some q'') stopped)
+                      (Eq.mp (congrArg (fun _a => IndependentDuodenary.normalizationEdge M mode _a q'') eq) step)))
+    run (Eq.refl (IndependentDuodenary.normalizationLift initial))
+'IndependentDuodenary.normalization_reverse_run' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_reverse_run: [IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.referenceTerminal,
+ IndependentDuodenary.normalization_running_step,
+ IndependentDuodenary.ReferenceRun.rec,
+ Option.noConfusion,
+ congrArg,
+ IndependentDuodenary.reference_dstep_none_iff,
+ IndependentDuodenary.normalization_done_stops,
+ Option.casesOn,
+ Option.some.injEq,
+ Option.some,
+ Exists,
+ Eq.mp,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.ReferenceRun.zero,
+ instOfNatNat,
+ IndependentDuodenary.normalization_running_step.match_1,
+ Or.casesOn,
+ IndependentDuodenary.NormalizationConfiguration.done,
+ And.casesOn,
+ IndependentDuodenary.ReferenceRun.next,
+ IndependentDuodenary.referenceDStep,
+ Option.none,
+ instHAdd,
+ And,
+ Unit,
+ Exists.casesOn,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ Nat,
+ And.intro,
+ IndependentDuodenary.AcceptanceConvention,
+ Exists.intro,
+ Iff.mp,
+ Bool,
+ Eq.ndrec,
+ instAddNat,
+ IndependentDuodenary.normalizationStep,
+ Eq.refl,
+ Or.inl,
+ Or,
+ IndependentDuodenary.ReferenceRun,
+ IndependentDuodenary.NormalizationConfiguration,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ IndependentDuodenary.normalizationEdge,
+ letFun,
+ Or.inr,
+ rfl,
+ Eq.trans,
+ IndependentDuodenary.referenceDEdge,
+ Option]
+theorem IndependentDuodenary.normalization_exact_overhead : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention)
+  (initial : IndependentDuodenary.ReferenceConfiguration a s k) {n : ℕ}
+  {out : IndependentDuodenary.NormalizationConfiguration a s k},
+  IndependentDuodenary.ReferenceRun (IndependentDuodenary.normalizationEdge M mode) n
+      (IndependentDuodenary.normalizationLift initial) out →
+    out.done = true →
+      ∃ t q,
+        n = t + 1 ∧
+          IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) t initial q ∧
+            IndependentDuodenary.referenceTerminal q ∧ out = IndependentDuodenary.normalizationFinish mode q :=
+fun {a s k} M mode initial {n} {out} run done =>
+  Or.casesOn (IndependentDuodenary.normalization_reverse_run M mode initial run)
+    (fun h =>
+      Exists.casesOn h fun q h =>
+        And.casesOn h fun source eq => Bool.noConfusion (Eq.mp (congrArg (fun _a => _a.done = true) eq) done))
+    fun finished => finished
+'IndependentDuodenary.normalization_exact_overhead' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_exact_overhead: [IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.referenceTerminal,
+ congrArg,
+ Exists,
+ Eq.mp,
+ IndependentDuodenary.normalizationFinish,
+ instOfNatNat,
+ Or.casesOn,
+ Bool.noConfusion,
+ IndependentDuodenary.NormalizationConfiguration.done,
+ And.casesOn,
+ Bool.true,
+ instHAdd,
+ And,
+ Exists.casesOn,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ Nat,
+ IndependentDuodenary.AcceptanceConvention,
+ Bool,
+ instAddNat,
+ Or,
+ IndependentDuodenary.ReferenceRun,
+ IndependentDuodenary.NormalizationConfiguration,
+ OfNat.ofNat,
+ IndependentDuodenary.normalization_reverse_run,
+ Eq,
+ IndependentDuodenary.normalizationEdge,
+ IndependentDuodenary.referenceDEdge]
+theorem IndependentDuodenary.normalization_empty_input : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k) (mode : IndependentDuodenary.AcceptanceConvention),
+  IndependentDuodenary.referenceTerminal (IndependentDuodenary.referenceInitial M.initial []) →
+    IndependentDuodenary.ReferenceRun (IndependentDuodenary.normalizationEdge M mode) 1
+      (IndependentDuodenary.normalizationLift (IndependentDuodenary.referenceInitial M.initial []))
+      (IndependentDuodenary.normalizationFinish mode (IndependentDuodenary.referenceInitial M.initial [])) :=
+fun {a s k} M mode halt =>
+  IndependentDuodenary.normalization_finished_run M mode
+    (IndependentDuodenary.ReferenceRun.zero (IndependentDuodenary.referenceInitial M.initial [])) halt
+'IndependentDuodenary.normalization_empty_input' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_empty_input: [IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.referenceTerminal,
+ IndependentDuodenary.ReferenceDeterministicMachine.initial,
+ IndependentDuodenary.normalization_finished_run,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.ReferenceRun.zero,
+ instOfNatNat,
+ IndependentDuodenary.referenceInitial,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ Nat,
+ IndependentDuodenary.AcceptanceConvention,
+ Bool,
+ IndependentDuodenary.ReferenceRun,
+ IndependentDuodenary.NormalizationConfiguration,
+ OfNat.ofNat,
+ IndependentDuodenary.normalizationEdge,
+ IndependentDuodenary.referenceDEdge,
+ List.nil]
+theorem IndependentDuodenary.normalization_state_to_head_language : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k)
+  (initial : IndependentDuodenary.ReferenceConfiguration a s k),
+  (∃ t q,
+      IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) t initial q ∧
+        IndependentDuodenary.referenceTerminal q ∧ q.state = 0) ↔
+    ∃ n out,
+      IndependentDuodenary.ReferenceRun
+          (IndependentDuodenary.normalizationEdge M IndependentDuodenary.AcceptanceConvention.stateToHead) n
+          (IndependentDuodenary.normalizationLift initial) out ∧
+        out.done = true ∧ out.body.tape 0 (out.body.head 0) = 1 :=
+fun {a s k} M initial =>
+  {
+    mp := fun a_1 =>
+      Exists.casesOn a_1 fun t h =>
+        Exists.casesOn h fun q h =>
+          And.casesOn h fun run right =>
+            And.casesOn right fun halt accepts =>
+              Exists.intro (t + 1)
+                (Exists.intro
+                  (IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.stateToHead q)
+                  ⟨IndependentDuodenary.normalization_finished_run M
+                      IndependentDuodenary.AcceptanceConvention.stateToHead run halt,
+                    ⟨rfl, (IndependentDuodenary.normalization_finish_head_accepts q).mpr accepts⟩⟩),
+    mpr := fun a_1 =>
+      Exists.casesOn a_1 fun n h =>
+        Exists.casesOn h fun out h =>
+          And.casesOn h fun run right =>
+            And.casesOn right fun done accepts =>
+              Exists.casesOn
+                (IndependentDuodenary.normalization_exact_overhead M
+                  IndependentDuodenary.AcceptanceConvention.stateToHead initial run done)
+                fun t h =>
+                Exists.casesOn h fun q h =>
+                  And.casesOn h fun count right =>
+                    And.casesOn right fun source right =>
+                      And.casesOn right fun halt eq =>
+                        Exists.intro t
+                          (Exists.intro q
+                            ⟨source,
+                              ⟨halt,
+                                (IndependentDuodenary.normalization_finish_head_accepts q).mp
+                                  (Eq.mp (congrArg (fun _a => _a.body.tape 0 (_a.body.head 0) = 1) eq) accepts)⟩⟩) }
+'IndependentDuodenary.normalization_state_to_head_language' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_state_to_head_language: [Iff.mpr,
+ IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.referenceTerminal,
+ congrArg,
+ IndependentDuodenary.normalization_exact_overhead,
+ IndependentDuodenary.normalization_finished_run,
+ Exists,
+ Eq.mp,
+ Fin.instOfNat,
+ IndependentDuodenary.normalizationFinish,
+ instOfNatNat,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ IndependentDuodenary.NormalizationConfiguration.done,
+ And.casesOn,
+ Bool.true,
+ instHAdd,
+ And,
+ Iff,
+ Exists.casesOn,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.normalization_finish_head_accepts,
+ And.intro,
+ Iff.intro,
+ Exists.intro,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ Iff.mp,
+ Bool,
+ instAddNat,
+ IndependentDuodenary.ReferenceRun,
+ IndependentDuodenary.NormalizationConfiguration,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ IndependentDuodenary.AcceptanceConvention.stateToHead,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.normalizationEdge,
+ rfl,
+ IndependentDuodenary.referenceDEdge]
+theorem IndependentDuodenary.normalization_head_to_state_language : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k)
+  (initial : IndependentDuodenary.ReferenceConfiguration a s k),
+  (∃ t q,
+      IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceDEdge M) t initial q ∧
+        IndependentDuodenary.referenceTerminal q ∧ q.tape 0 (q.head 0) = 1) ↔
+    ∃ n out,
+      IndependentDuodenary.ReferenceRun
+          (IndependentDuodenary.normalizationEdge M IndependentDuodenary.AcceptanceConvention.headToState) n
+          (IndependentDuodenary.normalizationLift initial) out ∧
+        out.done = true ∧ out.body.state = 0 :=
+fun {a s k} M initial =>
+  {
+    mp := fun a_1 =>
+      Exists.casesOn a_1 fun t h =>
+        Exists.casesOn h fun q h =>
+          And.casesOn h fun run right =>
+            And.casesOn right fun halt accepts =>
+              Exists.intro (t + 1)
+                (Exists.intro
+                  (IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.headToState q)
+                  ⟨IndependentDuodenary.normalization_finished_run M
+                      IndependentDuodenary.AcceptanceConvention.headToState run halt,
+                    ⟨rfl, (IndependentDuodenary.normalization_finish_state_accepts q).mpr accepts⟩⟩),
+    mpr := fun a_1 =>
+      Exists.casesOn a_1 fun n h =>
+        Exists.casesOn h fun out h =>
+          And.casesOn h fun run right =>
+            And.casesOn right fun done accepts =>
+              Exists.casesOn
+                (IndependentDuodenary.normalization_exact_overhead M
+                  IndependentDuodenary.AcceptanceConvention.headToState initial run done)
+                fun t h =>
+                Exists.casesOn h fun q h =>
+                  And.casesOn h fun count right =>
+                    And.casesOn right fun source right =>
+                      And.casesOn right fun halt eq =>
+                        Exists.intro t
+                          (Exists.intro q
+                            ⟨source,
+                              ⟨halt,
+                                (IndependentDuodenary.normalization_finish_state_accepts q).mp
+                                  (Eq.mp (congrArg (fun _a => _a.body.state = 0) eq) accepts)⟩⟩) }
+'IndependentDuodenary.normalization_head_to_state_language' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_head_to_state_language: [IndependentDuodenary.AcceptanceConvention.headToState,
+ Iff.mpr,
+ IndependentDuodenary.normalizationLift,
+ IndependentDuodenary.normalization_finish_state_accepts,
+ IndependentDuodenary.referenceTerminal,
+ congrArg,
+ IndependentDuodenary.normalization_exact_overhead,
+ IndependentDuodenary.normalization_finished_run,
+ Exists,
+ Eq.mp,
+ Fin.instOfNat,
+ IndependentDuodenary.normalizationFinish,
+ instOfNatNat,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ IndependentDuodenary.NormalizationConfiguration.done,
+ And.casesOn,
+ Bool.true,
+ instHAdd,
+ And,
+ Iff,
+ Exists.casesOn,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ And.intro,
+ Iff.intro,
+ Exists.intro,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ Iff.mp,
+ Bool,
+ instAddNat,
+ IndependentDuodenary.ReferenceRun,
+ IndependentDuodenary.NormalizationConfiguration,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.normalizationEdge,
+ rfl,
+ IndependentDuodenary.referenceDEdge]
+theorem IndependentDuodenary.normalization_polynomial_overhead : ∀ (c d length time : ℕ),
+  time ≤ IndependentDuodenary.prizePolynomialBound c d length →
+    time + 1 ≤ IndependentDuodenary.prizePolynomialBound (c + 1) d length :=
+fun c d length time bound =>
+  let_fun positive :=
+    pow_pos
+      (Decidable.byContradiction fun a =>
+        Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+          (Lean.Omega.Constraint.combine_sat'
+            (Lean.Omega.Constraint.addInequality_sat
+              (le_of_le_of_eq (Int.ofNat_nonneg length) (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_2)))
+            (Lean.Omega.tidy_sat
+              (Lean.Omega.Constraint.addInequality_sat
+                (le_of_le_of_eq (Int.sub_nonneg_of_le (Lean.Omega.Int.ofNat_le_of_le (Nat.le_of_not_lt a)))
+                  (Eq.trans
+                    (Lean.Omega.Int.sub_congr (id (Eq.refl ↑0))
+                      (Eq.trans (Int.ofNat_add length 1)
+                        (Eq.trans
+                          (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_2)
+                            (id (Eq.refl ↑1)))
+                          (Eq.symm
+                            (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [0, 0, 1] }
+                              { const := 1, coeffs := [] }
+                              (Lean.Omega.Coeffs.ofList
+                                [↑(IndependentDuodenary.prizePolynomialBound c d length), ↑time, ↑length]))))))
+                    (Eq.symm
+                      (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [] } { const := 1, coeffs := [0, 0, 1] }
+                        (Lean.Omega.Coeffs.ofList
+                          [↑(IndependentDuodenary.prizePolynomialBound c d length), ↑time, ↑length])))))))))
+      d;
+  id
+    (le_of_not_gt fun a =>
+      Linarith.lt_irrefl
+        (Eq.mp
+          (congrArg (fun _a => _a < 0)
+            (Mathlib.Tactic.Ring.of_eq
+              (Mathlib.Tactic.Ring.add_congr
+                (Mathlib.Tactic.Ring.add_congr
+                  (Mathlib.Tactic.Ring.add_congr
+                    (Mathlib.Tactic.Ring.neg_congr
+                      (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                      (Mathlib.Tactic.Ring.neg_add
+                        (Mathlib.Tactic.Ring.neg_one_mul
+                          (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                            (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                              (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1))
+                              (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                              (Eq.refl (Int.negOfNat 1)))))
+                        Mathlib.Tactic.Ring.neg_zero))
+                    (Mathlib.Tactic.Ring.sub_congr (Mathlib.Tactic.Ring.atom_pf ↑time)
+                      (Mathlib.Tactic.Ring.mul_congr (Mathlib.Tactic.Ring.atom_pf ↑c)
+                        (Mathlib.Tactic.Ring.pow_congr
+                          (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf ↑length)
+                            (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                            (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                              (Mathlib.Tactic.Ring.add_pf_add_zero (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                          (Mathlib.Tactic.Ring.atom_pf d)
+                          (Mathlib.Tactic.Ring.pow_add
+                            (Mathlib.Tactic.Ring.pow_atom
+                              (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                              (d ^ Nat.rawCast 1 * Nat.rawCast 1))
+                            (Mathlib.Tactic.Ring.pow_zero
+                              (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                            (Mathlib.Tactic.Ring.add_mul
+                              (Mathlib.Tactic.Ring.mul_add
+                                (Mathlib.Tactic.Ring.mul_pf_left
+                                  (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1)))
+                                (Mathlib.Tactic.Ring.mul_zero
+                                  ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                      (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                    Nat.rawCast 1))
+                                (Mathlib.Tactic.Ring.add_pf_add_zero
+                                  ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                        (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                      Nat.rawCast 1 +
+                                    0)))
+                              (Mathlib.Tactic.Ring.zero_mul (Nat.rawCast 1 + 0))
+                              (Mathlib.Tactic.Ring.add_pf_add_zero
+                                ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                      (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                    Nat.rawCast 1 +
+                                  0)))))
+                        (Mathlib.Tactic.Ring.add_mul
+                          (Mathlib.Tactic.Ring.mul_add
+                            (Mathlib.Tactic.Ring.mul_pf_left (↑c) (Nat.rawCast 1)
+                              (Mathlib.Tactic.Ring.mul_pf_right
+                                (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                                (d ^ Nat.rawCast 1 * Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1))))
+                            (Mathlib.Tactic.Ring.mul_zero (↑c ^ Nat.rawCast 1 * Nat.rawCast 1))
+                            (Mathlib.Tactic.Ring.add_pf_add_zero
+                              (↑c ^ Nat.rawCast 1 *
+                                  ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                      (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                    Nat.rawCast 1) +
+                                0)))
+                          (Mathlib.Tactic.Ring.zero_mul
+                            ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                Nat.rawCast 1 +
+                              0))
+                          (Mathlib.Tactic.Ring.add_pf_add_zero
+                            (↑c ^ Nat.rawCast 1 *
+                                ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                    (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                  Nat.rawCast 1) +
+                              0))))
+                      (Mathlib.Tactic.Ring.sub_pf
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul (↑c) (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_mul (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                              (d ^ Nat.rawCast 1 * Nat.rawCast 1)
+                              (Mathlib.Tactic.Ring.neg_one_mul
+                                (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                  (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                    (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1))
+                                    (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                                    (Eq.refl (Int.negOfNat 1)))))))
+                          Mathlib.Tactic.Ring.neg_zero)
+                        (Mathlib.Tactic.Ring.add_pf_add_lt (↑time ^ Nat.rawCast 1 * Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.add_pf_zero_add
+                            (↑c ^ Nat.rawCast 1 *
+                                ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                    (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                  (Int.negOfNat 1).rawCast) +
+                              0)))))
+                    (Mathlib.Tactic.Ring.add_pf_add_lt (Int.negOfNat 1).rawCast
+                      (Mathlib.Tactic.Ring.add_pf_zero_add
+                        (↑time ^ Nat.rawCast 1 * Nat.rawCast 1 +
+                          (↑c ^ Nat.rawCast 1 *
+                              ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                (Int.negOfNat 1).rawCast) +
+                            0)))))
+                  (Mathlib.Tactic.Ring.sub_congr
+                    (Mathlib.Tactic.Ring.add_congr
+                      (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 0)))
+                      (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                      (Mathlib.Tactic.Ring.add_pf_zero_add (Nat.rawCast 1 + 0)))
+                    (Mathlib.Tactic.Ring.pow_congr
+                      (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf ↑length)
+                        (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                        (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.add_pf_add_zero (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                      (Mathlib.Tactic.Ring.atom_pf d)
+                      (Mathlib.Tactic.Ring.pow_add
+                        (Mathlib.Tactic.Ring.pow_atom (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                          (d ^ Nat.rawCast 1 * Nat.rawCast 1))
+                        (Mathlib.Tactic.Ring.pow_zero (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                        (Mathlib.Tactic.Ring.add_mul
+                          (Mathlib.Tactic.Ring.mul_add
+                            (Mathlib.Tactic.Ring.mul_pf_left
+                              (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                              (d ^ Nat.rawCast 1 * Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1)))
+                            (Mathlib.Tactic.Ring.mul_zero
+                              ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                Nat.rawCast 1))
+                            (Mathlib.Tactic.Ring.add_pf_add_zero
+                              ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                    (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                  Nat.rawCast 1 +
+                                0)))
+                          (Mathlib.Tactic.Ring.zero_mul (Nat.rawCast 1 + 0))
+                          (Mathlib.Tactic.Ring.add_pf_add_zero
+                            ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                Nat.rawCast 1 +
+                              0)))))
+                    (Mathlib.Tactic.Ring.sub_pf
+                      (Mathlib.Tactic.Ring.neg_add
+                        (Mathlib.Tactic.Ring.neg_mul (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                          (d ^ Nat.rawCast 1 * Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.neg_one_mul
+                            (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                              (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1))
+                                (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                                (Eq.refl (Int.negOfNat 1))))))
+                        Mathlib.Tactic.Ring.neg_zero)
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (Nat.rawCast 1)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add
+                          ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                              (Int.negOfNat 1).rawCast +
+                            0)))))
+                  (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                    (Mathlib.Meta.NormNum.IsInt.to_isNat
+                      (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                        (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1))
+                        (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                        (Eq.refl (Int.ofNat 0))))
+                    (Mathlib.Tactic.Ring.add_pf_add_lt (↑time ^ Nat.rawCast 1 * Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_add_lt
+                        (↑c ^ Nat.rawCast 1 *
+                          ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                              (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                            (Int.negOfNat 1).rawCast))
+                        (Mathlib.Tactic.Ring.add_pf_zero_add
+                          ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                              (Int.negOfNat 1).rawCast +
+                            0))))))
+                (Mathlib.Tactic.Ring.sub_congr
+                  (Mathlib.Tactic.Ring.add_congr
+                    (Mathlib.Tactic.Ring.mul_congr
+                      (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf ↑c)
+                        (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                        (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.add_pf_add_zero (↑c ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                      (Mathlib.Tactic.Ring.pow_congr
+                        (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf ↑length)
+                          (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                          (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.add_pf_add_zero (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                        (Mathlib.Tactic.Ring.atom_pf d)
+                        (Mathlib.Tactic.Ring.pow_add
+                          (Mathlib.Tactic.Ring.pow_atom (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                            (d ^ Nat.rawCast 1 * Nat.rawCast 1))
+                          (Mathlib.Tactic.Ring.pow_zero (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                          (Mathlib.Tactic.Ring.add_mul
+                            (Mathlib.Tactic.Ring.mul_add
+                              (Mathlib.Tactic.Ring.mul_pf_left
+                                (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                                (d ^ Nat.rawCast 1 * Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1)))
+                              (Mathlib.Tactic.Ring.mul_zero
+                                ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                    (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                  Nat.rawCast 1))
+                              (Mathlib.Tactic.Ring.add_pf_add_zero
+                                ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                      (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                    Nat.rawCast 1 +
+                                  0)))
+                            (Mathlib.Tactic.Ring.zero_mul (Nat.rawCast 1 + 0))
+                            (Mathlib.Tactic.Ring.add_pf_add_zero
+                              ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                    (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                  Nat.rawCast 1 +
+                                0)))))
+                      (Mathlib.Tactic.Ring.add_mul
+                        (Mathlib.Tactic.Ring.mul_add
+                          (Mathlib.Tactic.Ring.mul_pf_right
+                            (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                            (d ^ Nat.rawCast 1 * Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1)))
+                          (Mathlib.Tactic.Ring.mul_zero (Nat.rawCast 1))
+                          (Mathlib.Tactic.Ring.add_pf_add_zero
+                            ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                Nat.rawCast 1 +
+                              0)))
+                        (Mathlib.Tactic.Ring.add_mul
+                          (Mathlib.Tactic.Ring.mul_add
+                            (Mathlib.Tactic.Ring.mul_pf_left (↑c) (Nat.rawCast 1)
+                              (Mathlib.Tactic.Ring.mul_pf_right
+                                (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                                (d ^ Nat.rawCast 1 * Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1))))
+                            (Mathlib.Tactic.Ring.mul_zero (↑c ^ Nat.rawCast 1 * Nat.rawCast 1))
+                            (Mathlib.Tactic.Ring.add_pf_add_zero
+                              (↑c ^ Nat.rawCast 1 *
+                                  ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                      (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                    Nat.rawCast 1) +
+                                0)))
+                          (Mathlib.Tactic.Ring.zero_mul
+                            ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                Nat.rawCast 1 +
+                              0))
+                          (Mathlib.Tactic.Ring.add_pf_add_zero
+                            (↑c ^ Nat.rawCast 1 *
+                                ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                    (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                  Nat.rawCast 1) +
+                              0)))
+                        (Mathlib.Tactic.Ring.add_pf_add_gt
+                          (↑c ^ Nat.rawCast 1 *
+                            ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                              Nat.rawCast 1))
+                          (Mathlib.Tactic.Ring.add_pf_add_zero
+                            ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                Nat.rawCast 1 +
+                              0)))))
+                    (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                    (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_add_zero
+                        (↑c ^ Nat.rawCast 1 *
+                            ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                              Nat.rawCast 1) +
+                          ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                              Nat.rawCast 1 +
+                            0)))))
+                  (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf ↑time)
+                    (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 1)))
+                    (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_add_zero (↑time ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                  (Mathlib.Tactic.Ring.sub_pf
+                    (Mathlib.Tactic.Ring.neg_add
+                      (Mathlib.Tactic.Ring.neg_one_mul
+                        (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                          (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                            (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1))
+                            (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                            (Eq.refl (Int.negOfNat 1)))))
+                      (Mathlib.Tactic.Ring.neg_add
+                        (Mathlib.Tactic.Ring.neg_mul (↑time) (Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.neg_one_mul
+                            (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                              (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1))
+                                (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                                (Eq.refl (Int.negOfNat 1))))))
+                        Mathlib.Tactic.Ring.neg_zero))
+                    (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                      (Mathlib.Meta.NormNum.IsInt.to_isNat
+                        (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                          (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                          (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1)) (Eq.refl (Int.ofNat 0))))
+                      (Mathlib.Tactic.Ring.add_pf_add_gt (↑time ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                        (Mathlib.Tactic.Ring.add_pf_add_zero
+                          (↑c ^ Nat.rawCast 1 *
+                              ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                Nat.rawCast 1) +
+                            ((Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)) ^
+                                  (d ^ Nat.rawCast 1 * Nat.rawCast 1) *
+                                Nat.rawCast 1 +
+                              0)))))))
+                (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                  (Mathlib.Tactic.Ring.add_overlap_pf_zero (↑time) (Nat.rawCast 1)
+                    (Mathlib.Meta.NormNum.IsInt.to_isNat
+                      (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                        (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                        (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1)) (Eq.refl (Int.ofNat 0)))))
+                  (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                    (Mathlib.Tactic.Ring.add_overlap_pf_zero (↑c) (Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_overlap_pf_zero
+                        (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                        (d ^ Nat.rawCast 1 * Nat.rawCast 1)
+                        (Mathlib.Meta.NormNum.IsInt.to_isNat
+                          (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                            (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1))
+                            (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                            (Eq.refl (Int.ofNat 0))))))
+                    (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                      (Mathlib.Tactic.Ring.add_overlap_pf_zero
+                        (Nat.rawCast 1 + (↑length ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                        (d ^ Nat.rawCast 1 * Nat.rawCast 1)
+                        (Mathlib.Meta.NormNum.IsInt.to_isNat
+                          (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                            (Mathlib.Meta.NormNum.IsInt.of_raw ℤ (Int.negOfNat 1))
+                            (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw ℤ 1))
+                            (Eq.refl (Int.ofNat 0)))))
+                      (Mathlib.Tactic.Ring.add_pf_zero_add 0)))))
+              (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat ℤ (Eq.refl 0)))))
+          (Linarith.add_lt_of_neg_of_le
+            (Linarith.add_lt_of_neg_of_le
+              (Linarith.add_lt_of_neg_of_le (neg_neg_of_pos Linarith.zero_lt_one)
+                (Linarith.sub_nonpos_of_le
+                  (id
+                    (Eq.mp
+                      (Eq.trans (Mathlib.Tactic.Zify._auxLemma.2 time (c * (length + 1) ^ d))
+                        (congrArg (LE.le ↑time)
+                          (Eq.trans (Nat.cast_mul c ((length + 1) ^ d))
+                            (congrArg (HMul.hMul ↑c)
+                              (Eq.trans (Nat.cast_pow (length + 1) d)
+                                (congrArg (fun x => x ^ d)
+                                  (Eq.trans (Nat.cast_add length 1) (congrArg (HAdd.hAdd ↑length) Nat.cast_one))))))))
+                      bound))))
+              (Linarith.sub_nonpos_of_le
+                (Int.add_one_le_iff.mpr
+                  (id
+                    (Eq.mp
+                      (Eq.trans (Mathlib.Tactic.Zify._auxLemma.3 0 ((length + 1) ^ d))
+                        (congr (congrArg LT.lt Nat.cast_zero)
+                          (Eq.trans (Nat.cast_pow (length + 1) d)
+                            (congrArg (fun x => x ^ d)
+                              (Eq.trans (Nat.cast_add length 1) (congrArg (HAdd.hAdd ↑length) Nat.cast_one))))))
+                      positive)))))
+            (Linarith.sub_nonpos_of_le
+              (Int.add_one_le_iff.mpr
+                (id
+                  (Eq.mp
+                    (Eq.trans (Mathlib.Tactic.Zify._auxLemma.3 ((c + 1) * (length + 1) ^ d) (time + 1))
+                      (congr
+                        (congrArg LT.lt
+                          (Eq.trans (Nat.cast_mul (c + 1) ((length + 1) ^ d))
+                            (congr
+                              (congrArg HMul.hMul (Eq.trans (Nat.cast_add c 1) (congrArg (HAdd.hAdd ↑c) Nat.cast_one)))
+                              (Eq.trans (Nat.cast_pow (length + 1) d)
+                                (congrArg (fun x => x ^ d)
+                                  (Eq.trans (Nat.cast_add length 1) (congrArg (HAdd.hAdd ↑length) Nat.cast_one)))))))
+                        (Eq.trans (Nat.cast_add time 1) (congrArg (HAdd.hAdd ↑time) Nat.cast_one))))
+                    a)))))))
+'IndependentDuodenary.normalization_polynomial_overhead' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES normalization_polynomial_overhead: [Iff.mpr,
+ Semiring.toNatCast,
+ StrictOrderedSemiring.toPosMulStrictMono,
+ NegZeroClass.toNeg,
+ NonAssocSemiring.toAddCommMonoidWithOne,
+ Ring.toSub,
+ pow_pos,
+ Lean.Omega.Constraint.not_sat'_of_isImpossible,
+ Preorder.toLT,
+ Semiring.toOne,
+ HMul.hMul,
+ of_decide_eq_true,
+ Nat.rawCast,
+ le_of_le_of_eq,
+ AddMonoid.toAddSemigroup,
+ NonUnitalNonAssocRing.toMul,
+ Ring.toNonAssocRing,
+ Mathlib.Tactic.Ring.mul_zero,
+ Mathlib.Tactic.Ring.mul_pf_left,
+ Lean.Omega.Constraint.mk,
+ Mathlib.Tactic.Ring.add_pf_add_gt,
+ Lean.Omega.Constraint.combine_sat',
+ congrArg,
+ CommSemiring.toSemiring,
+ Mathlib.Tactic.Ring.add_overlap_pf_zero,
+ Mathlib.Tactic.Ring.neg_congr,
+ Nat.instMonoid,
+ Mathlib.Tactic.Ring.neg_zero,
+ Mathlib.Tactic.Ring.mul_pf_right,
+ StrictOrderedRing.toOrderedAddCommGroup,
+ Int.rawCast,
+ AddMonoid.toZero,
+ PartialOrder.toPreorder,
+ Mathlib.Tactic.Ring.one_mul,
+ AddGroupWithOne.toAddMonoidWithOne,
+ LinearOrderedCommSemiring.toLinearOrderedSemiring,
+ HSub.hSub,
+ StrictOrderedSemiring.toSemiring,
+ Lean.Omega.Int.add_congr,
+ Mathlib.Tactic.Ring.zero_mul,
+ Mathlib.Meta.NormNum.IsNat.of_raw,
+ Lean.Omega.LinearCombo.eval,
+ Option.some,
+ Mathlib.Tactic.Ring.instCommSemiringNat,
+ CommSemiring.toCommMonoidWithZero,
+ Int.add_one_le_iff,
+ OrderedSemiring.zeroLEOneClass,
+ le_of_not_gt,
+ Lean.Omega.LinearCombo.coordinate_eval_2,
+ Monoid.toNatPow,
+ Mathlib.Tactic.Ring.cast_zero,
+ OrderedRing.toRing,
+ Mathlib.Tactic.Ring.neg_mul,
+ Eq.mp,
+ NonUnitalNonAssocSemiring.toMul,
+ Mathlib.Tactic.Ring.sub_pf,
+ Mathlib.Tactic.Ring.neg_add,
+ id,
+ Distrib.toAdd,
+ instDecidableEqBool,
+ Int.instNegInt,
+ OrderedAddCommGroup.toAddCommGroup,
+ Int.sub_nonneg_of_le,
+ AddMonoidWithOne.toNatCast,
+ Int.ofNat,
+ Mathlib.Tactic.Zify._auxLemma.3,
+ instMulNat,
+ OrderedSemiring.toSemiring,
+ SubtractionMonoid.toSubNegZeroMonoid,
+ instOfNatNat,
+ Int,
+ AddCommMonoidWithOne.toAddMonoidWithOne,
+ Int.instAddMonoid,
+ Mathlib.Tactic.Ring.sub_congr,
+ Mathlib.Meta.NormNum.isNat_ofNat,
+ Mathlib.Meta.NormNum.isInt_mul,
+ LE.le,
+ LinearOrderedRing.toStrictOrderedRing,
+ instLENat,
+ Mathlib.Tactic.Zify._auxLemma.2,
+ SubNegZeroMonoid.toNegZeroClass,
+ Mathlib.Tactic.Ring.of_eq,
+ Mathlib.Tactic.Ring.add_pf_zero_add,
+ SubtractionCommMonoid.toSubtractionMonoid,
+ Nat.cast,
+ NonAssocRing.toNonUnitalNonAssocRing,
+ Lean.Omega.Int.sub_congr,
+ Mathlib.Tactic.Ring.mul_congr,
+ List.cons,
+ Lean.Omega.LinearCombo,
+ Int.instLTInt,
+ IndependentDuodenary.prizePolynomialBound,
+ Nat.cast_add,
+ AddMonoidWithOne.toOne,
+ Bool.true,
+ Mathlib.Tactic.Ring.add_mul,
+ GT.gt,
+ Option.none,
+ instHAdd,
+ Nat.instMonoidWithZero,
+ AddSemigroup.toAdd,
+ Lean.Omega.tidy_sat,
+ Mathlib.Tactic.Ring.add_pf_add_zero,
+ instHSub,
+ Mathlib.Tactic.Ring.add_pf_add_overlap_zero,
+ Nat.cast_mul,
+ Mathlib.Meta.NormNum.IsInt.to_raw_eq,
+ HPow.hPow,
+ MonoidWithZero.toZero,
+ instOfNat,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Mathlib.Meta.NormNum.IsInt.to_isNat,
+ Lean.Omega.LinearCombo.mk,
+ NonAssocSemiring.toNonUnitalNonAssocSemiring,
+ Mathlib.Tactic.Ring.pow_add,
+ Int.instRing,
+ Lean.Omega.Coeffs.ofList,
+ Nat,
+ congr,
+ LT.lt,
+ Nat.instStrictOrderedSemiring,
+ OrderedRing.toOrderedSemiring,
+ Lean.Omega.LinearCombo.add_eval,
+ Linarith.add_lt_of_neg_of_le,
+ Int.instOrderedRing,
+ Lean.Omega.LinearCombo.sub_eval,
+ Lean.Omega.LinearCombo.coordinate,
+ Nat.instPartialOrder,
+ Decidable.byContradiction,
+ StrictOrderedSemiring.toPartialOrder,
+ Mathlib.Tactic.Ring.add_pf_add_lt,
+ Bool,
+ Nat.decLt,
+ Int.instAdd,
+ Lean.Omega.LinearCombo.instAdd,
+ One.toOfNat1,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ Zero.toOfNat0,
+ Mathlib.Meta.NormNum.isInt_add,
+ Eq.refl,
+ neg_neg_of_pos,
+ Int.instSub,
+ Mathlib.Meta.NormNum.IsInt.of_raw,
+ Int.ofNat_add,
+ Lean.Omega.Int.ofNat_le_of_le,
+ instNatCastInt,
+ instHPow,
+ Nat.cast_zero,
+ Mathlib.Tactic.Ring.cast_pos,
+ AddMonoidWithOne.toAddMonoid,
+ Nat.cast_pow,
+ LinearOrderedCommRing.toLinearOrderedCommSemiring,
+ instLTNat,
+ LinearOrderedSemiring.toStrictOrderedSemiring,
+ LinearOrderedCommRing.toLinearOrderedRing,
+ Int.instLinearOrderedCommRing,
+ Mathlib.Tactic.Ring.atom_pf,
+ AddCommGroup.toDivisionAddCommMonoid,
+ NonAssocSemiring.toNatCast,
+ Linarith.sub_nonpos_of_le,
+ Int.instCommSemiring,
+ OfNat.ofNat,
+ Eq.symm,
+ Lean.Omega.Constraint.addInequality_sat,
+ Decidable.decide,
+ LinearOrder.toPartialOrder,
+ Linarith.lt_irrefl,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Linarith.zero_lt_one,
+ Nat.cast_one,
+ Mathlib.Tactic.Ring.neg_one_mul,
+ Ring.toAddGroupWithOne,
+ Lean.Omega.LinearCombo.instSub,
+ Not,
+ StrictOrderedRing.toPartialOrder,
+ Nat.le_of_not_lt,
+ letFun,
+ Neg.neg,
+ MonoidWithZero.toMonoid,
+ Mathlib.Tactic.Ring.mul_add,
+ Int.instLEInt,
+ Eq.trans,
+ Int.negOfNat,
+ Mathlib.Tactic.Ring.add_congr,
+ Int.instSemiring,
+ Nat.instOrderedSemiring,
+ Lean.Omega.Constraint.isImpossible,
+ Mathlib.Tactic.Ring.pow_congr,
+ Int.ofNat_nonneg,
+ Mathlib.Meta.NormNum.IsNat.to_isInt,
+ Mathlib.Tactic.Ring.pow_zero,
+ Semiring.toMonoidWithZero,
+ instHMul,
+ List.nil,
+ Nat.instLinearOrder,
+ Mathlib.Tactic.Ring.pow_atom]
+theorem IndependentDuodenary.normalization_finish_heads_unchanged : ∀ {a s k : ℕ}
+  (mode : IndependentDuodenary.AcceptanceConvention) (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  (IndependentDuodenary.normalizationFinish mode q).body.head = q.head :=
+fun {a s k} mode q =>
+  funext fun i =>
+    of_eq_true
+      (Eq.trans
+        (congrArg (fun x => { body := x, done := true }.body.head i = q.head i)
+          (congr
+            (congrArg
+              (IndependentDuodenary.ReferenceConfiguration.mk
+                (if
+                    IndependentDuodenary.normalizationVerdict mode q.state (IndependentDuodenary.referenceRead q) =
+                      true then
+                  0
+                else 1))
+              (funext fun i => add_zero (q.head i)))
+            (funext fun i =>
+              funext fun j =>
+                ite_congr (Eq.refl (j = q.head i))
+                  (fun a_1 =>
+                    Eq.refl
+                      (match mode with
+                      | IndependentDuodenary.AcceptanceConvention.stateToHead =>
+                        if i = 0 then if q.state = 0 then 1 else 2 else IndependentDuodenary.referenceRead q i
+                      | IndependentDuodenary.AcceptanceConvention.headToState =>
+                        IndependentDuodenary.referenceRead q i))
+                  fun a_1 => Eq.refl (q.tape i j))))
+        (eq_self (q.head i)))
+'IndependentDuodenary.normalization_finish_heads_unchanged' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_finish_heads_unchanged: [congrArg,
+ AddMonoid.toAddZeroClass,
+ instDecidableEqFin,
+ IndependentDuodenary.ReferenceInstruction.write,
+ IndependentDuodenary.normalizationFinishInstruction.proof_1,
+ Int.instDecidableEq,
+ IndependentDuodenary.normalizationVerdict,
+ IndependentDuodenary.normalizationFinishInstruction.proof_2,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.NormalizationConfiguration.mk,
+ instOfNatNat,
+ Int,
+ Int.instAddMonoid,
+ IndependentDuodenary.referenceRead,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ Bool.true,
+ funext,
+ instHAdd,
+ Unit,
+ IndependentDuodenary.normalizationFinishInstruction,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.ReferenceConfiguration.mk,
+ congr,
+ AddZeroClass.toZero,
+ IndependentDuodenary.AcceptanceConvention,
+ True,
+ IndependentDuodenary.normalizationVerdict.match_1,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ Bool,
+ of_eq_true,
+ instAddNat,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ add_zero,
+ ite_congr,
+ OfNat.ofNat,
+ Fin,
+ AddZeroClass.toAdd,
+ Eq,
+ Not,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.normalization_head_to_state_tape_unchanged : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  (IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.headToState q).body.tape =
+    q.tape :=
+fun {a s k} q =>
+  funext fun i =>
+    funext fun j =>
+      if h : j = q.head i then
+        of_eq_true
+          (Eq.trans
+            (congr
+              (congrArg Eq
+                (Eq.trans
+                  (congr
+                    (congrArg
+                      (fun x =>
+                        {
+                                body :=
+                                  {
+                                    state :=
+                                      if
+                                          IndependentDuodenary.normalizationVerdict
+                                              IndependentDuodenary.AcceptanceConvention.headToState q.state
+                                              (IndependentDuodenary.referenceRead q) =
+                                            true then
+                                        0
+                                      else 1,
+                                    head := fun i =>
+                                      q.head i +
+                                        IndependentDuodenary.referenceDisplacement
+                                          IndependentDuodenary.ReferenceMove.stay,
+                                    tape := x },
+                                done := true }.body.tape
+                          i)
+                      (funext fun i =>
+                        funext fun j =>
+                          ite_congr (Eq.refl (j = q.head i)) (fun a_1 => Eq.refl (q.tape i (q.head i))) fun a_1 =>
+                            Eq.refl (q.tape i j)))
+                    h)
+                  (ite_cond_eq_true (q.tape i (q.head i)) (q.tape i (q.head i)) (eq_self (q.head i)))))
+              (congrArg (q.tape i) h))
+            (eq_self (q.tape i (q.head i))))
+      else
+        of_eq_true
+          (Eq.trans
+            (congrArg (fun x => x = q.tape i j)
+              (Eq.trans
+                (congrArg
+                  (fun x =>
+                    {
+                            body :=
+                              {
+                                state :=
+                                  if
+                                      IndependentDuodenary.normalizationVerdict
+                                          IndependentDuodenary.AcceptanceConvention.headToState q.state
+                                          (IndependentDuodenary.referenceRead q) =
+                                        true then
+                                    0
+                                  else 1,
+                                head := fun i =>
+                                  q.head i +
+                                    IndependentDuodenary.referenceDisplacement IndependentDuodenary.ReferenceMove.stay,
+                                tape := x },
+                            done := true }.body.tape
+                      i j)
+                  (funext fun i =>
+                    funext fun j =>
+                      ite_congr (Eq.refl (j = q.head i)) (fun a_1 => Eq.refl (q.tape i (q.head i))) fun a_1 =>
+                        Eq.refl (q.tape i j)))
+                (ite_cond_eq_false (q.tape i (q.head i)) (q.tape i j) (eq_false h))))
+            (eq_self (q.tape i j)))
+'IndependentDuodenary.normalization_head_to_state_tape_unchanged' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_head_to_state_tape_unchanged: [IndependentDuodenary.AcceptanceConvention.headToState,
+ eq_false,
+ congrArg,
+ IndependentDuodenary.ReferenceInstruction.write,
+ IndependentDuodenary.normalizationFinishInstruction.proof_1,
+ IndependentDuodenary.referenceDisplacement,
+ Int.instDecidableEq,
+ IndependentDuodenary.normalizationVerdict,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.NormalizationConfiguration.mk,
+ instOfNatNat,
+ Int,
+ IndependentDuodenary.referenceRead,
+ ite_cond_eq_true,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ dite,
+ IndependentDuodenary.ReferenceMove.stay,
+ Bool.true,
+ funext,
+ instHAdd,
+ IndependentDuodenary.normalizationFinishInstruction,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat,
+ IndependentDuodenary.ReferenceConfiguration.mk,
+ congr,
+ True,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ Bool,
+ of_eq_true,
+ Int.instAdd,
+ instAddNat,
+ Eq.refl,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ ite_congr,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ Eq,
+ Not,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.normalization_finish_head_rejects : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  IndependentDuodenary.referenceTerminal q →
+    let out := (IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.stateToHead q).body;
+    out.tape 0 (out.head 0) = 2 ↔ q.state = 1 :=
+fun {a s k} q halt =>
+  let_fun h := fun e =>
+    let_fun this := congrArg Fin.val e;
+    False.elim (Eq.mp (Mathlib.Algebra.CharZero.Defs._auxLemma.10 2) this);
+  Or.casesOn halt
+    (fun hs =>
+      of_eq_true
+        (Eq.trans
+          (congr
+            (congrArg Iff
+              (Eq.trans
+                (congrArg (fun x => x = 2)
+                  (Eq.trans (IndependentDuodenary.normalization_finish_head q)
+                    (ite_cond_eq_true 1 2 (Eq.trans (congrArg (fun x => x = 0) hs) (eq_self 0)))))
+                (eq_false h)))
+            (Eq.trans (congrArg (fun x => x = 1) hs) Mathlib.Algebra.NeZero._auxLemma.2))
+          (iff_self False)))
+    fun hs =>
+    of_eq_true
+      (Eq.trans
+        (congr
+          (congrArg Iff
+            (Eq.trans
+              (congrArg (fun x => x = 2)
+                (Eq.trans (IndependentDuodenary.normalization_finish_head q)
+                  (ite_cond_eq_false 1 2
+                    (Eq.trans (congrArg (fun x => x = 0) hs)
+                      ((fun x_0 =>
+                          eq_false ((fun x_0 => Ne.symm IndependentDuodenary.reference_accept_reject_distinct) x_0))
+                        s)))))
+              (eq_self 2)))
+          (Eq.trans (congrArg (fun x => x = 1) hs) (eq_self 1)))
+        (iff_self True))
+'IndependentDuodenary.normalization_finish_head_rejects' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_finish_head_rejects: [False,
+ IndependentDuodenary.referenceTerminal.proof_1,
+ IndependentDuodenary.referenceTerminal,
+ NeZero.one,
+ Semiring.toOne,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ Fin.instCommRing,
+ False.elim,
+ instDecidableEqFin,
+ Fin.nontrivial,
+ CommSemiring.toCommMonoidWithZero,
+ Nat.instCharZero,
+ Eq.mp,
+ Fin.instOfNat,
+ IndependentDuodenary.normalizationFinish,
+ AddMonoidWithOne.toNatCast,
+ IndependentDuodenary.normalization_finish_head,
+ Ne,
+ Ne.symm,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ Mathlib.Algebra.CharZero.Defs._auxLemma.10,
+ ite_cond_eq_true,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ Fin.val,
+ Nat.instAddMonoidWithOne,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ Or.casesOn,
+ iff_self,
+ AddMonoidWithOne.toOne,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Iff,
+ instNatAtLeastTwo,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ of_eq_true,
+ One.toOfNat1,
+ instAddNat,
+ IndependentDuodenary.reference_accept_reject_distinct,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ IndependentDuodenary.AcceptanceConvention.stateToHead,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ instOfNatAtLeastTwo,
+ letFun,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.normalization_finish_state_rejects : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  q.tape 0 (q.head 0) = 1 ∨ q.tape 0 (q.head 0) = 2 →
+    ((IndependentDuodenary.normalizationFinish IndependentDuodenary.AcceptanceConvention.headToState q).body.state = 1 ↔
+      q.tape 0 (q.head 0) = 2) :=
+fun {a s k} q boolean =>
+  let_fun h := fun e =>
+    let_fun this := congrArg Fin.val e;
+    False.elim (Eq.mp (Mathlib.Algebra.CharZero.Defs._auxLemma.10 2) this);
+  Or.casesOn boolean
+    (fun hs =>
+      of_eq_true
+        (Eq.trans
+          (congr
+            (congrArg Iff
+              (Eq.trans
+                (congrArg (fun x => { body := x, done := true }.body.state = 1)
+                  (congr
+                    (congr
+                      (congrArg
+                        (fun x =>
+                          IndependentDuodenary.ReferenceConfiguration.mk
+                            { state := x, write := fun i => q.tape i (q.head i),
+                                move := fun x => IndependentDuodenary.ReferenceMove.stay }.state)
+                        (ite_cond_eq_true 0 1
+                          (Eq.trans
+                            (congrArg (fun x => x = true)
+                              ((fun p p_1 e_p =>
+                                  @Eq.rec Prop p
+                                    (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                                    (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1
+                                    e_p)
+                                (IndependentDuodenary.referenceRead q 0 = 1) True
+                                (Eq.trans (congrArg (fun x => x = 1) hs) (eq_self 1))))
+                            (eq_self true))))
+                      (funext fun i =>
+                        congrArg
+                          (fun x =>
+                            q.head i +
+                              IndependentDuodenary.referenceDisplacement
+                                ({ state := x, write := fun i => q.tape i (q.head i),
+                                      move := fun x => IndependentDuodenary.ReferenceMove.stay }.move
+                                  i))
+                          (ite_cond_eq_true 0 1
+                            (Eq.trans
+                              (congrArg (fun x => x = true)
+                                ((fun p p_1 e_p =>
+                                    @Eq.rec Prop p
+                                      (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                                      (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1
+                                      e_p)
+                                  (IndependentDuodenary.referenceRead q 0 = 1) True
+                                  (Eq.trans (congrArg (fun x => x = 1) hs) (eq_self 1))))
+                              (eq_self true)))))
+                    (funext fun i =>
+                      funext fun j =>
+                        ite_congr (Eq.refl (j = q.head i))
+                          (fun a_1 =>
+                            congrArg
+                              (fun x =>
+                                { state := x, write := fun i => q.tape i (q.head i),
+                                      move := fun x => IndependentDuodenary.ReferenceMove.stay }.write
+                                  i)
+                              (ite_cond_eq_true 0 1
+                                (Eq.trans
+                                  (congrArg (fun x => x = true)
+                                    ((fun p p_1 e_p =>
+                                        @Eq.rec Prop p
+                                          (fun p_2 e_p =>
+                                            ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                                          (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p))
+                                          p_1 e_p)
+                                      (IndependentDuodenary.referenceRead q 0 = 1) True
+                                      (Eq.trans (congrArg (fun x => x = 1) hs) (eq_self 1))))
+                                  (eq_self true))))
+                          fun a_1 => Eq.refl (q.tape i j))))
+                Mathlib.Algebra.NeZero._auxLemma.2))
+            (Eq.trans (congrArg (fun x => x = 2) hs) (eq_false h)))
+          (iff_self False)))
+    fun hs =>
+    of_eq_true
+      (Eq.trans
+        (congr
+          (congrArg Iff
+            (Eq.trans
+              (congrArg (fun x => { body := x, done := true }.body.state = 1)
+                (congr
+                  (congr
+                    (congrArg
+                      (fun x =>
+                        IndependentDuodenary.ReferenceConfiguration.mk
+                          { state := x, write := fun i => q.tape i (q.head i),
+                              move := fun x => IndependentDuodenary.ReferenceMove.stay }.state)
+                      (ite_cond_eq_false 0 1
+                        (Eq.trans
+                          (congrArg (fun x => x = true)
+                            ((fun p p_1 e_p =>
+                                @Eq.rec Prop p
+                                  (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                                  (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                              (IndependentDuodenary.referenceRead q 0 = 1) False
+                              (Eq.trans (congrArg (fun x => x = 1) hs) (eq_false (Ne.symm h)))))
+                          Bool.false_eq_true)))
+                    (funext fun i =>
+                      congrArg
+                        (fun x =>
+                          q.head i +
+                            IndependentDuodenary.referenceDisplacement
+                              ({ state := x, write := fun i => q.tape i (q.head i),
+                                    move := fun x => IndependentDuodenary.ReferenceMove.stay }.move
+                                i))
+                        (ite_cond_eq_false 0 1
+                          (Eq.trans
+                            (congrArg (fun x => x = true)
+                              ((fun p p_1 e_p =>
+                                  @Eq.rec Prop p
+                                    (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                                    (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1
+                                    e_p)
+                                (IndependentDuodenary.referenceRead q 0 = 1) False
+                                (Eq.trans (congrArg (fun x => x = 1) hs) (eq_false (Ne.symm h)))))
+                            Bool.false_eq_true))))
+                  (funext fun i =>
+                    funext fun j =>
+                      ite_congr (Eq.refl (j = q.head i))
+                        (fun a_1 =>
+                          congrArg
+                            (fun x =>
+                              { state := x, write := fun i => q.tape i (q.head i),
+                                    move := fun x => IndependentDuodenary.ReferenceMove.stay }.write
+                                i)
+                            (ite_cond_eq_false 0 1
+                              (Eq.trans
+                                (congrArg (fun x => x = true)
+                                  ((fun p p_1 e_p =>
+                                      @Eq.rec Prop p
+                                        (fun p_2 e_p =>
+                                          ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                                        (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p))
+                                        p_1 e_p)
+                                    (IndependentDuodenary.referenceRead q 0 = 1) False
+                                    (Eq.trans (congrArg (fun x => x = 1) hs) (eq_false (Ne.symm h)))))
+                                Bool.false_eq_true)))
+                        fun a_1 => Eq.refl (q.tape i j))))
+              (eq_self 1)))
+          (Eq.trans (congrArg (fun x => x = 2) hs) (eq_self 2)))
+        (iff_self True))
+'IndependentDuodenary.normalization_finish_state_rejects' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES normalization_finish_state_rejects: [IndependentDuodenary.AcceptanceConvention.headToState,
+ False,
+ NeZero.one,
+ Semiring.toOne,
+ instSubsingletonDecidable,
+ instDecidableTrue,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ Fin.instCommRing,
+ False.elim,
+ instDecidableEqFin,
+ Fin.nontrivial,
+ IndependentDuodenary.ReferenceInstruction.write,
+ Decidable,
+ IndependentDuodenary.normalizationFinishInstruction.proof_1,
+ IndependentDuodenary.referenceDisplacement,
+ Bool.false_eq_true,
+ CommSemiring.toCommMonoidWithZero,
+ Nat.instCharZero,
+ Eq.rec,
+ Int.instDecidableEq,
+ Eq.mp,
+ IndependentDuodenary.normalizationVerdict,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ IndependentDuodenary.normalizationFinish,
+ IndependentDuodenary.NormalizationConfiguration.mk,
+ AddMonoidWithOne.toNatCast,
+ Ne,
+ Ne.symm,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ Mathlib.Algebra.CharZero.Defs._auxLemma.10,
+ Int,
+ IndependentDuodenary.referenceRead,
+ ite_cond_eq_true,
+ IndependentDuodenary.NormalizationConfiguration.body,
+ Fin.val,
+ Nat.instAddMonoidWithOne,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ Or.casesOn,
+ IndependentDuodenary.ReferenceInstruction.state,
+ iff_self,
+ IndependentDuodenary.ReferenceMove.stay,
+ AddMonoidWithOne.toOne,
+ Bool.true,
+ funext,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Iff,
+ instNatAtLeastTwo,
+ IndependentDuodenary.normalizationFinishInstruction,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ IndependentDuodenary.ReferenceInstruction.mk,
+ IndependentDuodenary.normalizationVerdict.proof_2,
+ Nat,
+ IndependentDuodenary.ReferenceConfiguration.mk,
+ congr,
+ True,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ instDecidableFalse,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ Int.instAdd,
+ IndependentDuodenary.ReferenceInstruction.move,
+ One.toOfNat1,
+ instAddNat,
+ Eq.refl,
+ Or,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ Subsingleton.elim,
+ ite_congr,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ Decidable.decide,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ instOfNatAtLeastTwo,
+ Not,
+ letFun,
+ Eq.trans,
+ ite]
 theorem IndependentDuodenary.affine_station_composition : ∀ (p q : IndependentDuodenary.AffineStationParameter)
   (x : ZMod 12),
   IndependentDuodenary.affineStationApply (IndependentDuodenary.affineStationCompose p q) x =
@@ -25287,4 +28148,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 408 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 430 theorem declarations; only standard Lean axioms permitted.

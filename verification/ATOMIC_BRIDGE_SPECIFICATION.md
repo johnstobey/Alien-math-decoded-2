@@ -3,7 +3,7 @@
 This expands the annotated statements about the missing prize bridge and the
 incompleteness of packaging as mathematical proof. It is an obligation register,
 not a completed P-versus-NP proof. The baseline library has 354 named theorem
-declarations; the parser and halting extension adds 19, for 373 declarations. The reference-machine extension adds 13, for 386 declarations. The experimental guarded Fulgurite SAT module adds 22, for 408 current declarations. This does not close a registered compiler or fixed-protocol reduction obligation. Five additional unnamed encoding examples are checked separately;
+declarations; the parser and halting extension adds 19, for 373 declarations. The reference-machine extension adds 13, for 386 declarations. The experimental guarded Fulgurite SAT module adds 22, for 408 declarations. Acceptance normalization adds 22, for 430 current declarations. This does not close a registered compiler or fixed-protocol reduction obligation. Five additional unnamed encoding examples are checked separately;
 they do not increase that library count.
 
 This is one concrete equality-route specification; alternative encodings and
@@ -131,14 +131,15 @@ lower-bound argument; the bound on explicit orbit covers is not one.
 
 The machine-readable companion is `packaging/atomic_bridge_obligations.json`.
 Dependencies refer to the numbered atoms, not to assumed Lean facts. Five proved entries identify checked unnamed Lean examples; three additional
-entries identify named parser and halting theorems in the library. Four further
+entries identify named parser and halting theorems in the library. The acceptance-convention entry 1.13 now has a finite-control compiler, two-way
+run and language proofs, and exact one-transition overhead. Four further
 entries supply the requested reference-machine and class definitions; these are
 marked `defined_in_library`, not equivalence or simulation theorems. Existing library
 reachability correctness and cover bounds are separately listed as verified
 baseline evidence. The dependency graph has no cycles; the absent reduction
 2.21 remains a genuine missing construction rather than a renamed hypothesis.
 
-**Register totals:** 77 atoms; 12 completed obligations; 65 open obligations. These totals are not library theorem counts.
+**Register totals:** 77 atoms; 13 completed obligations; 64 open obligations. These totals are not library theorem counts.
 
 ## Item 1: Standard-model correspondence
 
@@ -274,9 +275,11 @@ Evidence: `IndependentDuodenary/ComplexityEncoding.lean`.
 
 Convert accept/reject control states to halted head symbols 1/2 and back. Prove language preservation, correct handling of empty input, and an explicit time overhead independent of the particular input.
 
-Status: **open**.
+Status: **proved_in_library**.
 
 Prerequisites: 1.02, 1.12.
+
+Evidence: `IndependentDuodenary/AcceptanceNormalization.lean`.
 
 ### 1.14 — Reference-to-repository simulator
 

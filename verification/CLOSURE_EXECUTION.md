@@ -1,4 +1,8 @@
-# Complete closure execution ledger
+# Historical closure execution ledger
+
+This records the reference-machine batch at e50b45c. The later normalization
+batch closes 1.13; current statuses are in `packaging/atomic_bridge_obligations.json`.
+The historical entries below are retained rather than rewritten.
 
 This ledger lists individually all 69 entries that were open at the start of this execution. Four definition obligations are now implemented; 65 remain open. It does not certify zero-open closure. Complete code is in the cited source file, not abbreviated here. Every original acceptance criterion is preserved below.
 

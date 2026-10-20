@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: twenty-seven modules; 408 theorem declarations.
+- Project library: twenty-eight modules; 430 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 408 stated Lean theorems.
+There are no incomplete obligations inside the 430 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -99,7 +99,7 @@ build, warning-free checks, fifteen canonical guards, synthesis guards and all
 thirteen executable checks passed. The executable output is retained in
 `pipeline-execution.txt`.
 
-Final local audit: all 408 theorem declarations passed, permitting only the
+Final local audit: all 430 theorem declarations passed, permitting only the
 standard Lean axiom union already listed. The placeholder scan also covers
 the native launcher and example sources. All newly added modules, the
 refactored dynamics module and both runners elaborate without diagnostics.
@@ -166,3 +166,13 @@ invariance, an anchored sum criterion for AND, conditional-free 0/1 ring
 semantics for arbitrary Boolean formulas, both directions of satisfiability
 equivalence, lossless assignment encoding and exact cardinality 2^n.
 See [PHASE_ALIGNMENT.md](PHASE_ALIGNMENT.md) for the precise scope.
+
+## Acceptance normalization: sequential batch 1.13
+
+Twenty-two new library declarations provide a complete finite local table for
+state-output/head-output convention conversion, forward and reverse run
+classification, language preservation in each direction and exact one-transition
+overhead. Input-independent polynomial witnesses increase c to c+1 and retain d.
+The current library count is 430; 13 atomic obligations are completed and 64
+remain open. This does not supply the next four-symbol TM0 compiler (1.14).
+See [ACCEPTANCE_NORMALIZATION.md](ACCEPTANCE_NORMALIZATION.md).

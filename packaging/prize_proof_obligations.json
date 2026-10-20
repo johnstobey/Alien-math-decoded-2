@@ -1,6 +1,6 @@
 {
   "purpose": "research obligation register; not a submission readiness certificate",
-  "current_named_theorems": 408,
+  "current_named_theorems": 430,
   "new_proved_results": [
     "IndependentDuodenary.protocol_reachability_check_correct",
     "IndependentDuodenary.protocol_reachability_check_rejects_iff",
@@ -140,5 +140,39 @@
     "all_formula_sizes": true,
     "fixed_protocol_reduction_proved": false,
     "registered_obligations_closed": []
+  },
+  "acceptance_normalization": {
+    "closed_atomic_obligations": [
+      "1.13"
+    ],
+    "source": "IndependentDuodenary/AcceptanceNormalization.lean",
+    "theorems": [
+      "IndependentDuodenary.normalization_control_cardinality",
+      "IndependentDuodenary.normalization_done_stops",
+      "IndependentDuodenary.normalization_halted_iff_done",
+      "IndependentDuodenary.normalization_running_step",
+      "IndependentDuodenary.normalization_finish_head",
+      "IndependentDuodenary.normalization_finish_head_boolean",
+      "IndependentDuodenary.normalization_finish_head_accepts",
+      "IndependentDuodenary.normalization_finish_state_accepts",
+      "IndependentDuodenary.normalization_source_step",
+      "IndependentDuodenary.normalization_halt_step",
+      "IndependentDuodenary.normalization_forward_run",
+      "IndependentDuodenary.normalization_finished_run",
+      "IndependentDuodenary.normalization_reverse_run",
+      "IndependentDuodenary.normalization_exact_overhead",
+      "IndependentDuodenary.normalization_empty_input",
+      "IndependentDuodenary.normalization_state_to_head_language",
+      "IndependentDuodenary.normalization_head_to_state_language",
+      "IndependentDuodenary.normalization_polynomial_overhead",
+      "IndependentDuodenary.normalization_finish_heads_unchanged",
+      "IndependentDuodenary.normalization_head_to_state_tape_unchanged",
+      "IndependentDuodenary.normalization_finish_head_rejects",
+      "IndependentDuodenary.normalization_finish_state_rejects"
+    ],
+    "scope": "finite-control reference convention conversion; not the TM0 compiler",
+    "exact_transition_overhead": 1,
+    "control_states": "2*(s+2)",
+    "polynomial_overhead": "c*(N+1)^d becomes (c+1)*(N+1)^d"
   }
 }
