@@ -1,6 +1,6 @@
 {
   "purpose": "research obligation register; not a submission readiness certificate",
-  "current_named_theorems": 430,
+  "current_named_theorems": 447,
   "new_proved_results": [
     "IndependentDuodenary.protocol_reachability_check_correct",
     "IndependentDuodenary.protocol_reachability_check_rejects_iff",
@@ -174,5 +174,31 @@
     "exact_transition_overhead": 1,
     "control_states": "2*(s+2)",
     "polynomial_overhead": "c*(N+1)^d becomes (c+1)*(N+1)^d"
+  },
+  "post_microcode_component": {
+    "source": "IndependentDuodenary/PostMicrocode.lean",
+    "supports_atomic_obligation": "1.14",
+    "obligation_closed": false,
+    "target": "PrizeMachine (4*s+3), with 4*(s+1) actual control states",
+    "actual_step_multiplier": 2,
+    "theorems": [
+      "IndependentDuodenary.post_micro_instruction",
+      "IndependentDuodenary.post_micro_two_ticks",
+      "IndependentDuodenary.post_micro_run",
+      "IndependentDuodenary.post_micro_prize_step",
+      "IndependentDuodenary.post_micro_prize_tick",
+      "IndependentDuodenary.post_micro_prize_iterate",
+      "IndependentDuodenary.post_micro_prize_initial",
+      "IndependentDuodenary.post_compiler_run",
+      "IndependentDuodenary.post_compiler_accepts",
+      "IndependentDuodenary.post_micro_halt",
+      "IndependentDuodenary.post_compiler_halts",
+      "IndependentDuodenary.post_compiler_polynomial_bound",
+      "IndependentDuodenary.post_micro_actual_step",
+      "IndependentDuodenary.post_micro_actual_run",
+      "IndependentDuodenary.post_micro_rename_actual_run",
+      "IndependentDuodenary.post_compiler_actual_run",
+      "IndependentDuodenary.post_micro_pending_not_halted"
+    ]
   }
 }

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "count": 430,
+  "count": 447,
   "audit_evidence": "verification/axioms-and-proofs.txt",
   "theorems": [
     {
@@ -1478,6 +1478,125 @@
       "module": "PipelineSynthesis",
       "source": "IndependentDuodenary/PipelineSynthesis.lean",
       "line": 85,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_instruction",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 55,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_two_ticks",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 65,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_run",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 73,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_prize_step",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 100,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_prize_tick",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 110,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_prize_iterate",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 117,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_prize_initial",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 126,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_compiler_run",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 131,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_compiler_accepts",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 137,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_halt",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 142,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_compiler_halts",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 146,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_compiler_polynomial_bound",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 153,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_actual_step",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 160,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_actual_run",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 176,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_rename_actual_run",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 188,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_compiler_actual_run",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 200,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.post_micro_pending_not_halted",
+      "module": "PostMicrocode",
+      "source": "IndependentDuodenary/PostMicrocode.lean",
+      "line": 207,
       "external_prize_implication_established": false
     },
     {

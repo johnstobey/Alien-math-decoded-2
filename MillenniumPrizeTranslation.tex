@@ -130,7 +130,11 @@ they are not supplied by the fixed cyclic operator. No general SAT reduction
 to that operator or polynomial-time SAT decision follows. Acceptance normalization adds twenty-two declarations, closing the finite-control
 output-convention obligation 1.13 with two-way language preservation and exactly
 one extra transition. It does not supply the four-symbol TM0 compiler of 1.14.
-The generated appendix inventories the current library.
+A single-tape four-symbol compiler component adds seventeen declarations. It
+produces actual finite-control Post-machine code and simulates each combined
+write/move instruction with two primitive transitions. The general multi-tape
+layout, source alphabet encoding and class correspondence are not supplied by
+this component, so 1.14 remains open. The generated appendix inventories the current library.
 Exact propositions, proof terms, direct dependencies and transitive foundational
 requirements are in the accompanying \texttt{verification/THEOREMS.md} and
 \texttt{verification/axioms-and-proofs.txt}.

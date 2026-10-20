@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 430 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 447 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `normalization_control_cardinality`
 
@@ -3283,6 +3283,287 @@ Proof method: Definitional equality.
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES pipeline_empty_transmission_rejected` and the printed proof in the machine-generated audit.
+
+## `post_micro_instruction`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_instruction {s : ℕ} (M : WriteMoveMachine s)
+    (q : WriteMoveConfiguration s) (i : WriteMoveInstruction s)
+    (instruction : M q.q q.Tape.head = some i) :
+    postMachineTick (postMicroMachine M) (postMachineTick (postMicroMachine M) (microLift q)) =
+      microLift (writeMoveApply q i)
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_instruction` and the printed proof in the machine-generated audit.
+
+## `post_micro_two_ticks`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_two_ticks {s : ℕ} (M : WriteMoveMachine s) (q : WriteMoveConfiguration s) :
+    postMachineTick (postMicroMachine M) (postMachineTick (postMicroMachine M) (microLift q)) =
+      microLift (writeMoveTick M q)
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_two_ticks` and the printed proof in the machine-generated audit.
+
+## `post_micro_run`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_run {s : ℕ} (M : WriteMoveMachine s) (input : List (Fin 4)) (n : ℕ) :
+    ((postMachineTick (postMicroMachine M))^[2 * n]) (Turing.TM0.init input) =
+      microLift (writeMoveRun M input n)
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_run` and the printed proof in the machine-generated audit.
+
+## `post_micro_prize_step`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_prize_step {s : ℕ} (M : WriteMoveMachine s) (q : MicroConfiguration s) :
+    Turing.TM0.step (compileWriteMove M) (microPrizeConfiguration q) =
+      (Turing.TM0.step (postMicroMachine M) q).map microPrizeConfiguration
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_prize_step` and the printed proof in the machine-generated audit.
+
+## `post_micro_prize_tick`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_prize_tick {s : ℕ} (M : WriteMoveMachine s) (q : MicroConfiguration s) :
+    postMachineTick (compileWriteMove M) (microPrizeConfiguration q) =
+      microPrizeConfiguration (postMachineTick (postMicroMachine M) q)
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_prize_tick` and the printed proof in the machine-generated audit.
+
+## `post_micro_prize_iterate`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_prize_iterate {s : ℕ} (M : WriteMoveMachine s) (q : MicroConfiguration s)
+    (n : ℕ) :
+    ((postMachineTick (compileWriteMove M))^[n]) (microPrizeConfiguration q) =
+      microPrizeConfiguration (((postMachineTick (postMicroMachine M))^[n]) q)
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_prize_iterate` and the printed proof in the machine-generated audit.
+
+## `post_micro_prize_initial`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_prize_initial (s : ℕ) (input : List (Fin 4)) :
+    microPrizeConfiguration (s
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_prize_initial` and the printed proof in the machine-generated audit.
+
+## `post_compiler_run`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_compiler_run {s : ℕ} (M : WriteMoveMachine s) (input : List (Fin 4)) (n : ℕ) :
+    prizeRun (compileWriteMove M) input (2 * n) =
+      microPrizeConfiguration (microLift (writeMoveRun M input n))
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_compiler_run` and the printed proof in the machine-generated audit.
+
+## `post_compiler_accepts`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_compiler_accepts {s : ℕ} (M : WriteMoveMachine s) (input : List (Fin 4)) (n : ℕ) :
+    prizeAccepts (compileWriteMove M) input (2 * n) ↔
+      (writeMoveRun M input n).Tape.head = 1
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_compiler_accepts` and the printed proof in the machine-generated audit.
+
+## `post_micro_halt`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_halt {s : ℕ} (M : WriteMoveMachine s) (q : WriteMoveConfiguration s) :
+    Turing.TM0.step (postMicroMachine M) (microLift q) = none ↔ writeMoveStep M q = none
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_halt` and the printed proof in the machine-generated audit.
+
+## `post_compiler_halts`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_compiler_halts {s : ℕ} (M : WriteMoveMachine s) (input : List (Fin 4)) (n : ℕ) :
+    prizeHalted (compileWriteMove M) input (2 * n) ↔
+      writeMoveStep M (writeMoveRun M input n) = none
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_compiler_halts` and the printed proof in the machine-generated audit.
+
+## `post_compiler_polynomial_bound`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_compiler_polynomial_bound (c d length time : ℕ)
+    (bound : time ≤ prizePolynomialBound c d length) :
+    2 * time ≤ prizePolynomialBound (2 * c) d length
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_compiler_polynomial_bound` and the printed proof in the machine-generated audit.
+
+## `post_micro_actual_step`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_actual_step {s : ℕ} (M : WriteMoveMachine s)
+    (q q' : WriteMoveConfiguration s) (step : writeMoveStep M q = some q') :
+    ∃ mid : MicroConfiguration s,
+      Turing.TM0.step (postMicroMachine M) (microLift q) = some mid ∧
+      Turing.TM0.step (postMicroMachine M) mid = some (microLift q')
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_actual_step` and the printed proof in the machine-generated audit.
+
+## `post_micro_actual_run`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_actual_run {s : ℕ} (M : WriteMoveMachine s)
+    {n : ℕ} {q q' : WriteMoveConfiguration s}
+    (run : ReferenceRun (fun x y => writeMoveStep M x = some y) n q q') :
+    ReferenceRun (fun x y => Turing.TM0.step (postMicroMachine M) x = some y)
+      (2 * n) (microLift q) (microLift q')
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_actual_run` and the printed proof in the machine-generated audit.
+
+## `post_micro_rename_actual_run`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_rename_actual_run {s : ℕ} (M : WriteMoveMachine s)
+    {n : ℕ} {q q' : MicroConfiguration s}
+    (run : ReferenceRun (fun x y => Turing.TM0.step (postMicroMachine M) x = some y) n q q') :
+    ReferenceRun (fun x y => Turing.TM0.step (compileWriteMove M) x = some y)
+      n (microPrizeConfiguration q) (microPrizeConfiguration q')
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_rename_actual_run` and the printed proof in the machine-generated audit.
+
+## `post_compiler_actual_run`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_compiler_actual_run {s : ℕ} (M : WriteMoveMachine s)
+    {n : ℕ} {q q' : WriteMoveConfiguration s}
+    (run : ReferenceRun (fun x y => writeMoveStep M x = some y) n q q') :
+    ReferenceRun (fun x y => Turing.TM0.step (compileWriteMove M) x = some y)
+      (2 * n) (microPrizeConfiguration (microLift q)) (microPrizeConfiguration (microLift q'))
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_compiler_actual_run` and the printed proof in the machine-generated audit.
+
+## `post_micro_pending_not_halted`
+
+Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
+
+```lean
+theorem post_micro_pending_not_halted {s : ℕ} (M : WriteMoveMachine s)
+    (state : Fin (s + 1)) (phase : Fin 4) (pending : phase ≠ 0) (tape : Turing.Tape (Fin 4)) :
+    Turing.TM0.step (postMicroMachine M) ⟨(state, phase), tape⟩ ≠ none
+```
+
+Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES post_micro_pending_not_halted` and the printed proof in the machine-generated audit.
 
 ## `reference_accept_reject_distinct`
 

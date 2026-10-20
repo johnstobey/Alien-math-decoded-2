@@ -143,3 +143,9 @@ entry 1.13 with 22 checked declarations and exact one-transition overhead.
 Current library inventory: 430 declarations, plus 16 separately audited phase
 experiments. Current atomic register: 13 completed, 64 open. The four-symbol
 TM0 compiler (1.14) remains open.
+
+[Post-machine compiler component](verification/POST_MICROCODE.md) provides
+actual four-symbol `PrizeMachine` code and 17 supporting theorems, bringing the
+library inventory to 447. Each combined source write/move instruction takes
+exactly two target instructions. This single-tape component is partial evidence
+for 1.14; the general multi-tape compiler remains open, with 64 open entries.

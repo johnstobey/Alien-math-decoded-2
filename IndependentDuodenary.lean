@@ -25,3 +25,4 @@ import IndependentDuodenary.ComplexityEncoding
 import IndependentDuodenary.ReferenceMachines
 import IndependentDuodenary.FulguriteSAT
 import IndependentDuodenary.AcceptanceNormalization
+import IndependentDuodenary.PostMicrocode

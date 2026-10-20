@@ -81,6 +81,13 @@ jobs:
             lake env lean "$proof_file" 2>&1 | tee .lake/search-boundary-check.log
             test ! -s .lake/search-boundary-check.log
           done
+      - name: Verify four-symbol compiler microcode
+        run: |
+          for proof_file in IndependentDuodenary/PostMicrocode.lean examples/PostMicrocodeBoundary.lean
+          do
+            lake env lean "$proof_file" 2>&1 | tee .lake/post-microcode-check.log
+            test ! -s .lake/post-microcode-check.log
+          done
       - name: Verify acceptance normalization batch
         run: |
           for proof_file in IndependentDuodenary/AcceptanceNormalization.lean examples/AcceptanceNormalizationBoundary.lean

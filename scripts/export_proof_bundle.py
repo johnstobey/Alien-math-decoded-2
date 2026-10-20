@@ -180,6 +180,8 @@ def main():
             (['python3', 'scripts/audit_phase_alignment.py'], 'phase-axioms.log', False),
             (['lake', 'env', 'lean', 'IndependentDuodenary/AcceptanceNormalization.lean'], 'normalization-module.log', True),
             (['lake', 'env', 'lean', 'examples/AcceptanceNormalizationBoundary.lean'], 'normalization-fixtures.log', True),
+            (['lake', 'env', 'lean', 'IndependentDuodenary/PostMicrocode.lean'], 'microcode-module.log', True),
+            (['lake', 'env', 'lean', 'examples/PostMicrocodeBoundary.lean'], 'microcode-fixtures.log', True),
             (['lake', 'exe', 'verifyPipeline'], 'pipeline.log', False)]:
             records.append(checked_command(cmd, logs / filename, strict))
         if args.translation:

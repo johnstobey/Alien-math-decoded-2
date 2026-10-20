@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: twenty-eight modules; 430 theorem declarations.
+- Project library: twenty-nine modules; 447 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 430 stated Lean theorems.
+There are no incomplete obligations inside the 447 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -99,7 +99,7 @@ build, warning-free checks, fifteen canonical guards, synthesis guards and all
 thirteen executable checks passed. The executable output is retained in
 `pipeline-execution.txt`.
 
-Final local audit: all 430 theorem declarations passed, permitting only the
+Final local audit: all 447 theorem declarations passed, permitting only the
 standard Lean axiom union already listed. The placeholder scan also covers
 the native launcher and example sources. All newly added modules, the
 refactored dynamics module and both runners elaborate without diagnostics.
@@ -176,3 +176,13 @@ overhead. Input-independent polynomial witnesses increase c to c+1 and retain d.
 The current library count is 430; 13 atomic obligations are completed and 64
 remain open. This does not supply the next four-symbol TM0 compiler (1.14).
 See [ACCEPTANCE_NORMALIZATION.md](ACCEPTANCE_NORMALIZATION.md).
+
+## Post-machine compiler microcode: partial 1.14
+
+Seventeen new declarations compile four-symbol, single-tape write/move
+instructions into the actual `PrizeMachine` type, with four finite control
+phases per source state and exactly two actual target transitions per source
+transition. Initialization, arbitrary finite runs, head acceptance and halting
+correspondence at macrostep boundaries are checked. Current library: 447.
+This component does not close the general multi-tape/alphabet compiler; 1.14
+and all 64 previously open entries remain open. See [POST_MICROCODE.md](POST_MICROCODE.md).
