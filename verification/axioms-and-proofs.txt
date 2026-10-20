@@ -1,3 +1,418 @@
+theorem IndependentDuodenary.affine_station_composition : ∀ (p q : IndependentDuodenary.AffineStationParameter)
+  (x : ZMod 12),
+  IndependentDuodenary.affineStationApply (IndependentDuodenary.affineStationCompose p q) x =
+    IndependentDuodenary.affineStationApply p (IndependentDuodenary.affineStationApply q x) :=
+fun p q x =>
+  id
+    (Mathlib.Tactic.Ring.of_eq
+      (Mathlib.Tactic.Ring.add_congr
+        (Mathlib.Tactic.Ring.mul_congr
+          (Mathlib.Tactic.Ring.mul_congr (Mathlib.Tactic.Ring.atom_pf ↑p.1) (Mathlib.Tactic.Ring.atom_pf ↑q.1)
+            (Mathlib.Tactic.Ring.add_mul
+              (Mathlib.Tactic.Ring.mul_add
+                (Mathlib.Tactic.Ring.mul_pf_left (↑p.1) (Nat.rawCast 1)
+                  (Mathlib.Tactic.Ring.mul_pf_right (↑q.1) (Nat.rawCast 1)
+                    (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1))))
+                (Mathlib.Tactic.Ring.mul_zero (↑p.1 ^ Nat.rawCast 1 * Nat.rawCast 1))
+                (Mathlib.Tactic.Ring.add_pf_add_zero
+                  (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * Nat.rawCast 1) + 0)))
+              (Mathlib.Tactic.Ring.zero_mul (↑q.1 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+              (Mathlib.Tactic.Ring.add_pf_add_zero
+                (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * Nat.rawCast 1) + 0))))
+          (Mathlib.Tactic.Ring.atom_pf x)
+          (Mathlib.Tactic.Ring.add_mul
+            (Mathlib.Tactic.Ring.mul_add
+              (Mathlib.Tactic.Ring.mul_pf_left (↑p.1) (Nat.rawCast 1)
+                (Mathlib.Tactic.Ring.mul_pf_left (↑q.1) (Nat.rawCast 1)
+                  (Mathlib.Tactic.Ring.mul_pf_right x (Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1)))))
+              (Mathlib.Tactic.Ring.mul_zero (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * Nat.rawCast 1)))
+              (Mathlib.Tactic.Ring.add_pf_add_zero
+                (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1)) + 0)))
+            (Mathlib.Tactic.Ring.zero_mul (x ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+            (Mathlib.Tactic.Ring.add_pf_add_zero
+              (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1)) + 0))))
+        (Mathlib.Tactic.Ring.add_congr
+          (Mathlib.Tactic.Ring.mul_congr (Mathlib.Tactic.Ring.atom_pf ↑p.1) (Mathlib.Tactic.Ring.atom_pf q.2)
+            (Mathlib.Tactic.Ring.add_mul
+              (Mathlib.Tactic.Ring.mul_add
+                (Mathlib.Tactic.Ring.mul_pf_left (↑p.1) (Nat.rawCast 1)
+                  (Mathlib.Tactic.Ring.mul_pf_right q.2 (Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1))))
+                (Mathlib.Tactic.Ring.mul_zero (↑p.1 ^ Nat.rawCast 1 * Nat.rawCast 1))
+                (Mathlib.Tactic.Ring.add_pf_add_zero
+                  (↑p.1 ^ Nat.rawCast 1 * (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1) + 0)))
+              (Mathlib.Tactic.Ring.zero_mul (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+              (Mathlib.Tactic.Ring.add_pf_add_zero (↑p.1 ^ Nat.rawCast 1 * (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1) + 0))))
+          (Mathlib.Tactic.Ring.atom_pf p.2)
+          (Mathlib.Tactic.Ring.add_pf_add_lt (↑p.1 ^ Nat.rawCast 1 * (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1))
+            (Mathlib.Tactic.Ring.add_pf_zero_add (p.2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+        (Mathlib.Tactic.Ring.add_pf_add_lt
+          (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1)))
+          (Mathlib.Tactic.Ring.add_pf_zero_add
+            (↑p.1 ^ Nat.rawCast 1 * (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1) +
+              (p.2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))))
+      (Mathlib.Tactic.Ring.add_congr
+        (Mathlib.Tactic.Ring.mul_congr (Mathlib.Tactic.Ring.atom_pf ↑p.1)
+          (Mathlib.Tactic.Ring.add_congr
+            (Mathlib.Tactic.Ring.mul_congr (Mathlib.Tactic.Ring.atom_pf ↑q.1) (Mathlib.Tactic.Ring.atom_pf x)
+              (Mathlib.Tactic.Ring.add_mul
+                (Mathlib.Tactic.Ring.mul_add
+                  (Mathlib.Tactic.Ring.mul_pf_left (↑q.1) (Nat.rawCast 1)
+                    (Mathlib.Tactic.Ring.mul_pf_right x (Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1))))
+                  (Mathlib.Tactic.Ring.mul_zero (↑q.1 ^ Nat.rawCast 1 * Nat.rawCast 1))
+                  (Mathlib.Tactic.Ring.add_pf_add_zero
+                    (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1) + 0)))
+                (Mathlib.Tactic.Ring.zero_mul (x ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                (Mathlib.Tactic.Ring.add_pf_add_zero (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1) + 0))))
+            (Mathlib.Tactic.Ring.atom_pf q.2)
+            (Mathlib.Tactic.Ring.add_pf_add_lt (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1))
+              (Mathlib.Tactic.Ring.add_pf_zero_add (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+          (Mathlib.Tactic.Ring.add_mul
+            (Mathlib.Tactic.Ring.mul_add
+              (Mathlib.Tactic.Ring.mul_pf_left (↑p.1) (Nat.rawCast 1)
+                (Mathlib.Tactic.Ring.mul_pf_right (↑q.1) (Nat.rawCast 1)
+                  (Mathlib.Tactic.Ring.mul_pf_right x (Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1)))))
+              (Mathlib.Tactic.Ring.mul_add
+                (Mathlib.Tactic.Ring.mul_pf_left (↑p.1) (Nat.rawCast 1)
+                  (Mathlib.Tactic.Ring.mul_pf_right q.2 (Nat.rawCast 1) (Mathlib.Tactic.Ring.one_mul (Nat.rawCast 1))))
+                (Mathlib.Tactic.Ring.mul_zero (↑p.1 ^ Nat.rawCast 1 * Nat.rawCast 1))
+                (Mathlib.Tactic.Ring.add_pf_add_zero
+                  (↑p.1 ^ Nat.rawCast 1 * (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1) + 0)))
+              (Mathlib.Tactic.Ring.add_pf_add_lt
+                (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1)))
+                (Mathlib.Tactic.Ring.add_pf_zero_add
+                  (↑p.1 ^ Nat.rawCast 1 * (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1) + 0))))
+            (Mathlib.Tactic.Ring.zero_mul
+              (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1) + (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+            (Mathlib.Tactic.Ring.add_pf_add_zero
+              (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1)) +
+                (↑p.1 ^ Nat.rawCast 1 * (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1) + 0)))))
+        (Mathlib.Tactic.Ring.atom_pf p.2)
+        (Mathlib.Tactic.Ring.add_pf_add_lt
+          (↑p.1 ^ Nat.rawCast 1 * (↑q.1 ^ Nat.rawCast 1 * (x ^ Nat.rawCast 1 * Nat.rawCast 1)))
+          (Mathlib.Tactic.Ring.add_pf_add_lt (↑p.1 ^ Nat.rawCast 1 * (q.2 ^ Nat.rawCast 1 * Nat.rawCast 1))
+            (Mathlib.Tactic.Ring.add_pf_zero_add (p.2 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))))
+'IndependentDuodenary.affine_station_composition' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES affine_station_composition: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Units.val,
+ NonAssocSemiring.toAddCommMonoidWithOne,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ Nat.rawCast,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ Mathlib.Tactic.Ring.mul_zero,
+ Mathlib.Tactic.Ring.mul_pf_left,
+ Monoid.toMulOneClass,
+ MulOneClass.toMul,
+ CommSemiring.toSemiring,
+ Mathlib.Tactic.Ring.mul_pf_right,
+ Mathlib.Tactic.Ring.one_mul,
+ Mathlib.Tactic.Ring.zero_mul,
+ Mathlib.Tactic.Ring.instCommSemiringNat,
+ CommSemiring.toCommMonoidWithZero,
+ Monoid.toNatPow,
+ Units,
+ NonUnitalNonAssocSemiring.toMul,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ AddCommMonoidWithOne.toAddMonoidWithOne,
+ Mathlib.Tactic.Ring.of_eq,
+ Mathlib.Tactic.Ring.add_pf_zero_add,
+ IndependentDuodenary.affineStationCompose,
+ ZMod,
+ Prod.fst,
+ Mathlib.Tactic.Ring.mul_congr,
+ Mathlib.Tactic.Ring.add_mul,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Mathlib.Tactic.Ring.add_pf_add_zero,
+ HPow.hPow,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ NonAssocSemiring.toNonUnitalNonAssocSemiring,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ IndependentDuodenary.AffineStationParameter,
+ Mathlib.Tactic.Ring.add_pf_add_lt,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ instHPow,
+ IndependentDuodenary.affineStationApply,
+ Mathlib.Tactic.Ring.atom_pf,
+ OfNat.ofNat,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Prod.snd,
+ MonoidWithZero.toMonoid,
+ Mathlib.Tactic.Ring.mul_add,
+ Mathlib.Tactic.Ring.add_congr,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.affine_station_permutation_injective : Function.Injective
+  IndependentDuodenary.affineStationPermutation :=
+fun ⦃p q⦄ h =>
+  let_fun h0 := congrArg (fun f => f 0) h;
+  let_fun h1 := congrArg (fun f => f 1) h;
+  let_fun hb :=
+    Eq.mp
+      (congr (congrArg Eq (Eq.trans (congrArg (fun x => x + p.2) (mul_zero ↑p.1)) (zero_add p.2)))
+        (Eq.trans (congrArg (fun x => x + q.2) (mul_zero ↑q.1)) (zero_add q.2)))
+      h0;
+  let_fun hv :=
+    Eq.mpr (id (Mathlib.Algebra.Group.Basic._auxLemma.4 q.2))
+      (Eq.mp
+        (Eq.trans
+          (congr (congrArg Eq (congr (congrArg HAdd.hAdd (mul_one ↑p.1)) hb))
+            (congrArg (fun x => x + q.2) (mul_one ↑q.1)))
+          (Mathlib.Algebra.Group.Basic._auxLemma.4 q.2))
+        h1);
+  Prod.ext (Units.ext (add_right_cancel hv)) hb
+'IndependentDuodenary.affine_station_permutation_injective' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES affine_station_permutation_injective: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Units.val,
+ Eq.mpr,
+ Equiv.instFunLike,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ MulZeroClass.toMul,
+ AddGroupWithOne.toAddGroup,
+ MulOneClass.toMul,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ AddCancelMonoid.toIsCancelAdd,
+ NonUnitalNonAssocSemiring.toMulZeroClass,
+ CommSemiring.toCommMonoidWithZero,
+ Units,
+ Eq.mp,
+ id,
+ Distrib.toAdd,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ Units.ext,
+ zero_add,
+ ZMod,
+ Prod.fst,
+ add_right_cancel,
+ MulZeroClass.mul_zero,
+ MulZeroOneClass.toMulOneClass,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Equiv.Perm,
+ IndependentDuodenary.affineStationPermutation,
+ Prod.ext,
+ Nat,
+ congr,
+ IndependentDuodenary.AffineStationParameter,
+ MulOneClass.toOne,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Function.Injective,
+ AddMonoidWithOne.toAddMonoid,
+ IndependentDuodenary.affineStationApply,
+ CommRing.toRing,
+ mul_one,
+ AddGroup.toAddCancelMonoid,
+ OfNat.ofNat,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Prod.snd,
+ DFunLike.coe,
+ Ring.toAddGroupWithOne,
+ letFun,
+ IsCancelAdd.toIsRightCancelAdd,
+ Mathlib.Algebra.Group.Basic._auxLemma.4,
+ MonoidWithZero.toMonoid,
+ Eq.trans,
+ MulZeroClass.toZero,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.twelve_unit_count : Fintype.card (ZMod 12)ˣ = 4 :=
+Trans.trans (Fintype.card_congr ZMod.unitsEquivCoprime) (of_decide_eq_true (id (Eq.refl true)))
+'IndependentDuodenary.twelve_unit_count' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES twelve_unit_count: [Fintype.card_congr,
+ Nat.Coprime,
+ Trans.trans,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Nat.instDecidableCoprime,
+ Subtype.fintype,
+ Units,
+ ZMod.unitsEquivCoprime,
+ instFintypeUnitsOfDecidableEq,
+ Fintype.card,
+ id,
+ Subtype,
+ instOfNatNat,
+ ZMod,
+ instTransEq,
+ Bool.true,
+ CommRing.toCommSemiring,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Eq.refl,
+ instDecidableEqNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ MonoidWithZero.toMonoid,
+ Semiring.toMonoidWithZero,
+ ZMod.val]
+theorem IndependentDuodenary.twelve_unit_residues : ∀ (u : (ZMod 12)ˣ), ↑u = 1 ∨ ↑u = 5 ∨ ↑u = 7 ∨ ↑u = 11 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.twelve_unit_residues' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES twelve_unit_residues: [Semiring.toNatCast,
+ Units.val,
+ Semiring.toOne,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Units,
+ instFintypeUnitsOfDecidableEq,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ One.toOfNat1,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ Or,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instDecidableOr,
+ instOfNatAtLeastTwo,
+ MonoidWithZero.toMonoid,
+ Semiring.toMonoidWithZero]
+theorem IndependentDuodenary.affine_station_parameter_card : Fintype.card IndependentDuodenary.AffineStationParameter =
+  48 :=
+Eq.mpr (id (congrArg (fun _a => _a = 48) (Fintype.card_prod (ZMod 12)ˣ (ZMod 12))))
+  (Eq.mpr (id (congrArg (fun _a => _a * Fintype.card (ZMod 12) = 48) IndependentDuodenary.twelve_unit_count))
+    (Eq.mpr (id (congrArg (fun _a => 4 * _a = 48) (ZMod.card 12))) (Eq.refl (4 * 12))))
+'IndependentDuodenary.affine_station_parameter_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES affine_station_parameter_card: [Eq.mpr,
+ HMul.hMul,
+ IndependentDuodenary.twelve_unit_count,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Units,
+ instFintypeUnitsOfDecidableEq,
+ Fintype.card,
+ id,
+ instMulNat,
+ instOfNatNat,
+ Fintype.card_prod,
+ ZMod,
+ CommRing.toCommSemiring,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Eq.refl,
+ instFintypeProd,
+ Prod,
+ OfNat.ofNat,
+ Eq,
+ ZMod.card,
+ MonoidWithZero.toMonoid,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.affine_station_group_card : Nat.card ↥IndependentDuodenary.affineStationSubgroup = 48 :=
+Eq.mpr (id (congrArg (fun _a => _a = 48) (Eq.symm (Nat.card_congr IndependentDuodenary.affineStationGroupEquiv))))
+  (Eq.mpr (id (congrArg (fun _a => _a = 48) Nat.card_eq_fintype_card))
+    (Eq.mpr (id (congrArg (fun _a => _a = 48) IndependentDuodenary.affine_station_parameter_card)) (Eq.refl 48)))
+'IndependentDuodenary.affine_station_group_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES affine_station_group_card: [Eq.mpr,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ IndependentDuodenary.affine_station_parameter_card,
+ Membership.mem,
+ Units,
+ instFintypeUnitsOfDecidableEq,
+ Fintype.card,
+ id,
+ Subtype,
+ IndependentDuodenary.affineStationSubgroup,
+ Nat.card,
+ Subgroup,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.affineStationGroupEquiv,
+ Equiv.Perm.permGroup,
+ Nat.card_congr,
+ CommRing.toCommSemiring,
+ Nat.instNeZeroSucc,
+ Equiv.Perm,
+ Nat,
+ IndependentDuodenary.AffineStationParameter,
+ Eq.refl,
+ instFintypeProd,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ SetLike.instMembership,
+ Subgroup.instSetLike,
+ MonoidWithZero.toMonoid,
+ Nat.card_eq_fintype_card,
+ Semiring.toMonoidWithZero]
+theorem IndependentDuodenary.affine_five_changes_cyclic_distance : IndependentDuodenary.cyclicDistance
+    (IndependentDuodenary.affineStationApply IndependentDuodenary.multiplyFiveParameter 0)
+    (IndependentDuodenary.affineStationApply IndependentDuodenary.multiplyFiveParameter 1) ≠
+  IndependentDuodenary.cyclicDistance 0 1 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.affine_five_changes_cyclic_distance' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES affine_five_changes_cyclic_distance: [instDecidableNot,
+ IndependentDuodenary.multiplyFiveParameter,
+ Semiring.toOne,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ IndependentDuodenary.cyclicDistance,
+ Bool,
+ One.toOfNat1,
+ Zero.toOfNat0,
+ Eq.refl,
+ instDecidableEqNat,
+ IndependentDuodenary.affineStationApply,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
 theorem IndependentDuodenary.bitToTwelve_values : IndependentDuodenary.bitToTwelve 0 = 0 ∧
   IndependentDuodenary.bitToTwelve 1 = 6 :=
 of_decide_eq_true (id (Eq.refl true))
@@ -1585,6 +2000,793 @@ DIRECT DEPENDENCIES zero_bits_count: [IndependentDuodenary.weightLayer_card,
  IndependentDuodenary.weightLayer,
  Decidable.decide,
  Eq]
+theorem IndependentDuodenary.semantic_decoder_no_collision.{u_1, u_2} : ∀ {L : Type u_1} {S : Type u_2} (r : Setoid L)
+  (encode : L → S) (decode : S → Quotient r),
+  (∀ (x : L), decode (encode x) = ⟦x⟧) → ∀ (x y : L), encode x = encode y → r x y :=
+fun {L} {S} r encode decode h x y heq =>
+  Quotient.exact (Eq.trans (Eq.symm (h x)) (Eq.trans (congrArg decode heq) (h y)))
+'IndependentDuodenary.semantic_decoder_no_collision' depends on axioms: [propext]
+DIRECT DEPENDENCIES semantic_decoder_no_collision: [congrArg,
+ Setoid,
+ Quotient.mk,
+ Quotient,
+ Quotient.exact,
+ Eq.symm,
+ Eq,
+ Setoid.r,
+ Eq.trans]
+theorem IndependentDuodenary.exact_decoder_injective.{u_1, u_2} : ∀ {M : Type u_1} {S : Type u_2} (encode : M → S)
+  (decode : S → M), Function.LeftInverse decode encode → Function.Injective encode :=
+fun {M} {S} encode decode h => Function.LeftInverse.injective h
+'IndependentDuodenary.exact_decoder_injective' does not depend on any axioms
+DIRECT DEPENDENCIES exact_decoder_injective: [Function.LeftInverse.injective, Function.LeftInverse, Function.Injective]
+theorem IndependentDuodenary.exact_decoder_capacity.{u_1, u_2} : ∀ {M : Type u_1} {S : Type u_2} [inst : Fintype M]
+  [inst_1 : Fintype S] (encode : M → S) (decode : S → M),
+  Function.LeftInverse decode encode → Fintype.card M ≤ Fintype.card S :=
+fun {M} {S} [Fintype M] [Fintype S] encode decode h =>
+  Fintype.card_le_of_injective encode (Function.LeftInverse.injective h)
+'IndependentDuodenary.exact_decoder_capacity' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_decoder_capacity: [Fintype.card_le_of_injective,
+ Function.LeftInverse.injective,
+ Function.LeftInverse,
+ Fintype.card,
+ LE.le,
+ instLENat,
+ Fintype,
+ Nat]
+theorem IndependentDuodenary.no_exact_decoder_over_capacity.{u_1, u_2} : ∀ {M : Type u_1} {S : Type u_2}
+  [inst : Fintype M] [inst_1 : Fintype S],
+  Fintype.card S < Fintype.card M → ∀ (encode : M → S) (decode : S → M), ¬Function.LeftInverse decode encode :=
+fun {M} {S} [Fintype M] [Fintype S] hcard encode decode h =>
+  Nat.not_le_of_gt hcard (IndependentDuodenary.exact_decoder_capacity encode decode h)
+'IndependentDuodenary.no_exact_decoder_over_capacity' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES no_exact_decoder_over_capacity: [Function.LeftInverse,
+ Fintype.card,
+ IndependentDuodenary.exact_decoder_capacity,
+ Fintype,
+ Nat,
+ LT.lt,
+ Nat.not_le_of_gt,
+ instLTNat,
+ Not]
+theorem IndependentDuodenary.no_infinite_exact_finite_decoder.{u_1, u_2} : ∀ {M : Type u_1} {S : Type u_2}
+  [inst : Infinite M] [inst : Finite S] (encode : M → S) (decode : S → M), ¬Function.LeftInverse decode encode :=
+fun {M} {S} [Infinite M] [Finite S] encode decode h =>
+  not_injective_infinite_finite encode (Function.LeftInverse.injective h)
+'IndependentDuodenary.no_infinite_exact_finite_decoder' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES no_infinite_exact_finite_decoder: [Function.LeftInverse.injective,
+ Function.LeftInverse,
+ Finite,
+ not_injective_infinite_finite,
+ Infinite,
+ Not]
+theorem IndependentDuodenary.twelve_symbol_word_capacity : ∀ (n : ℕ), Fintype.card (Fin n → ZMod 12) = 12 ^ n :=
+fun n =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = 12 ^ n)
+        (Eq.trans Fintype.card_fun (congr (congrArg HPow.hPow (ZMod.card 12)) (Fintype.card_fin n))))
+      (eq_self (12 ^ n)))
+'IndependentDuodenary.twelve_symbol_word_capacity' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES twelve_symbol_word_capacity: [Fintype.card_fin,
+ congrArg,
+ Nat.instMonoid,
+ ZMod.fintype,
+ instDecidableEqFin,
+ Monoid.toNatPow,
+ Fintype.card,
+ instOfNatNat,
+ ZMod,
+ Fin.fintype,
+ HPow.hPow,
+ Nat.instNeZeroSucc,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ Pi.fintype,
+ of_eq_true,
+ instHPow,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Fintype.card_fun,
+ ZMod.card,
+ Eq.trans]
+theorem IndependentDuodenary.natural_word_length_left_inverse : Function.LeftInverse List.length
+  IndependentDuodenary.encodeNaturalWord :=
+fun n => of_eq_true (Eq.trans (congrArg (fun x => x = n) (List.length_replicate n 0)) (eq_self n))
+'IndependentDuodenary.natural_word_length_left_inverse' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES natural_word_length_left_inverse: [List.replicate,
+ Function.LeftInverse,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toCommMonoidWithZero,
+ List.length_replicate,
+ instOfNatNat,
+ ZMod,
+ List,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ Zero.toOfNat0,
+ IndependentDuodenary.encodeNaturalWord,
+ OfNat.ofNat,
+ Eq,
+ List.length,
+ Eq.trans]
+theorem IndependentDuodenary.natural_word_encoding_injective : Function.Injective
+  IndependentDuodenary.encodeNaturalWord :=
+Function.LeftInverse.injective IndependentDuodenary.natural_word_length_left_inverse
+'IndependentDuodenary.natural_word_encoding_injective' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES natural_word_encoding_injective: [Function.LeftInverse.injective,
+ IndependentDuodenary.natural_word_length_left_inverse,
+ instOfNatNat,
+ ZMod,
+ List,
+ Nat,
+ IndependentDuodenary.encodeNaturalWord,
+ Function.Injective,
+ OfNat.ofNat,
+ List.length]
+theorem IndependentDuodenary.word_distance_self.{u_1, u_2} : ∀ {ι : Type u_1} {Alphabet : Type u_2} [inst : Fintype ι]
+  [inst_1 : DecidableEq Alphabet] (x : ι → Alphabet), IndependentDuodenary.wordDistance x x = 0 :=
+fun {ι} {Alphabet} [inst : Fintype ι] [DecidableEq Alphabet] x =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x.card = 0)
+        (Eq.trans
+          ((fun {α} p p_1 e_p =>
+              @Eq.rec (α → Prop) p
+                (fun p_2 e_p =>
+                  ∀ {inst : DecidablePred p} [inst_2 : DecidablePred p_2] (s s_1 : Finset α),
+                    s = s_1 → Finset.filter p s = Finset.filter p_2 s_1)
+                (fun {inst} [inst_2 : DecidablePred p] =>
+                  Eq.ndrec (motive := fun [DecidablePred p] =>
+                    ∀ (s s_1 : Finset α), s = s_1 → Finset.filter p s = Finset.filter p s_1)
+                    (fun s s_1 e_s => e_s ▸ Eq.refl (Finset.filter p s)) (Subsingleton.elim inst inst_2))
+                p_1 e_p)
+            (fun i => x i ≠ x i) (fun i => False)
+            (funext fun i => Eq.trans (congrArg Not (eq_self (x i))) not_true_eq_false) Finset.univ Finset.univ
+            (Eq.refl Finset.univ))
+          (Finset.filter_False Finset.univ)))
+      (eq_self 0))
+'IndependentDuodenary.word_distance_self' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES word_distance_self: [instDecidableNot,
+ False,
+ instSubsingletonDecidable,
+ Finset.univ,
+ congrArg,
+ Finset,
+ Decidable,
+ Eq.rec,
+ not_true_eq_false,
+ Finset.filter_False,
+ Pi.instSubsingleton,
+ Ne,
+ instOfNatNat,
+ IndependentDuodenary.wordDistance,
+ Finset.instEmptyCollection,
+ funext,
+ Fintype,
+ DecidablePred,
+ Nat,
+ True,
+ eq_self,
+ instDecidableFalse,
+ Finset.card,
+ of_eq_true,
+ Eq.ndrec,
+ Eq.refl,
+ EmptyCollection.emptyCollection,
+ Subsingleton.elim,
+ OfNat.ofNat,
+ Finset.filter,
+ Eq,
+ Not,
+ Eq.trans,
+ DecidableEq]
+theorem IndependentDuodenary.word_distance_comm.{u_1, u_2} : ∀ {ι : Type u_1} {Alphabet : Type u_2} [inst : Fintype ι]
+  [inst_1 : DecidableEq Alphabet] (x y : ι → Alphabet),
+  IndependentDuodenary.wordDistance x y = IndependentDuodenary.wordDistance y x :=
+fun {ι} {Alphabet} [inst : Fintype ι] [DecidableEq Alphabet] x y =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x_1 => (Finset.filter (fun i => x i ≠ y i) Finset.univ).card = x_1.card)
+        ((fun {α} p p_1 e_p =>
+            @Eq.rec (α → Prop) p
+              (fun p_2 e_p =>
+                ∀ {inst : DecidablePred p} [inst_2 : DecidablePred p_2] (s s_1 : Finset α),
+                  s = s_1 → Finset.filter p s = Finset.filter p_2 s_1)
+              (fun {inst} [inst_2 : DecidablePred p] =>
+                Eq.ndrec (motive := fun [DecidablePred p] =>
+                  ∀ (s s_1 : Finset α), s = s_1 → Finset.filter p s = Finset.filter p s_1)
+                  (fun s s_1 e_s => e_s ▸ Eq.refl (Finset.filter p s)) (Subsingleton.elim inst inst_2))
+              p_1 e_p)
+          (fun i => y i ≠ x i) (fun i => x i ≠ y i) (funext fun i => IndependentDuodenary.EncodingIntegrity._auxLemma.1)
+          Finset.univ Finset.univ (Eq.refl Finset.univ)))
+      (eq_self (Finset.filter (fun i => x i ≠ y i) Finset.univ).card))
+'IndependentDuodenary.word_distance_comm' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES word_distance_comm: [instDecidableNot,
+ instSubsingletonDecidable,
+ Finset.univ,
+ congrArg,
+ Finset,
+ Decidable,
+ Eq.rec,
+ Pi.instSubsingleton,
+ Ne,
+ IndependentDuodenary.wordDistance,
+ funext,
+ Fintype,
+ DecidablePred,
+ Nat,
+ True,
+ eq_self,
+ Finset.card,
+ of_eq_true,
+ Eq.ndrec,
+ IndependentDuodenary.EncodingIntegrity._auxLemma.1,
+ Eq.refl,
+ Subsingleton.elim,
+ Finset.filter,
+ Eq,
+ Eq.trans,
+ DecidableEq]
+theorem IndependentDuodenary.word_distance_triangle.{u_1, u_2} : ∀ {ι : Type u_1} {Alphabet : Type u_2}
+  [inst : Fintype ι] [inst_1 : DecidableEq Alphabet] (x y z : ι → Alphabet),
+  IndependentDuodenary.wordDistance x z ≤
+    IndependentDuodenary.wordDistance x y + IndependentDuodenary.wordDistance y z :=
+fun {ι} {Alphabet} [Fintype ι] [DecidableEq Alphabet] x y z =>
+  let_fun hs := fun ⦃i⦄ hi =>
+    let_fun hxz := (Finset.mem_filter.mp hi).right;
+    if hxy : x i = y i then
+      Finset.mem_union.mpr (Or.inr (Finset.mem_filter.mpr ⟨Finset.mem_univ i, fun hyz => hxz (Eq.trans hxy hyz)⟩))
+    else Finset.mem_union.mpr (Or.inl (Finset.mem_filter.mpr ⟨Finset.mem_univ i, hxy⟩));
+  LE.le.trans (Finset.card_mono hs)
+    (Finset.card_union_le (Finset.filter (fun i => x i ≠ y i) Finset.univ)
+      (Finset.filter (fun i => y i ≠ z i) Finset.univ))
+'IndependentDuodenary.word_distance_triangle' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES word_distance_triangle: [Iff.mpr,
+ Finset.mem_univ,
+ instDecidableNot,
+ Finset.univ,
+ Finset.instUnion,
+ Finset,
+ Classical.propDecidable,
+ Membership.mem,
+ HasSubset.Subset,
+ Ne,
+ Finset.instMembership,
+ LE.le,
+ instLENat,
+ Finset.card_union_le,
+ IndependentDuodenary.wordDistance,
+ dite,
+ instHAdd,
+ And,
+ Fintype,
+ And.right,
+ HAdd.hAdd,
+ Nat.instPreorder,
+ Nat,
+ And.intro,
+ Iff.mp,
+ Finset.instHasSubset,
+ Finset.card,
+ instAddNat,
+ Finset.mem_filter,
+ Finset.mem_union,
+ Or.inl,
+ Or,
+ LE.le.trans,
+ Union.union,
+ Finset.filter,
+ Eq,
+ Not,
+ letFun,
+ Or.inr,
+ Eq.trans,
+ Finset.card_mono,
+ DecidableEq]
+theorem IndependentDuodenary.bounded_error_unique.{u_1, u_2} : ∀ {ι : Type u_1} {Alphabet : Type u_2} [inst : Fintype ι]
+  [inst_1 : DecidableEq Alphabet] (C : Set (ι → Alphabet)) (d t : ℕ),
+  (∀ a ∈ C, ∀ b ∈ C, a ≠ b → d ≤ IndependentDuodenary.wordDistance a b) →
+    2 * t < d →
+      ∀ (a b received : ι → Alphabet),
+        a ∈ C →
+          b ∈ C →
+            IndependentDuodenary.wordDistance a received ≤ t →
+              IndependentDuodenary.wordDistance b received ≤ t → a = b :=
+fun {ι} {Alphabet} [Fintype ι] [DecidableEq Alphabet] C d t hsep hbound a b received ha hb hea heb =>
+  Decidable.byContradiction fun hab =>
+    let_fun hlower := hsep a ha b hb hab;
+    let_fun hupper := IndependentDuodenary.word_distance_triangle a received b;
+    let_fun hd :=
+      LE.le.trans hlower
+        (LE.le.trans
+          (Eq.mp
+            (congrArg
+              (fun _a => IndependentDuodenary.wordDistance a b ≤ IndependentDuodenary.wordDistance a received + _a)
+              (IndependentDuodenary.word_distance_comm received b))
+            hupper)
+          (Nat.add_le_add hea heb));
+    Nat.not_le_of_gt hbound (Eq.mpr (id (congrArg (LE.le d) (two_mul t))) hd)
+'IndependentDuodenary.bounded_error_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES bounded_error_unique: [Eq.mpr,
+ False,
+ HMul.hMul,
+ congrArg,
+ IndependentDuodenary.word_distance_comm,
+ two_mul,
+ Membership.mem,
+ Eq.mp,
+ NonUnitalNonAssocSemiring.toMul,
+ id,
+ Distrib.toAdd,
+ Ne,
+ instMulNat,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ Nat.instNonAssocSemiring,
+ instHAdd,
+ instNatAtLeastTwo,
+ Fintype,
+ HAdd.hAdd,
+ Nat.instPreorder,
+ Fintype.decidablePiFintype,
+ NonAssocSemiring.toNonUnitalNonAssocSemiring,
+ Nat,
+ LT.lt,
+ Nat.add_le_add,
+ Nat.not_le_of_gt,
+ Decidable.byContradiction,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ IndependentDuodenary.word_distance_triangle,
+ LE.le.trans,
+ instLTNat,
+ NonAssocSemiring.toNatCast,
+ OfNat.ofNat,
+ Eq,
+ Set.instMembership,
+ instOfNatAtLeastTwo,
+ Not,
+ letFun,
+ instHMul,
+ DecidableEq,
+ Set]
+theorem IndependentDuodenary.bounded_error_decoder_correct.{u_1, u_2} : ∀ {ι : Type u_1} {Alphabet : Type u_2}
+  [inst : Fintype ι] [inst_1 : DecidableEq Alphabet] (C : Set (ι → Alphabet)) (d t : ℕ),
+  (∀ a ∈ C, ∀ b ∈ C, a ≠ b → d ≤ IndependentDuodenary.wordDistance a b) →
+    2 * t < d →
+      ∀ (decode : (ι → Alphabet) → ι → Alphabet) (received sent : ι → Alphabet),
+        sent ∈ C →
+          IndependentDuodenary.wordDistance sent received ≤ t →
+            decode received ∈ C →
+              IndependentDuodenary.wordDistance (decode received) received ≤ t → decode received = sent :=
+fun {ι} {Alphabet} [Fintype ι] [DecidableEq Alphabet] C d t hsep hbound decode received sent hsent hnoise hdecode
+    hradius =>
+  IndependentDuodenary.bounded_error_unique C d t hsep hbound (decode received) sent received hdecode hsent hradius
+    hnoise
+'IndependentDuodenary.bounded_error_decoder_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES bounded_error_decoder_correct: [IndependentDuodenary.bounded_error_unique,
+ HMul.hMul,
+ Membership.mem,
+ Ne,
+ instMulNat,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ Fintype,
+ Nat,
+ LT.lt,
+ instLTNat,
+ OfNat.ofNat,
+ Eq,
+ Set.instMembership,
+ instHMul,
+ DecidableEq,
+ Set]
+theorem IndependentDuodenary.repetition_word_distance.{u_2} : ∀ {Alphabet : Type u_2} [inst : DecidableEq Alphabet]
+  (n : ℕ) (a b : Alphabet),
+  IndependentDuodenary.wordDistance (IndependentDuodenary.repetitionWord n a)
+      (IndependentDuodenary.repetitionWord n b) =
+    if a = b then 0 else n :=
+fun {Alphabet} [inst : DecidableEq Alphabet] n a b =>
+  if h : a = b then
+    of_eq_true
+      (Eq.trans
+        (congr
+          (congrArg (fun x => Eq x.card)
+            (Eq.trans
+              ((fun {α} p p_1 e_p =>
+                  @Eq.rec (α → Prop) p
+                    (fun p_2 e_p =>
+                      ∀ {inst : DecidablePred p} [inst_1 : DecidablePred p_2] (s s_1 : Finset α),
+                        s = s_1 → Finset.filter p s = Finset.filter p_2 s_1)
+                    (fun {inst} [inst_1 : DecidablePred p] =>
+                      Eq.ndrec (motive := fun [DecidablePred p] =>
+                        ∀ (s s_1 : Finset α), s = s_1 → Finset.filter p s = Finset.filter p s_1)
+                        (fun s s_1 e_s => e_s ▸ Eq.refl (Finset.filter p s)) (Subsingleton.elim inst inst_1))
+                    p_1 e_p)
+                (fun i => IndependentDuodenary.repetitionWord n a i ≠ IndependentDuodenary.repetitionWord n b i)
+                (fun i => False)
+                (funext fun i =>
+                  Eq.trans (congrArg (fun x => x ≠ b) h) (Eq.trans (congrArg Not (eq_self b)) not_true_eq_false))
+                Finset.univ Finset.univ (Eq.refl Finset.univ))
+              (Finset.filter_False Finset.univ)))
+          (ite_cond_eq_true 0 n (Eq.trans (congrArg (fun x => x = b) h) (eq_self b))))
+        (eq_self 0))
+  else
+    of_eq_true
+      (Eq.trans
+        (congr
+          (congrArg Eq
+            (Eq.trans
+              (congrArg Finset.card
+                (Eq.trans
+                  ((fun {α} p p_1 e_p =>
+                      @Eq.rec (α → Prop) p
+                        (fun p_2 e_p =>
+                          ∀ {inst : DecidablePred p} [inst_1 : DecidablePred p_2] (s s_1 : Finset α),
+                            s = s_1 → Finset.filter p s = Finset.filter p_2 s_1)
+                        (fun {inst} [inst_1 : DecidablePred p] =>
+                          Eq.ndrec (motive := fun [DecidablePred p] =>
+                            ∀ (s s_1 : Finset α), s = s_1 → Finset.filter p s = Finset.filter p s_1)
+                            (fun s s_1 e_s => e_s ▸ Eq.refl (Finset.filter p s)) (Subsingleton.elim inst inst_1))
+                        p_1 e_p)
+                    (fun i => IndependentDuodenary.repetitionWord n a i ≠ IndependentDuodenary.repetitionWord n b i)
+                    (fun i => True) (funext fun i => Eq.trans (congrArg Not (eq_false h)) not_false_eq_true) Finset.univ
+                    Finset.univ (Eq.refl Finset.univ))
+                  (Finset.filter_True Finset.univ)))
+              (Fintype.card_fin n)))
+          (ite_cond_eq_false 0 n (eq_false h)))
+        (eq_self n))
+'IndependentDuodenary.repetition_word_distance' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES repetition_word_distance: [instDecidableNot,
+ False,
+ Fintype.card_fin,
+ instSubsingletonDecidable,
+ instDecidableTrue,
+ Finset.univ,
+ eq_false,
+ congrArg,
+ Finset,
+ IndependentDuodenary.repetitionWord,
+ Decidable,
+ Finset.filter_True,
+ Eq.rec,
+ not_true_eq_false,
+ Finset.filter_False,
+ Pi.instSubsingleton,
+ Ne,
+ instOfNatNat,
+ ite_cond_eq_true,
+ IndependentDuodenary.wordDistance,
+ Finset.instEmptyCollection,
+ dite,
+ Fin.fintype,
+ funext,
+ DecidablePred,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ instDecidableFalse,
+ Finset.card,
+ of_eq_true,
+ Eq.ndrec,
+ Eq.refl,
+ EmptyCollection.emptyCollection,
+ Subsingleton.elim,
+ OfNat.ofNat,
+ not_false_eq_true,
+ ite_cond_eq_false,
+ Fin,
+ Finset.filter,
+ Eq,
+ Not,
+ Eq.trans,
+ DecidableEq,
+ ite]
+theorem IndependentDuodenary.repetition_word_injective.{u_2} : ∀ {Alphabet : Type u_2} {n : ℕ},
+  0 < n → Function.Injective (IndependentDuodenary.repetitionWord n) :=
+fun {Alphabet} {n} hn ⦃a b⦄ h => congrFun h ⟨0, hn⟩
+'IndependentDuodenary.repetition_word_injective' does not depend on any axioms
+DIRECT DEPENDENCIES repetition_word_injective: [IndependentDuodenary.repetitionWord,
+ Fin.mk,
+ instOfNatNat,
+ congrFun,
+ Nat,
+ LT.lt,
+ Function.Injective,
+ instLTNat,
+ OfNat.ofNat,
+ Fin,
+ Eq]
+theorem IndependentDuodenary.repetition_code_separation.{u_2} : ∀ {Alphabet : Type u_2} [inst : DecidableEq Alphabet]
+  (n : ℕ),
+  ∀ a ∈ Set.range (IndependentDuodenary.repetitionWord n),
+    ∀ b ∈ Set.range (IndependentDuodenary.repetitionWord n), a ≠ b → n ≤ IndependentDuodenary.wordDistance a b :=
+fun {Alphabet} [DecidableEq Alphabet] n a a_1 =>
+  Exists.casesOn (motive := fun x =>
+    ∀ b ∈ Set.range (IndependentDuodenary.repetitionWord n), a ≠ b → n ≤ IndependentDuodenary.wordDistance a b) a_1
+    fun a_2 h =>
+    Eq.ndrec (motive := fun a =>
+      ∀ b ∈ Set.range (IndependentDuodenary.repetitionWord n), a ≠ b → n ≤ IndependentDuodenary.wordDistance a b)
+      (fun b a =>
+        Exists.casesOn (motive := fun x =>
+          IndependentDuodenary.repetitionWord n a_2 ≠ b →
+            n ≤ IndependentDuodenary.wordDistance (IndependentDuodenary.repetitionWord n a_2) b)
+          a fun b_1 h =>
+          Eq.ndrec (motive := fun b =>
+            IndependentDuodenary.repetitionWord n a_2 ≠ b →
+              n ≤ IndependentDuodenary.wordDistance (IndependentDuodenary.repetitionWord n a_2) b)
+            (fun hab =>
+              let_fun hne := fun h => hab (congrArg (IndependentDuodenary.repetitionWord n) h);
+              Eq.mpr (id (congrArg (fun _a => n ≤ _a) (IndependentDuodenary.repetition_word_distance n a_2 b_1)))
+                (Eq.mpr (id (congrArg (fun _a => n ≤ _a) (if_neg hne))) (le_refl n)))
+            h)
+      h
+'IndependentDuodenary.repetition_code_separation' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES repetition_code_separation: [Eq.mpr,
+ le_refl,
+ congrArg,
+ IndependentDuodenary.repetition_word_distance,
+ IndependentDuodenary.repetitionWord,
+ Membership.mem,
+ id,
+ Ne,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ Fin.fintype,
+ Exists.casesOn,
+ Nat.instPreorder,
+ Nat,
+ Eq.ndrec,
+ Set.range,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Set.instMembership,
+ if_neg,
+ letFun,
+ DecidableEq,
+ ite,
+ Set]
+theorem IndependentDuodenary.repetition_three_one_error_unique.{u_2} : ∀ {Alphabet : Type u_2}
+  [inst : DecidableEq Alphabet] (a b : Alphabet) (received : Fin 3 → Alphabet),
+  IndependentDuodenary.wordDistance (IndependentDuodenary.repetitionWord 3 a) received ≤ 1 →
+    IndependentDuodenary.wordDistance (IndependentDuodenary.repetitionWord 3 b) received ≤ 1 → a = b :=
+fun {Alphabet} [DecidableEq Alphabet] a b received ha hb =>
+  let_fun hwords :=
+    IndependentDuodenary.bounded_error_unique (Set.range (IndependentDuodenary.repetitionWord 3)) 3 1
+      (IndependentDuodenary.repetition_code_separation 3) (of_decide_eq_true (id (Eq.refl true)))
+      (IndependentDuodenary.repetitionWord 3 a) (IndependentDuodenary.repetitionWord 3 b) received (Exists.intro a rfl)
+      (Exists.intro b rfl) ha hb;
+  IndependentDuodenary.repetition_word_injective (of_decide_eq_true (id (Eq.refl true))) hwords
+'IndependentDuodenary.repetition_three_one_error_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES repetition_three_one_error_unique: [IndependentDuodenary.bounded_error_unique,
+ HMul.hMul,
+ of_decide_eq_true,
+ IndependentDuodenary.repetitionWord,
+ id,
+ instMulNat,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ Fin.fintype,
+ IndependentDuodenary.repetition_code_separation,
+ Bool.true,
+ IndependentDuodenary.repetition_word_injective,
+ Nat,
+ LT.lt,
+ Exists.intro,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ Set.range,
+ instLTNat,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ letFun,
+ rfl,
+ instHMul,
+ DecidableEq]
+theorem IndependentDuodenary.two_errors_distance_lower.{u_1, u_2} : ∀ {ι : Type u_1} {Alphabet : Type u_2}
+  [inst : Fintype ι] [inst_1 : DecidableEq Alphabet] (x y : ι → Alphabet) (i j : ι),
+  i ≠ j → x i ≠ y i → x j ≠ y j → 2 ≤ IndependentDuodenary.wordDistance x y :=
+fun {ι} {Alphabet} [Fintype ι] [DecidableEq Alphabet] x y i j hij hi hj =>
+  let_fun hs := fun ⦃k⦄ hk =>
+    let_fun hk' :=
+      Eq.mp
+        (Eq.trans Mathlib.Data.Finset.Insert._auxLemma.25
+          (congrArg (Or (k = i)) Mathlib.Data.Finset.Insert._auxLemma.1))
+        hk;
+    Or.casesOn hk'
+      (fun h =>
+        Eq.ndrec (motive := fun i =>
+          i ≠ j → x i ≠ y i → k ∈ {i, j} → k ∈ Finset.filter (fun k => x k ≠ y k) Finset.univ)
+          (fun hij hi hk => Finset.mem_filter.mpr ⟨Finset.mem_univ k, hi⟩) h hij hi hk)
+      fun h =>
+      Eq.ndrec (motive := fun j => i ≠ j → x j ≠ y j → k ∈ {i, j} → k ∈ Finset.filter (fun k => x k ≠ y k) Finset.univ)
+        (fun hij hj hk => Finset.mem_filter.mpr ⟨Finset.mem_univ k, hj⟩) h hij hj hk;
+  let_fun hc :=
+    of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x = 2)
+          (Eq.trans
+            (Finset.card_insert_of_not_mem
+              (of_eq_true
+                (Eq.trans (congrArg Not (Eq.trans Mathlib.Data.Finset.Insert._auxLemma.1 (eq_false hij)))
+                  not_false_eq_true)))
+            (congrArg (fun x => x + 1) (Finset.card_singleton j))))
+        (eq_self 2));
+  Eq.mpr (id (congrArg (fun _a => _a ≤ IndependentDuodenary.wordDistance x y) (Eq.symm hc))) (Finset.card_mono hs)
+'IndependentDuodenary.two_errors_distance_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES two_errors_distance_lower: [Iff.mpr,
+ Finset.mem_univ,
+ Eq.mpr,
+ instDecidableNot,
+ False,
+ Finset.univ,
+ eq_false,
+ congrArg,
+ Finset,
+ Classical.propDecidable,
+ Membership.mem,
+ Eq.mp,
+ id,
+ Mathlib.Data.Finset.Insert._auxLemma.1,
+ Insert.insert,
+ HasSubset.Subset,
+ Ne,
+ instOfNatNat,
+ Finset.instMembership,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ Finset.instInsert,
+ Or.casesOn,
+ instHAdd,
+ And,
+ Fintype,
+ HAdd.hAdd,
+ Mathlib.Data.Finset.Insert._auxLemma.25,
+ Nat,
+ And.intro,
+ True,
+ eq_self,
+ Finset.instHasSubset,
+ Finset.card,
+ of_eq_true,
+ Eq.ndrec,
+ instAddNat,
+ Finset.mem_filter,
+ Or,
+ Finset.instSingleton,
+ Singleton.singleton,
+ OfNat.ofNat,
+ Eq.symm,
+ not_false_eq_true,
+ Finset.filter,
+ Eq,
+ Not,
+ letFun,
+ Finset.card_insert_of_not_mem,
+ Eq.trans,
+ Finset.card_mono,
+ DecidableEq,
+ Finset.card_singleton]
+theorem IndependentDuodenary.at_most_one_error_pair.{u_1, u_2} : ∀ {ι : Type u_1} {Alphabet : Type u_2}
+  [inst : Fintype ι] [inst_1 : DecidableEq Alphabet] (x y : ι → Alphabet) (i j : ι),
+  i ≠ j → IndependentDuodenary.wordDistance x y ≤ 1 → x i = y i ∨ x j = y j :=
+fun {ι} {Alphabet} [Fintype ι] [DecidableEq Alphabet] x y i j hij hnoise =>
+  if hi : x i = y i then Or.inl hi
+  else
+    Or.inr
+      (Decidable.byContradiction fun hj =>
+        let_fun htwo := IndependentDuodenary.two_errors_distance_lower x y i j hij hi hj;
+        Nat.not_succ_le_self 1 (LE.le.trans htwo hnoise))
+'IndependentDuodenary.at_most_one_error_pair' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES at_most_one_error_pair: [False,
+ Ne,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ dite,
+ Fintype,
+ Nat.instPreorder,
+ Nat,
+ Decidable.byContradiction,
+ Or.inl,
+ Or,
+ LE.le.trans,
+ OfNat.ofNat,
+ Eq,
+ Not,
+ letFun,
+ Or.inr,
+ IndependentDuodenary.two_errors_distance_lower,
+ Nat.not_succ_le_self,
+ DecidableEq]
+theorem IndependentDuodenary.repetition_majority_recovery.{u_2} : ∀ {Alphabet : Type u_2} [inst : DecidableEq Alphabet]
+  (a : Alphabet) (received : Fin 3 → Alphabet),
+  IndependentDuodenary.wordDistance (IndependentDuodenary.repetitionWord 3 a) received ≤ 1 →
+    IndependentDuodenary.tripleMajority received = a :=
+fun {Alphabet} [DecidableEq Alphabet] a received hnoise =>
+  let_fun h01 :=
+    IndependentDuodenary.at_most_one_error_pair (IndependentDuodenary.repetitionWord 3 a) received 0 1
+      (of_decide_eq_true (id (Eq.refl true))) hnoise;
+  let_fun h02 :=
+    IndependentDuodenary.at_most_one_error_pair (IndependentDuodenary.repetitionWord 3 a) received 0 2
+      (of_decide_eq_true (id (Eq.refl true))) hnoise;
+  let_fun h12 :=
+    IndependentDuodenary.at_most_one_error_pair (IndependentDuodenary.repetitionWord 3 a) received 1 2
+      (of_decide_eq_true (id (Eq.refl true))) hnoise;
+  if h : received 0 = received 1 then
+    Eq.mpr (id (congrArg (fun _a => _a = a) (IndependentDuodenary.tripleMajority.eq_1 received)))
+      (Eq.mpr (id (congrArg (fun _a => _a = a) (if_pos h)))
+        (Or.casesOn h01 (fun ha => Eq.symm ha) fun ha => Eq.trans h (Eq.symm ha)))
+  else
+    Eq.mpr (id (congrArg (fun _a => _a = a) (IndependentDuodenary.tripleMajority.eq_1 received)))
+      (Eq.mpr (id (congrArg (fun _a => _a = a) (if_neg h)))
+        (Or.casesOn h02
+          (fun ha0 => Or.casesOn h12 (fun ha1 => False.elim (h (Eq.trans (Eq.symm ha0) ha1))) fun ha2 => Eq.symm ha2)
+          fun ha2 => Eq.symm ha2))
+'IndependentDuodenary.repetition_majority_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES repetition_majority_recovery: [Eq.mpr,
+ instDecidableNot,
+ IndependentDuodenary.tripleMajority,
+ of_decide_eq_true,
+ congrArg,
+ IndependentDuodenary.repetitionWord,
+ False.elim,
+ instDecidableEqFin,
+ IndependentDuodenary.at_most_one_error_pair,
+ IndependentDuodenary.tripleMajority.eq_1,
+ id,
+ Fin.instOfNat,
+ Ne,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ if_pos,
+ IndependentDuodenary.wordDistance,
+ dite,
+ Fin.fintype,
+ Or.casesOn,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Eq.refl,
+ Or,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.tripleMajority.proof_1,
+ if_neg,
+ Not,
+ letFun,
+ Eq.trans,
+ DecidableEq,
+ ite]
 theorem IndependentDuodenary.conditional_level_return : ∀ (levels step : ℕ),
   levels = 12 → step = 3 → IndependentDuodenary.station (step * levels) = 0 :=
 fun levels step hLevels hStep => Eq.symm hLevels ▸ Eq.symm hStep ▸ IndependentDuodenary.three_times_twelve_returns
@@ -7846,4 +9048,1428 @@ DIRECT DEPENDENCIES binary_source_key_sharing: [NonUnitalNonAssocCommRing.toNonU
  Eq,
  IndependentDuodenary.split_binary_double_zero,
  Prod.instAddCommMonoid]
-AUDIT PASSED: 92 theorem declarations; only standard Lean axioms permitted.
+theorem IndependentDuodenary.twelveCRT_bijective : Function.Bijective ⇑IndependentDuodenary.twelveCRT :=
+RingEquiv.bijective IndependentDuodenary.twelveCRT
+'IndependentDuodenary.twelveCRT_bijective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES twelveCRT_bijective: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ Prod.instMul,
+ Prod.instAdd,
+ RingEquiv.instEquivLike,
+ IndependentDuodenary.twelveCRT,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ Function.Bijective,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ RingEquiv,
+ Prod,
+ OfNat.ofNat,
+ RingEquiv.bijective,
+ DFunLike.coe,
+ EquivLike.toFunLike]
+theorem IndependentDuodenary.crt_reconstruct_coordinates : ∀ (p : ZMod 4 × ZMod 3),
+  IndependentDuodenary.twelveCRT (IndependentDuodenary.crtReconstruct p) = p :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.crt_reconstruct_coordinates' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES crt_reconstruct_coordinates: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ instDecidableEqProd,
+ Prod.instMul,
+ Prod.instAdd,
+ RingEquiv.instEquivLike,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ IndependentDuodenary.twelveCRT,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.crtReconstruct,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ Bool,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ instFintypeProd,
+ RingEquiv,
+ Prod,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ DFunLike.coe,
+ EquivLike.toFunLike]
+theorem IndependentDuodenary.twelveCRT_inverse_formula : ∀ (p : ZMod 4 × ZMod 3),
+  IndependentDuodenary.twelveCRT.symm p = IndependentDuodenary.crtReconstruct p :=
+fun p =>
+  RingEquiv.injective IndependentDuodenary.twelveCRT
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => _a = IndependentDuodenary.twelveCRT (IndependentDuodenary.crtReconstruct p))
+          (RingEquiv.apply_symm_apply IndependentDuodenary.twelveCRT p)))
+      (Eq.mpr (id (congrArg (fun _a => p = _a) (IndependentDuodenary.crt_reconstruct_coordinates p))) (Eq.refl p)))
+'IndependentDuodenary.twelveCRT_inverse_formula' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES twelveCRT_inverse_formula: [RingEquiv.apply_symm_apply,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.crt_reconstruct_coordinates,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ congrArg,
+ Prod.instMul,
+ Prod.instAdd,
+ RingEquiv.instEquivLike,
+ RingEquiv.injective,
+ IndependentDuodenary.twelveCRT,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.crtReconstruct,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Eq.refl,
+ RingEquiv,
+ Prod,
+ OfNat.ofNat,
+ Eq,
+ DFunLike.coe,
+ RingEquiv.symm,
+ EquivLike.toFunLike]
+theorem IndependentDuodenary.crt_reconstruct_original : ∀ (x : ZMod 12),
+  IndependentDuodenary.crtReconstruct (IndependentDuodenary.twelveCRT x) = x :=
+fun x =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => _a = x)
+        (Eq.symm (IndependentDuodenary.twelveCRT_inverse_formula (IndependentDuodenary.twelveCRT x)))))
+    (Eq.mpr (id (congrArg (fun _a => _a = x) (RingEquiv.symm_apply_apply IndependentDuodenary.twelveCRT x)))
+      (Eq.refl x))
+'IndependentDuodenary.crt_reconstruct_original' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES crt_reconstruct_original: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ congrArg,
+ Prod.instMul,
+ Prod.instAdd,
+ RingEquiv.instEquivLike,
+ RingEquiv.symm_apply_apply,
+ IndependentDuodenary.twelveCRT,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.crtReconstruct,
+ IndependentDuodenary.twelveCRT_inverse_formula,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Eq.refl,
+ RingEquiv,
+ Prod,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ DFunLike.coe,
+ RingEquiv.symm,
+ EquivLike.toFunLike]
+theorem IndependentDuodenary.rotation_twelve_returns : ∀ (x : ZMod 12), IndependentDuodenary.rotateStation^[12] x = x :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.rotation_twelve_returns' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES rotation_twelve_returns: [of_decide_eq_true,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ Nat.iterate,
+ ZMod,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ IndependentDuodenary.rotateStation,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.rotation_no_shorter_period : ∀ (k : Fin 12),
+  (∀ (x : ZMod 12), IndependentDuodenary.rotateStation^[↑k] x = x) ↔ k = 0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.rotation_no_shorter_period' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES rotation_no_shorter_period: [of_decide_eq_true,
+ ZMod.fintype,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ id,
+ Fin.instOfNat,
+ instOfNatNat,
+ Fin.val,
+ Nat.iterate,
+ ZMod,
+ Bool.true,
+ Iff,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ Nat.decidableForallFin,
+ IndependentDuodenary.rotateStation,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ instDecidableIff]
+theorem IndependentDuodenary.reflection_involution : ∀ (x : ZMod 12),
+  IndependentDuodenary.reflectStation (IndependentDuodenary.reflectStation x) = x :=
+fun x => of_eq_true (Eq.trans (congrArg (fun x_1 => x_1 = x) (neg_neg x)) (eq_self x))
+'IndependentDuodenary.reflection_involution' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reflection_involution: [NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ NonUnitalNonAssocRing.toMul,
+ IndependentDuodenary.reflectStation,
+ congrArg,
+ neg_neg,
+ instOfNatNat,
+ ZMod,
+ NonUnitalNonAssocRing.toHasDistribNeg,
+ Nat,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ True,
+ eq_self,
+ of_eq_true,
+ HasDistribNeg.toInvolutiveNeg,
+ InvolutiveNeg.toNeg,
+ OfNat.ofNat,
+ Eq,
+ Neg.neg,
+ Eq.trans]
+theorem IndependentDuodenary.reflection_rotation_relation : ∀ (x : ZMod 12),
+  IndependentDuodenary.reflectStation (IndependentDuodenary.rotateStation (IndependentDuodenary.reflectStation x)) =
+    x - 1 :=
+fun x =>
+  of_eq_true
+    (Eq.trans
+      (congr
+        (congrArg Eq
+          (Eq.trans (neg_add_rev (-x) 1) (Eq.trans (congrArg (HAdd.hAdd (-1)) (neg_neg x)) (add_comm (-1) x))))
+        (sub_eq_add_neg x 1))
+      (eq_self (x + -1)))
+'IndependentDuodenary.reflection_rotation_relation' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reflection_rotation_relation: [neg_add_rev,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Ring.toSub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ Ring.toNeg,
+ NonUnitalNonAssocRing.toMul,
+ IndependentDuodenary.reflectStation,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ sub_eq_add_neg,
+ HSub.hSub,
+ neg_neg,
+ instOfNatNat,
+ SubtractionMonoid.toSubNegMonoid,
+ SubtractionCommMonoid.toSubtractionMonoid,
+ add_comm,
+ ZMod,
+ NonUnitalNonAssocRing.toHasDistribNeg,
+ SubNegMonoid.toSub,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ instHAdd,
+ CommRing.toCommSemiring,
+ instHSub,
+ AddGroup.toSubNegMonoid,
+ HAdd.hAdd,
+ Ring.toAddCommGroup,
+ Nat,
+ congr,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ True,
+ eq_self,
+ SubNegMonoid.toNeg,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ AddCommSemigroup.toAddCommMagma,
+ HasDistribNeg.toInvolutiveNeg,
+ SubNegMonoid.toAddMonoid,
+ CommRing.toRing,
+ AddCommGroup.toDivisionAddCommMonoid,
+ IndependentDuodenary.rotateStation,
+ InvolutiveNeg.toNeg,
+ OfNat.ofNat,
+ AddCommMonoid.toAddCommSemigroup,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ Neg.neg,
+ Eq.trans,
+ AddCommMagma.toAdd]
+theorem IndependentDuodenary.antipode_involution : ∀ (x : ZMod 12),
+  IndependentDuodenary.antipode (IndependentDuodenary.antipode x) = x :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.antipode_involution' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES antipode_involution: [of_decide_eq_true,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ IndependentDuodenary.antipode,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.antipode_fixed_point_free : ∀ (x : ZMod 12), IndependentDuodenary.antipode x ≠ x :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.antipode_fixed_point_free' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES antipode_fixed_point_free: [instDecidableNot,
+ of_decide_eq_true,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ IndependentDuodenary.antipode,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.antipodal_pair_card : ∀ (i : Fin 6), (IndependentDuodenary.antipodalPair i).card = 2 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.antipodal_pair_card' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES antipodal_pair_card: [of_decide_eq_true,
+ id,
+ IndependentDuodenary.antipodalPair,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Nat,
+ Finset.card,
+ Bool,
+ Eq.refl,
+ instDecidableEqNat,
+ Nat.decidableForallFin,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.antipodal_pairs_cover : ∀ (x : ZMod 12), ∃ i, x ∈ IndependentDuodenary.antipodalPair i :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.antipodal_pairs_cover' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES antipodal_pairs_cover: [of_decide_eq_true,
+ Finset,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Membership.mem,
+ Exists,
+ id,
+ IndependentDuodenary.antipodalPair,
+ instOfNatNat,
+ Finset.instMembership,
+ ZMod,
+ Fin.fintype,
+ Bool.true,
+ Fintype.decidableExistsFintype,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ Finset.decidableMem,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.antipodal_pairs_disjoint : ∀ (i j : Fin 6),
+  i ≠ j → Disjoint (IndependentDuodenary.antipodalPair i) (IndependentDuodenary.antipodalPair j) :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.antipodal_pairs_disjoint' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES antipodal_pairs_disjoint: [instDecidableNot,
+ Finset.decidableDisjoint,
+ of_decide_eq_true,
+ Finset,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ Disjoint,
+ id,
+ IndependentDuodenary.antipodalPair,
+ forall_prop_decidable,
+ Ne,
+ instOfNatNat,
+ Finset.partialOrder,
+ ZMod,
+ Bool.true,
+ Nat,
+ Bool,
+ Eq.refl,
+ Nat.decidableForallFin,
+ OfNat.ofNat,
+ Finset.instOrderBot,
+ Fin,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.antipodal_pairs_injective : Function.Injective IndependentDuodenary.antipodalPair :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.antipodal_pairs_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES antipodal_pairs_injective: [Fintype.decidableInjectiveFintype,
+ of_decide_eq_true,
+ Finset,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ id,
+ IndependentDuodenary.antipodalPair,
+ instOfNatNat,
+ Finset.decidableEq,
+ ZMod,
+ Fin.fintype,
+ Bool.true,
+ Nat,
+ Bool,
+ Eq.refl,
+ Function.Injective,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.antipodal_pair_family_card : (Finset.image IndependentDuodenary.antipodalPair
+      Finset.univ).card =
+  6 :=
+Eq.mpr
+  (id
+    (congrArg (fun _a => _a = 6)
+      (Finset.card_image_of_injective Finset.univ IndependentDuodenary.antipodal_pairs_injective)))
+  (Eq.refl Finset.univ.card)
+'IndependentDuodenary.antipodal_pair_family_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES antipodal_pair_family_card: [Eq.mpr,
+ Finset.univ,
+ congrArg,
+ Finset,
+ ZMod.decidableEq,
+ id,
+ IndependentDuodenary.antipodalPair,
+ instOfNatNat,
+ Finset.decidableEq,
+ Finset.card_image_of_injective,
+ ZMod,
+ Fin.fintype,
+ Nat,
+ IndependentDuodenary.antipodal_pairs_injective,
+ Finset.card,
+ Eq.refl,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Finset.image]
+theorem IndependentDuodenary.directed_difference_translation : ∀ (a b k : ZMod 12),
+  IndependentDuodenary.directedDifference (a + k) (b + k) = IndependentDuodenary.directedDifference a b :=
+fun a b k => of_eq_true (Eq.trans (congrArg (fun x => x = b - a) (add_sub_add_right_eq_sub b a k)) (eq_self (b - a)))
+'IndependentDuodenary.directed_difference_translation' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES directed_difference_translation: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Ring.toSub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ AddMonoid.toAddZeroClass,
+ HSub.hSub,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ SubNegMonoid.toSub,
+ instHAdd,
+ instHSub,
+ AddGroup.toSubNegMonoid,
+ HAdd.hAdd,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.directedDifference,
+ SubNegMonoid.toAddMonoid,
+ CommRing.toRing,
+ OfNat.ofNat,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ add_sub_add_right_eq_sub,
+ Eq.trans]
+theorem IndependentDuodenary.cyclic_distance_translation : ∀ (a b k : ZMod 12),
+  IndependentDuodenary.cyclicDistance (a + k) (b + k) = IndependentDuodenary.cyclicDistance a b :=
+fun a b k =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = (b - a).val ⊓ (12 - (b - a).val))
+        (congr (congrArg (fun x => min x.val) (add_sub_add_right_eq_sub b a k))
+          (congrArg (fun x => 12 - x.val) (add_sub_add_right_eq_sub b a k))))
+      (eq_self ((b - a).val ⊓ (12 - (b - a).val))))
+'IndependentDuodenary.cyclic_distance_translation' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES cyclic_distance_translation: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Ring.toSub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ AddMonoid.toAddZeroClass,
+ HSub.hSub,
+ Distrib.toAdd,
+ instSubNat,
+ instOfNatNat,
+ ZMod,
+ SubNegMonoid.toSub,
+ instHAdd,
+ instHSub,
+ AddGroup.toSubNegMonoid,
+ HAdd.hAdd,
+ Nat,
+ congr,
+ IndependentDuodenary.cyclicDistance,
+ True,
+ eq_self,
+ Nat.instMin_mathlib,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ SubNegMonoid.toAddMonoid,
+ CommRing.toRing,
+ OfNat.ofNat,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ add_sub_add_right_eq_sub,
+ Min.min,
+ Eq.trans,
+ ZMod.val]
+theorem IndependentDuodenary.cyclic_distance_reflection : ∀ (a b : ZMod 12),
+  IndependentDuodenary.cyclicDistance (-a) (-b) = IndependentDuodenary.cyclicDistance a b :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cyclic_distance_reflection' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cyclic_distance_reflection: [of_decide_eq_true,
+ ZMod.commRing,
+ Ring.toNeg,
+ ZMod.fintype,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.cyclicDistance,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ instDecidableEqNat,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ Neg.neg]
+theorem IndependentDuodenary.cyclic_distance_bound : ∀ (a b : ZMod 12), IndependentDuodenary.cyclicDistance a b ≤ 6 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cyclic_distance_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cyclic_distance_bound: [of_decide_eq_true,
+ ZMod.fintype,
+ id,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ ZMod,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.cyclicDistance,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ Nat.decLe]
+theorem IndependentDuodenary.cyclic_distance_all_values : ∀ (d : Fin 7),
+  ∃ x, IndependentDuodenary.cyclicDistance 0 x = ↑d :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cyclic_distance_all_values' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cyclic_distance_all_values: [of_decide_eq_true,
+ ZMod.commRing,
+ ZMod.fintype,
+ CommSemiring.toCommMonoidWithZero,
+ Exists,
+ id,
+ instOfNatNat,
+ Fin.val,
+ ZMod,
+ Bool.true,
+ Fintype.decidableExistsFintype,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.cyclicDistance,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ instDecidableEqNat,
+ Nat.decidableForallFin,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.dihedral_action_one : ∀ (x : ZMod 12),
+  IndependentDuodenary.dihedralStationAction 1 x = x :=
+fun x => of_eq_true (Eq.trans (congrArg (fun x_1 => x_1 = x) (add_zero x)) (eq_self x))
+'IndependentDuodenary.dihedral_action_one' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES dihedral_action_one: [InvOneClass.toOne,
+ ZMod.commRing,
+ DivInvOneMonoid.toInvOneClass,
+ congrArg,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ Group.toDivisionMonoid,
+ DivisionMonoid.toDivInvOneMonoid,
+ DihedralGroup.instGroup,
+ instOfNatNat,
+ ZMod,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ IndependentDuodenary.dihedralStationAction,
+ AddZeroClass.toZero,
+ DihedralGroup,
+ True,
+ eq_self,
+ of_eq_true,
+ One.toOfNat1,
+ Zero.toOfNat0,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ OfNat.ofNat,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ Eq.trans]
+theorem IndependentDuodenary.dihedral_action_mul : ∀ (g h : DihedralGroup 12) (x : ZMod 12),
+  IndependentDuodenary.dihedralStationAction (g * h) x =
+    IndependentDuodenary.dihedralStationAction g (IndependentDuodenary.dihedralStationAction h x) :=
+fun g h x =>
+  DihedralGroup.casesOn (motive := fun t =>
+    g = t →
+      IndependentDuodenary.dihedralStationAction (g * h) x =
+        IndependentDuodenary.dihedralStationAction g (IndependentDuodenary.dihedralStationAction h x))
+    g
+    (fun a h_1 =>
+      Eq.symm h_1 ▸
+        DihedralGroup.casesOn (motive := fun t =>
+          h = t →
+            IndependentDuodenary.dihedralStationAction (DihedralGroup.r a * h) x =
+              IndependentDuodenary.dihedralStationAction (DihedralGroup.r a)
+                (IndependentDuodenary.dihedralStationAction h x))
+          h
+          (fun a_1 h_2 =>
+            Eq.symm h_2 ▸
+              id
+                (Mathlib.Tactic.Ring.of_eq
+                  (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf x)
+                    (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf a) (Mathlib.Tactic.Ring.atom_pf a_1)
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (a ^ Nat.rawCast 1 * Nat.rawCast 1)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (a_1 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                    (Mathlib.Tactic.Ring.add_pf_add_lt (x ^ Nat.rawCast 1 * Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_zero_add
+                        (a ^ Nat.rawCast 1 * Nat.rawCast 1 + (a_1 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))))
+                  (Mathlib.Tactic.Ring.add_congr
+                    (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf x) (Mathlib.Tactic.Ring.atom_pf a_1)
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (x ^ Nat.rawCast 1 * Nat.rawCast 1)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (a_1 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                    (Mathlib.Tactic.Ring.atom_pf a)
+                    (Mathlib.Tactic.Ring.add_pf_add_lt (x ^ Nat.rawCast 1 * Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_add_gt (a ^ Nat.rawCast 1 * Nat.rawCast 1)
+                        (Mathlib.Tactic.Ring.add_pf_add_zero (a_1 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))))))
+          (fun a_1 h_2 =>
+            Eq.symm h_2 ▸
+              Eq.mpr
+                (id
+                  (congr
+                    (congrArg Eq (Eq.trans (neg_add_rev x (a_1 - a)) (congrArg (fun x_1 => x_1 + -x) (neg_sub a_1 a))))
+                    (congrArg (fun x => x + a) (neg_add_rev x a_1))))
+                (Mathlib.Tactic.Ring.of_eq
+                  (Mathlib.Tactic.Ring.add_congr
+                    (Mathlib.Tactic.Ring.sub_congr (Mathlib.Tactic.Ring.atom_pf a) (Mathlib.Tactic.Ring.atom_pf a_1)
+                      (Mathlib.Tactic.Ring.sub_pf
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul a_1 (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_one_mul
+                              (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                  (Eq.refl (Int.negOfNat 1))))))
+                          Mathlib.Tactic.Ring.neg_zero)
+                        (Mathlib.Tactic.Ring.add_pf_add_lt (a ^ Nat.rawCast 1 * Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.add_pf_zero_add (a_1 ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0)))))
+                    (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf x)
+                      (Mathlib.Tactic.Ring.neg_add
+                        (Mathlib.Tactic.Ring.neg_mul x (Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.neg_one_mul
+                            (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                              (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                (Eq.refl (Int.negOfNat 1))))))
+                        Mathlib.Tactic.Ring.neg_zero))
+                    (Mathlib.Tactic.Ring.add_pf_add_lt (a ^ Nat.rawCast 1 * Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (a_1 ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (x ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0)))))
+                  (Mathlib.Tactic.Ring.add_congr
+                    (Mathlib.Tactic.Ring.add_congr
+                      (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf a_1)
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul a_1 (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_one_mul
+                              (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                  (Eq.refl (Int.negOfNat 1))))))
+                          Mathlib.Tactic.Ring.neg_zero))
+                      (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf x)
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul x (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_one_mul
+                              (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                  (Eq.refl (Int.negOfNat 1))))))
+                          Mathlib.Tactic.Ring.neg_zero))
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (a_1 ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (x ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0))))
+                    (Mathlib.Tactic.Ring.atom_pf a)
+                    (Mathlib.Tactic.Ring.add_pf_add_gt (a ^ Nat.rawCast 1 * Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_add_zero
+                        (a_1 ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast +
+                          (x ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0)))))))
+          (Eq.refl h))
+    (fun a h_1 =>
+      Eq.symm h_1 ▸
+        DihedralGroup.casesOn (motive := fun t =>
+          h = t →
+            IndependentDuodenary.dihedralStationAction (DihedralGroup.sr a * h) x =
+              IndependentDuodenary.dihedralStationAction (DihedralGroup.sr a)
+                (IndependentDuodenary.dihedralStationAction h x))
+          h
+          (fun a_1 h_2 =>
+            Eq.symm h_2 ▸
+              Eq.mpr
+                (id
+                  (congr
+                    (congrArg Eq
+                      (Eq.trans (neg_add_rev x (a + a_1)) (congrArg (fun x_1 => x_1 + -x) (neg_add_rev a a_1))))
+                    (Eq.trans (neg_add_rev (x + a_1) a) (congrArg (HAdd.hAdd (-a)) (neg_add_rev x a_1)))))
+                (Mathlib.Tactic.Ring.of_eq
+                  (Mathlib.Tactic.Ring.add_congr
+                    (Mathlib.Tactic.Ring.add_congr
+                      (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf a_1)
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul a_1 (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_one_mul
+                              (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                  (Eq.refl (Int.negOfNat 1))))))
+                          Mathlib.Tactic.Ring.neg_zero))
+                      (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf a)
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul a (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_one_mul
+                              (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                  (Eq.refl (Int.negOfNat 1))))))
+                          Mathlib.Tactic.Ring.neg_zero))
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (a_1 ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (a ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0))))
+                    (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf x)
+                      (Mathlib.Tactic.Ring.neg_add
+                        (Mathlib.Tactic.Ring.neg_mul x (Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.neg_one_mul
+                            (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                              (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                (Eq.refl (Int.negOfNat 1))))))
+                        Mathlib.Tactic.Ring.neg_zero))
+                    (Mathlib.Tactic.Ring.add_pf_add_lt (a_1 ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (a ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (x ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0)))))
+                  (Mathlib.Tactic.Ring.add_congr
+                    (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf a)
+                      (Mathlib.Tactic.Ring.neg_add
+                        (Mathlib.Tactic.Ring.neg_mul a (Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.neg_one_mul
+                            (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                              (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                (Eq.refl (Int.negOfNat 1))))))
+                        Mathlib.Tactic.Ring.neg_zero))
+                    (Mathlib.Tactic.Ring.add_congr
+                      (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf a_1)
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul a_1 (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_one_mul
+                              (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                  (Eq.refl (Int.negOfNat 1))))))
+                          Mathlib.Tactic.Ring.neg_zero))
+                      (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf x)
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul x (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_one_mul
+                              (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                  (Eq.refl (Int.negOfNat 1))))))
+                          Mathlib.Tactic.Ring.neg_zero))
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (a_1 ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (x ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0))))
+                    (Mathlib.Tactic.Ring.add_pf_add_gt (a_1 ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (a ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (x ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0)))))))
+          (fun a_1 h_2 =>
+            Eq.symm h_2 ▸
+              Eq.mpr
+                (id
+                  (congrArg (Eq (x + (a_1 - a)))
+                    (Eq.trans (Eq.trans (congrArg (fun x => -(x + a)) (neg_add_rev x a_1)) (neg_add_rev (-a_1 + -x) a))
+                      (congrArg (HAdd.hAdd (-a))
+                        (Eq.trans (neg_add_rev (-a_1) (-x)) (congr (congrArg HAdd.hAdd (neg_neg x)) (neg_neg a_1)))))))
+                (Mathlib.Tactic.Ring.of_eq
+                  (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf x)
+                    (Mathlib.Tactic.Ring.sub_congr (Mathlib.Tactic.Ring.atom_pf a_1) (Mathlib.Tactic.Ring.atom_pf a)
+                      (Mathlib.Tactic.Ring.sub_pf
+                        (Mathlib.Tactic.Ring.neg_add
+                          (Mathlib.Tactic.Ring.neg_mul a (Nat.rawCast 1)
+                            (Mathlib.Tactic.Ring.neg_one_mul
+                              (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                  (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                  (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                  (Eq.refl (Int.negOfNat 1))))))
+                          Mathlib.Tactic.Ring.neg_zero)
+                        (Mathlib.Tactic.Ring.add_pf_add_lt (a_1 ^ Nat.rawCast 1 * Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.add_pf_zero_add (a ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0)))))
+                    (Mathlib.Tactic.Ring.add_pf_add_lt (x ^ Nat.rawCast 1 * Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_zero_add
+                        (a_1 ^ Nat.rawCast 1 * Nat.rawCast 1 + (a ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0)))))
+                  (Mathlib.Tactic.Ring.add_congr
+                    (Mathlib.Tactic.Ring.neg_congr (Mathlib.Tactic.Ring.atom_pf a)
+                      (Mathlib.Tactic.Ring.neg_add
+                        (Mathlib.Tactic.Ring.neg_mul a (Nat.rawCast 1)
+                          (Mathlib.Tactic.Ring.neg_one_mul
+                            (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                              (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                (Mathlib.Meta.NormNum.IsNat.to_isInt (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                (Eq.refl (Int.negOfNat 1))))))
+                        Mathlib.Tactic.Ring.neg_zero))
+                    (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf x) (Mathlib.Tactic.Ring.atom_pf a_1)
+                      (Mathlib.Tactic.Ring.add_pf_add_lt (x ^ Nat.rawCast 1 * Nat.rawCast 1)
+                        (Mathlib.Tactic.Ring.add_pf_zero_add (a_1 ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                    (Mathlib.Tactic.Ring.add_pf_add_gt (x ^ Nat.rawCast 1 * Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.add_pf_add_gt (a_1 ^ Nat.rawCast 1 * Nat.rawCast 1)
+                        (Mathlib.Tactic.Ring.add_pf_add_zero (a ^ Nat.rawCast 1 * (Int.negOfNat 1).rawCast + 0)))))))
+          (Eq.refl h))
+    (Eq.refl g)
+'IndependentDuodenary.dihedral_action_mul' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES dihedral_action_mul: [neg_add_rev,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ DihedralGroup.casesOn,
+ Eq.mpr,
+ NonAssocSemiring.toAddCommMonoidWithOne,
+ Ring.toSub,
+ neg_sub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ CommRing.toNonUnitalCommRing,
+ Nat.rawCast,
+ ZMod.commRing,
+ Ring.toNeg,
+ NonUnitalNonAssocRing.toMul,
+ Ring.toNonAssocRing,
+ Monoid.toMulOneClass,
+ MulOneClass.toMul,
+ Mathlib.Tactic.Ring.add_pf_add_gt,
+ congrArg,
+ CommSemiring.toSemiring,
+ Mathlib.Tactic.Ring.neg_congr,
+ Mathlib.Tactic.Ring.neg_zero,
+ AddMonoid.toAddZeroClass,
+ Int.rawCast,
+ HSub.hSub,
+ Mathlib.Meta.NormNum.IsNat.of_raw,
+ Mathlib.Tactic.Ring.instCommSemiringNat,
+ CommSemiring.toCommMonoidWithZero,
+ Monoid.toNatPow,
+ Mathlib.Tactic.Ring.neg_mul,
+ NonUnitalNonAssocSemiring.toMul,
+ Mathlib.Tactic.Ring.sub_pf,
+ neg_neg,
+ DihedralGroup.instGroup,
+ Mathlib.Tactic.Ring.neg_add,
+ id,
+ Distrib.toAdd,
+ DivInvMonoid.toMonoid,
+ Int.ofNat,
+ instOfNatNat,
+ Int,
+ AddCommMonoidWithOne.toAddMonoidWithOne,
+ Mathlib.Tactic.Ring.sub_congr,
+ SubtractionMonoid.toSubNegMonoid,
+ Mathlib.Meta.NormNum.isInt_mul,
+ Mathlib.Tactic.Ring.of_eq,
+ Mathlib.Tactic.Ring.add_pf_zero_add,
+ SubtractionCommMonoid.toSubtractionMonoid,
+ ZMod,
+ NonAssocRing.toNonUnitalNonAssocRing,
+ NonUnitalNonAssocRing.toHasDistribNeg,
+ Group.toDivInvMonoid,
+ SubNegMonoid.toSub,
+ DihedralGroup.r,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Mathlib.Tactic.Ring.add_pf_add_zero,
+ instHSub,
+ Mathlib.Meta.NormNum.IsInt.to_raw_eq,
+ HPow.hPow,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ NonAssocSemiring.toNonUnitalNonAssocSemiring,
+ Ring.toAddCommGroup,
+ DihedralGroup.sr,
+ Nat,
+ IndependentDuodenary.dihedralStationAction,
+ congr,
+ DihedralGroup,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ SubNegMonoid.toNeg,
+ Mathlib.Tactic.Ring.add_pf_add_lt,
+ Eq.ndrec,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ Mathlib.Meta.NormNum.IsInt.of_raw,
+ instHPow,
+ HasDistribNeg.toInvolutiveNeg,
+ SubNegMonoid.toAddMonoid,
+ CommRing.toRing,
+ Mathlib.Tactic.Ring.atom_pf,
+ AddCommGroup.toDivisionAddCommMonoid,
+ InvolutiveNeg.toNeg,
+ OfNat.ofNat,
+ Eq.symm,
+ AddZeroClass.toAdd,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Mathlib.Tactic.Ring.neg_one_mul,
+ Neg.neg,
+ MonoidWithZero.toMonoid,
+ Eq.trans,
+ Int.negOfNat,
+ Mathlib.Tactic.Ring.add_congr,
+ Mathlib.Meta.NormNum.IsNat.to_isInt,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.dihedral_zero_one_separates : ∀ (g h : DihedralGroup 12),
+  IndependentDuodenary.dihedralStationAction g 0 = IndependentDuodenary.dihedralStationAction h 0 →
+    IndependentDuodenary.dihedralStationAction g 1 = IndependentDuodenary.dihedralStationAction h 1 → g = h :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.dihedral_zero_one_separates' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES dihedral_zero_one_separates: [Semiring.toOne,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ instDecidableEqDihedralGroup,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ forall_prop_decidable,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ DihedralGroup.instFintypeOfNeZeroNat,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.dihedralStationAction,
+ DihedralGroup,
+ Bool,
+ One.toOfNat1,
+ Fintype.decidableForallFintype,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.dihedral_station_hom_injective : Function.Injective
+  ⇑IndependentDuodenary.dihedralStationHom :=
+fun ⦃g h⦄ heq =>
+  IndependentDuodenary.dihedral_zero_one_separates g h (congrArg (fun f => f 0) heq) (congrArg (fun f => f 1) heq)
+'IndependentDuodenary.dihedral_station_hom_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES dihedral_station_hom_injective: [Equiv.instFunLike,
+ MonoidHom.instFunLike,
+ Semiring.toOne,
+ ZMod.commRing,
+ MonoidHom,
+ Monoid.toMulOneClass,
+ congrArg,
+ CommSemiring.toSemiring,
+ CommSemiring.toCommMonoidWithZero,
+ DihedralGroup.instGroup,
+ DivInvMonoid.toMonoid,
+ instOfNatNat,
+ ZMod,
+ Group.toDivInvMonoid,
+ Equiv.Perm.permGroup,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Equiv.Perm,
+ Nat,
+ DihedralGroup,
+ One.toOfNat1,
+ Zero.toOfNat0,
+ Function.Injective,
+ IndependentDuodenary.dihedral_zero_one_separates,
+ OfNat.ofNat,
+ Eq,
+ DFunLike.coe,
+ IndependentDuodenary.dihedralStationHom]
+theorem IndependentDuodenary.dihedral_twelve_card : Fintype.card (DihedralGroup 12) = 24 :=
+Eq.mpr (id (congrArg (fun _a => _a = 24) DihedralGroup.card)) (Eq.refl (2 * 12))
+'IndependentDuodenary.dihedral_twelve_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES dihedral_twelve_card: [Eq.mpr,
+ DihedralGroup.card,
+ HMul.hMul,
+ congrArg,
+ Fintype.card,
+ id,
+ instMulNat,
+ instOfNatNat,
+ DihedralGroup.instFintypeOfNeZeroNat,
+ Nat.instNeZeroSucc,
+ Nat,
+ DihedralGroup,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq,
+ instHMul]
+theorem IndependentDuodenary.dihedral_preserves_cyclic_distance : ∀ (g : DihedralGroup 12) (a b : ZMod 12),
+  IndependentDuodenary.cyclicDistance (IndependentDuodenary.dihedralStationAction g a)
+      (IndependentDuodenary.dihedralStationAction g b) =
+    IndependentDuodenary.cyclicDistance a b :=
+fun g a b =>
+  DihedralGroup.casesOn (motive := fun t =>
+    g = t →
+      IndependentDuodenary.cyclicDistance (IndependentDuodenary.dihedralStationAction g a)
+          (IndependentDuodenary.dihedralStationAction g b) =
+        IndependentDuodenary.cyclicDistance a b)
+    g (fun k h => Eq.symm h ▸ IndependentDuodenary.cyclic_distance_translation a b k)
+    (fun k h =>
+      Eq.symm h ▸
+        Eq.trans (IndependentDuodenary.cyclic_distance_reflection (a + k) (b + k))
+          (IndependentDuodenary.cyclic_distance_translation a b k))
+    (Eq.refl g)
+'IndependentDuodenary.dihedral_preserves_cyclic_distance' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES dihedral_preserves_cyclic_distance: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ DihedralGroup.casesOn,
+ IndependentDuodenary.cyclic_distance_reflection,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ Ring.toNeg,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ DihedralGroup.r,
+ instHAdd,
+ HAdd.hAdd,
+ DihedralGroup.sr,
+ Nat,
+ IndependentDuodenary.dihedralStationAction,
+ DihedralGroup,
+ IndependentDuodenary.cyclicDistance,
+ Eq.ndrec,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Eq.refl,
+ IndependentDuodenary.cyclic_distance_translation,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ Neg.neg,
+ Eq.trans]
+theorem IndependentDuodenary.cyclic_zero_one_separates : ∀ (x y : ZMod 12),
+  IndependentDuodenary.cyclicDistance 0 x = IndependentDuodenary.cyclicDistance 0 y →
+    IndependentDuodenary.cyclicDistance 1 x = IndependentDuodenary.cyclicDistance 1 y → x = y :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cyclic_zero_one_separates' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cyclic_zero_one_separates: [Semiring.toOne,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ forall_prop_decidable,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.cyclicDistance,
+ Bool,
+ One.toOfNat1,
+ Fintype.decidableForallFintype,
+ Zero.toOfNat0,
+ Eq.refl,
+ instDecidableEqNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.cyclic_distance_one_iff : ∀ (a b : ZMod 12),
+  IndependentDuodenary.cyclicDistance a b = 1 ↔ b = a + 1 ∨ b = a - 1 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cyclic_distance_one_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cyclic_distance_one_iff: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Ring.toSub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ HSub.hSub,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Iff,
+ instHSub,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.cyclicDistance,
+ Bool,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ instDecidableEqNat,
+ Or,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instDecidableOr,
+ instDecidableIff]
+theorem IndependentDuodenary.dihedral_matches_directed_edge : ∀ (a b : ZMod 12),
+  IndependentDuodenary.cyclicDistance a b = 1 →
+    ∃ g, IndependentDuodenary.dihedralStationAction g 0 = a ∧ IndependentDuodenary.dihedralStationAction g 1 = b :=
+fun a b hab =>
+  Or.casesOn ((IndependentDuodenary.cyclic_distance_one_iff a b).mp hab)
+    (fun hb =>
+      Exists.intro (DihedralGroup.r a)
+        ⟨of_eq_true (Eq.trans (congrArg (fun x => x = a) (Eq.trans (add_comm 0 a) (add_zero a))) (eq_self a)),
+          of_eq_true (Eq.trans (congr (congrArg Eq (add_comm 1 a)) hb) (eq_self (a + 1)))⟩)
+    fun hb =>
+    Exists.intro (DihedralGroup.sr (-a))
+      ⟨of_eq_true
+          (Eq.trans
+            (congrArg (fun x => x = a)
+              (Eq.trans (congrArg Neg.neg (Eq.trans (add_comm 0 (-a)) (add_zero (-a)))) (neg_neg a)))
+            (eq_self a)),
+        of_eq_true
+          (Eq.trans
+            (congr
+              (congrArg Eq
+                (Eq.trans (Eq.trans (congrArg Neg.neg (add_comm 1 (-a))) (neg_add_rev (-a) 1))
+                  (Eq.trans (congrArg (HAdd.hAdd (-1)) (neg_neg a)) (add_comm (-1) a))))
+              (Eq.trans hb (sub_eq_add_neg a 1)))
+            (eq_self (a + -1)))⟩
+'IndependentDuodenary.dihedral_matches_directed_edge' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES dihedral_matches_directed_edge: [neg_add_rev,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Ring.toSub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ IndependentDuodenary.cyclic_distance_one_iff,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ Ring.toNeg,
+ NonUnitalNonAssocRing.toMul,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ sub_eq_add_neg,
+ HSub.hSub,
+ CommSemiring.toCommMonoidWithZero,
+ Exists,
+ neg_neg,
+ Distrib.toAdd,
+ instOfNatNat,
+ SubtractionMonoid.toSubNegMonoid,
+ SubtractionCommMonoid.toSubtractionMonoid,
+ add_comm,
+ ZMod,
+ Or.casesOn,
+ NonUnitalNonAssocRing.toHasDistribNeg,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ DihedralGroup.r,
+ instHAdd,
+ And,
+ CommRing.toCommSemiring,
+ instHSub,
+ AddGroup.toSubNegMonoid,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Ring.toAddCommGroup,
+ DihedralGroup.sr,
+ Nat,
+ IndependentDuodenary.dihedralStationAction,
+ And.intro,
+ congr,
+ DihedralGroup,
+ IndependentDuodenary.cyclicDistance,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ True,
+ eq_self,
+ SubNegMonoid.toNeg,
+ Exists.intro,
+ Iff.mp,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Or,
+ AddCommSemigroup.toAddCommMagma,
+ AddMonoidWithOne.toAddMonoid,
+ HasDistribNeg.toInvolutiveNeg,
+ SubNegMonoid.toAddMonoid,
+ CommRing.toRing,
+ AddCommGroup.toDivisionAddCommMonoid,
+ InvolutiveNeg.toNeg,
+ add_zero,
+ OfNat.ofNat,
+ AddCommMonoid.toAddCommSemigroup,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ Neg.neg,
+ Eq.trans,
+ AddCommMagma.toAdd]
+theorem IndependentDuodenary.cyclic_isometry_is_dihedral : ∀ (f : ZMod 12 → ZMod 12),
+  (∀ (a b : ZMod 12), IndependentDuodenary.cyclicDistance (f a) (f b) = IndependentDuodenary.cyclicDistance a b) →
+    ∃ g, f = IndependentDuodenary.dihedralStationAction g :=
+fun f hf =>
+  let_fun hedge := Eq.trans (hf 0 1) (of_decide_eq_true (id (Eq.refl true)));
+  Exists.casesOn (IndependentDuodenary.dihedral_matches_directed_edge (f 0) (f 1) hedge) fun g h =>
+    And.casesOn h fun hg0 hg1 =>
+      Exists.intro g
+        (funext fun x =>
+          let y := IndependentDuodenary.dihedralStationAction g⁻¹ (f x);
+          let_fun hinv :=
+            id
+              (Eq.mpr
+                (id (congrArg (fun _a => _a = f x) (Eq.symm (IndependentDuodenary.dihedral_action_mul g g⁻¹ (f x)))))
+                (Eq.mpr
+                  (id
+                    (congrArg (fun _a => IndependentDuodenary.dihedralStationAction _a (f x) = f x) (mul_inv_cancel g)))
+                  (Eq.mpr (id (congrArg (fun _a => _a = f x) (IndependentDuodenary.dihedral_action_one (f x))))
+                    (Eq.refl (f x)))));
+          let_fun hzero :=
+            Trans.trans
+              (Trans.trans (Eq.symm (IndependentDuodenary.dihedral_preserves_cyclic_distance g 0 y))
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        IndependentDuodenary.cyclicDistance _a (IndependentDuodenary.dihedralStationAction g y) =
+                          IndependentDuodenary.cyclicDistance (f 0) (f x))
+                      hg0))
+                  (Eq.mpr
+                    (id
+                      (congrArg
+                        (fun _a =>
+                          IndependentDuodenary.cyclicDistance (f 0) _a =
+                            IndependentDuodenary.cyclicDistance (f 0) (f x))
+                        hinv))
+                    (Eq.refl (IndependentDuodenary.cyclicDistance (f 0) (f x))))))
+              (hf 0 x);
+          let_fun hone :=
+            Trans.trans
+              (Trans.trans (Eq.symm (IndependentDuodenary.dihedral_preserves_cyclic_distance g 1 y))
+                (Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a =>
+                        IndependentDuodenary.cyclicDistance _a (IndependentDuodenary.dihedralStationAction g y) =
+                          IndependentDuodenary.cyclicDistance (f 1) (f x))
+                      hg1))
+                  (Eq.mpr
+                    (id
+                      (congrArg
+                        (fun _a =>
+                          IndependentDuodenary.cyclicDistance (f 1) _a =
+                            IndependentDuodenary.cyclicDistance (f 1) (f x))
+                        hinv))
+                    (Eq.refl (IndependentDuodenary.cyclicDistance (f 1) (f x))))))
+              (hf 1 x);
+          let_fun hy := IndependentDuodenary.cyclic_zero_one_separates y x hzero hone;
+          Eq.trans (Eq.symm hinv) (congrArg (IndependentDuodenary.dihedralStationAction g) hy))
+'IndependentDuodenary.cyclic_isometry_is_dihedral' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cyclic_isometry_is_dihedral: [Eq.mpr,
+ IndependentDuodenary.dihedral_preserves_cyclic_distance,
+ DivInvMonoid.toInv,
+ Trans.trans,
+ InvOneClass.toOne,
+ Semiring.toOne,
+ HMul.hMul,
+ of_decide_eq_true,
+ ZMod.commRing,
+ DivInvOneMonoid.toInvOneClass,
+ Monoid.toMulOneClass,
+ MulOneClass.toMul,
+ congrArg,
+ CommSemiring.toSemiring,
+ Group.toDivisionMonoid,
+ IndependentDuodenary.dihedral_matches_directed_edge,
+ CommSemiring.toCommMonoidWithZero,
+ DivisionMonoid.toDivInvOneMonoid,
+ Exists,
+ DihedralGroup.instGroup,
+ id,
+ DivInvMonoid.toMonoid,
+ instOfNatNat,
+ IndependentDuodenary.dihedral_action_mul,
+ ZMod,
+ And.casesOn,
+ Group.toDivInvMonoid,
+ instTransEq,
+ Bool.true,
+ funext,
+ And,
+ CommRing.toCommSemiring,
+ Inv.inv,
+ Exists.casesOn,
+ CommMonoidWithZero.toZero,
+ Nat,
+ IndependentDuodenary.dihedralStationAction,
+ DihedralGroup,
+ IndependentDuodenary.cyclicDistance,
+ Exists.intro,
+ Bool,
+ mul_inv_cancel,
+ One.toOfNat1,
+ Zero.toOfNat0,
+ Eq.refl,
+ Monoid.toOne,
+ InvOneClass.toInv,
+ IndependentDuodenary.dihedral_action_one,
+ instDecidableEqNat,
+ OfNat.ofNat,
+ Eq.symm,
+ Decidable.decide,
+ Eq,
+ letFun,
+ IndependentDuodenary.cyclic_zero_one_separates,
+ Eq.trans,
+ instHMul]
+theorem IndependentDuodenary.cyclic_station_isometry_card : Nat.card IndependentDuodenary.CyclicStationIsometry = 24 :=
+Eq.mpr (id (congrArg (fun _a => _a = 24) (Eq.symm (Nat.card_congr IndependentDuodenary.dihedralCyclicIsometryEquiv))))
+  (Eq.mpr (id (congrArg (fun _a => _a = 24) Nat.card_eq_fintype_card))
+    (Eq.mpr (id (congrArg (fun _a => _a = 24) IndependentDuodenary.dihedral_twelve_card)) (Eq.refl 24)))
+'IndependentDuodenary.cyclic_station_isometry_card' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
+ congrArg,
+ IndependentDuodenary.CyclicStationIsometry,
+ Fintype.card,
+ id,
+ Nat.card,
+ instOfNatNat,
+ Nat.card_congr,
+ DihedralGroup.instFintypeOfNeZeroNat,
+ Nat.instNeZeroSucc,
+ Nat,
+ DihedralGroup,
+ IndependentDuodenary.dihedralCyclicIsometryEquiv,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ IndependentDuodenary.dihedral_twelve_card,
+ Nat.card_eq_fintype_card]
+AUDIT PASSED: 150 theorem declarations; only standard Lean axioms permitted.

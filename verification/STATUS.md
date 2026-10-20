@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: nine modules; 92 theorem declarations.
+- Project library: twelve modules; 150 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -36,4 +36,9 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 92 stated Lean theorems.
+There are no incomplete obligations inside the 150 stated Lean theorems.
+
+The independent structural ledger is now formalized as described in
+`STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
+encoding results. A source-specific natural-language semantics and encoding
+still require explicit definitions and preservation proofs.

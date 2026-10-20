@@ -1,6 +1,110 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 92 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 150 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+
+## `affine_station_composition`
+
+Source: `IndependentDuodenary/AffineStations.lean`. Compilation: **passed**.
+
+```lean
+theorem affine_station_composition (p q : AffineStationParameter) (x : ZMod 12) :
+    affineStationApply (affineStationCompose p q) x =
+      affineStationApply p (affineStationApply q x)
+```
+
+Proof method: Expand the unit-affine formulas and normalize ring expressions.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES affine_station_composition` and the printed proof in the machine-generated audit.
+
+## `affine_station_permutation_injective`
+
+Source: `IndependentDuodenary/AffineStations.lean`. Compilation: **passed**.
+
+```lean
+theorem affine_station_permutation_injective : Function.Injective affineStationPermutation
+```
+
+Proof method: Evaluation at 0 identifies offsets; evaluation at 1 and cancellation identify units.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES affine_station_permutation_injective` and the printed proof in the machine-generated audit.
+
+## `twelve_unit_count`
+
+Source: `IndependentDuodenary/AffineStations.lean`. Compilation: **passed**.
+
+```lean
+theorem twelve_unit_count : Fintype.card (ZMod 12)ˣ = 4
+```
+
+Proof method: The units/coprime-residue equivalence and finite computation.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES twelve_unit_count` and the printed proof in the machine-generated audit.
+
+## `twelve_unit_residues`
+
+Source: `IndependentDuodenary/AffineStations.lean`. Compilation: **passed**.
+
+```lean
+theorem twelve_unit_residues : ∀ u : (ZMod 12)ˣ,
+    (u : ZMod 12) = 1 ∨ (u : ZMod 12) = 5 ∨
+      (u : ZMod 12) = 7 ∨ (u : ZMod 12) = 11
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES twelve_unit_residues` and the printed proof in the machine-generated audit.
+
+## `affine_station_parameter_card`
+
+Source: `IndependentDuodenary/AffineStations.lean`. Compilation: **passed**.
+
+```lean
+theorem affine_station_parameter_card : Fintype.card AffineStationParameter = 48
+```
+
+Proof method: Product cardinality with twelve_unit_count.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES affine_station_parameter_card` and the printed proof in the machine-generated audit.
+
+## `affine_station_group_card`
+
+Source: `IndependentDuodenary/AffineStations.lean`. Compilation: **passed**.
+
+```lean
+theorem affine_station_group_card : Nat.card affineStationSubgroup = 48
+```
+
+Proof method: The proved equivalence between parameters and the actual affine permutation subgroup.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES affine_station_group_card` and the printed proof in the machine-generated audit.
+
+## `affine_five_changes_cyclic_distance`
+
+Source: `IndependentDuodenary/AffineStations.lean`. Compilation: **passed**.
+
+```lean
+theorem affine_five_changes_cyclic_distance :
+    cyclicDistance (affineStationApply multiplyFiveParameter 0)
+      (affineStationApply multiplyFiveParameter 1) ≠ cyclicDistance 0 1
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES affine_five_changes_cyclic_distance` and the printed proof in the machine-generated audit.
 
 ## `bitToTwelve_values`
 
@@ -479,6 +583,317 @@ Proof method: Specialization of weightLayer_card and kernel-checked computation.
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES zero_bits_count` and the printed proof in the machine-generated audit.
+
+## `semantic_decoder_no_collision`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem semantic_decoder_no_collision {L S : Type*} (r : Setoid L)
+    (encode : L → S) (decode : S → Quotient r)
+    (h : ∀ x, decode (encode x) = Quotient.mk r x)
+    (x y : L) (heq : encode x = encode y) : r.r x y
+```
+
+Proof method: Apply the class decoder to equal encodings, then Quotient.exact.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES semantic_decoder_no_collision` and the printed proof in the machine-generated audit.
+
+## `exact_decoder_injective`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_decoder_injective {M S : Type*} (encode : M → S) (decode : S → M)
+    (h : Function.LeftInverse decode encode) : Function.Injective encode
+```
+
+Proof method: Injectivity of a function with a left inverse.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_decoder_injective` and the printed proof in the machine-generated audit.
+
+## `exact_decoder_capacity`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_decoder_capacity {M S : Type*} [Fintype M] [Fintype S]
+    (encode : M → S) (decode : S → M) (h : Function.LeftInverse decode encode) :
+    Fintype.card M ≤ Fintype.card S
+```
+
+Proof method: Finite cardinality inequality from the proved encoder injectivity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_decoder_capacity` and the printed proof in the machine-generated audit.
+
+## `no_exact_decoder_over_capacity`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem no_exact_decoder_over_capacity {M S : Type*} [Fintype M] [Fintype S]
+    (hcard : Fintype.card S < Fintype.card M) (encode : M → S) (decode : S → M) :
+    ¬ Function.LeftInverse decode encode
+```
+
+Proof method: Contradict the exact-decoder cardinality bound.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES no_exact_decoder_over_capacity` and the printed proof in the machine-generated audit.
+
+## `no_infinite_exact_finite_decoder`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem no_infinite_exact_finite_decoder {M S : Type*} [Infinite M] [Finite S]
+    (encode : M → S) (decode : S → M) : ¬ Function.LeftInverse decode encode
+```
+
+Proof method: Infinite-to-finite pigeonhole theorem and left-inverse injectivity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES no_infinite_exact_finite_decoder` and the printed proof in the machine-generated audit.
+
+## `twelve_symbol_word_capacity`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem twelve_symbol_word_capacity (n : ℕ) :
+    Fintype.card (Fin n → ZMod 12) = 12 ^ n
+```
+
+Proof method: Cardinality of a function space with domain Fin n and codomain ZMod 12.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES twelve_symbol_word_capacity` and the printed proof in the machine-generated audit.
+
+## `natural_word_length_left_inverse`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem natural_word_length_left_inverse :
+    Function.LeftInverse List.length encodeNaturalWord
+```
+
+Proof method: Length of List.replicate is the encoded natural number.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES natural_word_length_left_inverse` and the printed proof in the machine-generated audit.
+
+## `natural_word_encoding_injective`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem natural_word_encoding_injective : Function.Injective encodeNaturalWord
+```
+
+Proof method: Injectivity supplied by the length left inverse.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES natural_word_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `word_distance_self`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem word_distance_self (x : ι → Alphabet) : wordDistance x x = 0
+```
+
+Proof method: The mismatch filter is empty.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES word_distance_self` and the printed proof in the machine-generated audit.
+
+## `word_distance_comm`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem word_distance_comm (x y : ι → Alphabet) : wordDistance x y = wordDistance y x
+```
+
+Proof method: Symmetry of inequality in the mismatch predicate.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES word_distance_comm` and the printed proof in the machine-generated audit.
+
+## `word_distance_triangle`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem word_distance_triangle (x y z : ι → Alphabet) :
+    wordDistance x z ≤ wordDistance x y + wordDistance y z
+```
+
+Proof method: Every endpoint mismatch lies in the union of the two intermediate mismatch sets; cardinality bounds.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES word_distance_triangle` and the printed proof in the machine-generated audit.
+
+## `bounded_error_unique`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem bounded_error_unique (C : Set (ι → Alphabet)) (d t : ℕ)
+    (hsep : ∀ a ∈ C, ∀ b ∈ C, a ≠ b → d ≤ wordDistance a b)
+    (hbound : 2 * t < d) (a b received : ι → Alphabet)
+    (ha : a ∈ C) (hb : b ∈ C)
+    (hea : wordDistance a received ≤ t) (heb : wordDistance b received ≤ t) : a = b
+```
+
+Proof method: The proved Hamming triangle inequality contradicts the explicit separation and error-radius bounds.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bounded_error_unique` and the printed proof in the machine-generated audit.
+
+## `bounded_error_decoder_correct`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem bounded_error_decoder_correct (C : Set (ι → Alphabet)) (d t : ℕ)
+    (hsep : ∀ a ∈ C, ∀ b ∈ C, a ≠ b → d ≤ wordDistance a b)
+    (hbound : 2 * t < d) (decode : (ι → Alphabet) → (ι → Alphabet))
+    (received sent : ι → Alphabet) (hsent : sent ∈ C)
+    (hnoise : wordDistance sent received ≤ t)
+    (hdecode : decode received ∈ C)
+    (hradius : wordDistance (decode received) received ≤ t) : decode received = sent
+```
+
+Proof method: Apply bounded_error_unique to the decoder output and transmitted codeword.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES bounded_error_decoder_correct` and the printed proof in the machine-generated audit.
+
+## `repetition_word_distance`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem repetition_word_distance (n : ℕ) (a b : Alphabet) :
+    wordDistance (repetitionWord n a) (repetitionWord n b) = if a = b then 0 else n
+```
+
+Proof method: Equal/unequal payload cases make the mismatch set empty or all of Fin n.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES repetition_word_distance` and the printed proof in the machine-generated audit.
+
+## `repetition_word_injective`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem repetition_word_injective {n : ℕ} (hn : 0 < n) :
+    Function.Injective (repetitionWord (Alphabet
+```
+
+Proof method: Evaluate an equality of repetition words at the first coordinate, supplied by n>0.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES repetition_word_injective` and the printed proof in the machine-generated audit.
+
+## `repetition_code_separation`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem repetition_code_separation (n : ℕ) :
+    ∀ a ∈ Set.range (repetitionWord (Alphabet
+```
+
+Proof method: Unpack both codewords from the range and use their explicit repetition-word distance.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES repetition_code_separation` and the printed proof in the machine-generated audit.
+
+## `repetition_three_one_error_unique`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem repetition_three_one_error_unique (a b : Alphabet) (received : Fin 3 → Alphabet)
+    (ha : wordDistance (repetitionWord 3 a) received ≤ 1)
+    (hb : wordDistance (repetitionWord 3 b) received ≤ 1) : a = b
+```
+
+Proof method: Specialize bounded_error_unique to the proved repetition separation and use encoder injectivity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES repetition_three_one_error_unique` and the printed proof in the machine-generated audit.
+
+## `two_errors_distance_lower`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem two_errors_distance_lower (x y : ι → Alphabet) (i j : ι) (hij : i ≠ j)
+    (hi : x i ≠ y i) (hj : x j ≠ y j) : 2 ≤ wordDistance x y
+```
+
+Proof method: The two distinct corrupted positions form a two-element subset of the mismatch set.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES two_errors_distance_lower` and the printed proof in the machine-generated audit.
+
+## `at_most_one_error_pair`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem at_most_one_error_pair (x y : ι → Alphabet) (i j : ι) (hij : i ≠ j)
+    (hnoise : wordDistance x y ≤ 1) : x i = y i ∨ x j = y j
+```
+
+Proof method: Two errors would contradict the assumed distance at most one.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES at_most_one_error_pair` and the printed proof in the machine-generated audit.
+
+## `repetition_majority_recovery`
+
+Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
+
+```lean
+theorem repetition_majority_recovery (a : Alphabet) (received : Fin 3 → Alphabet)
+    (hnoise : wordDistance (repetitionWord 3 a) received ≤ 1) :
+    tripleMajority received = a
+```
+
+Proof method: The explicit majority decoder and the proved impossibility of two corrupted positions.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES repetition_majority_recovery` and the printed proof in the machine-generated audit.
 
 ## `conditional_level_return`
 
@@ -1419,3 +1834,457 @@ Proof method: Discharge source_key_sharing cancellation with split_binary_double
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES binary_source_key_sharing` and the printed proof in the machine-generated audit.
+
+## `twelveCRT_bijective`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem twelveCRT_bijective : Function.Bijective twelveCRT
+```
+
+Proof method: Bijectivity of the coprime Chinese remainder ring equivalence.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES twelveCRT_bijective` and the printed proof in the machine-generated audit.
+
+## `crt_reconstruct_coordinates`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem crt_reconstruct_coordinates : ∀ p, twelveCRT (crtReconstruct p) = p
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES crt_reconstruct_coordinates` and the printed proof in the machine-generated audit.
+
+## `twelveCRT_inverse_formula`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem twelveCRT_inverse_formula (p : ZMod 4 × ZMod 3) :
+    twelveCRT.symm p = crtReconstruct p
+```
+
+Proof method: Apply CRT injectivity and the proved coordinate reconstruction identity.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES twelveCRT_inverse_formula` and the printed proof in the machine-generated audit.
+
+## `crt_reconstruct_original`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem crt_reconstruct_original (x : ZMod 12) : crtReconstruct (twelveCRT x) = x
+```
+
+Proof method: Rewrite reconstruction as the CRT inverse and use its left inverse law.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES crt_reconstruct_original` and the printed proof in the machine-generated audit.
+
+## `rotation_twelve_returns`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem rotation_twelve_returns : ∀ x, (rotateStation^[12]) x = x
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES rotation_twelve_returns` and the printed proof in the machine-generated audit.
+
+## `rotation_no_shorter_period`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem rotation_no_shorter_period :
+    ∀ k : Fin 12, (∀ x, (rotateStation^[k.val]) x = x) ↔ k = 0
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES rotation_no_shorter_period` and the printed proof in the machine-generated audit.
+
+## `reflection_involution`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem reflection_involution (x : ZMod 12) : reflectStation (reflectStation x) = x
+```
+
+Proof method: Double negation in ZMod 12.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reflection_involution` and the printed proof in the machine-generated audit.
+
+## `reflection_rotation_relation`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem reflection_rotation_relation (x : ZMod 12) :
+    reflectStation (rotateStation (reflectStation x)) = x - 1
+```
+
+Proof method: Negation and commutativity in the additive residue group.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reflection_rotation_relation` and the printed proof in the machine-generated audit.
+
+## `antipode_involution`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem antipode_involution : ∀ x, antipode (antipode x) = x
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES antipode_involution` and the printed proof in the machine-generated audit.
+
+## `antipode_fixed_point_free`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem antipode_fixed_point_free : ∀ x, antipode x ≠ x
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES antipode_fixed_point_free` and the printed proof in the machine-generated audit.
+
+## `antipodal_pair_card`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem antipodal_pair_card : ∀ i, (antipodalPair i).card = 2
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES antipodal_pair_card` and the printed proof in the machine-generated audit.
+
+## `antipodal_pairs_cover`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem antipodal_pairs_cover : ∀ x : ZMod 12, ∃ i, x ∈ antipodalPair i
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES antipodal_pairs_cover` and the printed proof in the machine-generated audit.
+
+## `antipodal_pairs_disjoint`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem antipodal_pairs_disjoint :
+    ∀ i j : Fin 6, i ≠ j → Disjoint (antipodalPair i) (antipodalPair j)
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES antipodal_pairs_disjoint` and the printed proof in the machine-generated audit.
+
+## `antipodal_pairs_injective`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem antipodal_pairs_injective : Function.Injective antipodalPair
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES antipodal_pairs_injective` and the printed proof in the machine-generated audit.
+
+## `antipodal_pair_family_card`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem antipodal_pair_family_card :
+    (Finset.univ.image antipodalPair).card = 6
+```
+
+Proof method: Injectivity of the pair parameterization and cardinality of Fin 6.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES antipodal_pair_family_card` and the printed proof in the machine-generated audit.
+
+## `directed_difference_translation`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem directed_difference_translation (a b k : ZMod 12) :
+    directedDifference (a + k) (b + k) = directedDifference a b
+```
+
+Proof method: Cancellation of the common additive translation.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES directed_difference_translation` and the printed proof in the machine-generated audit.
+
+## `cyclic_distance_translation`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem cyclic_distance_translation (a b k : ZMod 12) :
+    cyclicDistance (a + k) (b + k) = cyclicDistance a b
+```
+
+Proof method: Cancellation inside the modular difference.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cyclic_distance_translation` and the printed proof in the machine-generated audit.
+
+## `cyclic_distance_reflection`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem cyclic_distance_reflection :
+    ∀ a b : ZMod 12, cyclicDistance (-a) (-b) = cyclicDistance a b
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cyclic_distance_reflection` and the printed proof in the machine-generated audit.
+
+## `cyclic_distance_bound`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem cyclic_distance_bound : ∀ a b : ZMod 12, cyclicDistance a b ≤ 6
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cyclic_distance_bound` and the printed proof in the machine-generated audit.
+
+## `cyclic_distance_all_values`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem cyclic_distance_all_values :
+    ∀ d : Fin 7, ∃ x : ZMod 12, cyclicDistance 0 x = d.val
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cyclic_distance_all_values` and the printed proof in the machine-generated audit.
+
+## `dihedral_action_one`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem dihedral_action_one (x : ZMod 12) : dihedralStationAction 1 x = x
+```
+
+Proof method: Unfold the identity rotation and add zero.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dihedral_action_one` and the printed proof in the machine-generated audit.
+
+## `dihedral_action_mul`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem dihedral_action_mul (g h : DihedralGroup 12) (x : ZMod 12) :
+    dihedralStationAction (g * h) x = dihedralStationAction g (dihedralStationAction h x)
+```
+
+Proof method: Four constructor cases and ring normalization.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dihedral_action_mul` and the printed proof in the machine-generated audit.
+
+## `dihedral_zero_one_separates`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem dihedral_zero_one_separates : ∀ g h : DihedralGroup 12,
+    dihedralStationAction g 0 = dihedralStationAction h 0 →
+    dihedralStationAction g 1 = dihedralStationAction h 1 → g = h
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dihedral_zero_one_separates` and the printed proof in the machine-generated audit.
+
+## `dihedral_station_hom_injective`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem dihedral_station_hom_injective : Function.Injective dihedralStationHom
+```
+
+Proof method: Evaluate equal permutations at 0 and 1; dihedral_zero_one_separates.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dihedral_station_hom_injective` and the printed proof in the machine-generated audit.
+
+## `dihedral_twelve_card`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem dihedral_twelve_card : Fintype.card (DihedralGroup 12) = 24
+```
+
+Proof method: Specialize the cardinality theorem for the standard dihedral group.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dihedral_twelve_card` and the printed proof in the machine-generated audit.
+
+## `dihedral_preserves_cyclic_distance`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem dihedral_preserves_cyclic_distance (g : DihedralGroup 12) (a b : ZMod 12) :
+    cyclicDistance (dihedralStationAction g a) (dihedralStationAction g b) =
+      cyclicDistance a b
+```
+
+Proof method: Rotation/translation invariance and reflection invariance.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dihedral_preserves_cyclic_distance` and the printed proof in the machine-generated audit.
+
+## `cyclic_zero_one_separates`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem cyclic_zero_one_separates : ∀ x y : ZMod 12,
+    cyclicDistance 0 x = cyclicDistance 0 y →
+    cyclicDistance 1 x = cyclicDistance 1 y → x = y
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cyclic_zero_one_separates` and the printed proof in the machine-generated audit.
+
+## `cyclic_distance_one_iff`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem cyclic_distance_one_iff : ∀ a b : ZMod 12,
+    cyclicDistance a b = 1 ↔ b = a + 1 ∨ b = a - 1
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cyclic_distance_one_iff` and the printed proof in the machine-generated audit.
+
+## `dihedral_matches_directed_edge`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem dihedral_matches_directed_edge (a b : ZMod 12) (hab : cyclicDistance a b = 1) :
+    ∃ g : DihedralGroup 12, dihedralStationAction g 0 = a ∧ dihedralStationAction g 1 = b
+```
+
+Proof method: Use the distance-one characterization to construct a rotation or reflection.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dihedral_matches_directed_edge` and the printed proof in the machine-generated audit.
+
+## `cyclic_isometry_is_dihedral`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem cyclic_isometry_is_dihedral (f : ZMod 12 → ZMod 12)
+    (hf : ∀ a b, cyclicDistance (f a) (f b) = cyclicDistance a b) :
+    ∃ g : DihedralGroup 12, f = dihedralStationAction g
+```
+
+Proof method: Match the images of 0 and 1, then use the two-distance separation theorem at every point.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cyclic_isometry_is_dihedral` and the printed proof in the machine-generated audit.
+
+## `cyclic_station_isometry_card`
+
+Source: `IndependentDuodenary/TwelveStateStructure.lean`. Compilation: **passed**.
+
+```lean
+theorem cyclic_station_isometry_card : Nat.card CyclicStationIsometry = 24
+```
+
+Proof method: Bijection between all cyclic isometries and DihedralGroup 12.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cyclic_station_isometry_card` and the printed proof in the machine-generated audit.

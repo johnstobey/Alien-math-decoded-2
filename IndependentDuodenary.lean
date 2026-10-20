@@ -6,3 +6,6 @@ import IndependentDuodenary.SourceKeys
 import IndependentDuodenary.SourceReduction
 import IndependentDuodenary.SourceProjection
 import IndependentDuodenary.SourceFactorization
+import IndependentDuodenary.TwelveStateStructure
+import IndependentDuodenary.EncodingIntegrity
+import IndependentDuodenary.AffineStations

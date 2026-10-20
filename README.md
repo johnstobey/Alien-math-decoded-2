@@ -18,6 +18,10 @@ No predecessor project is a source or dependency.
   exact-key translation, canonical representatives, homogeneous permitted
   projections, support factorization and uniqueness, folding, and key sharing.
   See [the pinned source and proof scope](verification/SOURCE_MODEL.md).
+- `TwelveStateStructure`, `AffineStations`, `EncodingIntegrity`: CRT with an
+  explicit inverse, the complete cyclic-isometry classification, the 48-element
+  affine permutation group, exact-decoding capacity, and a concrete single-error
+  correcting repetition codec. See [the structural ledger](verification/STRUCTURAL_LEDGER.md).
 - `MappingBoundary`: an explicit internal map from natural addition to modular
   addition; a general image-closure theorem **assuming** operation preservation;
   and a level-return statement **assuming** the stated level and step values.
