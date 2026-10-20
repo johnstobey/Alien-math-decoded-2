@@ -7075,6 +7075,1589 @@ DIRECT DEPENDENCIES repetition_majority_recovery: [Eq.mpr,
  Eq.trans,
  DecidableEq,
  ite]
+theorem IndependentDuodenary.fulgurite_zero_ne_six : 0 ≠ 6 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.fulgurite_zero_ne_six' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_zero_ne_six: [Semiring.toNatCast,
+ instDecidableNot,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ CommMonoidWithZero.toZero,
+ Nat,
+ Bool,
+ Zero.toOfNat0,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo]
+theorem IndependentDuodenary.fulgurite_half_turn_twice : ∀ (x : ZMod 12), x + 6 + 6 = x :=
+fun x =>
+  let_fun h := of_decide_eq_true (id (Eq.refl true));
+  Eq.mpr (id (congrArg (fun _a => _a = x) (add_assoc x 6 6)))
+    (Eq.mpr (id (congrArg (fun _a => x + _a = x) h))
+      (Eq.mpr (id (congrArg (fun _a => _a = x) (add_zero x))) (Eq.refl x)))
+'IndependentDuodenary.fulgurite_half_turn_twice' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_half_turn_twice: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ AddMonoid.toAddSemigroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ add_assoc,
+ AddMonoid.toAddZeroClass,
+ ZMod.decidableEq,
+ AddGroupWithOne.toAddMonoidWithOne,
+ CommSemiring.toCommMonoidWithZero,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ instHAdd,
+ AddSemigroup.toAdd,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat,
+ AddZeroClass.toZero,
+ Bool,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ OfNat.ofNat,
+ AddZeroClass.toAdd,
+ Decidable.decide,
+ Eq,
+ Ring.toAddGroupWithOne,
+ instOfNatAtLeastTwo,
+ letFun]
+theorem IndependentDuodenary.fulgurite_bit_negation : ∀ (b : Bool),
+  (IndependentDuodenary.fulguriteBit !b) = IndependentDuodenary.fulguriteBit b + 6 :=
+fun b =>
+  Bool.casesOn (motive := fun t =>
+    b = t → (IndependentDuodenary.fulguriteBit !b) = IndependentDuodenary.fulguriteBit b + 6) b
+    (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+    (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl b)
+'IndependentDuodenary.fulgurite_bit_negation' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_bit_negation: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Bool.not,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.fulguriteBit,
+ Bool.true,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Bool.casesOn,
+ instNatAtLeastTwo,
+ HAdd.hAdd,
+ Nat,
+ Bool,
+ Eq.ndrec,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ Bool.false,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo]
+theorem IndependentDuodenary.fulgurite_bit_conjunction : ∀ (b c : Bool),
+  IndependentDuodenary.fulguriteMeet (IndependentDuodenary.fulguriteBit b) (IndependentDuodenary.fulguriteBit c) =
+    IndependentDuodenary.fulguriteBit (b && c) :=
+fun b c =>
+  Bool.casesOn (motive := fun t =>
+    b = t →
+      IndependentDuodenary.fulguriteMeet (IndependentDuodenary.fulguriteBit b) (IndependentDuodenary.fulguriteBit c) =
+        IndependentDuodenary.fulguriteBit (b && c))
+    b
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          c = t →
+            IndependentDuodenary.fulguriteMeet (IndependentDuodenary.fulguriteBit false)
+                (IndependentDuodenary.fulguriteBit c) =
+              IndependentDuodenary.fulguriteBit (false && c))
+          c (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+          (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl c))
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          c = t →
+            IndependentDuodenary.fulguriteMeet (IndependentDuodenary.fulguriteBit true)
+                (IndependentDuodenary.fulguriteBit c) =
+              IndependentDuodenary.fulguriteBit (true && c))
+          c (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+          (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl c))
+    (Eq.refl b)
+'IndependentDuodenary.fulgurite_bit_conjunction' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_bit_conjunction: [of_decide_eq_true,
+ IndependentDuodenary.fulguriteMeet,
+ ZMod.decidableEq,
+ id,
+ Bool.and,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.fulguriteBit,
+ Bool.true,
+ Bool.casesOn,
+ Nat,
+ Bool,
+ Eq.ndrec,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ Bool.false,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.fulgurite_bit_disjunction : ∀ (b c : Bool),
+  IndependentDuodenary.fulguriteJoin (IndependentDuodenary.fulguriteBit b) (IndependentDuodenary.fulguriteBit c) =
+    IndependentDuodenary.fulguriteBit (b || c) :=
+fun b c =>
+  Bool.casesOn (motive := fun t =>
+    b = t →
+      IndependentDuodenary.fulguriteJoin (IndependentDuodenary.fulguriteBit b) (IndependentDuodenary.fulguriteBit c) =
+        IndependentDuodenary.fulguriteBit (b || c))
+    b
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          c = t →
+            IndependentDuodenary.fulguriteJoin (IndependentDuodenary.fulguriteBit false)
+                (IndependentDuodenary.fulguriteBit c) =
+              IndependentDuodenary.fulguriteBit (false || c))
+          c (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+          (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl c))
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          c = t →
+            IndependentDuodenary.fulguriteJoin (IndependentDuodenary.fulguriteBit true)
+                (IndependentDuodenary.fulguriteBit c) =
+              IndependentDuodenary.fulguriteBit (true || c))
+          c (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+          (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl c))
+    (Eq.refl b)
+'IndependentDuodenary.fulgurite_bit_disjunction' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_bit_disjunction: [of_decide_eq_true,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.fulguriteJoin,
+ IndependentDuodenary.fulguriteBit,
+ Bool.true,
+ Bool.casesOn,
+ Nat,
+ Bool,
+ Eq.ndrec,
+ Bool.or,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ Bool.false,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.fulgurite_bit_injective : Function.Injective IndependentDuodenary.fulguriteBit :=
+fun ⦃a b⦄ h =>
+  Bool.casesOn (motive := fun t => a = t → a = b) a
+    (fun h_1 =>
+      Eq.ndrec (motive := fun ⦃a⦄ => IndependentDuodenary.fulguriteBit a = IndependentDuodenary.fulguriteBit b → a = b)
+        (fun h =>
+          Bool.casesOn (motive := fun t => b = t → false = b) b
+            (fun h_2 =>
+              Eq.ndrec (motive := fun ⦃b⦄ =>
+                IndependentDuodenary.fulguriteBit false = IndependentDuodenary.fulguriteBit b → false = b)
+                (fun h => of_eq_true (Eq.trans (eq_self false) (eq_true True.intro))) (Eq.symm h_2) h)
+            (fun h_2 =>
+              Eq.ndrec (motive := fun ⦃b⦄ =>
+                IndependentDuodenary.fulguriteBit false = IndependentDuodenary.fulguriteBit b → false = b)
+                (fun h =>
+                  False.elim
+                    (Eq.mp
+                      (Eq.trans
+                        (Eq.trans
+                          (congr
+                            (congrArg Eq
+                              (ite_congr (Eq.trans Bool.false_eq_true (eq_false not_false)) (fun a => Eq.refl 6)
+                                fun a => Eq.refl 0))
+                            (ite_congr (Eq.trans (eq_self true) (eq_true True.intro)) (fun a => Eq.refl 6) fun a =>
+                              Eq.refl 0))
+                          IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                        (eq_false not_false))
+                      h))
+                (Eq.symm h_2) h)
+            (Eq.refl b))
+        (Eq.symm h_1) h)
+    (fun h_1 =>
+      Eq.ndrec (motive := fun ⦃a⦄ => IndependentDuodenary.fulguriteBit a = IndependentDuodenary.fulguriteBit b → a = b)
+        (fun h =>
+          Bool.casesOn (motive := fun t => b = t → true = b) b
+            (fun h_2 =>
+              Eq.ndrec (motive := fun ⦃b⦄ =>
+                IndependentDuodenary.fulguriteBit true = IndependentDuodenary.fulguriteBit b → true = b)
+                (fun h =>
+                  False.elim
+                    (Eq.mp
+                      (Eq.trans
+                        (Eq.trans
+                          (congr
+                            (congrArg Eq
+                              (ite_congr (Eq.trans (eq_self true) (eq_true True.intro)) (fun a => Eq.refl 6) fun a =>
+                                Eq.refl 0))
+                            (ite_congr (Eq.trans Bool.false_eq_true (eq_false not_false)) (fun a => Eq.refl 6) fun a =>
+                              Eq.refl 0))
+                          (eq_false (Ne.symm IndependentDuodenary.fulgurite_zero_ne_six)))
+                        (eq_false not_false))
+                      h))
+                (Eq.symm h_2) h)
+            (fun h_2 =>
+              Eq.ndrec (motive := fun ⦃b⦄ =>
+                IndependentDuodenary.fulguriteBit true = IndependentDuodenary.fulguriteBit b → true = b)
+                (fun h => of_eq_true (Eq.trans (eq_self true) (eq_true True.intro))) (Eq.symm h_2) h)
+            (Eq.refl b))
+        (Eq.symm h_1) h)
+    (Eq.refl a)
+'IndependentDuodenary.fulgurite_bit_injective' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_bit_injective: [Semiring.toNatCast,
+ False,
+ instDecidableTrue,
+ ZMod.commRing,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.fulgurite_zero_ne_six,
+ IndependentDuodenary.fulguriteBit.proof_1,
+ False.elim,
+ IndependentDuodenary.FulguriteSAT._auxLemma.1,
+ Bool.false_eq_true,
+ CommSemiring.toCommMonoidWithZero,
+ Eq.mp,
+ instDecidableEqBool,
+ Ne.symm,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.fulguriteBit,
+ Bool.true,
+ CommRing.toCommSemiring,
+ not_false,
+ Bool.casesOn,
+ instNatAtLeastTwo,
+ CommMonoidWithZero.toZero,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ instDecidableFalse,
+ eq_true,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ Zero.toOfNat0,
+ Eq.refl,
+ Function.Injective,
+ ite_congr,
+ OfNat.ofNat,
+ Eq.symm,
+ Bool.false,
+ Eq,
+ instOfNatAtLeastTwo,
+ Not,
+ Eq.trans,
+ True.intro,
+ ite]
+theorem IndependentDuodenary.fulgurite_bit_law : ∀ (b : Bool),
+  IndependentDuodenary.obsidianBitLaw (IndependentDuodenary.fulguriteBit b) :=
+fun b =>
+  Bool.casesOn (motive := fun t => b = t → IndependentDuodenary.obsidianBitLaw (IndependentDuodenary.fulguriteBit b)) b
+    (fun h =>
+      Eq.symm h ▸
+        of_eq_true
+          (Eq.trans
+            (congr
+              (congrArg Or
+                (Eq.trans (congrArg (fun x => x = 0) (ite_cond_eq_false 6 0 Bool.false_eq_true)) (eq_self 0)))
+              (congrArg (fun x => x = 6) (ite_cond_eq_false 6 0 Bool.false_eq_true)))
+            (true_or (0 = 6))))
+    (fun h =>
+      Eq.symm h ▸
+        of_eq_true
+          (Eq.trans
+            (congr (congrArg (fun x => Or (x = 0)) (ite_cond_eq_true 6 0 (eq_self true)))
+              (Eq.trans (congrArg (fun x => x = 6) (ite_cond_eq_true 6 0 (eq_self true))) (eq_self 6)))
+            (or_true (6 = 0))))
+    (Eq.refl b)
+'IndependentDuodenary.fulgurite_bit_law' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_bit_law: [Semiring.toNatCast,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ true_or,
+ IndependentDuodenary.fulguriteBit.proof_1,
+ Bool.false_eq_true,
+ CommSemiring.toCommMonoidWithZero,
+ instDecidableEqBool,
+ instOfNatNat,
+ ite_cond_eq_true,
+ IndependentDuodenary.obsidianBitLaw.proof_1,
+ ZMod,
+ IndependentDuodenary.fulguriteBit,
+ Bool.true,
+ CommRing.toCommSemiring,
+ Bool.casesOn,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.obsidianBitLaw,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ Zero.toOfNat0,
+ Eq.refl,
+ Or,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ Bool.false,
+ or_true,
+ Eq,
+ instOfNatAtLeastTwo,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.fulgurite_assignment_law : ∀ {n : ℕ} (a : Fin n → Bool),
+  IndependentDuodenary.obsidianAssignmentLaw (IndependentDuodenary.fulguriteCompileAssignment a) :=
+fun {n} a i => IndependentDuodenary.fulgurite_bit_law (a i)
+'IndependentDuodenary.fulgurite_assignment_law' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_assignment_law: [IndependentDuodenary.fulguriteCompileAssignment,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ Nat,
+ Bool,
+ IndependentDuodenary.fulgurite_bit_law,
+ Fin]
+theorem IndependentDuodenary.fulgurite_assignment_decode_encode : ∀ {n : ℕ} (a : Fin n → Bool),
+  IndependentDuodenary.fulguriteDecodeAssignment (IndependentDuodenary.fulguriteCompileAssignment a) = a :=
+fun {n} a =>
+  funext fun i =>
+    Bool.casesOn (motive := fun t =>
+      a i = t →
+        IndependentDuodenary.fulguriteDecodeAssignment (IndependentDuodenary.fulguriteCompileAssignment a) i = a i)
+      (a i)
+      (fun h =>
+        Eq.ndrec (motive := fun x =>
+          a i = x →
+            IndependentDuodenary.fulguriteDecodeAssignment (IndependentDuodenary.fulguriteCompileAssignment a) i = x)
+          (fun h =>
+            of_eq_true
+              (Eq.trans
+                (congrArg (fun x => x = false)
+                  ((fun p p_1 e_p =>
+                      @Eq.rec Prop p (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                        (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                    (IndependentDuodenary.fulguriteCompileAssignment a i = 6) False
+                    (Eq.trans
+                      (congrArg (fun x => x = 6)
+                        (ite_cond_eq_false 6 0 (Eq.trans (congrArg (fun x => x = true) h) Bool.false_eq_true)))
+                      IndependentDuodenary.FulguriteSAT._auxLemma.1)))
+                (eq_self false)))
+          (Eq.symm h) (Eq.refl (a i)))
+      (fun h =>
+        Eq.ndrec (motive := fun x =>
+          a i = x →
+            IndependentDuodenary.fulguriteDecodeAssignment (IndependentDuodenary.fulguriteCompileAssignment a) i = x)
+          (fun h =>
+            of_eq_true
+              (Eq.trans
+                (congrArg (fun x => x = true)
+                  ((fun p p_1 e_p =>
+                      @Eq.rec Prop p (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                        (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                    (IndependentDuodenary.fulguriteCompileAssignment a i = 6) True
+                    (Eq.trans
+                      (congrArg (fun x => x = 6)
+                        (ite_cond_eq_true 6 0 (Eq.trans (congrArg (fun x => x = true) h) (eq_self true))))
+                      (eq_self 6))))
+                (eq_self true)))
+          (Eq.symm h) (Eq.refl (a i)))
+      (Eq.refl (a i))
+'IndependentDuodenary.fulgurite_assignment_decode_encode' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_assignment_decode_encode: [Semiring.toNatCast,
+ False,
+ instSubsingletonDecidable,
+ IndependentDuodenary.fulguriteCompileAssignment,
+ instDecidableTrue,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.fulguriteBit.proof_1,
+ ZMod.decidableEq,
+ Decidable,
+ IndependentDuodenary.FulguriteSAT._auxLemma.1,
+ Bool.false_eq_true,
+ CommSemiring.toCommMonoidWithZero,
+ Eq.rec,
+ instDecidableEqBool,
+ IndependentDuodenary.fulguriteDecodeAssignment,
+ instOfNatNat,
+ ite_cond_eq_true,
+ ZMod,
+ Bool.true,
+ funext,
+ CommRing.toCommSemiring,
+ Bool.casesOn,
+ CommMonoidWithZero.toZero,
+ Nat,
+ True,
+ eq_self,
+ instDecidableFalse,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ Zero.toOfNat0,
+ Eq.refl,
+ Subsingleton.elim,
+ IndependentDuodenary.fulguriteDecodeAssignment.proof_1,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ Bool.false,
+ Fin,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.fulgurite_assignment_encode_decode : ∀ {n : ℕ} (p : IndependentDuodenary.RegisterPhase n),
+  IndependentDuodenary.obsidianAssignmentLaw p →
+    IndependentDuodenary.fulguriteCompileAssignment (IndependentDuodenary.fulguriteDecodeAssignment p) = p :=
+fun {n} p valid =>
+  funext fun i =>
+    Or.casesOn (valid i)
+      (fun h =>
+        of_eq_true
+          (Eq.trans
+            (congr
+              (congrArg Eq
+                (ite_cond_eq_false 6 0
+                  (Eq.trans
+                    (congrArg (fun x => x = true)
+                      ((fun p p_1 e_p =>
+                          @Eq.rec Prop p
+                            (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                            (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                        (p i = 6) False
+                        (Eq.trans (congrArg (fun x => x = 6) h) IndependentDuodenary.FulguriteSAT._auxLemma.1)))
+                    Bool.false_eq_true)))
+              h)
+            (eq_self 0)))
+      fun h =>
+      of_eq_true
+        (Eq.trans
+          (congr
+            (congrArg Eq
+              (ite_cond_eq_true 6 0
+                (Eq.trans
+                  (congrArg (fun x => x = true)
+                    ((fun p p_1 e_p =>
+                        @Eq.rec Prop p (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                          (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                      (p i = 6) True (Eq.trans (congrArg (fun x => x = 6) h) (eq_self 6))))
+                  (eq_self true))))
+            h)
+          (eq_self 6))
+'IndependentDuodenary.fulgurite_assignment_encode_decode' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_assignment_encode_decode: [Semiring.toNatCast,
+ False,
+ instSubsingletonDecidable,
+ IndependentDuodenary.fulguriteCompileAssignment,
+ instDecidableTrue,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.fulguriteBit.proof_1,
+ ZMod.decidableEq,
+ Decidable,
+ IndependentDuodenary.FulguriteSAT._auxLemma.1,
+ Bool.false_eq_true,
+ CommSemiring.toCommMonoidWithZero,
+ Eq.rec,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ instDecidableEqBool,
+ IndependentDuodenary.fulguriteDecodeAssignment,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ ite_cond_eq_true,
+ IndependentDuodenary.obsidianBitLaw.proof_1,
+ ZMod,
+ Or.casesOn,
+ Bool.true,
+ funext,
+ CommRing.toCommSemiring,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.obsidianBitLaw,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ instDecidableFalse,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ Zero.toOfNat0,
+ Eq.refl,
+ Subsingleton.elim,
+ IndependentDuodenary.fulguriteDecodeAssignment.proof_1,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.fulgurite_assignment_cardinality : ∀ (n : ℕ),
+  Nat.card { p // IndependentDuodenary.obsidianAssignmentLaw p } = 2 ^ n :=
+fun n =>
+  Eq.mpr
+    (id (congrArg (fun _a => _a = 2 ^ n) (Eq.symm (Nat.card_congr (IndependentDuodenary.fulguriteAssignmentEquiv n)))))
+    (of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x = 2 ^ n)
+          (Eq.trans Nat.card_eq_fintype_card
+            (Eq.trans Fintype.card_pi
+              (Eq.trans (Eq.trans (Finset.prod_congr (Eq.refl Finset.univ) fun x a => Eq.refl 2) (Finset.prod_const 2))
+                (congrArg (HPow.hPow 2) (Fintype.card_fin n))))))
+        (eq_self (2 ^ n))))
+'IndependentDuodenary.fulgurite_assignment_cardinality' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_assignment_cardinality: [Fintype.card_pi,
+ Eq.mpr,
+ Fintype.card_fin,
+ Bool.fintype,
+ Finset.univ,
+ congrArg,
+ Finset,
+ Nat.instMonoid,
+ instDecidableEqFin,
+ Membership.mem,
+ Monoid.toNatPow,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ Fintype.card,
+ id,
+ Subtype,
+ Nat.card,
+ instOfNatNat,
+ Finset.prod_congr,
+ IndependentDuodenary.RegisterPhase,
+ Finset.instMembership,
+ Finset.prod_const,
+ Fin.fintype,
+ Finset.prod,
+ Nat.card_congr,
+ HPow.hPow,
+ CommMonoid.toMonoid,
+ IndependentDuodenary.fulguriteAssignmentEquiv,
+ Nat,
+ True,
+ eq_self,
+ Nat.instCommMonoid,
+ Finset.card,
+ Pi.fintype,
+ Bool,
+ of_eq_true,
+ Eq.refl,
+ instHPow,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Eq,
+ Nat.card_eq_fintype_card,
+ Eq.trans]
+theorem IndependentDuodenary.fulgurite_compile_size : ∀ {n : ℕ} (f : IndependentDuodenary.DiscoveryFormula n),
+  IndependentDuodenary.fulguriteSize (IndependentDuodenary.discoveryCompile f) = IndependentDuodenary.discoverySize f :=
+fun {n} f =>
+  IndependentDuodenary.DiscoveryFormula.rec (fun a => of_eq_true (eq_self 1))
+    (fun a a_ih =>
+      of_eq_true
+        (Eq.trans (congrArg (fun x => 1 + x = 1 + IndependentDuodenary.discoverySize a) a_ih)
+          (eq_self (1 + IndependentDuodenary.discoverySize a))))
+    (fun a a_1 a_ih a_ih_1 =>
+      of_eq_true
+        (Eq.trans
+          (congrArg (fun x => x = 1 + IndependentDuodenary.discoverySize a + IndependentDuodenary.discoverySize a_1)
+            (congr (congrArg (fun x => HAdd.hAdd (1 + x)) a_ih) a_ih_1))
+          (eq_self (1 + IndependentDuodenary.discoverySize a + IndependentDuodenary.discoverySize a_1))))
+    (fun a a_1 a_ih a_ih_1 =>
+      of_eq_true
+        (Eq.trans
+          (congrArg (fun x => x = 1 + IndependentDuodenary.discoverySize a + IndependentDuodenary.discoverySize a_1)
+            (congr (congrArg (fun x => HAdd.hAdd (1 + x)) a_ih) a_ih_1))
+          (eq_self (1 + IndependentDuodenary.discoverySize a + IndependentDuodenary.discoverySize a_1))))
+    f
+'IndependentDuodenary.fulgurite_compile_size' depends on axioms: [propext]
+DIRECT DEPENDENCIES fulgurite_compile_size: [congrArg,
+ IndependentDuodenary.discoverySize,
+ instOfNatNat,
+ instHAdd,
+ IndependentDuodenary.discoveryCompile,
+ HAdd.hAdd,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ of_eq_true,
+ IndependentDuodenary.DiscoveryFormula.rec,
+ instAddNat,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Eq.trans,
+ IndependentDuodenary.fulguriteSize,
+ IndependentDuodenary.DiscoveryFormula]
+theorem IndependentDuodenary.fulgurite_compile_correct : ∀ {n : ℕ} (f : IndependentDuodenary.DiscoveryFormula n)
+  (a : Fin n → Bool),
+  IndependentDuodenary.fulguriteEval (IndependentDuodenary.fulguriteCompileAssignment a)
+      (IndependentDuodenary.discoveryCompile f) =
+    IndependentDuodenary.fulguriteBit (IndependentDuodenary.discoveryEval a f) :=
+fun {n} f a =>
+  IndependentDuodenary.DiscoveryFormula.rec
+    (fun i =>
+      Eq.refl
+        (IndependentDuodenary.fulguriteEval (IndependentDuodenary.fulguriteCompileAssignment a)
+          (IndependentDuodenary.discoveryCompile (IndependentDuodenary.DiscoveryFormula.atom i))))
+    (fun f ih =>
+      Eq.mpr
+        (id (congrArg (fun x => x + 6 = IndependentDuodenary.fulguriteBit !IndependentDuodenary.discoveryEval a f) ih))
+        (Eq.symm (IndependentDuodenary.fulgurite_bit_negation (IndependentDuodenary.discoveryEval a f))))
+    (fun f g ihf ihg =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun x =>
+              x =
+                IndependentDuodenary.fulguriteBit
+                  (IndependentDuodenary.discoveryEval a f && IndependentDuodenary.discoveryEval a g))
+            (congr (congrArg IndependentDuodenary.fulguriteMeet ihf) ihg)))
+        (IndependentDuodenary.fulgurite_bit_conjunction (IndependentDuodenary.discoveryEval a f)
+          (IndependentDuodenary.discoveryEval a g)))
+    (fun f g ihf ihg =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun x =>
+              x =
+                IndependentDuodenary.fulguriteBit
+                  (IndependentDuodenary.discoveryEval a f || IndependentDuodenary.discoveryEval a g))
+            (congr (congrArg IndependentDuodenary.fulguriteJoin ihf) ihg)))
+        (IndependentDuodenary.fulgurite_bit_disjunction (IndependentDuodenary.discoveryEval a f)
+          (IndependentDuodenary.discoveryEval a g)))
+    f
+'IndependentDuodenary.fulgurite_compile_correct' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_compile_correct: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ IndependentDuodenary.fulguriteCompileAssignment,
+ Bool.not,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.fulguriteMeet,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.DiscoveryFormula.atom,
+ id,
+ Distrib.toAdd,
+ Bool.and,
+ IndependentDuodenary.DiscoveryFormula.conjunction,
+ instOfNatNat,
+ IndependentDuodenary.discoveryEval,
+ IndependentDuodenary.fulgurite_bit_disjunction,
+ ZMod,
+ IndependentDuodenary.fulguriteJoin,
+ IndependentDuodenary.fulguriteBit,
+ instHAdd,
+ IndependentDuodenary.discoveryCompile,
+ CommRing.toCommSemiring,
+ IndependentDuodenary.fulgurite_bit_conjunction,
+ instNatAtLeastTwo,
+ HAdd.hAdd,
+ IndependentDuodenary.DiscoveryFormula.disjunction,
+ Nat,
+ congr,
+ Bool,
+ IndependentDuodenary.DiscoveryFormula.rec,
+ IndependentDuodenary.DiscoveryFormula.negation,
+ Bool.or,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Eq.refl,
+ IndependentDuodenary.fulguriteEval,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Eq,
+ instOfNatAtLeastTwo,
+ IndependentDuodenary.fulguriteEval.proof_2,
+ IndependentDuodenary.fulgurite_bit_negation,
+ IndependentDuodenary.DiscoveryFormula]
+theorem IndependentDuodenary.fulgurite_eval_preserves_law : ∀ {n : ℕ} (e : IndependentDuodenary.FulguriteCircuit n)
+  (p : IndependentDuodenary.RegisterPhase n),
+  IndependentDuodenary.obsidianAssignmentLaw p →
+    IndependentDuodenary.obsidianBitLaw (IndependentDuodenary.fulguriteEval p e) :=
+fun {n} e p valid =>
+  IndependentDuodenary.FulguriteCircuit.rec (fun i => valid i)
+    (fun e ih =>
+      Or.casesOn ih
+        (fun h =>
+          Eq.mpr (id (congr (congrArg (fun x => Or (x + 6 = 0)) h) (congrArg (fun x => x + 6 = 6) h)))
+            (of_decide_eq_true (id (Eq.refl true))))
+        fun h =>
+        Eq.mpr (id (congr (congrArg (fun x => Or (x + 6 = 0)) h) (congrArg (fun x => x + 6 = 6) h)))
+          (of_decide_eq_true (id (Eq.refl true))))
+    (fun e f ihe ihf =>
+      id
+        (Decidable.casesOn (ZMod.decidableEq 12 (IndependentDuodenary.fulguriteEval p e) 6)
+          (fun h => Eq.mpr (id (congrArg IndependentDuodenary.obsidianBitLaw (if_neg h))) (Or.inl rfl)) fun h =>
+          Eq.mpr (id (congrArg IndependentDuodenary.obsidianBitLaw (if_pos h))) ihf))
+    (fun e f ihe ihf =>
+      id
+        (Decidable.casesOn (ZMod.decidableEq 12 (IndependentDuodenary.fulguriteEval p e) 6)
+          (fun h => Eq.mpr (id (congrArg IndependentDuodenary.obsidianBitLaw (if_neg h))) ihf) fun h =>
+          Eq.mpr (id (congrArg IndependentDuodenary.obsidianBitLaw (if_pos h))) (Or.inr rfl)))
+    e
+'IndependentDuodenary.fulgurite_eval_preserves_law' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_eval_preserves_law: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.fulguriteMeet.proof_1,
+ Decidable.casesOn,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ Decidable,
+ CommSemiring.toCommMonoidWithZero,
+ IndependentDuodenary.FulguriteCircuit,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ if_pos,
+ IndependentDuodenary.obsidianBitLaw.proof_1,
+ ZMod,
+ Or.casesOn,
+ IndependentDuodenary.fulguriteJoin.proof_1,
+ Bool.true,
+ instHAdd,
+ CommRing.toCommSemiring,
+ IndependentDuodenary.FulguriteCircuit.rec,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.obsidianBitLaw,
+ IndependentDuodenary.FulguriteCircuit.meet,
+ Nat,
+ congr,
+ Bool,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ Or.inl,
+ Or,
+ IndependentDuodenary.FulguriteCircuit.join,
+ IndependentDuodenary.fulguriteEval,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ if_neg,
+ instDecidableOr,
+ instOfNatAtLeastTwo,
+ Not,
+ IndependentDuodenary.fulguriteEval.proof_2,
+ IndependentDuodenary.FulguriteCircuit.halfTurn,
+ Or.inr,
+ rfl,
+ ite]
+theorem IndependentDuodenary.fulgurite_satisfiability_equivalence : ∀ {n : ℕ}
+  (f : IndependentDuodenary.DiscoveryFormula n),
+  (∃ a, IndependentDuodenary.discoveryEval a f = true) ↔
+    ∃ p,
+      IndependentDuodenary.obsidianAssignmentLaw p ∧
+        IndependentDuodenary.fulguriteEval p (IndependentDuodenary.discoveryCompile f) = 6 :=
+fun {n} f =>
+  {
+    mp := fun a =>
+      Exists.casesOn a fun a h =>
+        Exists.intro (IndependentDuodenary.fulguriteCompileAssignment a)
+          ⟨IndependentDuodenary.fulgurite_assignment_law a,
+            Eq.mpr (id (congrArg (fun _a => _a = 6) (IndependentDuodenary.fulgurite_compile_correct f a)))
+              (Eq.mpr (id (congrArg (fun _a => IndependentDuodenary.fulguriteBit _a = 6) h))
+                (Eq.refl (IndependentDuodenary.fulguriteBit true)))⟩,
+    mpr := fun a =>
+      Exists.casesOn a fun p h =>
+        And.casesOn h fun valid h =>
+          Exists.intro (IndependentDuodenary.fulguriteDecodeAssignment p)
+            (let_fun correct :=
+              IndependentDuodenary.fulgurite_compile_correct f (IndependentDuodenary.fulguriteDecodeAssignment p);
+            Bool.casesOn (motive := fun t =>
+              IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p) f = t →
+                IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p) f = true)
+              (IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p) f)
+              (fun h_1 =>
+                Eq.ndrec (motive := fun x =>
+                  IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p) f = x →
+                    x = true)
+                  (fun he =>
+                    False.elim
+                      (Eq.mp
+                        (Eq.trans
+                          (Eq.trans
+                            (congrArg (Eq 6)
+                              (ite_congr
+                                (Eq.trans (Eq.trans (congrArg (fun x => x = true) he) Bool.false_eq_true)
+                                  (eq_false not_false))
+                                (fun a => Eq.refl 6) fun a => Eq.refl 0))
+                            (eq_false (Ne.symm IndependentDuodenary.fulgurite_zero_ne_six)))
+                          (eq_false not_false))
+                        (Eq.mp
+                          (congrArg
+                            (fun _a =>
+                              _a =
+                                IndependentDuodenary.fulguriteBit
+                                  (IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p)
+                                    f))
+                            h)
+                          (Eq.mp
+                            (congrArg
+                              (fun _a =>
+                                IndependentDuodenary.fulguriteEval _a (IndependentDuodenary.discoveryCompile f) =
+                                  IndependentDuodenary.fulguriteBit
+                                    (IndependentDuodenary.discoveryEval
+                                      (IndependentDuodenary.fulguriteDecodeAssignment p) f))
+                              (IndependentDuodenary.fulgurite_assignment_encode_decode p valid))
+                            correct))))
+                  (Eq.symm h_1)
+                  (Eq.refl (IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p) f)))
+              (fun h =>
+                Eq.ndrec (motive := fun x =>
+                  IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p) f = x →
+                    x = true)
+                  (fun he => Eq.refl true) (Eq.symm h)
+                  (Eq.refl (IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p) f)))
+              (Eq.refl (IndependentDuodenary.discoveryEval (IndependentDuodenary.fulguriteDecodeAssignment p) f))) }
+'IndependentDuodenary.fulgurite_satisfiability_equivalence' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_satisfiability_equivalence: [Semiring.toNatCast,
+ Eq.mpr,
+ False,
+ IndependentDuodenary.fulguriteCompileAssignment,
+ ZMod.commRing,
+ eq_false,
+ IndependentDuodenary.fulgurite_assignment_encode_decode,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.fulgurite_zero_ne_six,
+ IndependentDuodenary.fulguriteBit.proof_1,
+ False.elim,
+ Bool.false_eq_true,
+ CommSemiring.toCommMonoidWithZero,
+ Exists,
+ Eq.mp,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ id,
+ instDecidableEqBool,
+ IndependentDuodenary.fulguriteDecodeAssignment,
+ Ne.symm,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.fulgurite_assignment_law,
+ IndependentDuodenary.discoveryEval,
+ ZMod,
+ And.casesOn,
+ IndependentDuodenary.fulguriteBit,
+ Bool.true,
+ IndependentDuodenary.discoveryCompile,
+ And,
+ CommRing.toCommSemiring,
+ Iff,
+ not_false,
+ Bool.casesOn,
+ Exists.casesOn,
+ instNatAtLeastTwo,
+ CommMonoidWithZero.toZero,
+ Nat,
+ And.intro,
+ Iff.intro,
+ Exists.intro,
+ instDecidableFalse,
+ Bool,
+ Eq.ndrec,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.fulgurite_compile_correct,
+ IndependentDuodenary.fulguriteEval,
+ ite_congr,
+ OfNat.ofNat,
+ Eq.symm,
+ Bool.false,
+ Fin,
+ Eq,
+ instOfNatAtLeastTwo,
+ Not,
+ letFun,
+ Eq.trans,
+ IndependentDuodenary.DiscoveryFormula,
+ ite]
+theorem IndependentDuodenary.fulgurite_register_phase_roundtrip : ∀ {n : ℕ} (a : Fin n → Bool),
+  IndependentDuodenary.registerPhases
+      (IndependentDuodenary.phaseRegisterState (IndependentDuodenary.fulguriteCompileAssignment a)) =
+    IndependentDuodenary.fulguriteCompileAssignment a :=
+fun {n} a =>
+  funext fun i => IndependentDuodenary.key_one_hot_phase (IndependentDuodenary.fulguriteCompileAssignment a i)
+'IndependentDuodenary.fulgurite_register_phase_roundtrip' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_register_phase_roundtrip: [IndependentDuodenary.fulguriteCompileAssignment,
+ IndependentDuodenary.phaseRegisterState,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ ZMod,
+ funext,
+ Nat,
+ Bool,
+ IndependentDuodenary.key_one_hot_phase,
+ IndependentDuodenary.registerPhases,
+ OfNat.ofNat,
+ Fin,
+ Eq]
+theorem IndependentDuodenary.fulgurite_meet_not_affine : ¬∃ A B C,
+    ∀ (x y : Bool),
+      A * IndependentDuodenary.fulguriteBit x + B * IndependentDuodenary.fulguriteBit y + C =
+        IndependentDuodenary.fulguriteBit (x && y) :=
+fun a =>
+  Exists.casesOn a fun A h =>
+    Exists.casesOn h fun B h =>
+      Exists.casesOn h fun C h =>
+        let_fun hc := h false false;
+        Eq.ndrec (motive := fun C =>
+          (∀ (x y : Bool),
+              A * IndependentDuodenary.fulguriteBit x + B * IndependentDuodenary.fulguriteBit y + C =
+                IndependentDuodenary.fulguriteBit (x && y)) →
+            False)
+          (fun h =>
+            let_fun ha := h true false;
+            let_fun hb := h false true;
+            let_fun hab := h true true;
+            False.elim
+              (Eq.mp
+                (Eq.trans
+                  (Eq.trans
+                    (congr
+                      (congrArg Eq
+                        (Eq.trans
+                          (congrArg (fun x => x + 0)
+                            (Eq.trans
+                              (congr
+                                (congrArg HAdd.hAdd
+                                  (Eq.trans
+                                    (congrArg (HMul.hMul A)
+                                      (ite_congr (Eq.trans (eq_self true) (eq_true True.intro)) (fun a => Eq.refl 6)
+                                        fun a => Eq.refl 0))
+                                    (Eq.mp
+                                      (congr
+                                        (congrArg Eq
+                                          (Eq.trans
+                                            (congrArg (fun x => x + 0)
+                                              (Eq.trans
+                                                (congr
+                                                  (congrArg (fun x => HAdd.hAdd (A * x))
+                                                    (ite_congr (Eq.trans (eq_self true) (eq_true True.intro))
+                                                      (fun a => Eq.refl 6) fun a => Eq.refl 0))
+                                                  (Eq.trans
+                                                    (congrArg (HMul.hMul B)
+                                                      (ite_congr (Eq.trans Bool.false_eq_true (eq_false not_false))
+                                                        (fun a => Eq.refl 6) fun a => Eq.refl 0))
+                                                    (mul_zero B)))
+                                                (add_zero (A * 6))))
+                                            (add_zero (A * 6))))
+                                        (ite_congr
+                                          (Eq.trans
+                                            (Eq.trans (congrArg (fun x => x = true) (Bool.and_false true))
+                                              Bool.false_eq_true)
+                                            (eq_false not_false))
+                                          (fun a => Eq.refl 6) fun a => Eq.refl 0))
+                                      ha)))
+                                (Eq.trans
+                                  (congrArg (HMul.hMul B)
+                                    (ite_congr (Eq.trans (eq_self true) (eq_true True.intro)) (fun a => Eq.refl 6)
+                                      fun a => Eq.refl 0))
+                                  (Eq.mp
+                                    (congr
+                                      (congrArg Eq
+                                        (Eq.trans
+                                          (congrArg (fun x => x + 0)
+                                            (Eq.trans
+                                              (congr
+                                                (congrArg HAdd.hAdd
+                                                  (Eq.trans
+                                                    (congrArg (HMul.hMul A)
+                                                      (ite_congr (Eq.trans Bool.false_eq_true (eq_false not_false))
+                                                        (fun a => Eq.refl 6) fun a => Eq.refl 0))
+                                                    (mul_zero A)))
+                                                (congrArg (HMul.hMul B)
+                                                  (ite_congr (Eq.trans (eq_self true) (eq_true True.intro))
+                                                    (fun a => Eq.refl 6) fun a => Eq.refl 0)))
+                                              (zero_add (B * 6))))
+                                          (add_zero (B * 6))))
+                                      (ite_congr
+                                        (Eq.trans
+                                          (Eq.trans (congrArg (fun x => x = true) (Bool.and_true false))
+                                            Bool.false_eq_true)
+                                          (eq_false not_false))
+                                        (fun a => Eq.refl 6) fun a => Eq.refl 0))
+                                    hb)))
+                              (add_zero 0)))
+                          (add_zero 0)))
+                      (ite_congr
+                        (Eq.trans (Eq.trans (congrArg (fun x => x = true) (Bool.and_self true)) (eq_self true))
+                          (eq_true True.intro))
+                        (fun a => Eq.refl 6) fun a => Eq.refl 0))
+                    IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                  (eq_false not_false))
+                hab))
+          (Eq.symm
+            (Eq.mp
+              (congr
+                (congrArg Eq
+                  (Eq.trans
+                    (congrArg (fun x => x + C)
+                      (Eq.trans
+                        (congr
+                          (congrArg HAdd.hAdd
+                            (Eq.trans
+                              (congrArg (HMul.hMul A)
+                                (ite_congr (Eq.trans Bool.false_eq_true (eq_false not_false)) (fun a => Eq.refl 6)
+                                  fun a => Eq.refl 0))
+                              (mul_zero A)))
+                          (Eq.trans
+                            (congrArg (HMul.hMul B)
+                              (ite_congr (Eq.trans Bool.false_eq_true (eq_false not_false)) (fun a => Eq.refl 6)
+                                fun a => Eq.refl 0))
+                            (mul_zero B)))
+                        (add_zero 0)))
+                    (zero_add C)))
+                (ite_congr
+                  (Eq.trans (Eq.trans (congrArg (fun x => x = true) (Bool.and_self false)) Bool.false_eq_true)
+                    (eq_false not_false))
+                  (fun a => Eq.refl 6) fun a => Eq.refl 0))
+              hc))
+          h
+'IndependentDuodenary.fulgurite_meet_not_affine' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_meet_not_affine: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ False,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ HMul.hMul,
+ instDecidableTrue,
+ CommRing.toNonUnitalCommRing,
+ Bool.and_false,
+ ZMod.commRing,
+ eq_false,
+ NonUnitalNonAssocRing.toMul,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.fulguriteBit.proof_1,
+ False.elim,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.FulguriteSAT._auxLemma.1,
+ NonUnitalNonAssocSemiring.toMulZeroClass,
+ Bool.and_true,
+ Bool.false_eq_true,
+ CommSemiring.toCommMonoidWithZero,
+ Exists,
+ Eq.mp,
+ Distrib.toAdd,
+ Bool.and,
+ instDecidableEqBool,
+ instOfNatNat,
+ Bool.and_self,
+ zero_add,
+ ZMod,
+ MulZeroClass.mul_zero,
+ IndependentDuodenary.fulguriteBit,
+ Bool.true,
+ instHAdd,
+ CommRing.toCommSemiring,
+ not_false,
+ Exists.casesOn,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat,
+ congr,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ True,
+ eq_self,
+ instDecidableFalse,
+ eq_true,
+ Bool,
+ Eq.ndrec,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ ite_congr,
+ OfNat.ofNat,
+ Eq.symm,
+ Bool.false,
+ Eq,
+ Ring.toAddGroupWithOne,
+ instOfNatAtLeastTwo,
+ Not,
+ letFun,
+ Eq.trans,
+ MulZeroClass.toZero,
+ True.intro,
+ instHMul,
+ ite]
+theorem IndependentDuodenary.fulgurite_rewrite_sound : ∀ {n : ℕ} {e f : IndependentDuodenary.FulguriteCircuit n},
+  IndependentDuodenary.FulguriteRewrite e f →
+    ∀ (p : IndependentDuodenary.RegisterPhase n),
+      IndependentDuodenary.obsidianAssignmentLaw p →
+        IndependentDuodenary.fulguriteEval p e = IndependentDuodenary.fulguriteEval p f :=
+fun {n} {e f} rule p valid =>
+  IndependentDuodenary.FulguriteRewrite.casesOn (motive := fun a a_1 t =>
+    e = a → f = a_1 → HEq rule t → IndependentDuodenary.fulguriteEval p e = IndependentDuodenary.fulguriteEval p f) rule
+    (fun e_1 h =>
+      Eq.ndrec (motive := fun {e} =>
+        ∀ (rule : IndependentDuodenary.FulguriteRewrite e f),
+          f = e_1 →
+            HEq rule (IndependentDuodenary.FulguriteRewrite.doubleTurn e_1) →
+              IndependentDuodenary.fulguriteEval p e = IndependentDuodenary.fulguriteEval p f)
+        (fun rule h =>
+          Eq.ndrec (motive := fun e =>
+            ∀ (rule : IndependentDuodenary.FulguriteRewrite e.halfTurn.halfTurn f),
+              HEq rule (IndependentDuodenary.FulguriteRewrite.doubleTurn e) →
+                IndependentDuodenary.fulguriteEval p e.halfTurn.halfTurn = IndependentDuodenary.fulguriteEval p f)
+            (fun rule h => IndependentDuodenary.fulgurite_half_turn_twice (IndependentDuodenary.fulguriteEval p f)) h
+            rule)
+        (Eq.symm h) rule)
+    (fun e_1 f_1 h =>
+      Eq.ndrec (motive := fun {e} =>
+        ∀ (rule : IndependentDuodenary.FulguriteRewrite e f),
+          f = f_1.meet e_1 →
+            HEq rule (IndependentDuodenary.FulguriteRewrite.meetComm e_1 f_1) →
+              IndependentDuodenary.fulguriteEval p e = IndependentDuodenary.fulguriteEval p f)
+        (fun rule h =>
+          Eq.ndrec (motive := fun {f} =>
+            ∀ (rule : IndependentDuodenary.FulguriteRewrite (e_1.meet f_1) f),
+              HEq rule (IndependentDuodenary.FulguriteRewrite.meetComm e_1 f_1) →
+                IndependentDuodenary.fulguriteEval p (e_1.meet f_1) = IndependentDuodenary.fulguriteEval p f)
+            (fun rule h =>
+              let_fun he := IndependentDuodenary.fulgurite_eval_preserves_law e_1 p valid;
+              let_fun hf := IndependentDuodenary.fulgurite_eval_preserves_law f_1 p valid;
+              Or.casesOn he
+                (fun he =>
+                  Or.casesOn hf
+                    (fun hf =>
+                      of_eq_true
+                        (Eq.trans
+                          (Eq.trans
+                            (Eq.trans
+                              (congr
+                                (congrArg Eq
+                                  (Eq.trans
+                                    (ite_congr
+                                      (Eq.trans
+                                        (Eq.trans (congrArg (fun x => x = 6) he)
+                                          IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                                        (eq_false not_false))
+                                      (fun a => hf) fun a => Eq.refl 0)
+                                    (ite_self 0)))
+                                (Eq.trans
+                                  (ite_congr
+                                    (Eq.trans
+                                      (Eq.trans (congrArg (fun x => x = 6) hf)
+                                        IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                                      (eq_false not_false))
+                                    (fun a => he) fun a => Eq.refl 0)
+                                  (ite_self 0)))
+                              (eq_self 0))
+                            (eq_true True.intro))
+                          (eq_true True.intro)))
+                    fun hf =>
+                    of_eq_true
+                      (Eq.trans
+                        (Eq.trans
+                          (Eq.trans
+                            (congr
+                              (congrArg Eq
+                                (ite_congr
+                                  (Eq.trans
+                                    (Eq.trans (congrArg (fun x => x = 6) he)
+                                      IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                                    (eq_false not_false))
+                                  (fun a => hf) fun a => Eq.refl 0))
+                              (Eq.trans
+                                (ite_congr
+                                  (Eq.trans (Eq.trans (congrArg (fun x => x = 6) hf) (eq_self 6)) (eq_true True.intro))
+                                  (fun a => he) fun a => Eq.refl 0)
+                                (ite_self 0)))
+                            (eq_self 0))
+                          (eq_true True.intro))
+                        (eq_true True.intro)))
+                fun he =>
+                Or.casesOn hf
+                  (fun hf =>
+                    of_eq_true
+                      (Eq.trans
+                        (Eq.trans
+                          (Eq.trans
+                            (congr
+                              (congrArg Eq
+                                (Eq.trans
+                                  (ite_congr
+                                    (Eq.trans (Eq.trans (congrArg (fun x => x = 6) he) (eq_self 6))
+                                      (eq_true True.intro))
+                                    (fun a => hf) fun a => Eq.refl 0)
+                                  (ite_self 0)))
+                              (ite_congr
+                                (Eq.trans
+                                  (Eq.trans (congrArg (fun x => x = 6) hf)
+                                    IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                                  (eq_false not_false))
+                                (fun a => he) fun a => Eq.refl 0))
+                            (eq_self 0))
+                          (eq_true True.intro))
+                        (eq_true True.intro)))
+                  fun hf =>
+                  of_eq_true
+                    (Eq.trans
+                      (Eq.trans
+                        (Eq.trans
+                          (congr
+                            (congrArg Eq
+                              (ite_congr
+                                (Eq.trans (Eq.trans (congrArg (fun x => x = 6) he) (eq_self 6)) (eq_true True.intro))
+                                (fun a => hf) fun a => Eq.refl 0))
+                            (ite_congr
+                              (Eq.trans (Eq.trans (congrArg (fun x => x = 6) hf) (eq_self 6)) (eq_true True.intro))
+                              (fun a => he) fun a => Eq.refl 0))
+                          (eq_self 6))
+                        (eq_true True.intro))
+                      (eq_true True.intro)))
+            (Eq.symm h) rule)
+        (Eq.symm h) rule)
+    (fun e_1 f_1 h =>
+      Eq.ndrec (motive := fun {e} =>
+        ∀ (rule : IndependentDuodenary.FulguriteRewrite e f),
+          f = f_1.join e_1 →
+            HEq rule (IndependentDuodenary.FulguriteRewrite.joinComm e_1 f_1) →
+              IndependentDuodenary.fulguriteEval p e = IndependentDuodenary.fulguriteEval p f)
+        (fun rule h =>
+          Eq.ndrec (motive := fun {f} =>
+            ∀ (rule : IndependentDuodenary.FulguriteRewrite (e_1.join f_1) f),
+              HEq rule (IndependentDuodenary.FulguriteRewrite.joinComm e_1 f_1) →
+                IndependentDuodenary.fulguriteEval p (e_1.join f_1) = IndependentDuodenary.fulguriteEval p f)
+            (fun rule h =>
+              let_fun he := IndependentDuodenary.fulgurite_eval_preserves_law e_1 p valid;
+              let_fun hf := IndependentDuodenary.fulgurite_eval_preserves_law f_1 p valid;
+              Or.casesOn he
+                (fun he =>
+                  Or.casesOn hf
+                    (fun hf =>
+                      of_eq_true
+                        (Eq.trans
+                          (Eq.trans
+                            (Eq.trans
+                              (congr
+                                (congrArg Eq
+                                  (ite_congr
+                                    (Eq.trans
+                                      (Eq.trans (congrArg (fun x => x = 6) he)
+                                        IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                                      (eq_false not_false))
+                                    (fun a => Eq.refl 6) fun a => hf))
+                                (ite_congr
+                                  (Eq.trans
+                                    (Eq.trans (congrArg (fun x => x = 6) hf)
+                                      IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                                    (eq_false not_false))
+                                  (fun a => Eq.refl 6) fun a => he))
+                              (eq_self 0))
+                            (eq_true True.intro))
+                          (eq_true True.intro)))
+                    fun hf =>
+                    of_eq_true
+                      (Eq.trans
+                        (Eq.trans
+                          (Eq.trans
+                            (congr
+                              (congrArg Eq
+                                (Eq.trans
+                                  (ite_congr
+                                    (Eq.trans
+                                      (Eq.trans (congrArg (fun x => x = 6) he)
+                                        IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                                      (eq_false not_false))
+                                    (fun a => Eq.refl 6) fun a => hf)
+                                  (ite_self 6)))
+                              (ite_congr
+                                (Eq.trans (Eq.trans (congrArg (fun x => x = 6) hf) (eq_self 6)) (eq_true True.intro))
+                                (fun a => Eq.refl 6) fun a => he))
+                            (eq_self 6))
+                          (eq_true True.intro))
+                        (eq_true True.intro)))
+                fun he =>
+                Or.casesOn hf
+                  (fun hf =>
+                    of_eq_true
+                      (Eq.trans
+                        (Eq.trans
+                          (Eq.trans
+                            (congr
+                              (congrArg Eq
+                                (ite_congr
+                                  (Eq.trans (Eq.trans (congrArg (fun x => x = 6) he) (eq_self 6)) (eq_true True.intro))
+                                  (fun a => Eq.refl 6) fun a => hf))
+                              (Eq.trans
+                                (ite_congr
+                                  (Eq.trans
+                                    (Eq.trans (congrArg (fun x => x = 6) hf)
+                                      IndependentDuodenary.FulguriteSAT._auxLemma.1)
+                                    (eq_false not_false))
+                                  (fun a => Eq.refl 6) fun a => he)
+                                (ite_self 6)))
+                            (eq_self 6))
+                          (eq_true True.intro))
+                        (eq_true True.intro)))
+                  fun hf =>
+                  of_eq_true
+                    (Eq.trans
+                      (Eq.trans
+                        (Eq.trans
+                          (congr
+                            (congrArg Eq
+                              (Eq.trans
+                                (ite_congr
+                                  (Eq.trans (Eq.trans (congrArg (fun x => x = 6) he) (eq_self 6)) (eq_true True.intro))
+                                  (fun a => Eq.refl 6) fun a => hf)
+                                (ite_self 6)))
+                            (Eq.trans
+                              (ite_congr
+                                (Eq.trans (Eq.trans (congrArg (fun x => x = 6) hf) (eq_self 6)) (eq_true True.intro))
+                                (fun a => Eq.refl 6) fun a => he)
+                              (ite_self 6)))
+                          (eq_self 6))
+                        (eq_true True.intro))
+                      (eq_true True.intro)))
+            (Eq.symm h) rule)
+        (Eq.symm h) rule)
+    (Eq.refl e) (Eq.refl f) (HEq.refl rule)
+'IndependentDuodenary.fulgurite_rewrite_sound' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_rewrite_sound: [Semiring.toNatCast,
+ IndependentDuodenary.fulguriteMeet.proof_1,
+ False,
+ IndependentDuodenary.FulguriteRewrite.doubleTurn,
+ instDecidableTrue,
+ ZMod.commRing,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.fulgurite_half_turn_twice,
+ HEq.refl,
+ ite_self,
+ ZMod.decidableEq,
+ IndependentDuodenary.FulguriteRewrite,
+ IndependentDuodenary.FulguriteSAT._auxLemma.1,
+ CommSemiring.toCommMonoidWithZero,
+ IndependentDuodenary.FulguriteRewrite.joinComm,
+ IndependentDuodenary.FulguriteCircuit,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ IndependentDuodenary.FulguriteRewrite.casesOn,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.obsidianBitLaw.proof_1,
+ ZMod,
+ Or.casesOn,
+ IndependentDuodenary.fulguriteJoin.proof_1,
+ CommRing.toCommSemiring,
+ not_false,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.obsidianBitLaw,
+ IndependentDuodenary.FulguriteCircuit.meet,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ instDecidableFalse,
+ eq_true,
+ of_eq_true,
+ Eq.ndrec,
+ IndependentDuodenary.fulgurite_eval_preserves_law,
+ IndependentDuodenary.FulguriteRewrite.meetComm,
+ Zero.toOfNat0,
+ Eq.refl,
+ HEq,
+ IndependentDuodenary.FulguriteCircuit.join,
+ IndependentDuodenary.fulguriteEval,
+ ite_congr,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ instOfNatAtLeastTwo,
+ Not,
+ IndependentDuodenary.FulguriteCircuit.halfTurn,
+ letFun,
+ Eq.trans,
+ True.intro,
+ ite]
+theorem IndependentDuodenary.fulgurite_trace_sound : ∀ {n : ℕ} {e f : IndependentDuodenary.FulguriteCircuit n},
+  IndependentDuodenary.FulguriteTrace e f →
+    ∀ (p : IndependentDuodenary.RegisterPhase n),
+      IndependentDuodenary.obsidianAssignmentLaw p →
+        IndependentDuodenary.fulguriteEval p e = IndependentDuodenary.fulguriteEval p f :=
+fun {n} {e f} trace p valid =>
+  IndependentDuodenary.FulguriteTrace.rec (Eq.refl (IndependentDuodenary.fulguriteEval p e))
+    (fun {f g} trace rule ih => Eq.trans ih (IndependentDuodenary.fulgurite_rewrite_sound rule p valid)) trace
+'IndependentDuodenary.fulgurite_trace_sound' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_trace_sound: [IndependentDuodenary.FulguriteTrace.rec,
+ IndependentDuodenary.FulguriteTrace,
+ IndependentDuodenary.fulgurite_rewrite_sound,
+ IndependentDuodenary.FulguriteRewrite,
+ IndependentDuodenary.FulguriteCircuit,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ ZMod,
+ Nat,
+ Eq.refl,
+ IndependentDuodenary.fulguriteEval,
+ OfNat.ofNat,
+ Eq,
+ Eq.trans]
+theorem IndependentDuodenary.fulgurite_trace_preserves_satisfiability : ∀ {n : ℕ}
+  {e f : IndependentDuodenary.FulguriteCircuit n},
+  IndependentDuodenary.FulguriteTrace e f →
+    ((∃ p, IndependentDuodenary.obsidianAssignmentLaw p ∧ IndependentDuodenary.fulguriteEval p e = 6) ↔
+      ∃ p, IndependentDuodenary.obsidianAssignmentLaw p ∧ IndependentDuodenary.fulguriteEval p f = 6) :=
+fun {n} {e f} trace =>
+  {
+    mp := fun a =>
+      Exists.casesOn a fun p h =>
+        And.casesOn h fun valid h =>
+          Exists.intro p ⟨valid, Eq.trans (Eq.symm (IndependentDuodenary.fulgurite_trace_sound trace p valid)) h⟩,
+    mpr := fun a =>
+      Exists.casesOn a fun p h =>
+        And.casesOn h fun valid h =>
+          Exists.intro p ⟨valid, Eq.trans (IndependentDuodenary.fulgurite_trace_sound trace p valid) h⟩ }
+'IndependentDuodenary.fulgurite_trace_preserves_satisfiability' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_trace_preserves_satisfiability: [Semiring.toNatCast,
+ ZMod.commRing,
+ IndependentDuodenary.FulguriteTrace,
+ CommSemiring.toSemiring,
+ Exists,
+ IndependentDuodenary.FulguriteCircuit,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ IndependentDuodenary.fulgurite_trace_sound,
+ ZMod,
+ And.casesOn,
+ And,
+ CommRing.toCommSemiring,
+ Iff,
+ Exists.casesOn,
+ instNatAtLeastTwo,
+ Nat,
+ And.intro,
+ Iff.intro,
+ Exists.intro,
+ IndependentDuodenary.fulguriteEval,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ instOfNatAtLeastTwo,
+ Eq.trans]
+theorem IndependentDuodenary.fulgurite_trace_trans : ∀ {n : ℕ} {e f g : IndependentDuodenary.FulguriteCircuit n},
+  IndependentDuodenary.FulguriteTrace e f →
+    IndependentDuodenary.FulguriteTrace f g → IndependentDuodenary.FulguriteTrace e g :=
+fun {n} {e f g} first second =>
+  IndependentDuodenary.FulguriteTrace.rec first
+    (fun {f_1 g} trace rule ih => IndependentDuodenary.FulguriteTrace.append ih rule) second
+'IndependentDuodenary.fulgurite_trace_trans' does not depend on any axioms
+DIRECT DEPENDENCIES fulgurite_trace_trans: [IndependentDuodenary.FulguriteTrace.append,
+ IndependentDuodenary.FulguriteTrace.rec,
+ IndependentDuodenary.FulguriteTrace,
+ IndependentDuodenary.FulguriteRewrite,
+ IndependentDuodenary.FulguriteCircuit,
+ Nat]
+theorem IndependentDuodenary.fulgurite_discovery_preserves_satisfiability : ∀ {n : ℕ} (fuel : ℕ)
+  (e : IndependentDuodenary.FulguriteCircuit n),
+  (∃ p, IndependentDuodenary.obsidianAssignmentLaw p ∧ IndependentDuodenary.fulguriteEval p e = 6) ↔
+    ∃ p,
+      IndependentDuodenary.obsidianAssignmentLaw p ∧
+        IndependentDuodenary.fulguriteEval p ↑(IndependentDuodenary.fulguriteDiscover fuel e) = 6 :=
+fun {n} fuel e =>
+  IndependentDuodenary.fulgurite_trace_preserves_satisfiability (IndependentDuodenary.fulguriteDiscover fuel e).property
+'IndependentDuodenary.fulgurite_discovery_preserves_satisfiability' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES fulgurite_discovery_preserves_satisfiability: [Semiring.toNatCast,
+ ZMod.commRing,
+ IndependentDuodenary.FulguriteTrace,
+ CommSemiring.toSemiring,
+ Exists,
+ IndependentDuodenary.FulguriteCircuit,
+ IndependentDuodenary.obsidianAssignmentLaw,
+ IndependentDuodenary.fulgurite_trace_preserves_satisfiability,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ ZMod,
+ IndependentDuodenary.fulguriteDiscover,
+ And,
+ CommRing.toCommSemiring,
+ Iff,
+ instNatAtLeastTwo,
+ Nat,
+ IndependentDuodenary.fulguriteEval,
+ OfNat.ofNat,
+ Subtype.val,
+ Eq,
+ instOfNatAtLeastTwo,
+ Subtype.property]
 theorem IndependentDuodenary.conditional_level_return : ∀ (levels step : ℕ),
   levels = 12 → step = 3 → IndependentDuodenary.station (step * levels) = 0 :=
 fun levels step hLevels hStep => Eq.symm hLevels ▸ Eq.symm hStep ▸ IndependentDuodenary.three_times_twelve_returns
@@ -23704,4 +25287,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 386 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 408 theorem declarations; only standard Lean axioms permitted.

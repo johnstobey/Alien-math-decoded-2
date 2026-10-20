@@ -81,6 +81,13 @@ jobs:
             lake env lean "$proof_file" 2>&1 | tee .lake/search-boundary-check.log
             test ! -s .lake/search-boundary-check.log
           done
+      - name: Verify guarded Fulgurite SAT experiment
+        run: |
+          for proof_file in IndependentDuodenary/FulguriteSAT.lean examples/FulguriteSATBoundary.lean
+          do
+            lake env lean "$proof_file" 2>&1 | tee .lake/fulgurite-sat-check.log
+            test ! -s .lake/fulgurite-sat-check.log
+          done
       - name: Verify reference-machine definitions and boundaries
         run: |
           for proof_file in IndependentDuodenary/ReferenceMachines.lean examples/ReferenceMachinesBoundary.lean

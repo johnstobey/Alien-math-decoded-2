@@ -3,7 +3,7 @@
 This expands the annotated statements about the missing prize bridge and the
 incompleteness of packaging as mathematical proof. It is an obligation register,
 not a completed P-versus-NP proof. The baseline library has 354 named theorem
-declarations; the parser and halting extension adds 19, for 373 declarations. The reference-machine extension adds 13, for 386 current declarations. Five additional unnamed encoding examples are checked separately;
+declarations; the parser and halting extension adds 19, for 373 declarations. The reference-machine extension adds 13, for 386 declarations. The experimental guarded Fulgurite SAT module adds 22, for 408 current declarations. This does not close a registered compiler or fixed-protocol reduction obligation. Five additional unnamed encoding examples are checked separately;
 they do not increase that library count.
 
 This is one concrete equality-route specification; alternative encodings and

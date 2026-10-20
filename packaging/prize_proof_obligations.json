@@ -1,6 +1,6 @@
 {
   "purpose": "research obligation register; not a submission readiness certificate",
-  "current_named_theorems": 386,
+  "current_named_theorems": 408,
   "new_proved_results": [
     "IndependentDuodenary.protocol_reachability_check_correct",
     "IndependentDuodenary.protocol_reachability_check_rejects_iff",
@@ -99,5 +99,35 @@
       "IndependentDuodenary.reference_nbranch_bound_forces_terminal"
     ],
     "conventional_model_equivalence_proved": false
+  },
+  "experimental_fulgurite_sat": {
+    "source": "IndependentDuodenary/FulguriteSAT.lean",
+    "theorems": [
+      "IndependentDuodenary.fulgurite_zero_ne_six",
+      "IndependentDuodenary.fulgurite_half_turn_twice",
+      "IndependentDuodenary.fulgurite_bit_negation",
+      "IndependentDuodenary.fulgurite_bit_conjunction",
+      "IndependentDuodenary.fulgurite_bit_disjunction",
+      "IndependentDuodenary.fulgurite_bit_injective",
+      "IndependentDuodenary.fulgurite_bit_law",
+      "IndependentDuodenary.fulgurite_assignment_law",
+      "IndependentDuodenary.fulgurite_assignment_decode_encode",
+      "IndependentDuodenary.fulgurite_assignment_encode_decode",
+      "IndependentDuodenary.fulgurite_assignment_cardinality",
+      "IndependentDuodenary.fulgurite_compile_size",
+      "IndependentDuodenary.fulgurite_compile_correct",
+      "IndependentDuodenary.fulgurite_eval_preserves_law",
+      "IndependentDuodenary.fulgurite_satisfiability_equivalence",
+      "IndependentDuodenary.fulgurite_register_phase_roundtrip",
+      "IndependentDuodenary.fulgurite_meet_not_affine",
+      "IndependentDuodenary.fulgurite_rewrite_sound",
+      "IndependentDuodenary.fulgurite_trace_sound",
+      "IndependentDuodenary.fulgurite_trace_preserves_satisfiability",
+      "IndependentDuodenary.fulgurite_trace_trans",
+      "IndependentDuodenary.fulgurite_discovery_preserves_satisfiability"
+    ],
+    "scope": "arbitrary finite Boolean formulas to guarded twelve-position circuits; not fixed registerStep reachability",
+    "registered_obligations_closed": [],
+    "polynomial_machine_runtime_proved": false
   }
 }

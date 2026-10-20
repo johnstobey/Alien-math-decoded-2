@@ -122,7 +122,13 @@ simulation. The reference-machine extension adds thirteen supporting theorems an
 finite-control, multi-tape deterministic and nondeterministic machine definitions,
 with actual-transition runs and uniformly bounded reference complexity classes.
 This supplies definition obligations 1.01--1.04; compilers, cost bounds and
-class equivalences are still missing. The generated appendix inventories the current library.
+class equivalences are still missing. The experimental Fulgurite module adds twenty-two theorems for guarded Boolean
+circuits on twelve-position registers. Compilation preserves satisfiability
+and AST node count; certified rewrites preserve meaning. The assignment space
+still has cardinality $2^n$. Conditional AND/OR gates are additional operations;
+they are not supplied by the fixed cyclic operator. No general SAT reduction
+to that operator or polynomial-time SAT decision follows. The generated
+appendix inventories the current library.
 Exact propositions, proof terms, direct dependencies and transitive foundational
 requirements are in the accompanying \texttt{verification/THEOREMS.md} and
 \texttt{verification/axioms-and-proofs.txt}.

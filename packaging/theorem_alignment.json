@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "count": 386,
+  "count": 408,
   "audit_evidence": "verification/axioms-and-proofs.txt",
   "theorems": [
     {
@@ -918,6 +918,160 @@
       "module": "EncodingIntegrity",
       "source": "IndependentDuodenary/EncodingIntegrity.lean",
       "line": 155,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_zero_ne_six",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 68,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_half_turn_twice",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 70,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_bit_negation",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 74,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_bit_conjunction",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 78,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_bit_disjunction",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 82,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_bit_injective",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 86,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_bit_law",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 90,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_assignment_law",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 93,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_assignment_decode_encode",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 98,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_assignment_encode_decode",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 103,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_assignment_cardinality",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 119,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_compile_size",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 124,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_compile_correct",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 128,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_eval_preserves_law",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 143,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_satisfiability_equivalence",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 163,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_register_phase_roundtrip",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 181,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_meet_not_affine",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 188,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_rewrite_sound",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 211,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_trace_sound",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 227,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_trace_preserves_satisfiability",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 234,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_trace_trans",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 245,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.fulgurite_discovery_preserves_satisfiability",
+      "module": "FulguriteSAT",
+      "source": "IndependentDuodenary/FulguriteSAT.lean",
+      "line": 273,
       "external_prize_implication_established": false
     },
     {

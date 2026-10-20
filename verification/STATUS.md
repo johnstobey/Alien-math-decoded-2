@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: twenty-six modules; 386 theorem declarations.
+- Project library: twenty-seven modules; 408 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 386 stated Lean theorems.
+There are no incomplete obligations inside the 408 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -99,7 +99,7 @@ build, warning-free checks, fifteen canonical guards, synthesis guards and all
 thirteen executable checks passed. The executable output is retained in
 `pipeline-execution.txt`.
 
-Final local audit: all 386 theorem declarations passed, permitting only the
+Final local audit: all 408 theorem declarations passed, permitting only the
 standard Lean axiom union already listed. The placeholder scan also covers
 the native launcher and example sources. All newly added modules, the
 refactored dynamics module and both runners elaborate without diagnostics.
@@ -141,9 +141,18 @@ general SAT reduction, machine simulation or a Millennium Prize result.
 ## Reference-machine syntax and complexity definitions
 
 `ReferenceMachines.lean` implements obligations 1.01–1.04 with 13 supporting
-theorems. The current library has 386 named declarations. The register has five
+theorems. That revision brought the library to 386 named declarations. The register has five
 completed example obligations, three proved parser/halting obligations and four
 implemented definition obligations: 12 completed, 65 open. Reference P/NP are
 explicit definitions, not equivalences with the Prize classes. Full individual
 status for all 69 entries open at the start of this execution is retained in
 [CLOSURE_EXECUTION.md](CLOSURE_EXECUTION.md).
+
+## Guarded Fulgurite SAT experiment
+
+The new semantic prototype adds 22 theorems: lossless Boolean phase encoding,
+formula interpretation and exact AST-size preservation, satisfiability
+equivalence, certified bounded rewrite execution and its preservation theorem,
+and a no-affine-AND result for the chosen 0/6 encoding. The current count is 408.
+All 65 registered open obligations remain open; the target is circuit SAT with
+conditional gates, not fixed-operator reachability. See [FULGURITE_SAT.md](FULGURITE_SAT.md).

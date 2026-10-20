@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 386 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 408 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -2029,6 +2029,346 @@ Proof method: The explicit majority decoder and the proved impossibility of two 
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES repetition_majority_recovery` and the printed proof in the machine-generated audit.
+
+## `fulgurite_zero_ne_six`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_zero_ne_six : (0 : ZMod 12) ≠ 6
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_zero_ne_six` and the printed proof in the machine-generated audit.
+
+## `fulgurite_half_turn_twice`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_half_turn_twice (x : ZMod 12) : x + 6 + 6 = x
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_half_turn_twice` and the printed proof in the machine-generated audit.
+
+## `fulgurite_bit_negation`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_bit_negation (b : Bool) :
+    fulguriteBit (!b) = fulguriteBit b + 6
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_bit_negation` and the printed proof in the machine-generated audit.
+
+## `fulgurite_bit_conjunction`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_bit_conjunction (b c : Bool) :
+    fulguriteMeet (fulguriteBit b) (fulguriteBit c) = fulguriteBit (b && c)
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_bit_conjunction` and the printed proof in the machine-generated audit.
+
+## `fulgurite_bit_disjunction`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_bit_disjunction (b c : Bool) :
+    fulguriteJoin (fulguriteBit b) (fulguriteBit c) = fulguriteBit (b || c)
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_bit_disjunction` and the printed proof in the machine-generated audit.
+
+## `fulgurite_bit_injective`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_bit_injective : Function.Injective fulguriteBit
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_bit_injective` and the printed proof in the machine-generated audit.
+
+## `fulgurite_bit_law`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_bit_law (b : Bool) : obsidianBitLaw (fulguriteBit b)
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_bit_law` and the printed proof in the machine-generated audit.
+
+## `fulgurite_assignment_law`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_assignment_law {n : ℕ} (a : Fin n → Bool) :
+    obsidianAssignmentLaw (fulguriteCompileAssignment a)
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_assignment_law` and the printed proof in the machine-generated audit.
+
+## `fulgurite_assignment_decode_encode`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_assignment_decode_encode {n : ℕ} (a : Fin n → Bool) :
+    fulguriteDecodeAssignment (fulguriteCompileAssignment a) = a
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_assignment_decode_encode` and the printed proof in the machine-generated audit.
+
+## `fulgurite_assignment_encode_decode`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_assignment_encode_decode {n : ℕ} (p : RegisterPhase n)
+    (valid : obsidianAssignmentLaw p) :
+    fulguriteCompileAssignment (fulguriteDecodeAssignment p) = p
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_assignment_encode_decode` and the printed proof in the machine-generated audit.
+
+## `fulgurite_assignment_cardinality`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_assignment_cardinality (n : ℕ) :
+    Nat.card { p : RegisterPhase n // obsidianAssignmentLaw p } = 2 ^ n
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_assignment_cardinality` and the printed proof in the machine-generated audit.
+
+## `fulgurite_compile_size`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_compile_size {n : ℕ} (f : DiscoveryFormula n) :
+    fulguriteSize (discoveryCompile f) = discoverySize f
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_compile_size` and the printed proof in the machine-generated audit.
+
+## `fulgurite_compile_correct`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_compile_correct {n : ℕ} (f : DiscoveryFormula n) (a : Fin n → Bool) :
+    fulguriteEval (fulguriteCompileAssignment a) (discoveryCompile f) =
+      fulguriteBit (discoveryEval a f)
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_compile_correct` and the printed proof in the machine-generated audit.
+
+## `fulgurite_eval_preserves_law`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_eval_preserves_law {n : ℕ} (e : FulguriteCircuit n)
+    (p : RegisterPhase n) (valid : obsidianAssignmentLaw p) :
+    obsidianBitLaw (fulguriteEval p e)
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_eval_preserves_law` and the printed proof in the machine-generated audit.
+
+## `fulgurite_satisfiability_equivalence`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_satisfiability_equivalence {n : ℕ} (f : DiscoveryFormula n) :
+    (∃ a : Fin n → Bool, discoveryEval a f = true) ↔
+      ∃ p : RegisterPhase n, obsidianAssignmentLaw p ∧
+        fulguriteEval p (discoveryCompile f) = 6
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_satisfiability_equivalence` and the printed proof in the machine-generated audit.
+
+## `fulgurite_register_phase_roundtrip`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_register_phase_roundtrip {n : ℕ} (a : Fin n → Bool) :
+    registerPhases (phaseRegisterState (fulguriteCompileAssignment a)) =
+      fulguriteCompileAssignment a
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_register_phase_roundtrip` and the printed proof in the machine-generated audit.
+
+## `fulgurite_meet_not_affine`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_meet_not_affine :
+    ¬ ∃ A B C : ZMod 12, ∀ x y : Bool,
+      A * fulguriteBit x + B * fulguriteBit y + C = fulguriteBit (x && y)
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_meet_not_affine` and the printed proof in the machine-generated audit.
+
+## `fulgurite_rewrite_sound`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_rewrite_sound {n : ℕ} {e f : FulguriteCircuit n}
+    (rule : FulguriteRewrite e f) (p : RegisterPhase n)
+    (valid : obsidianAssignmentLaw p) : fulguriteEval p e = fulguriteEval p f
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_rewrite_sound` and the printed proof in the machine-generated audit.
+
+## `fulgurite_trace_sound`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_trace_sound {n : ℕ} {e f : FulguriteCircuit n}
+    (trace : FulguriteTrace e f) (p : RegisterPhase n)
+    (valid : obsidianAssignmentLaw p) : fulguriteEval p e = fulguriteEval p f
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_trace_sound` and the printed proof in the machine-generated audit.
+
+## `fulgurite_trace_preserves_satisfiability`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_trace_preserves_satisfiability {n : ℕ} {e f : FulguriteCircuit n}
+    (trace : FulguriteTrace e f) :
+    (∃ p : RegisterPhase n, obsidianAssignmentLaw p ∧ fulguriteEval p e = 6) ↔
+      ∃ p : RegisterPhase n, obsidianAssignmentLaw p ∧ fulguriteEval p f = 6
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_trace_preserves_satisfiability` and the printed proof in the machine-generated audit.
+
+## `fulgurite_trace_trans`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_trace_trans {n : ℕ} {e f g : FulguriteCircuit n}
+    (first : FulguriteTrace e f) (second : FulguriteTrace f g) : FulguriteTrace e g
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_trace_trans` and the printed proof in the machine-generated audit.
+
+## `fulgurite_discovery_preserves_satisfiability`
+
+Source: `IndependentDuodenary/FulguriteSAT.lean`. Compilation: **passed**.
+
+```lean
+theorem fulgurite_discovery_preserves_satisfiability {n : ℕ}
+    (fuel : ℕ) (e : FulguriteCircuit n) :
+    (∃ p : RegisterPhase n, obsidianAssignmentLaw p ∧ fulguriteEval p e = 6) ↔
+      ∃ p : RegisterPhase n, obsidianAssignmentLaw p ∧
+        fulguriteEval p (fulguriteDiscover fuel e).val = 6
+```
+
+Proof method: Structural induction, finite Boolean case analysis, phase-encoding equivalence, or composition of certified rewrites; exact proof terms and direct dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES fulgurite_discovery_preserves_satisfiability` and the printed proof in the machine-generated audit.
 
 ## `conditional_level_return`
 

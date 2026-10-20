@@ -116,9 +116,17 @@ packet from its archived revision; current research has its own audit index.
 expands the four missing complexity bridges into 77 explicit obligations and
 an acyclic dependency graph. Five initial encoding facts are checked as unnamed
 Lean examples. Nineteen named parser and halting theorems additionally close
-obligations 1.10–1.12; a subsequent reference-machine module adds 13 more, for 386 named declarations.
+obligations 1.10–1.12; a subsequent reference-machine module adds 13 more, for 386 named declarations at that revision.
 Twelve of 77 atomic obligations are completed, with 65 open. The latest four
 completed entries supply definitions, not compiler or complexity-equivalence
 proofs. See the [complete execution ledger](verification/CLOSURE_EXECUTION.md). See the
 [parser and halting report](verification/COMPLEXITY_ENCODING.md). The general SAT reduction
 and polynomial-time machine proof remain absent.
+
+[Guarded Fulgurite SAT experiment](verification/FULGURITE_SAT.md) translates
+arbitrary finite Boolean formulas into twelve-position circuits without
+consulting an assignment. It proves exact satisfiability preservation, AST-size
+preservation, guarded rewrite soundness and a lossless assignment space of
+`2^n`. Conditional AND/OR gates are explicit additions; they are not the fixed
+cyclic register operator. This adds 22 named theorems (408 total) and closes no
+registered machine-simulation or SAT-to-fixed-protocol obligation.
