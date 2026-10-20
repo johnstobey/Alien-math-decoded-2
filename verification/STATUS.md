@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: fourteen modules; 191 theorem declarations.
+- Project library: fifteen modules; 211 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 191 stated Lean theorems.
+There are no incomplete obligations inside the 211 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -48,3 +48,9 @@ natural-language interpretation still requires a proved rule mapping.
 The executable station-code walkthrough passed all five guards. It is run by
 CI in addition to the build and theorem audit; local output is preserved in
 `station-walkthrough.txt`.
+
+The supplied Mod-144 calculator now has an exact positive-rational arithmetic
+model, normalized implementation proof, five source fixtures, a noninjectivity
+proof, and a lossless protected result codec. See `CIPHER_VALIDATOR.md` for the
+source hash, rule mapping and numerical/interpretive boundaries. Both the Lean
+cipher walkthrough (nine guards) and five isolated JavaScript fixtures passed.

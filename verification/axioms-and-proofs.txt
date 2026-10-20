@@ -2000,6 +2000,804 @@ DIRECT DEPENDENCIES zero_bits_count: [IndependentDuodenary.weightLayer_card,
  IndependentDuodenary.weightLayer,
  Decidable.decide,
  Eq]
+theorem IndependentDuodenary.cipher_stage_normal_form : ∀ (p : IndependentDuodenary.CipherPeriod),
+  IndependentDuodenary.cipherStage p = 12 * p.numerator / p.denominator % 360 :=
+fun p => Nat.mod_mul_left_div_self (12 * p.numerator) p.denominator 360
+'IndependentDuodenary.cipher_stage_normal_form' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cipher_stage_normal_form: [instHDiv,
+ HMul.hMul,
+ Nat.mod_mul_left_div_self,
+ IndependentDuodenary.CipherPeriod.denominator,
+ HDiv.hDiv,
+ Nat.instMod,
+ instHMod,
+ instMulNat,
+ instOfNatNat,
+ IndependentDuodenary.CipherPeriod.numerator,
+ HMod.hMod,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ Nat.instDiv,
+ OfNat.ofNat,
+ Eq,
+ IndependentDuodenary.cipherStage,
+ instHMul]
+theorem IndependentDuodenary.cipher_pipeline_correct : ∀ (p : IndependentDuodenary.CipherPeriod) (h : ℕ),
+  IndependentDuodenary.cipherCalculate p h = IndependentDuodenary.cipherNormalized p h :=
+fun p h =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x * h % 144 = 12 * p.numerator / p.denominator % 360 * h % 144)
+        (IndependentDuodenary.cipher_stage_normal_form p))
+      (eq_self (12 * p.numerator / p.denominator % 360 * h % 144)))
+'IndependentDuodenary.cipher_pipeline_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cipher_pipeline_correct: [instHDiv,
+ HMul.hMul,
+ congrArg,
+ IndependentDuodenary.CipherPeriod.denominator,
+ HDiv.hDiv,
+ Nat.instMod,
+ instHMod,
+ instMulNat,
+ instOfNatNat,
+ IndependentDuodenary.CipherPeriod.numerator,
+ HMod.hMod,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ IndependentDuodenary.cipherCalculate,
+ True,
+ eq_self,
+ Nat.instDiv,
+ IndependentDuodenary.cipherNormalized,
+ of_eq_true,
+ OfNat.ofNat,
+ Eq,
+ IndependentDuodenary.cipher_stage_normal_form,
+ IndependentDuodenary.cipherStage,
+ Eq.trans,
+ instHMul]
+theorem IndependentDuodenary.cipher_stage_bound : ∀ (p : IndependentDuodenary.CipherPeriod),
+  IndependentDuodenary.cipherStage p < 360 :=
+fun p =>
+  Eq.mpr (id (congrArg (fun _a => _a < 360) (IndependentDuodenary.cipher_stage_normal_form p)))
+    (Nat.mod_lt (12 * p.numerator / p.denominator) (of_decide_eq_true (id (Eq.refl true))))
+'IndependentDuodenary.cipher_stage_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cipher_stage_bound: [Eq.mpr,
+ instHDiv,
+ HMul.hMul,
+ of_decide_eq_true,
+ congrArg,
+ IndependentDuodenary.CipherPeriod.denominator,
+ id,
+ HDiv.hDiv,
+ Nat.instMod,
+ instHMod,
+ instMulNat,
+ instOfNatNat,
+ IndependentDuodenary.CipherPeriod.numerator,
+ Nat.mod_lt,
+ Bool.true,
+ GT.gt,
+ HMod.hMod,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ LT.lt,
+ Nat.instDiv,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ instLTNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.cipher_stage_normal_form,
+ IndependentDuodenary.cipherStage,
+ instHMul]
+theorem IndependentDuodenary.cipher_output_bound : ∀ (p : IndependentDuodenary.CipherPeriod) (h : ℕ),
+  IndependentDuodenary.cipherCalculate p h < 144 :=
+fun p h => Nat.mod_lt (IndependentDuodenary.cipherStage p * h) (of_decide_eq_true (id (Eq.refl true)))
+'IndependentDuodenary.cipher_output_bound' does not depend on any axioms
+DIRECT DEPENDENCIES cipher_output_bound: [HMul.hMul,
+ of_decide_eq_true,
+ id,
+ instMulNat,
+ instOfNatNat,
+ Nat.mod_lt,
+ Bool.true,
+ GT.gt,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ IndependentDuodenary.cipherCalculate,
+ LT.lt,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ instLTNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.cipherStage,
+ instHMul]
+theorem IndependentDuodenary.cipher_zero_iff_divides : ∀ (p : IndependentDuodenary.CipherPeriod) (h : ℕ),
+  IndependentDuodenary.cipherCalculate p h = 0 ↔ 144 ∣ IndependentDuodenary.cipherStage p * h :=
+fun p h => Iff.symm Nat.dvd_iff_mod_eq_zero
+'IndependentDuodenary.cipher_zero_iff_divides' depends on axioms: [propext]
+DIRECT DEPENDENCIES cipher_zero_iff_divides: [Dvd.dvd,
+ HMul.hMul,
+ Nat.instMod,
+ instHMod,
+ instMulNat,
+ instOfNatNat,
+ HMod.hMod,
+ Iff,
+ Nat.instDvd,
+ Nat.dvd_iff_mod_eq_zero,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ IndependentDuodenary.cipherCalculate,
+ OfNat.ofNat,
+ Eq,
+ Iff.symm,
+ IndependentDuodenary.cipherStage,
+ instHMul]
+theorem IndependentDuodenary.cipher_same_stage : ∀ (p q : IndependentDuodenary.CipherPeriod) (h : ℕ),
+  IndependentDuodenary.cipherStage p = IndependentDuodenary.cipherStage q →
+    IndependentDuodenary.cipherCalculate p h = IndependentDuodenary.cipherCalculate q h :=
+fun p q h heq =>
+  of_eq_true
+    (Eq.trans (congrArg (fun x => x * h % 144 = IndependentDuodenary.cipherStage q * h % 144) heq)
+      (eq_self (IndependentDuodenary.cipherStage q * h % 144)))
+'IndependentDuodenary.cipher_same_stage' depends on axioms: [propext]
+DIRECT DEPENDENCIES cipher_same_stage: [HMul.hMul,
+ congrArg,
+ Nat.instMod,
+ instHMod,
+ instMulNat,
+ instOfNatNat,
+ HMod.hMod,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ IndependentDuodenary.cipherCalculate,
+ True,
+ eq_self,
+ of_eq_true,
+ OfNat.ofNat,
+ Eq,
+ IndependentDuodenary.cipherStage,
+ Eq.trans,
+ instHMul]
+theorem IndependentDuodenary.cipher_shift_thirty_stage : ∀ (p : IndependentDuodenary.CipherPeriod),
+  IndependentDuodenary.cipherStage (IndependentDuodenary.cipherShiftThirty p) = IndependentDuodenary.cipherStage p :=
+fun p =>
+  id
+    (id
+      (id
+        (let_fun heq :=
+          Mathlib.Tactic.Ring.of_eq
+            (Mathlib.Tactic.Ring.mul_congr
+              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 12)))
+              (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf p.numerator)
+                (Mathlib.Tactic.Ring.mul_congr
+                  (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 30)))
+                  (Mathlib.Tactic.Ring.atom_pf p.denominator)
+                  (Mathlib.Tactic.Ring.add_mul
+                    (Mathlib.Tactic.Ring.mul_add
+                      (Mathlib.Tactic.Ring.mul_pf_right p.denominator (Nat.rawCast 1)
+                        (Mathlib.Tactic.Ring.mul_one (Nat.rawCast 30)))
+                      (Mathlib.Tactic.Ring.mul_zero (Nat.rawCast 30))
+                      (Mathlib.Tactic.Ring.add_pf_add_zero (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 30 + 0)))
+                    (Mathlib.Tactic.Ring.zero_mul (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                    (Mathlib.Tactic.Ring.add_pf_add_zero (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 30 + 0))))
+                (Mathlib.Tactic.Ring.add_pf_add_lt (p.numerator ^ Nat.rawCast 1 * Nat.rawCast 1)
+                  (Mathlib.Tactic.Ring.add_pf_zero_add (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 30 + 0))))
+              (Mathlib.Tactic.Ring.add_mul
+                (Mathlib.Tactic.Ring.mul_add
+                  (Mathlib.Tactic.Ring.mul_pf_right p.numerator (Nat.rawCast 1)
+                    (Mathlib.Tactic.Ring.mul_one (Nat.rawCast 12)))
+                  (Mathlib.Tactic.Ring.mul_add
+                    (Mathlib.Tactic.Ring.mul_pf_right p.denominator (Nat.rawCast 1)
+                      (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                        (Mathlib.Meta.NormNum.isNat_mul (Eq.refl HMul.hMul) (Mathlib.Meta.NormNum.IsNat.of_raw ℕ 12)
+                          (Mathlib.Meta.NormNum.IsNat.of_raw ℕ 30) (Eq.refl 360))))
+                    (Mathlib.Tactic.Ring.mul_zero (Nat.rawCast 12))
+                    (Mathlib.Tactic.Ring.add_pf_add_zero (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 360 + 0)))
+                  (Mathlib.Tactic.Ring.add_pf_add_lt (p.numerator ^ Nat.rawCast 1 * Nat.rawCast 12)
+                    (Mathlib.Tactic.Ring.add_pf_zero_add (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 360 + 0))))
+                (Mathlib.Tactic.Ring.zero_mul
+                  (p.numerator ^ Nat.rawCast 1 * Nat.rawCast 1 + (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 30 + 0)))
+                (Mathlib.Tactic.Ring.add_pf_add_zero
+                  (p.numerator ^ Nat.rawCast 1 * Nat.rawCast 12 +
+                    (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 360 + 0)))))
+            (Mathlib.Tactic.Ring.add_congr
+              (Mathlib.Tactic.Ring.mul_congr
+                (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 12)))
+                (Mathlib.Tactic.Ring.atom_pf p.numerator)
+                (Mathlib.Tactic.Ring.add_mul
+                  (Mathlib.Tactic.Ring.mul_add
+                    (Mathlib.Tactic.Ring.mul_pf_right p.numerator (Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.mul_one (Nat.rawCast 12)))
+                    (Mathlib.Tactic.Ring.mul_zero (Nat.rawCast 12))
+                    (Mathlib.Tactic.Ring.add_pf_add_zero (p.numerator ^ Nat.rawCast 1 * Nat.rawCast 12 + 0)))
+                  (Mathlib.Tactic.Ring.zero_mul (p.numerator ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                  (Mathlib.Tactic.Ring.add_pf_add_zero (p.numerator ^ Nat.rawCast 1 * Nat.rawCast 12 + 0))))
+              (Mathlib.Tactic.Ring.mul_congr
+                (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 360)))
+                (Mathlib.Tactic.Ring.atom_pf p.denominator)
+                (Mathlib.Tactic.Ring.add_mul
+                  (Mathlib.Tactic.Ring.mul_add
+                    (Mathlib.Tactic.Ring.mul_pf_right p.denominator (Nat.rawCast 1)
+                      (Mathlib.Tactic.Ring.mul_one (Nat.rawCast 360)))
+                    (Mathlib.Tactic.Ring.mul_zero (Nat.rawCast 360))
+                    (Mathlib.Tactic.Ring.add_pf_add_zero (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 360 + 0)))
+                  (Mathlib.Tactic.Ring.zero_mul (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))
+                  (Mathlib.Tactic.Ring.add_pf_add_zero (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 360 + 0))))
+              (Mathlib.Tactic.Ring.add_pf_add_lt (p.numerator ^ Nat.rawCast 1 * Nat.rawCast 12)
+                (Mathlib.Tactic.Ring.add_pf_zero_add (p.denominator ^ Nat.rawCast 1 * Nat.rawCast 360 + 0))));
+        Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                _a %
+                      (360 *
+                        { numerator := p.numerator + 30 * p.denominator, denominator := p.denominator,
+                            numerator_pos := IndependentDuodenary.cipherShiftThirty.proof_1 p,
+                            denominator_pos := p.denominator_pos }.denominator) /
+                    { numerator := p.numerator + 30 * p.denominator, denominator := p.denominator,
+                        numerator_pos := IndependentDuodenary.cipherShiftThirty.proof_1 p,
+                        denominator_pos := p.denominator_pos }.denominator =
+                  12 * p.numerator % (360 * p.denominator) / p.denominator)
+              heq))
+          (Eq.mpr
+            (id
+              (congrArg
+                (fun _a =>
+                  _a /
+                      { numerator := p.numerator + 30 * p.denominator, denominator := p.denominator,
+                          numerator_pos := IndependentDuodenary.cipherShiftThirty.proof_1 p,
+                          denominator_pos := p.denominator_pos }.denominator =
+                    12 * p.numerator % (360 * p.denominator) / p.denominator)
+                (Nat.add_mod (12 * p.numerator) (360 * p.denominator)
+                  (360 *
+                    { numerator := p.numerator + 30 * p.denominator, denominator := p.denominator,
+                        numerator_pos := IndependentDuodenary.cipherShiftThirty.proof_1 p,
+                        denominator_pos := p.denominator_pos }.denominator))))
+            (of_eq_true
+              (Eq.trans
+                (congrArg (fun x => x / p.denominator = 12 * p.numerator % (360 * p.denominator) / p.denominator)
+                  (Eq.trans
+                    (congrArg (fun x => x % (360 * p.denominator))
+                      (Eq.trans
+                        (congrArg (HAdd.hAdd (12 * p.numerator % (360 * p.denominator)))
+                          (Nat.mod_self (360 * p.denominator)))
+                        (add_zero (12 * p.numerator % (360 * p.denominator)))))
+                    (Nat.mod_mod_of_dvd (12 * p.numerator)
+                      (of_eq_true (Mathlib.Algebra.Divisibility.Basic._auxLemma.2 (360 * p.denominator))))))
+                (eq_self (12 * p.numerator % (360 * p.denominator) / p.denominator))))))))
+'IndependentDuodenary.cipher_shift_thirty_stage' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES cipher_shift_thirty_stage: [Eq.mpr,
+ NonAssocSemiring.toAddCommMonoidWithOne,
+ IndependentDuodenary.cipherShiftThirty.proof_1,
+ Dvd.dvd,
+ instHDiv,
+ HMul.hMul,
+ Nat.mod_self,
+ IndependentDuodenary.cipherRemainderNumerator,
+ Nat.rawCast,
+ IndependentDuodenary.cipherShiftThirty,
+ Mathlib.Algebra.Divisibility.Basic._auxLemma.2,
+ Mathlib.Tactic.Ring.mul_zero,
+ congrArg,
+ CommSemiring.toSemiring,
+ Nat.instMonoid,
+ Mathlib.Tactic.Ring.mul_pf_right,
+ AddMonoid.toAddZeroClass,
+ semigroupDvd,
+ Mathlib.Tactic.Ring.zero_mul,
+ Mathlib.Meta.NormNum.IsNat.of_raw,
+ Nat.instAddMonoid,
+ Mathlib.Tactic.Ring.instCommSemiringNat,
+ CommSemiring.toCommMonoidWithZero,
+ Monoid.toNatPow,
+ IndependentDuodenary.CipherPeriod.denominator,
+ NonUnitalNonAssocSemiring.toMul,
+ id,
+ Distrib.toAdd,
+ HDiv.hDiv,
+ Nat.instMod,
+ instHMod,
+ IndependentDuodenary.CipherPeriod.denominator_pos,
+ instMulNat,
+ instOfNatNat,
+ AddCommMonoidWithOne.toAddMonoidWithOne,
+ Mathlib.Meta.NormNum.isNat_ofNat,
+ Mathlib.Tactic.Ring.of_eq,
+ Mathlib.Tactic.Ring.add_pf_zero_add,
+ Nat.instAddMonoidWithOne,
+ Mathlib.Tactic.Ring.mul_congr,
+ IndependentDuodenary.CipherPeriod.numerator,
+ Mathlib.Tactic.Ring.add_mul,
+ instHAdd,
+ HMod.hMod,
+ Mathlib.Tactic.Ring.add_pf_add_zero,
+ HPow.hPow,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ NonAssocSemiring.toNonUnitalNonAssocSemiring,
+ Nat.mod_mod_of_dvd,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ Mathlib.Tactic.Ring.mul_one,
+ Nat.instCommSemiring,
+ True,
+ eq_self,
+ Nat.instDiv,
+ Monoid.toSemigroup,
+ Mathlib.Tactic.Ring.add_pf_add_lt,
+ of_eq_true,
+ Mathlib.Meta.NormNum.isNat_mul,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ Zero.toOfNat0,
+ Eq.refl,
+ Nat.add_mod,
+ instHPow,
+ Mathlib.Tactic.Ring.cast_pos,
+ Mathlib.Tactic.Ring.atom_pf,
+ add_zero,
+ OfNat.ofNat,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ letFun,
+ IndependentDuodenary.cipherStage,
+ MonoidWithZero.toMonoid,
+ Mathlib.Tactic.Ring.mul_add,
+ Mathlib.Meta.NormNum.IsNat.to_raw_eq,
+ Eq.trans,
+ Mathlib.Tactic.Ring.add_congr,
+ IndependentDuodenary.CipherPeriod.mk,
+ Semiring.toMonoidWithZero,
+ instHMul]
+theorem IndependentDuodenary.cipher_shift_thirty_output : ∀ (p : IndependentDuodenary.CipherPeriod) (h : ℕ),
+  IndependentDuodenary.cipherCalculate (IndependentDuodenary.cipherShiftThirty p) h =
+    IndependentDuodenary.cipherCalculate p h :=
+fun p h =>
+  IndependentDuodenary.cipher_same_stage (IndependentDuodenary.cipherShiftThirty p) p h
+    (IndependentDuodenary.cipher_shift_thirty_stage p)
+'IndependentDuodenary.cipher_shift_thirty_output' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES cipher_shift_thirty_output: [IndependentDuodenary.cipherShiftThirty,
+ IndependentDuodenary.cipher_shift_thirty_stage,
+ IndependentDuodenary.cipher_same_stage,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ IndependentDuodenary.cipherCalculate,
+ Eq]
+theorem IndependentDuodenary.cipher_shift_thirty_distinct : ∀ (p : IndependentDuodenary.CipherPeriod),
+  IndependentDuodenary.cipherShiftThirty p ≠ p :=
+fun p heq =>
+  let_fun hn := congrArg IndependentDuodenary.CipherPeriod.numerator heq;
+  let_fun hd := p.denominator_pos;
+  id
+    (fun hn =>
+      Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+        (Lean.Omega.tidy_sat
+          (Lean.Omega.combo_sat' { lowerBound := some 0, upperBound := some 0 }
+            { lowerBound := some 1, upperBound := none } (-1) [1, 0] 1 [1]
+            (Lean.Omega.Coeffs.ofList [↑p.denominator, ↑p.numerator])
+            (Lean.Omega.tidy_sat
+              (Lean.Omega.Constraint.addEquality_sat
+                (Eq.trans
+                  (Eq.symm
+                    (Eq.trans
+                      (Lean.Omega.Int.sub_congr
+                        (Eq.trans (Int.ofNat_add p.numerator (30 * p.denominator))
+                          (Eq.trans
+                            (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_1)
+                              (Eq.trans (Int.ofNat_mul 30 p.denominator)
+                                (Eq.trans
+                                  (Lean.Omega.Int.mul_congr (id (Eq.refl ↑30))
+                                    (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0))
+                                  (Eq.symm
+                                    (Lean.Omega.LinearCombo.mul_eval { const := 30, coeffs := [] }
+                                      { const := 0, coeffs := [1] }
+                                      (Lean.Omega.Coeffs.ofList [↑p.denominator, ↑p.numerator])
+                                      (of_decide_eq_true (id (Eq.refl true))))))))
+                            (Eq.symm
+                              (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [0, 1] }
+                                { const := 0, coeffs := [30] }
+                                (Lean.Omega.Coeffs.ofList [↑p.denominator, ↑p.numerator])))))
+                        (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_1))
+                      (Eq.symm
+                        (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [30, 1] }
+                          { const := 0, coeffs := [0, 1] } (Lean.Omega.Coeffs.ofList [↑p.denominator, ↑p.numerator])))))
+                  (Int.sub_eq_zero_of_eq (Lean.Omega.Int.ofNat_congr hn)))))
+            (Lean.Omega.Constraint.addInequality_sat
+              (le_of_le_of_eq (Int.sub_nonneg_of_le (Int.add_one_le_of_lt (Lean.Omega.Int.ofNat_lt_of_lt hd)))
+                (Eq.trans
+                  (Lean.Omega.Int.sub_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0) (id (Eq.refl (↑0 + 1))))
+                  (Eq.symm
+                    (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [1] } { const := 1, coeffs := [] }
+                      (Lean.Omega.Coeffs.ofList [↑p.denominator, ↑p.numerator])))))))))
+    hn
+'IndependentDuodenary.cipher_shift_thirty_distinct' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES cipher_shift_thirty_distinct: [False,
+ Lean.Omega.Constraint.not_sat'_of_isImpossible,
+ HMul.hMul,
+ of_decide_eq_true,
+ IndependentDuodenary.cipherShiftThirty,
+ le_of_le_of_eq,
+ Lean.Omega.Constraint.mk,
+ congrArg,
+ Int.add_one_le_of_lt,
+ HSub.hSub,
+ Lean.Omega.Int.add_congr,
+ Lean.Omega.LinearCombo.eval,
+ Option.some,
+ Lean.Omega.Coeffs.isZero,
+ Int.instDecidableEq,
+ IndependentDuodenary.CipherPeriod.denominator,
+ Lean.Omega.combo_sat',
+ id,
+ instDecidableEqBool,
+ Int.instNegInt,
+ Int.sub_nonneg_of_le,
+ Ne,
+ IndependentDuodenary.CipherPeriod.denominator_pos,
+ instMulNat,
+ instOfNatNat,
+ Int,
+ Lean.Omega.LinearCombo.mul_eval,
+ List.decidableBAll,
+ Nat.cast,
+ Lean.Omega.Int.sub_congr,
+ IndependentDuodenary.CipherPeriod.numerator,
+ List.cons,
+ Lean.Omega.LinearCombo,
+ Int.instMul,
+ Bool.true,
+ Option.none,
+ instHAdd,
+ Lean.Omega.tidy_sat,
+ instHSub,
+ Lean.Omega.LinearCombo.coordinate_eval_0,
+ instOfNat,
+ HAdd.hAdd,
+ Lean.Omega.LinearCombo.mk,
+ Lean.Omega.Coeffs.ofList,
+ Nat,
+ Lean.Omega.Constraint.addEquality_sat,
+ IndependentDuodenary.CipherPeriod,
+ LT.lt,
+ Lean.Omega.LinearCombo.add_eval,
+ Lean.Omega.LinearCombo.sub_eval,
+ Lean.Omega.LinearCombo.coordinate,
+ Bool,
+ Int.instAdd,
+ Lean.Omega.LinearCombo.instAdd,
+ instAddNat,
+ Eq.refl,
+ Lean.Omega.Int.ofNat_lt_of_lt,
+ Int.instSub,
+ Int.ofNat_add,
+ Or,
+ instNatCastInt,
+ instLTNat,
+ Int.ofNat_mul,
+ Lean.Omega.Int.mul_congr,
+ Lean.Omega.Int.ofNat_congr,
+ OfNat.ofNat,
+ Eq.symm,
+ Lean.Omega.Constraint.addInequality_sat,
+ Decidable.decide,
+ Eq,
+ instDecidableOr,
+ Lean.Omega.LinearCombo.mul,
+ Lean.Omega.LinearCombo.instSub,
+ letFun,
+ Neg.neg,
+ Int.instLEInt,
+ Eq.trans,
+ Lean.Omega.Constraint.isImpossible,
+ Int.sub_eq_zero_of_eq,
+ instHMul,
+ List.nil,
+ Lean.Omega.LinearCombo.coordinate_eval_1]
+theorem IndependentDuodenary.cipher_calculate_not_injective : ∀ (h : ℕ),
+  ¬Function.Injective fun p => IndependentDuodenary.cipherCalculate p h :=
+fun h hinj =>
+  let p :=
+    { numerator := 1, denominator := 1, numerator_pos := of_decide_eq_true (id (Eq.refl true)),
+      denominator_pos := of_decide_eq_true (id (Eq.refl true)) };
+  IndependentDuodenary.cipher_shift_thirty_distinct p (hinj (IndependentDuodenary.cipher_shift_thirty_output p h))
+'IndependentDuodenary.cipher_calculate_not_injective' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES cipher_calculate_not_injective: [of_decide_eq_true,
+ IndependentDuodenary.cipherShiftThirty,
+ IndependentDuodenary.cipher_shift_thirty_output,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ IndependentDuodenary.cipherCalculate,
+ LT.lt,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ Function.Injective,
+ instLTNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ Not,
+ IndependentDuodenary.cipher_shift_thirty_distinct,
+ IndependentDuodenary.CipherPeriod.mk]
+theorem IndependentDuodenary.cipher_result_roundtrip : ∀ (r : ZMod 144),
+  IndependentDuodenary.decodeCipherResult (IndependentDuodenary.encodeCipherResult r) = r :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cipher_result_roundtrip' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cipher_result_roundtrip: [IndependentDuodenary.encodeCipherResult,
+ of_decide_eq_true,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.decodeCipherResult,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.cipher_payload_roundtrip : ∀ (c : IndependentDuodenary.CipherPayload),
+  IndependentDuodenary.encodeCipherResult (IndependentDuodenary.decodeCipherResult c) = c :=
+fun c => IndependentDuodenary.CipherPayload.casesOn c fun high low => of_decide_eq_true (id (Eq.refl true)) high low
+'IndependentDuodenary.cipher_payload_roundtrip' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cipher_payload_roundtrip: [IndependentDuodenary.encodeCipherResult,
+ of_decide_eq_true,
+ IndependentDuodenary.CipherPayload,
+ ZMod.fintype,
+ IndependentDuodenary.CipherPayload.casesOn,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.decodeCipherResult,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ IndependentDuodenary.CipherPayload.mk,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.instDecidableEqCipherPayload]
+theorem IndependentDuodenary.cipher_result_encoding_injective : Function.Injective
+  IndependentDuodenary.encodeCipherResult :=
+Equiv.injective IndependentDuodenary.cipherPayloadEquiv
+'IndependentDuodenary.cipher_result_encoding_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cipher_result_encoding_injective: [IndependentDuodenary.encodeCipherResult,
+ IndependentDuodenary.CipherPayload,
+ IndependentDuodenary.cipherPayloadEquiv,
+ instOfNatNat,
+ ZMod,
+ Nat,
+ Equiv.injective,
+ Function.Injective,
+ OfNat.ofNat]
+theorem IndependentDuodenary.cipher_protected_result_recovery : ∀ (result : ZMod 144)
+  (received : IndependentDuodenary.ProtectedStationCode),
+  IndependentDuodenary.wordDistance
+        (IndependentDuodenary.protectStationWire
+            (IndependentDuodenary.cipherPayloadWire (IndependentDuodenary.encodeCipherResult result))).1
+        received.1 ≤
+      1 →
+    IndependentDuodenary.wordDistance
+          (IndependentDuodenary.protectStationWire
+              (IndependentDuodenary.cipherPayloadWire (IndependentDuodenary.encodeCipherResult result))).2
+          received.2 ≤
+        1 →
+      IndependentDuodenary.cipherReceivedResult received = result :=
+fun result received hfirst hsecond =>
+  id
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => IndependentDuodenary.decodeCipherResult { high := _a.1, low := _a.2 } = result)
+          (IndependentDuodenary.protected_station_wire_recovery
+            (IndependentDuodenary.cipherPayloadWire (IndependentDuodenary.encodeCipherResult result)) received hfirst
+            hsecond)))
+      (IndependentDuodenary.cipher_result_roundtrip result))
+'IndependentDuodenary.cipher_protected_result_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cipher_protected_result_recovery: [Eq.mpr,
+ IndependentDuodenary.encodeCipherResult,
+ congrArg,
+ ZMod.decidableEq,
+ IndependentDuodenary.protected_station_wire_recovery,
+ id,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ IndependentDuodenary.recoverStationWire,
+ ZMod,
+ Prod.fst,
+ Fin.fintype,
+ Nat,
+ IndependentDuodenary.cipher_result_roundtrip,
+ IndependentDuodenary.decodeCipherResult,
+ IndependentDuodenary.cipherPayloadWire,
+ IndependentDuodenary.cipherReceivedResult,
+ IndependentDuodenary.CipherPayload.mk,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Prod.snd,
+ IndependentDuodenary.ProtectedStationCode,
+ IndependentDuodenary.protectStationWire,
+ IndependentDuodenary.StationWireCode]
+theorem IndependentDuodenary.cipher_pipeline_protected_recovery : ∀ (p : IndependentDuodenary.CipherPeriod) (h : ℕ)
+  (received : IndependentDuodenary.ProtectedStationCode),
+  IndependentDuodenary.wordDistance
+        (IndependentDuodenary.protectStationWire
+            (IndependentDuodenary.cipherPayloadWire
+              (IndependentDuodenary.encodeCipherResult ↑(IndependentDuodenary.cipherCalculate p h)))).1
+        received.1 ≤
+      1 →
+    IndependentDuodenary.wordDistance
+          (IndependentDuodenary.protectStationWire
+              (IndependentDuodenary.cipherPayloadWire
+                (IndependentDuodenary.encodeCipherResult ↑(IndependentDuodenary.cipherCalculate p h)))).2
+          received.2 ≤
+        1 →
+      IndependentDuodenary.cipherReceivedResult received = ↑(IndependentDuodenary.cipherNormalized p h) :=
+fun p h received hfirst hsecond =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => IndependentDuodenary.cipherReceivedResult received = ↑_a)
+        (Eq.symm (IndependentDuodenary.cipher_pipeline_correct p h))))
+    (IndependentDuodenary.cipher_protected_result_recovery (↑(IndependentDuodenary.cipherCalculate p h)) received hfirst
+      hsecond)
+'IndependentDuodenary.cipher_pipeline_protected_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES cipher_pipeline_protected_recovery: [Semiring.toNatCast,
+ Eq.mpr,
+ IndependentDuodenary.encodeCipherResult,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.cipher_pipeline_correct,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ Nat.cast,
+ ZMod,
+ Prod.fst,
+ Fin.fintype,
+ CommRing.toCommSemiring,
+ Nat,
+ IndependentDuodenary.CipherPeriod,
+ IndependentDuodenary.cipherCalculate,
+ IndependentDuodenary.cipherNormalized,
+ IndependentDuodenary.cipher_protected_result_recovery,
+ IndependentDuodenary.cipherPayloadWire,
+ IndependentDuodenary.cipherReceivedResult,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Eq,
+ Prod.snd,
+ IndependentDuodenary.ProtectedStationCode,
+ IndependentDuodenary.protectStationWire]
+theorem IndependentDuodenary.cipher_eris_fixture : IndependentDuodenary.cipherCalculate
+    (IndependentDuodenary.cipherHundredths 55800 (of_decide_eq_true (id (Eq.refl true)))) 12 =
+  0 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cipher_eris_fixture' does not depend on any axioms
+DIRECT DEPENDENCIES cipher_eris_fixture: [IndependentDuodenary.cipherHundredths,
+ of_decide_eq_true,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ IndependentDuodenary.cipherCalculate,
+ LT.lt,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ instDecidableEqNat,
+ instLTNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.cipher_haumea_fixture : IndependentDuodenary.cipherCalculate
+    (IndependentDuodenary.cipherHundredths 28400 (of_decide_eq_true (id (Eq.refl true)))) 5 =
+  120 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cipher_haumea_fixture' does not depend on any axioms
+DIRECT DEPENDENCIES cipher_haumea_fixture: [IndependentDuodenary.cipherHundredths,
+ of_decide_eq_true,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ IndependentDuodenary.cipherCalculate,
+ LT.lt,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ instDecidableEqNat,
+ instLTNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.cipher_makemake_fixture : IndependentDuodenary.cipherCalculate
+    (IndependentDuodenary.cipherHundredths 30604 (of_decide_eq_true (id (Eq.refl true)))) 5 =
+  72 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cipher_makemake_fixture' does not depend on any axioms
+DIRECT DEPENDENCIES cipher_makemake_fixture: [IndependentDuodenary.cipherHundredths,
+ of_decide_eq_true,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ IndependentDuodenary.cipherCalculate,
+ LT.lt,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ instDecidableEqNat,
+ instLTNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.cipher_gonggong_fixture : IndependentDuodenary.cipherCalculate
+    (IndependentDuodenary.cipherHundredths 55287 (of_decide_eq_true (id (Eq.refl true)))) 5 =
+  50 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cipher_gonggong_fixture' does not depend on any axioms
+DIRECT DEPENDENCIES cipher_gonggong_fixture: [IndependentDuodenary.cipherHundredths,
+ of_decide_eq_true,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ IndependentDuodenary.cipherCalculate,
+ LT.lt,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ instDecidableEqNat,
+ instLTNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
+theorem IndependentDuodenary.cipher_orcus_fixture : IndependentDuodenary.cipherCalculate
+    (IndependentDuodenary.cipherHundredths 24753 (of_decide_eq_true (id (Eq.refl true)))) 5 =
+  18 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.cipher_orcus_fixture' does not depend on any axioms
+DIRECT DEPENDENCIES cipher_orcus_fixture: [IndependentDuodenary.cipherHundredths,
+ of_decide_eq_true,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ IndependentDuodenary.cipherCalculate,
+ LT.lt,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ instDecidableEqNat,
+ instLTNat,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq]
 theorem IndependentDuodenary.semantic_decoder_no_collision.{u_1, u_2} : ∀ {L : Type u_1} {S : Type u_2} (r : Setoid L)
   (encode : L → S) (decode : S → Quotient r),
   (∀ (x : L), decode (encode x) = ⟦x⟧) → ∀ (x y : L), encode x = encode y → r x y :=
@@ -12182,4 +12980,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 191 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 211 theorem declarations; only standard Lean axioms permitted.

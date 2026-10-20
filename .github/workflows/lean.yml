@@ -24,5 +24,9 @@ jobs:
         run: python3 scripts/audit.py
       - name: Run station codec walkthrough
         run: lake env lean examples/StationWalkthrough.lean
+      - name: Run sourced cipher walkthrough
+        run: lake env lean examples/CipherWalkthrough.lean
+      - name: Check JavaScript cipher fixtures
+        run: node scripts/cipher-fixtures.mjs
       - name: Ensure dependency lockfile stayed unchanged
         run: git diff --exit-code -- lake-manifest.json lean-toolchain

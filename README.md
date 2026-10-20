@@ -26,6 +26,9 @@ No predecessor project is a source or dependency.
   permutation semantics, exact encoding/decoding on semantic classes, wire
   composition and inverse, and bounded-error recovery. See the
   [worked grammar and codec](verification/STATION_CODEC.md).
+- `CipherValidator`: exact arithmetic semantics for the supplied Mod-144
+  calculator, periodicity and information-loss proofs, and protected result
+  transport. See [source rules and proof boundaries](verification/CIPHER_VALIDATOR.md).
 - `MappingBoundary`: an explicit internal map from natural addition to modular
   addition; a general image-closure theorem **assuming** operation preservation;
   and a level-return statement **assuming** the stated level and step values.

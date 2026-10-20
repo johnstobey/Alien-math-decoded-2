@@ -1,0 +1,4 @@
+("period-harmonic-result", [(55800, 12, 0), (28400, 5, 120), (30604, 5, 72), (55287, 5, 50), (24753, 5, 18)])
+("haumea-payload", 10, 0)
+("recovered-result", 120)
+("thirty-year-shift", 0)

@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 191 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 211 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -583,6 +583,309 @@ Proof method: Specialization of weightLayer_card and kernel-checked computation.
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES zero_bits_count` and the printed proof in the machine-generated audit.
+
+## `cipher_stage_normal_form`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_stage_normal_form (p : CipherPeriod) :
+    cipherStage p = (12 * p.numerator / p.denominator) % 360
+```
+
+Proof method: Natural-number remainder/division identity Nat.mod_mul_left_div_self.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_stage_normal_form` and the printed proof in the machine-generated audit.
+
+## `cipher_pipeline_correct`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_pipeline_correct (p : CipherPeriod) (h : ℕ) :
+    cipherCalculate p h = cipherNormalized p h
+```
+
+Proof method: Substitute the proved stage normal form into both implementations.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_pipeline_correct` and the printed proof in the machine-generated audit.
+
+## `cipher_stage_bound`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_stage_bound (p : CipherPeriod) : cipherStage p < 360
+```
+
+Proof method: Stage normal form and the strict natural remainder bound.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_stage_bound` and the printed proof in the machine-generated audit.
+
+## `cipher_output_bound`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_output_bound (p : CipherPeriod) (h : ℕ) :
+    cipherCalculate p h < 144
+```
+
+Proof method: Strict natural remainder bound modulo 144.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_output_bound` and the printed proof in the machine-generated audit.
+
+## `cipher_zero_iff_divides`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_zero_iff_divides (p : CipherPeriod) (h : ℕ) :
+    cipherCalculate p h = 0 ↔ 144 ∣ cipherStage p * h
+```
+
+Proof method: Natural divisibility is equivalent to zero remainder.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_zero_iff_divides` and the printed proof in the machine-generated audit.
+
+## `cipher_same_stage`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_same_stage (p q : CipherPeriod) (h : ℕ)
+    (heq : cipherStage p = cipherStage q) :
+    cipherCalculate p h = cipherCalculate q h
+```
+
+Proof method: Substitution into the calculation definition.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_same_stage` and the printed proof in the machine-generated audit.
+
+## `cipher_shift_thirty_stage`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_shift_thirty_stage (p : CipherPeriod) :
+    cipherStage (cipherShiftThirty p) = cipherStage p
+```
+
+Proof method: Distribute multiplication and remove one full remainder modulus.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_shift_thirty_stage` and the printed proof in the machine-generated audit.
+
+## `cipher_shift_thirty_output`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_shift_thirty_output (p : CipherPeriod) (h : ℕ) :
+    cipherCalculate (cipherShiftThirty p) h = cipherCalculate p h
+```
+
+Proof method: Apply cipher_same_stage to the thirty-year stage identity.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_shift_thirty_output` and the printed proof in the machine-generated audit.
+
+## `cipher_shift_thirty_distinct`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_shift_thirty_distinct (p : CipherPeriod) :
+    cipherShiftThirty p ≠ p
+```
+
+Proof method: Project to the numerator; positive denominator makes the increase nonzero.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_shift_thirty_distinct` and the printed proof in the machine-generated audit.
+
+## `cipher_calculate_not_injective`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_calculate_not_injective (h : ℕ) :
+    ¬ Function.Injective (fun p : CipherPeriod => cipherCalculate p h)
+```
+
+Proof method: The distinct thirty-year-shifted input has the same calculated output.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_calculate_not_injective` and the printed proof in the machine-generated audit.
+
+## `cipher_result_roundtrip`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_result_roundtrip : ∀ r : ZMod 144,
+    decodeCipherResult (encodeCipherResult r) = r
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_result_roundtrip` and the printed proof in the machine-generated audit.
+
+## `cipher_payload_roundtrip`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_payload_roundtrip (c : CipherPayload) :
+    encodeCipherResult (decodeCipherResult c) = c
+```
+
+Proof method: Destructure the payload and kernel-check all finite digit pairs.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_payload_roundtrip` and the printed proof in the machine-generated audit.
+
+## `cipher_result_encoding_injective`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_result_encoding_injective : Function.Injective encodeCipherResult
+```
+
+Proof method: Injectivity of the explicitly proved payload equivalence.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_result_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `cipher_protected_result_recovery`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_protected_result_recovery (result : ZMod 144) (received : ProtectedStationCode)
+    (hfirst : wordDistance (protectStationWire (cipherPayloadWire (encodeCipherResult result))).1
+      received.1 ≤ 1)
+    (hsecond : wordDistance (protectStationWire (cipherPayloadWire (encodeCipherResult result))).2
+      received.2 ≤ 1) :
+    cipherReceivedResult received = result
+```
+
+Proof method: Recover both repeated digits, then apply the result codec round trip.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_protected_result_recovery` and the printed proof in the machine-generated audit.
+
+## `cipher_pipeline_protected_recovery`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_pipeline_protected_recovery (p : CipherPeriod) (h : ℕ)
+    (received : ProtectedStationCode)
+    (hfirst : wordDistance (protectStationWire (cipherPayloadWire
+      (encodeCipherResult (cipherCalculate p h : ZMod 144)))).1 received.1 ≤ 1)
+    (hsecond : wordDistance (protectStationWire (cipherPayloadWire
+      (encodeCipherResult (cipherCalculate p h : ZMod 144)))).2 received.2 ≤ 1) :
+    cipherReceivedResult received = (cipherNormalized p h : ZMod 144)
+```
+
+Proof method: Rewrite normalized output by pipeline correctness and apply protected result recovery.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_pipeline_protected_recovery` and the printed proof in the machine-generated audit.
+
+## `cipher_eris_fixture`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_eris_fixture : cipherCalculate (cipherHundredths 55800 (by decide)) 12 = 0
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_eris_fixture` and the printed proof in the machine-generated audit.
+
+## `cipher_haumea_fixture`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_haumea_fixture : cipherCalculate (cipherHundredths 28400 (by decide)) 5 = 120
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_haumea_fixture` and the printed proof in the machine-generated audit.
+
+## `cipher_makemake_fixture`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_makemake_fixture : cipherCalculate (cipherHundredths 30604 (by decide)) 5 = 72
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_makemake_fixture` and the printed proof in the machine-generated audit.
+
+## `cipher_gonggong_fixture`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_gonggong_fixture : cipherCalculate (cipherHundredths 55287 (by decide)) 5 = 50
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_gonggong_fixture` and the printed proof in the machine-generated audit.
+
+## `cipher_orcus_fixture`
+
+Source: `IndependentDuodenary/CipherValidator.lean`. Compilation: **passed**.
+
+```lean
+theorem cipher_orcus_fixture : cipherCalculate (cipherHundredths 24753 (by decide)) 5 = 18
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES cipher_orcus_fixture` and the printed proof in the machine-generated audit.
 
 ## `semantic_decoder_no_collision`
 

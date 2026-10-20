@@ -1,0 +1,5 @@
+{"period":558,"harmonic":12,"result":0}
+{"period":284,"harmonic":5,"result":120}
+{"period":306.04,"harmonic":5,"result":72}
+{"period":552.87,"harmonic":5,"result":50}
+{"period":247.53,"harmonic":5,"result":18}
