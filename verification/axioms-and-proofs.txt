@@ -8399,6 +8399,607 @@ DIRECT DEPENDENCIES pipeline_empty_transmission_rejected: [IndependentDuodenary.
  rfl,
  List.nil,
  Option]
+theorem IndependentDuodenary.reference_accept_reject_distinct : ∀ {s : ℕ}, 0 ≠ 1 :=
+fun {s} h =>
+  let_fun this := congrArg Fin.val h;
+  False.elim (Eq.mp Mathlib.Algebra.NeZero._auxLemma.2 this)
+'IndependentDuodenary.reference_accept_reject_distinct' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_accept_reject_distinct: [False,
+ congrArg,
+ False.elim,
+ Eq.mp,
+ Nat.instCanonicallyOrderedCommSemiring,
+ Fin.instOfNat,
+ Ne,
+ instOfNatNat,
+ Fin.val,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ instHAdd,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ One.toOfNat1,
+ instAddNat,
+ Zero.toOfNat0,
+ Nat.instLinearOrderedCommMonoidWithZero,
+ LinearOrderedCommMonoidWithZero.toZero,
+ OfNat.ofNat,
+ Fin,
+ CanonicallyOrderedCommSemiring.toOne,
+ Eq,
+ letFun]
+theorem IndependentDuodenary.reference_initial_heads : ∀ {a s k : ℕ} (state : Fin (s + 2))
+  (x : IndependentDuodenary.PrizeBinaryWord) (i : Fin (k + 1)),
+  (IndependentDuodenary.referenceInitial state x).head i = 0 :=
+fun {a s k} state x i => rfl
+'IndependentDuodenary.reference_initial_heads' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_initial_heads: [instOfNatNat,
+ Int,
+ instHAdd,
+ IndependentDuodenary.referenceInitial,
+ instOfNat,
+ HAdd.hAdd,
+ Nat,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ instAddNat,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.PrizeBinaryWord,
+ rfl]
+theorem IndependentDuodenary.reference_initial_negative_blank : ∀ {a s k : ℕ} (state : Fin (s + 2))
+  (x : IndependentDuodenary.PrizeBinaryWord) (i : Fin (k + 1)),
+  ∀ j < 0, (IndependentDuodenary.referenceInitial state x).tape i j = 0 :=
+fun {a s k} state x i j hj =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = 0)
+        (ite_cond_eq_false
+          (match x[j.toNat]? with
+          | none => 0
+          | some b => if b = true then 2 else 1)
+          0 (Eq.trans (congrArg (And (i = 0)) (eq_false (not_le.mpr hj))) (and_false (i = 0)))))
+      (eq_self 0))
+'IndependentDuodenary.reference_initial_negative_blank' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_initial_negative_blank: [instGetElem?OfGetElemOfDecidable,
+ not_le,
+ Iff.mpr,
+ False,
+ Preorder.toLT,
+ eq_false,
+ IndependentDuodenary.referenceInitial.match_1,
+ congrArg,
+ Int.instLinearOrder,
+ PartialOrder.toPreorder,
+ instDecidableEqFin,
+ Int.decLe,
+ Preorder.toLE,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ instOfNatNat,
+ Int,
+ LE.le,
+ Int.instLTInt,
+ Bool.true,
+ List,
+ instHAdd,
+ IndependentDuodenary.referenceInitial,
+ And,
+ Unit,
+ instOfNat,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ LT.lt,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ Nat.decLt,
+ IndependentDuodenary.referenceInitial.proof_1,
+ instAddNat,
+ Int.toNat,
+ and_false,
+ instLTNat,
+ instDecidableAnd,
+ GetElem?.getElem?,
+ List.instGetElemNatLtLength,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ LinearOrder.toPartialOrder,
+ Eq,
+ List.length,
+ IndependentDuodenary.PrizeBinaryWord,
+ Not,
+ Int.instLEInt,
+ Eq.trans,
+ Option,
+ ite]
+theorem IndependentDuodenary.reference_initial_other_tape_blank : ∀ {a s k : ℕ} (state : Fin (s + 2))
+  (x : IndependentDuodenary.PrizeBinaryWord) (i : Fin (k + 1)),
+  i ≠ 0 → ∀ (j : ℤ), (IndependentDuodenary.referenceInitial state x).tape i j = 0 :=
+fun {a s k} state x i hi j =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = 0)
+        (ite_cond_eq_false
+          (match x[j.toNat]? with
+          | none => 0
+          | some b => if b = true then 2 else 1)
+          0 (Eq.trans (congrArg (fun x => x ∧ 0 ≤ j) (eq_false hi)) (false_and (0 ≤ j)))))
+      (eq_self 0))
+'IndependentDuodenary.reference_initial_other_tape_blank' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_initial_other_tape_blank: [instGetElem?OfGetElemOfDecidable,
+ False,
+ eq_false,
+ IndependentDuodenary.referenceInitial.match_1,
+ congrArg,
+ instDecidableEqFin,
+ false_and,
+ Int.decLe,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ Ne,
+ instOfNatNat,
+ Int,
+ LE.le,
+ Bool.true,
+ List,
+ instHAdd,
+ IndependentDuodenary.referenceInitial,
+ And,
+ Unit,
+ instOfNat,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ LT.lt,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ Nat.decLt,
+ IndependentDuodenary.referenceInitial.proof_1,
+ instAddNat,
+ Int.toNat,
+ instLTNat,
+ instDecidableAnd,
+ GetElem?.getElem?,
+ List.instGetElemNatLtLength,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ Eq,
+ List.length,
+ IndependentDuodenary.PrizeBinaryWord,
+ Int.instLEInt,
+ Eq.trans,
+ Option,
+ ite]
+theorem IndependentDuodenary.reference_initial_empty_blank : ∀ {a s k : ℕ} (state : Fin (s + 2)) (i : Fin (k + 1))
+  (j : ℤ), (IndependentDuodenary.referenceInitial state []).tape i j = 0 :=
+fun {a s k} state i j =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => { state := state, head := fun x => 0, tape := x }.tape i j = 0)
+        (funext fun i =>
+          funext fun j =>
+            Eq.trans (ite_congr (Eq.refl (i = 0 ∧ 0 ≤ j)) (fun a_1 => Eq.refl 0) fun a_1 => Eq.refl 0) (ite_self 0)))
+      (eq_self 0))
+'IndependentDuodenary.reference_initial_empty_blank' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reference_initial_empty_blank: [instGetElem?OfGetElemOfDecidable,
+ IndependentDuodenary.referenceInitial.match_1,
+ congrArg,
+ ite_self,
+ instDecidableEqFin,
+ Int.decLe,
+ Fin.instOfNat,
+ instDecidableEqBool,
+ instOfNatNat,
+ Int,
+ LE.le,
+ Bool.true,
+ funext,
+ List,
+ instHAdd,
+ IndependentDuodenary.referenceInitial,
+ And,
+ Unit,
+ instOfNat,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.ReferenceConfiguration.mk,
+ LT.lt,
+ True,
+ eq_self,
+ Bool,
+ of_eq_true,
+ Nat.decLt,
+ IndependentDuodenary.referenceInitial.proof_1,
+ instAddNat,
+ Eq.refl,
+ Int.toNat,
+ instLTNat,
+ instDecidableAnd,
+ GetElem?.getElem?,
+ List.instGetElemNatLtLength,
+ ite_congr,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ List.length,
+ IndependentDuodenary.PrizeBinaryWord,
+ Not,
+ Int.instLEInt,
+ Eq.trans,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.reference_write_at_head : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k)
+  (instruction : IndependentDuodenary.ReferenceInstruction a s k) (i : Fin (k + 1)),
+  (IndependentDuodenary.referenceApply q instruction).tape i (q.head i) = instruction.write i :=
+fun {a s k} q instruction i =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = instruction.write i)
+        (ite_cond_eq_true (instruction.write i) (q.tape i (q.head i)) (eq_self (q.head i))))
+      (eq_self (instruction.write i)))
+'IndependentDuodenary.reference_write_at_head' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_write_at_head: [IndependentDuodenary.referenceApply,
+ congrArg,
+ IndependentDuodenary.ReferenceInstruction.write,
+ Int.instDecidableEq,
+ instOfNatNat,
+ Int,
+ ite_cond_eq_true,
+ instHAdd,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat,
+ True,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ of_eq_true,
+ instAddNat,
+ IndependentDuodenary.ReferenceInstruction,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.reference_write_other_cell : ∀ {a s k : ℕ}
+  (q : IndependentDuodenary.ReferenceConfiguration a s k)
+  (instruction : IndependentDuodenary.ReferenceInstruction a s k) (i : Fin (k + 1)) (j : ℤ),
+  j ≠ q.head i → (IndependentDuodenary.referenceApply q instruction).tape i j = q.tape i j :=
+fun {a s k} q instruction i j hj =>
+  of_eq_true
+    (Eq.trans (congrArg (fun x => x = q.tape i j) (ite_cond_eq_false (instruction.write i) (q.tape i j) (eq_false hj)))
+      (eq_self (q.tape i j)))
+'IndependentDuodenary.reference_write_other_cell' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_write_other_cell: [IndependentDuodenary.referenceApply,
+ eq_false,
+ congrArg,
+ IndependentDuodenary.ReferenceInstruction.write,
+ Int.instDecidableEq,
+ Ne,
+ instOfNatNat,
+ Int,
+ instHAdd,
+ IndependentDuodenary.ReferenceConfiguration,
+ HAdd.hAdd,
+ IndependentDuodenary.ReferenceConfiguration.tape,
+ Nat,
+ True,
+ eq_self,
+ IndependentDuodenary.ReferenceConfiguration.head,
+ of_eq_true,
+ instAddNat,
+ IndependentDuodenary.ReferenceInstruction,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ Eq,
+ Eq.trans,
+ ite]
+theorem IndependentDuodenary.reference_dstep_none_iff : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k)
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  IndependentDuodenary.referenceDStep M q = none ↔ IndependentDuodenary.referenceTerminal q :=
+fun {a s k} M q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x ↔ IndependentDuodenary.referenceTerminal q)
+        (Eq.trans Init.PropLemmas._auxLemma.65
+          (Eq.trans
+            (Eq.trans
+              (implies_congr (Eq.refl ¬IndependentDuodenary.referenceTerminal q)
+                (eq_false' fun h => Option.noConfusion h))
+              Init.Core._auxLemma.5)
+            Init.PropLemmas._auxLemma.52)))
+      (iff_self (IndependentDuodenary.referenceTerminal q)))
+'IndependentDuodenary.reference_dstep_none_iff' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_dstep_none_iff: [IndependentDuodenary.referenceApply,
+ IndependentDuodenary.instDecidableReferenceTerminal,
+ False,
+ IndependentDuodenary.referenceTerminal,
+ Option.noConfusion,
+ congrArg,
+ Option.some,
+ IndependentDuodenary.referenceRead,
+ iff_self,
+ Init.PropLemmas._auxLemma.52,
+ IndependentDuodenary.referenceDStep,
+ Option.none,
+ Iff,
+ Init.PropLemmas._auxLemma.65,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ IndependentDuodenary.ReferenceDeterministicMachine.transition,
+ implies_congr,
+ Nat,
+ Init.Core._auxLemma.5,
+ True,
+ of_eq_true,
+ Eq.refl,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ eq_false',
+ Eq,
+ Not,
+ Eq.trans,
+ Option,
+ ite]
+theorem IndependentDuodenary.reference_deterministic_transition : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceDeterministicMachine a s k)
+  (q q₁ q₂ : IndependentDuodenary.ReferenceConfiguration a s k),
+  IndependentDuodenary.referenceDEdge M q q₁ → IndependentDuodenary.referenceDEdge M q q₂ → q₁ = q₂ :=
+fun {a s k} M q q₁ q₂ h₁ h₂ => Option.some.inj (Eq.trans (Eq.symm h₁) h₂)
+'IndependentDuodenary.reference_deterministic_transition' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_deterministic_transition: [Option.some,
+ Option.some.inj,
+ IndependentDuodenary.referenceDStep,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceDeterministicMachine,
+ Nat,
+ Eq.symm,
+ Eq,
+ Eq.trans,
+ IndependentDuodenary.referenceDEdge,
+ Option]
+theorem IndependentDuodenary.reference_nondeterministic_finite_branching : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceNondeterministicMachine a s k)
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  ∃ successors,
+    ∀ (q' : IndependentDuodenary.ReferenceConfiguration a s k),
+      IndependentDuodenary.referenceNEdge M q q' ↔ q' ∈ successors :=
+fun {a s k} M q => Exists.intro (IndependentDuodenary.referenceNSuccessors M q) fun x => Iff.rfl
+'IndependentDuodenary.reference_nondeterministic_finite_branching' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_nondeterministic_finite_branching: [Iff.rfl,
+ Membership.mem,
+ Exists,
+ List,
+ Iff,
+ IndependentDuodenary.referenceNEdge,
+ List.instMembership,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceNondeterministicMachine,
+ Nat,
+ Exists.intro,
+ IndependentDuodenary.referenceNSuccessors]
+theorem IndependentDuodenary.reference_terminal_no_nstep : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceNondeterministicMachine a s k)
+  (q q' : IndependentDuodenary.ReferenceConfiguration a s k),
+  IndependentDuodenary.referenceTerminal q → ¬IndependentDuodenary.referenceNEdge M q q' :=
+fun {a s k} M q q' halt =>
+  of_eq_true
+    (Eq.trans
+      (congrArg Not
+        (Eq.trans
+          (congrArg (fun x => q' ∈ x)
+            (ite_cond_eq_true []
+              (List.map (IndependentDuodenary.referenceApply q)
+                (M.first q.state (IndependentDuodenary.referenceRead q) ::
+                  M.rest q.state (IndependentDuodenary.referenceRead q)))
+              (eq_true halt)))
+          (Init.Data.List.Lemmas._auxLemma.15 q')))
+      not_false_eq_true)
+'IndependentDuodenary.reference_terminal_no_nstep' depends on axioms: [propext]
+DIRECT DEPENDENCIES reference_terminal_no_nstep: [IndependentDuodenary.referenceApply,
+ IndependentDuodenary.instDecidableReferenceTerminal,
+ False,
+ IndependentDuodenary.referenceTerminal,
+ congrArg,
+ List.map,
+ IndependentDuodenary.ReferenceNondeterministicMachine.first,
+ Membership.mem,
+ Init.Data.List.Lemmas._auxLemma.15,
+ IndependentDuodenary.referenceRead,
+ ite_cond_eq_true,
+ List.cons,
+ List,
+ IndependentDuodenary.referenceNEdge,
+ List.instMembership,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceNondeterministicMachine,
+ IndependentDuodenary.ReferenceNondeterministicMachine.rest,
+ Nat,
+ True,
+ eq_true,
+ of_eq_true,
+ IndependentDuodenary.ReferenceInstruction,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ not_false_eq_true,
+ Not,
+ Eq.trans,
+ List.nil,
+ ite]
+theorem IndependentDuodenary.reference_nonterminal_has_nstep : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceNondeterministicMachine a s k)
+  (q : IndependentDuodenary.ReferenceConfiguration a s k),
+  ¬IndependentDuodenary.referenceTerminal q → ∃ q', IndependentDuodenary.referenceNEdge M q q' :=
+fun {a s k} M q halt =>
+  Exists.intro (IndependentDuodenary.referenceApply q (M.first q.state (IndependentDuodenary.referenceRead q)))
+    (of_eq_true
+      (Eq.trans
+        (Eq.trans
+          (congrArg
+            (fun x =>
+              IndependentDuodenary.referenceApply q (M.first q.state (IndependentDuodenary.referenceRead q)) ∈ x)
+            (ite_cond_eq_false []
+              (List.map (IndependentDuodenary.referenceApply q)
+                (M.first q.state (IndependentDuodenary.referenceRead q) ::
+                  M.rest q.state (IndependentDuodenary.referenceRead q)))
+              (eq_false halt)))
+          Init.Data.List.Lemmas._auxLemma.16)
+        (Eq.trans
+          (congr
+            (congrArg Or
+              (eq_self
+                (IndependentDuodenary.referenceApply q (M.first q.state (IndependentDuodenary.referenceRead q)))))
+            Init.Data.List.Lemmas._auxLemma.41)
+          (true_or
+            (∃ a_1 ∈ M.rest q.state (IndependentDuodenary.referenceRead q),
+              IndependentDuodenary.referenceApply q a_1 =
+                IndependentDuodenary.referenceApply q (M.first q.state (IndependentDuodenary.referenceRead q)))))))
+'IndependentDuodenary.reference_nonterminal_has_nstep' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reference_nonterminal_has_nstep: [IndependentDuodenary.referenceApply,
+ IndependentDuodenary.instDecidableReferenceTerminal,
+ IndependentDuodenary.referenceTerminal,
+ eq_false,
+ congrArg,
+ true_or,
+ List.map,
+ IndependentDuodenary.ReferenceNondeterministicMachine.first,
+ Membership.mem,
+ Exists,
+ IndependentDuodenary.referenceRead,
+ Init.Data.List.Lemmas._auxLemma.16,
+ List.cons,
+ List,
+ And,
+ IndependentDuodenary.referenceNEdge,
+ List.instMembership,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceNondeterministicMachine,
+ IndependentDuodenary.ReferenceNondeterministicMachine.rest,
+ Nat,
+ congr,
+ True,
+ Init.Data.List.Lemmas._auxLemma.41,
+ eq_self,
+ Exists.intro,
+ of_eq_true,
+ IndependentDuodenary.ReferenceInstruction,
+ Or,
+ IndependentDuodenary.ReferenceConfiguration.state,
+ ite_cond_eq_false,
+ Eq,
+ Not,
+ Eq.trans,
+ List.nil,
+ ite]
+theorem IndependentDuodenary.reference_nbranch_bound_forces_terminal : ∀ {a s k : ℕ}
+  (M : IndependentDuodenary.ReferenceNondeterministicMachine a s k)
+  (initial : IndependentDuodenary.ReferenceConfiguration a s k) (bound : ℕ),
+  (∀ (t : ℕ) (q : IndependentDuodenary.ReferenceConfiguration a s k),
+      IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceNEdge M) t initial q → t ≤ bound) →
+    ∀ (q : IndependentDuodenary.ReferenceConfiguration a s k),
+      IndependentDuodenary.ReferenceRun (IndependentDuodenary.referenceNEdge M) bound initial q →
+        IndependentDuodenary.referenceTerminal q :=
+fun {a s k} M initial bound bounded q run =>
+  Decidable.byContradiction fun halt =>
+    Exists.casesOn (IndependentDuodenary.reference_nonterminal_has_nstep M q halt) fun q' step =>
+      let_fun h := bounded (bound + 1) q' (IndependentDuodenary.ReferenceRun.next run step);
+      Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+        (Lean.Omega.tidy_sat
+          (Lean.Omega.Constraint.addInequality_sat
+            (le_of_le_of_eq (Int.sub_nonneg_of_le (Lean.Omega.Int.ofNat_le_of_le h))
+              (Eq.trans
+                (Lean.Omega.Int.sub_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0)
+                  (Eq.trans (Int.ofNat_add bound 1)
+                    (Eq.trans
+                      (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0) (id (Eq.refl ↑1)))
+                      (Eq.symm
+                        (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [1] } { const := 1, coeffs := [] }
+                          (Lean.Omega.Coeffs.ofList [↑bound]))))))
+                (Eq.symm
+                  (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [1] } { const := 1, coeffs := [1] }
+                    (Lean.Omega.Coeffs.ofList [↑bound])))))))
+'IndependentDuodenary.reference_nbranch_bound_forces_terminal' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES reference_nbranch_bound_forces_terminal: [IndependentDuodenary.instDecidableReferenceTerminal,
+ False,
+ Lean.Omega.Constraint.not_sat'_of_isImpossible,
+ IndependentDuodenary.referenceTerminal,
+ of_decide_eq_true,
+ le_of_le_of_eq,
+ Lean.Omega.Constraint.mk,
+ HSub.hSub,
+ Lean.Omega.Int.add_congr,
+ Lean.Omega.LinearCombo.eval,
+ Option.some,
+ Exists,
+ id,
+ instDecidableEqBool,
+ Int.instNegInt,
+ Int.sub_nonneg_of_le,
+ instOfNatNat,
+ Int,
+ LE.le,
+ instLENat,
+ Nat.cast,
+ Lean.Omega.Int.sub_congr,
+ List.cons,
+ Lean.Omega.LinearCombo,
+ IndependentDuodenary.ReferenceRun.next,
+ Bool.true,
+ Option.none,
+ instHAdd,
+ Lean.Omega.tidy_sat,
+ IndependentDuodenary.referenceNEdge,
+ instHSub,
+ Exists.casesOn,
+ Lean.Omega.LinearCombo.coordinate_eval_0,
+ IndependentDuodenary.ReferenceConfiguration,
+ IndependentDuodenary.ReferenceNondeterministicMachine,
+ instOfNat,
+ HAdd.hAdd,
+ Lean.Omega.LinearCombo.mk,
+ Lean.Omega.Coeffs.ofList,
+ Nat,
+ Lean.Omega.LinearCombo.add_eval,
+ Lean.Omega.LinearCombo.sub_eval,
+ Lean.Omega.LinearCombo.coordinate,
+ Decidable.byContradiction,
+ Bool,
+ Int.instAdd,
+ Lean.Omega.LinearCombo.instAdd,
+ instAddNat,
+ Eq.refl,
+ Int.instSub,
+ Int.ofNat_add,
+ Lean.Omega.Int.ofNat_le_of_le,
+ instNatCastInt,
+ IndependentDuodenary.ReferenceRun,
+ OfNat.ofNat,
+ Eq.symm,
+ Lean.Omega.Constraint.addInequality_sat,
+ Decidable.decide,
+ Eq,
+ Lean.Omega.LinearCombo.instSub,
+ Not,
+ letFun,
+ Neg.neg,
+ Int.instLEInt,
+ Eq.trans,
+ Lean.Omega.Constraint.isImpossible,
+ List.nil,
+ IndependentDuodenary.reference_nonterminal_has_nstep]
 theorem IndependentDuodenary.register_decode_encode : ∀ (r : ℕ) (q : IndependentDuodenary.RegisterState r),
   IndependentDuodenary.decodeRegisterWords r (IndependentDuodenary.encodeRegisterState q) = some q :=
 fun r q =>
@@ -23103,4 +23704,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 373 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 386 theorem declarations; only standard Lean axioms permitted.

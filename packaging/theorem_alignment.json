@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "count": 373,
+  "count": 386,
   "audit_evidence": "verification/axioms-and-proofs.txt",
   "theorems": [
     {
@@ -1170,6 +1170,97 @@
       "module": "PipelineSynthesis",
       "source": "IndependentDuodenary/PipelineSynthesis.lean",
       "line": 85,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_accept_reject_distinct",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 107,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_initial_heads",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 112,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_initial_negative_blank",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 116,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_initial_other_tape_blank",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 121,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_initial_empty_blank",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 126,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_write_at_head",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 131,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_write_other_cell",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 136,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_dstep_none_iff",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 142,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_deterministic_transition",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 146,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_nondeterministic_finite_branching",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 151,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_terminal_no_nstep",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 157,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_nonterminal_has_nstep",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 162,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reference_nbranch_bound_forces_terminal",
+      "module": "ReferenceMachines",
+      "source": "IndependentDuodenary/ReferenceMachines.lean",
+      "line": 168,
       "external_prize_implication_established": false
     },
     {

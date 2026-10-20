@@ -116,7 +116,9 @@ packet from its archived revision; current research has its own audit index.
 expands the four missing complexity bridges into 77 explicit obligations and
 an acyclic dependency graph. Five initial encoding facts are checked as unnamed
 Lean examples. Nineteen named parser and halting theorems additionally close
-obligations 1.10–1.12; the library now has 373 named declarations. Eight of 77
-atomic obligations are discharged, with 69 open. See the
+obligations 1.10–1.12; a subsequent reference-machine module adds 13 more, for 386 named declarations.
+Twelve of 77 atomic obligations are completed, with 65 open. The latest four
+completed entries supply definitions, not compiler or complexity-equivalence
+proofs. See the [complete execution ledger](verification/CLOSURE_EXECUTION.md). See the
 [parser and halting report](verification/COMPLEXITY_ENCODING.md). The general SAT reduction
 and polynomial-time machine proof remain absent.

@@ -81,6 +81,13 @@ jobs:
             lake env lean "$proof_file" 2>&1 | tee .lake/search-boundary-check.log
             test ! -s .lake/search-boundary-check.log
           done
+      - name: Verify reference-machine definitions and boundaries
+        run: |
+          for proof_file in IndependentDuodenary/ReferenceMachines.lean examples/ReferenceMachinesBoundary.lean
+          do
+            lake env lean "$proof_file" 2>&1 | tee .lake/reference-machine-check.log
+            test ! -s .lake/reference-machine-check.log
+          done
       - name: Verify total parsers and halted-run persistence
         run: |
           for proof_file in IndependentDuodenary/ComplexityEncoding.lean examples/ComplexityParserBoundary.lean

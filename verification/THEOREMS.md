@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 373 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 386 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -2576,6 +2576,216 @@ Proof method: Definitional equality.
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES pipeline_empty_transmission_rejected` and the printed proof in the machine-generated audit.
+
+## `reference_accept_reject_distinct`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_accept_reject_distinct {s : ℕ} : (0 : Fin (s + 2)) ≠ 1
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_accept_reject_distinct` and the printed proof in the machine-generated audit.
+
+## `reference_initial_heads`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_initial_heads {a s k : ℕ} (state : Fin (s + 2))
+    (x : PrizeBinaryWord) (i : Fin (k + 1)) :
+    (referenceInitial (a
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_initial_heads` and the printed proof in the machine-generated audit.
+
+## `reference_initial_negative_blank`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_initial_negative_blank {a s k : ℕ} (state : Fin (s + 2))
+    (x : PrizeBinaryWord) (i : Fin (k + 1)) (j : ℤ) (hj : j < 0) :
+    (referenceInitial (a
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_initial_negative_blank` and the printed proof in the machine-generated audit.
+
+## `reference_initial_other_tape_blank`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_initial_other_tape_blank {a s k : ℕ} (state : Fin (s + 2))
+    (x : PrizeBinaryWord) (i : Fin (k + 1)) (hi : i ≠ 0) (j : ℤ) :
+    (referenceInitial (a
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_initial_other_tape_blank` and the printed proof in the machine-generated audit.
+
+## `reference_initial_empty_blank`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_initial_empty_blank {a s k : ℕ} (state : Fin (s + 2))
+    (i : Fin (k + 1)) (j : ℤ) :
+    (referenceInitial (a
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_initial_empty_blank` and the printed proof in the machine-generated audit.
+
+## `reference_write_at_head`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_write_at_head {a s k : ℕ} (q : ReferenceConfiguration a s k)
+    (instruction : ReferenceInstruction a s k) (i : Fin (k + 1)) :
+    (referenceApply q instruction).tape i (q.head i) = instruction.write i
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_write_at_head` and the printed proof in the machine-generated audit.
+
+## `reference_write_other_cell`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_write_other_cell {a s k : ℕ} (q : ReferenceConfiguration a s k)
+    (instruction : ReferenceInstruction a s k) (i : Fin (k + 1)) (j : ℤ)
+    (hj : j ≠ q.head i) :
+    (referenceApply q instruction).tape i j = q.tape i j
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_write_other_cell` and the printed proof in the machine-generated audit.
+
+## `reference_dstep_none_iff`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_dstep_none_iff {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
+    (q : ReferenceConfiguration a s k) : referenceDStep M q = none ↔ referenceTerminal q
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_dstep_none_iff` and the printed proof in the machine-generated audit.
+
+## `reference_deterministic_transition`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_deterministic_transition {a s k : ℕ}
+    (M : ReferenceDeterministicMachine a s k) (q q₁ q₂ : ReferenceConfiguration a s k)
+    (h₁ : referenceDEdge M q q₁) (h₂ : referenceDEdge M q q₂) : q₁ = q₂
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_deterministic_transition` and the printed proof in the machine-generated audit.
+
+## `reference_nondeterministic_finite_branching`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_nondeterministic_finite_branching {a s k : ℕ}
+    (M : ReferenceNondeterministicMachine a s k) (q : ReferenceConfiguration a s k) :
+    ∃ successors : List (ReferenceConfiguration a s k),
+      ∀ q', referenceNEdge M q q' ↔ q' ∈ successors
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_nondeterministic_finite_branching` and the printed proof in the machine-generated audit.
+
+## `reference_terminal_no_nstep`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_terminal_no_nstep {a s k : ℕ}
+    (M : ReferenceNondeterministicMachine a s k) (q q' : ReferenceConfiguration a s k)
+    (halt : referenceTerminal q) : ¬ referenceNEdge M q q'
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_terminal_no_nstep` and the printed proof in the machine-generated audit.
+
+## `reference_nonterminal_has_nstep`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_nonterminal_has_nstep {a s k : ℕ}
+    (M : ReferenceNondeterministicMachine a s k) (q : ReferenceConfiguration a s k)
+    (halt : ¬ referenceTerminal q) : ∃ q', referenceNEdge M q q'
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_nonterminal_has_nstep` and the printed proof in the machine-generated audit.
+
+## `reference_nbranch_bound_forces_terminal`
+
+Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
+
+```lean
+theorem reference_nbranch_bound_forces_terminal {a s k : ℕ}
+    (M : ReferenceNondeterministicMachine a s k) (initial : ReferenceConfiguration a s k)
+    (bound : ℕ)
+    (bounded : ∀ t q, ReferenceRun (referenceNEdge M) t initial q → t ≤ bound)
+    (q : ReferenceConfiguration a s k)
+    (run : ReferenceRun (referenceNEdge M) bound initial q) : referenceTerminal q
+```
+
+Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES reference_nbranch_bound_forces_terminal` and the printed proof in the machine-generated audit.
 
 ## `register_decode_encode`
 

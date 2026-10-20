@@ -22,8 +22,8 @@ def visit(identifier):
 
 for identifier in atoms:
     visit(identifier)
-proved = [a for a in atoms.values() if a['status'] in ('proved_in_Lean_example', 'proved_in_library')]
-assert all(a['status'] in ('open', 'proved_in_Lean_example', 'proved_in_library') for a in atoms.values())
+proved = [a for a in atoms.values() if a['status'] in ('proved_in_Lean_example', 'proved_in_library', 'defined_in_library')]
+assert all(a['status'] in ('open', 'proved_in_Lean_example', 'proved_in_library', 'defined_in_library') for a in atoms.values())
 assert all(a['evidence'] and (root / a['evidence']).is_file() for a in proved)
 lines = [data['specification'].rstrip(), '',
          f"**Register totals:** {len(atoms)} atoms; {len(proved)} completed obligations; "
@@ -34,6 +34,8 @@ for group in data['groups']:
         lines += [f"### {atom['id']} — {atom['title']}", '', atom['acceptance_criterion'], '',
                   f"Status: **{atom['status']}**.", '',
                   'Prerequisites: ' + (', '.join(atom['requires']) or 'none') + '.', '']
+        if atom.get('declarations'):
+            lines += ['Declarations: ' + ', '.join('`' + n + '`' for n in atom['declarations']) + '.', '']
         if atom['evidence']:
             lines += [f"Evidence: `{atom['evidence']}`.", '']
 (root / 'verification/ATOMIC_BRIDGE_SPECIFICATION.md').write_text('\n'.join(lines))

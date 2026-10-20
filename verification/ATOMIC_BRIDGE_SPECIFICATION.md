@@ -3,7 +3,7 @@
 This expands the annotated statements about the missing prize bridge and the
 incompleteness of packaging as mathematical proof. It is an obligation register,
 not a completed P-versus-NP proof. The baseline library has 354 named theorem
-declarations; the parser and halting extension adds 19, for 373 current declarations. Five additional unnamed encoding examples are checked separately;
+declarations; the parser and halting extension adds 19, for 373 declarations. The reference-machine extension adds 13, for 386 current declarations. Five additional unnamed encoding examples are checked separately;
 they do not increase that library count.
 
 This is one concrete equality-route specification; alternative encodings and
@@ -131,12 +131,14 @@ lower-bound argument; the bound on explicit orbit covers is not one.
 
 The machine-readable companion is `packaging/atomic_bridge_obligations.json`.
 Dependencies refer to the numbered atoms, not to assumed Lean facts. Five proved entries identify checked unnamed Lean examples; three additional
-entries identify named parser and halting theorems in the library. Existing library
+entries identify named parser and halting theorems in the library. Four further
+entries supply the requested reference-machine and class definitions; these are
+marked `defined_in_library`, not equivalence or simulation theorems. Existing library
 reachability correctness and cover bounds are separately listed as verified
 baseline evidence. The dependency graph has no cycles; the absent reduction
 2.21 remains a genuine missing construction rather than a renamed hypothesis.
 
-**Register totals:** 77 atoms; 8 completed obligations; 69 open obligations. These totals are not library theorem counts.
+**Register totals:** 77 atoms; 12 completed obligations; 65 open obligations. These totals are not library theorem counts.
 
 ## Item 1: Standard-model correspondence
 
@@ -144,33 +146,49 @@ baseline evidence. The dependency graph has no cycles; the absent reduction
 
 Define a conventional finite multi-tape deterministic Turing machine and a finitely branching nondeterministic counterpart: finite alphabets, blank, states, initial state, accepting/rejecting states and one-transition semantics.
 
-Status: **open**.
+Status: **defined_in_library**.
 
 Prerequisites: none.
+
+Declarations: `ReferenceMove`, `ReferenceConfiguration`, `ReferenceInstruction`, `ReferenceDeterministicMachine`, `ReferenceNondeterministicMachine`, `referenceApply`, `referenceDStep`, `referenceNSuccessors`.
+
+Evidence: `IndependentDuodenary/ReferenceMachines.lean`.
 
 ### 1.02 — Reference runs and time
 
 Define configurations, initial input placement, finite runs, halting and acceptance. Count one actual reference-machine transition as one time step; specify whether all nondeterministic branches must halt within the bound.
 
-Status: **open**.
+Status: **defined_in_library**.
 
 Prerequisites: 1.01.
+
+Declarations: `referenceTerminal`, `referenceRead`, `referenceInitial`, `referenceDEdge`, `referenceNEdge`, `ReferenceRun`.
+
+Evidence: `IndependentDuodenary/ReferenceMachines.lean`.
 
 ### 1.03 — Reference P
 
 Define P_ref(L): one fixed deterministic reference machine decides every binary input x within a polynomial in |x|, with constants independent of x. Invalid encodings remain inputs and require a total answer.
 
-Status: **open**.
+Status: **defined_in_library**.
 
 Prerequisites: 1.02.
+
+Declarations: `ReferenceP`.
+
+Evidence: `IndependentDuodenary/ReferenceMachines.lean`.
 
 ### 1.04 — Reference NP
 
 Define NP_ref(L): one fixed nondeterministic reference machine has an accepting branch exactly for x in L and all branches obey a polynomial transition bound.
 
-Status: **open**.
+Status: **defined_in_library**.
 
 Prerequisites: 1.02.
+
+Declarations: `ReferenceNP`.
+
+Evidence: `IndependentDuodenary/ReferenceMachines.lean`.
 
 ### 1.05 — Existing word length
 

@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: twenty-five modules; 373 theorem declarations.
+- Project library: twenty-six modules; 386 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 373 stated Lean theorems.
+There are no incomplete obligations inside the 386 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -99,7 +99,7 @@ build, warning-free checks, fifteen canonical guards, synthesis guards and all
 thirteen executable checks passed. The executable output is retained in
 `pipeline-execution.txt`.
 
-Final local audit: all 373 theorem declarations passed, permitting only the
+Final local audit: all 386 theorem declarations passed, permitting only the
 standard Lean axiom union already listed. The placeholder scan also covers
 the native launcher and example sources. All newly added modules, the
 refactored dynamics module and both runners elaborate without diagnostics.
@@ -126,7 +126,7 @@ remain in the audited library; constructive-only foundations are not claimed.
 
 Four additional declarations establish a Boolean reachability decision and the
 lower bound `49152^r ≤ 12 * seeds.card` on complete fixed-operator orbit covers.
-The current library has 373 named declarations. This is not a general
+That extension brought the library to 354 named declarations. This is not a general
 computational lower bound or a prize solution. The administrative dossier at
 65e0db1 remains historical; current source and audit evidence are indexed by
 `THEOREMS.md` and `SEARCH_BOUNDARY.md`.
@@ -134,6 +134,16 @@ computational lower bound or a prize solution. The administrative dossier at
 ## Total parsers and halted-run persistence
 
 Nineteen new declarations close atomic obligations 1.10, 1.11 and 1.12.
-See [COMPLEXITY_ENCODING.md](COMPLEXITY_ENCODING.md). Eight of 77 atomic
-obligations are now discharged; 69 remain open. This does not establish the
+See [COMPLEXITY_ENCODING.md](COMPLEXITY_ENCODING.md). At that revision eight of 77 atomic
+obligations were discharged; 69 remained open. This does not establish the
 general SAT reduction, machine simulation or a Millennium Prize result.
+
+## Reference-machine syntax and complexity definitions
+
+`ReferenceMachines.lean` implements obligations 1.01–1.04 with 13 supporting
+theorems. The current library has 386 named declarations. The register has five
+completed example obligations, three proved parser/halting obligations and four
+implemented definition obligations: 12 completed, 65 open. Reference P/NP are
+explicit definitions, not equivalences with the Prize classes. Full individual
+status for all 69 entries open at the start of this execution is retained in
+[CLOSURE_EXECUTION.md](CLOSURE_EXECUTION.md).

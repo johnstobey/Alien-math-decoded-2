@@ -1,6 +1,6 @@
 {
   "purpose": "research obligation register; not a submission readiness certificate",
-  "current_named_theorems": 373,
+  "current_named_theorems": 386,
   "new_proved_results": [
     "IndependentDuodenary.protocol_reachability_check_correct",
     "IndependentDuodenary.protocol_reachability_check_rejects_iff",
@@ -74,5 +74,30 @@
       "IndependentDuodenary.prize_halted_boolean_output_stable",
       "IndependentDuodenary.prize_accepts_by_bound_iff"
     ]
+  },
+  "reference_machine_extension": {
+    "defined_atomic_obligations": [
+      "1.01",
+      "1.02",
+      "1.03",
+      "1.04"
+    ],
+    "source": "IndependentDuodenary/ReferenceMachines.lean",
+    "theorems": [
+      "IndependentDuodenary.reference_accept_reject_distinct",
+      "IndependentDuodenary.reference_initial_heads",
+      "IndependentDuodenary.reference_initial_negative_blank",
+      "IndependentDuodenary.reference_initial_other_tape_blank",
+      "IndependentDuodenary.reference_initial_empty_blank",
+      "IndependentDuodenary.reference_write_at_head",
+      "IndependentDuodenary.reference_write_other_cell",
+      "IndependentDuodenary.reference_dstep_none_iff",
+      "IndependentDuodenary.reference_deterministic_transition",
+      "IndependentDuodenary.reference_nondeterministic_finite_branching",
+      "IndependentDuodenary.reference_terminal_no_nstep",
+      "IndependentDuodenary.reference_nonterminal_has_nstep",
+      "IndependentDuodenary.reference_nbranch_bound_forces_terminal"
+    ],
+    "conventional_model_equivalence_proved": false
   }
 }
