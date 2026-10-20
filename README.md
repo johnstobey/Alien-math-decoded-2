@@ -96,3 +96,12 @@ state the finite bounds, unproved complexity obligation and release procedure.
 The [LaTeX translation monograph](MillenniumPrizeTranslation.tex) and
 `scripts/perfect_claim_bundle.sh` provide a PDF audit archive with a complete
 theorem index. This does not certify or file a Millennium Prize claim.
+
+[Administrative dossier index](claim_manifest.json),
+[cover letter](administrative/COVER_LETTER.md) and
+[intake summary](administrative/INTAKE_SUMMARY.md) record the audited baseline
+and unresolved prize and legal obligations. Generate a self-contained enclosure
+packet with `python3 scripts/build_intake_bundle.py` when the indexed release
+assets are present in `dist/`. Verify an extracted packet with the same script's
+`--verify-only` option. Large archives remain ignored by Git; a repository clone
+alone does not contain those binary enclosures. No institutional filing is made.

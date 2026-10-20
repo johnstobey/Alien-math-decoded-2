@@ -1,0 +1,264 @@
+{
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 1
+    },
+    "title": {
+      "type": "string"
+    },
+    "proof_baseline": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "theorem_catalog": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "repository",
+        "commit",
+        "theorem_catalog"
+      ],
+      "additionalProperties": false
+    },
+    "verification": {
+      "type": "object",
+      "properties": {
+        "named_theorems": {
+          "const": 350
+        },
+        "harness_checks_passed": {
+          "const": 13
+        },
+        "new_Lean_diagnostics": {
+          "const": 0
+        },
+        "full_build": {
+          "type": "string"
+        },
+        "ci_url": {
+          "type": "string"
+        },
+        "ci_evidence_kind": {
+          "type": "string"
+        },
+        "ci_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "raw_CI_logs_included": {
+          "const": false
+        },
+        "standard_axioms": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "custom_axioms": {
+          "const": false
+        },
+        "constructive_only": {
+          "const": false
+        }
+      },
+      "required": [
+        "named_theorems",
+        "harness_checks_passed",
+        "new_Lean_diagnostics",
+        "full_build",
+        "ci_url",
+        "ci_evidence_kind",
+        "ci_commit",
+        "raw_CI_logs_included",
+        "standard_axioms",
+        "custom_axioms",
+        "constructive_only"
+      ],
+      "additionalProperties": false
+    },
+    "claims": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
+        },
+        "prize_problem": {
+          "type": "string"
+        },
+        "prize_conjecture_proved": {
+          "const": false
+        },
+        "external_complexity_equivalence": {
+          "type": "string"
+        },
+        "CMI_eligibility": {
+          "const": "not_established"
+        },
+        "institutional_submission_performed": {
+          "const": false
+        },
+        "legal_completeness_certified": {
+          "const": false
+        }
+      },
+      "required": [
+        "scope",
+        "prize_problem",
+        "prize_conjecture_proved",
+        "external_complexity_equivalence",
+        "CMI_eligibility",
+        "institutional_submission_performed",
+        "legal_completeness_certified"
+      ],
+      "additionalProperties": false
+    },
+    "administration": {
+      "type": "object",
+      "properties": {
+        "document_status": {
+          "type": "string"
+        },
+        "signature": {
+          "type": "null"
+        },
+        "submitter_legal_identity": {
+          "type": "null"
+        },
+        "institutional_receipt": {
+          "type": "null"
+        },
+        "DOI": {
+          "type": "null"
+        },
+        "public_record": {
+          "type": "string"
+        },
+        "official_rules_review": {
+          "type": "object",
+          "properties": {
+            "url": {
+              "type": "string"
+            },
+            "retrieved": {
+              "const": false
+            },
+            "http_status": {
+              "const": 403
+            }
+          },
+          "required": [
+            "url",
+            "retrieved",
+            "http_status"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "document_status",
+        "signature",
+        "submitter_legal_identity",
+        "institutional_receipt",
+        "DOI",
+        "public_record",
+        "official_rules_review"
+      ],
+      "additionalProperties": false
+    },
+    "packaging": {
+      "type": "object",
+      "properties": {
+        "enclosure_ledger": {
+          "const": "DOSSIER_SHA256SUMS"
+        },
+        "algorithm": {
+          "const": "SHA-256"
+        },
+        "manifest_self_hash": {
+          "type": "string"
+        },
+        "archive_digest": {
+          "type": "string"
+        },
+        "all_indexed_files_in_administrative_packet": {
+          "const": true
+        },
+        "institutional_signature_or_endorsement": {
+          "const": false
+        }
+      },
+      "required": [
+        "enclosure_ledger",
+        "algorithm",
+        "manifest_self_hash",
+        "archive_digest",
+        "all_indexed_files_in_administrative_packet",
+        "institutional_signature_or_endorsement"
+      ],
+      "additionalProperties": false
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 22,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string",
+            "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$"
+          },
+          "role": {
+            "type": "string"
+          },
+          "bytes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "baseline_git_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "required": [
+          "id",
+          "path",
+          "role",
+          "bytes",
+          "sha256",
+          "baseline_git_url"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "title",
+    "proof_baseline",
+    "verification",
+    "claims",
+    "administration",
+    "packaging",
+    "artifacts"
+  ],
+  "additionalProperties": false,
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Finite protocol administrative dossier manifest"
+}

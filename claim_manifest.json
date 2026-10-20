@@ -1,0 +1,234 @@
+{
+  "schema_version": 1,
+  "title": "Finite protocol verification: administrative technical-review dossier",
+  "proof_baseline": {
+    "repository": "https://github.com/johnstobey/Alien-math-decoded-2",
+    "commit": "65e0db131c5ab65cddd0b913b41ddcb588108d97",
+    "theorem_catalog": "theorem_catalog"
+  },
+  "verification": {
+    "named_theorems": 350,
+    "harness_checks_passed": 13,
+    "new_Lean_diagnostics": 0,
+    "full_build": "passed_with_upstream_Mathlib_docPrime_warnings",
+    "ci_url": "https://github.com/johnstobey/Alien-math-decoded-2/actions/runs/39375975155",
+    "ci_evidence_kind": "public run/job HTML and parsed statuses",
+    "ci_commit": "65e0db131c5ab65cddd0b913b41ddcb588108d97",
+    "raw_CI_logs_included": false,
+    "standard_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "custom_axioms": false,
+    "constructive_only": false
+  },
+  "claims": {
+    "scope": "finite algebraic protocol and bounded aligned substitution recovery",
+    "prize_problem": "P versus NP",
+    "prize_conjecture_proved": false,
+    "external_complexity_equivalence": "not_formalized",
+    "CMI_eligibility": "not_established",
+    "institutional_submission_performed": false,
+    "legal_completeness_certified": false
+  },
+  "administration": {
+    "document_status": "unsigned technical-review dossier; not a perfected prize claim",
+    "signature": null,
+    "submitter_legal_identity": null,
+    "institutional_receipt": null,
+    "DOI": null,
+    "public_record": "Git source and metadata publication only",
+    "official_rules_review": {
+      "http_status": 403,
+      "retrieved": false,
+      "url": "https://www.claymath.org/millennium-problems/rules/"
+    }
+  },
+  "packaging": {
+    "enclosure_ledger": "DOSSIER_SHA256SUMS",
+    "algorithm": "SHA-256",
+    "manifest_self_hash": "in enclosure ledger; ledger itself excluded",
+    "archive_digest": "external .sha256 sidecar",
+    "all_indexed_files_in_administrative_packet": true,
+    "institutional_signature_or_endorsement": false
+  },
+  "artifacts": [
+    {
+      "id": "cover_letter",
+      "path": "administrative/COVER_LETTER.md",
+      "role": "unsigned administrative correspondence",
+      "bytes": 2599,
+      "sha256": "a5346828bc580bb58ce7a476eb3a44412bed1539441d5e24390f949252e31c4c",
+      "baseline_git_url": null
+    },
+    {
+      "id": "intake_summary",
+      "path": "administrative/INTAKE_SUMMARY.md",
+      "role": "scope and review instructions",
+      "bytes": 3416,
+      "sha256": "b4e29cdc33e1374a60ba21d110867e22d0ad30380a27f9ae35486e56ee86c09d",
+      "baseline_git_url": null
+    },
+    {
+      "id": "dossier_builder",
+      "path": "scripts/build_intake_bundle.py",
+      "role": "standard-library enclosure verifier and builder",
+      "bytes": 10608,
+      "sha256": "16fa20bc5ccf8e976ae01739ca3eada7fd640345cb24c2029b8a56f2669c6ce0",
+      "baseline_git_url": null
+    },
+    {
+      "id": "manifest_schema",
+      "path": "packaging/claim_manifest.schema.json",
+      "role": "JSON Schema for the authoritative index",
+      "bytes": 5969,
+      "sha256": "38a5546fe0d840f2b3b960a79e9a51d54267febdbe5d43f24151d03df481c1de",
+      "baseline_git_url": null
+    },
+    {
+      "id": "monograph_tex",
+      "path": "MillenniumPrizeTranslation.tex",
+      "role": "translation monograph source",
+      "bytes": 9361,
+      "sha256": "344653b7b7fd9e2caab82f45cb1cf2de9e9f120010988e5a5a6c1af1e866d67b",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/MillenniumPrizeTranslation.tex"
+    },
+    {
+      "id": "monograph_pdf",
+      "path": "dist/MillenniumPrizeTranslation.pdf",
+      "role": "compiled translation monograph",
+      "bytes": 192732,
+      "sha256": "e000532e477ac0b935d797c836069e6584c65dc51d0ff04e0df553b5a5f8a4a9",
+      "baseline_git_url": null
+    },
+    {
+      "id": "theorem_index",
+      "path": "verification/THEOREMS.md",
+      "role": "exact theorem statements and proof index",
+      "bytes": 188562,
+      "sha256": "a9e81c8c11a82a248b0b0dd7cb0e0803efc3eba833f9a68daf0a1a4574b1f648",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/verification/THEOREMS.md"
+    },
+    {
+      "id": "theorem_catalog",
+      "path": "packaging/theorem_alignment.json",
+      "role": "machine-readable declaration map",
+      "bytes": 87344,
+      "sha256": "974ade497c476889403fa69f751c1a6f8ae12c785754ad83576a0545d489f5e0",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/packaging/theorem_alignment.json"
+    },
+    {
+      "id": "proof_audit",
+      "path": "verification/axioms-and-proofs.txt",
+      "role": "proof terms and transitive foundations",
+      "bytes": 863365,
+      "sha256": "d0f50f300a08d5a85364879014bb5962029a80fd339cf8a8ff1d1e2d3f8539fa",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/verification/axioms-and-proofs.txt"
+    },
+    {
+      "id": "build_log",
+      "path": "verification/local-build.txt",
+      "role": "actual baseline build transcript",
+      "bytes": 601734,
+      "sha256": "dbe427cb7361df2f059e596e7a12cee878479aff6e8c7fca94c50187d3316c6d",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/verification/local-build.txt"
+    },
+    {
+      "id": "extracted_verification",
+      "path": "dist/claim-vendor-verification.log",
+      "role": "independent extraction build/audit/harness transcript",
+      "bytes": 1465478,
+      "sha256": "7bf259c6100ca842544f4006d0b0123cf0444ca45dfdec82baf26fb6557dfaa4",
+      "baseline_git_url": null
+    },
+    {
+      "id": "source_integrity",
+      "path": "dist/claim-source-integrity.log",
+      "role": "source archive checksum transcript",
+      "bytes": 25,
+      "sha256": "8e76007c41fd181fb9bf00331f44fe9e9acf6f9fdb60abb01d6129c910392e87",
+      "baseline_git_url": null
+    },
+    {
+      "id": "release_validation",
+      "path": "dist/claim-release-validation.json",
+      "role": "original release provenance record",
+      "bytes": 6077,
+      "sha256": "00daffaa624b3bced7519086b8ad8aae33cc7a71ce7cd102e0a4a1ac559a4d19",
+      "baseline_git_url": null
+    },
+    {
+      "id": "bridge",
+      "path": "IndependentDuodenary/MillenniumBridge.lean",
+      "role": "finite reachability equivalence and unproved complexity definition",
+      "bytes": 5869,
+      "sha256": "fbf5758de1955cd128ead4906559036c37d75028e42839171668c27b5d888056",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/IndependentDuodenary/MillenniumBridge.lean"
+    },
+    {
+      "id": "lakefile",
+      "path": "lakefile.lean",
+      "role": "pinned build configuration",
+      "bytes": 338,
+      "sha256": "a9381722ec6d510be33d1fe0eb0948f977cdee8ee079e6cd33b6da2e081569bc",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/lakefile.lean"
+    },
+    {
+      "id": "toolchain",
+      "path": "lean-toolchain",
+      "role": "Lean toolchain pin",
+      "bytes": 25,
+      "sha256": "6faf6530819a0bc6d6092a2d9b974ea8e8adfec955d0e51e02e1f82734264d14",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/lean-toolchain"
+    },
+    {
+      "id": "dependency_lock",
+      "path": "lake-manifest.json",
+      "role": "locked dependency closure",
+      "bytes": 3535,
+      "sha256": "d1b568e7d09ff72c3b4b8a95e6da8f6226e2968a5f3a7de89dae19282086e23d",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/lake-manifest.json"
+    },
+    {
+      "id": "proof_exporter",
+      "path": "scripts/perfect_claim_bundle.sh",
+      "role": "proof and monograph archive entry point",
+      "bytes": 267,
+      "sha256": "4c80b588cba4592dce7f35b1e68b556bf626a16277e897632db613427d3a2717",
+      "baseline_git_url": "https://github.com/johnstobey/Alien-math-decoded-2/blob/65e0db131c5ab65cddd0b913b41ddcb588108d97/scripts/perfect_claim_bundle.sh"
+    },
+    {
+      "id": "source_archive",
+      "path": "dist/independent-duodenary-65e0db131c5a-source-translation.tar.gz",
+      "role": "complete nested proof archive",
+      "bytes": 31126164,
+      "sha256": "18a20e65b46d5a51347e3b7803ac682cac313168f907f6c4cad9b738f8e91f18",
+      "baseline_git_url": null
+    },
+    {
+      "id": "source_archive_sidecar",
+      "path": "dist/independent-duodenary-65e0db131c5a-source-translation.tar.gz.sha256",
+      "role": "nested archive SHA-256 sidecar",
+      "bytes": 127,
+      "sha256": "7da3e00bc7bf3c1c9febefcf32796676f830b0f18833fcbba3f7f93fa4a9b939",
+      "baseline_git_url": null
+    },
+    {
+      "id": "vendor_archive",
+      "path": "dist/independent-duodenary-65e0db131c5a-vendor-translation.tar.gz",
+      "role": "complete nested proof archive",
+      "bytes": 291428978,
+      "sha256": "deac28a1f3637dc1c20116dbe342c1791379cb7246f6b1f6b2c1051b42d823e0",
+      "baseline_git_url": null
+    },
+    {
+      "id": "vendor_archive_sidecar",
+      "path": "dist/independent-duodenary-65e0db131c5a-vendor-translation.tar.gz.sha256",
+      "role": "nested archive SHA-256 sidecar",
+      "bytes": 127,
+      "sha256": "0e3a657d6fc67ca3f76d1c3a6ecb1dc4f5bec65f25da4c14dab88fca25669e9b",
+      "baseline_git_url": null
+    }
+  ]
+}
