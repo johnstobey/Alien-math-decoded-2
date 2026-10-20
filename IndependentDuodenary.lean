@@ -15,3 +15,6 @@ import IndependentDuodenary.CipherValidator
 import IndependentDuodenary.SourceKeyRepresentation
 import IndependentDuodenary.RegisterDynamics
 import IndependentDuodenary.RegisterBridge
+import IndependentDuodenary.CanonicalArchitecture
+import IndependentDuodenary.PipelineSynthesis
+import IndependentDuodenary.PipelineHarness

@@ -2000,6 +2000,1369 @@ DIRECT DEPENDENCIES zero_bits_count: [IndependentDuodenary.weightLayer_card,
  IndependentDuodenary.weightLayer,
  Decidable.decide,
  Eq]
+theorem IndependentDuodenary.canonical_coefficient_roundtrip : ∀ {r : ℕ}
+  (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.canonicalFromCoefficients (IndependentDuodenary.canonicalCoefficientNatural.app r x) = x :=
+fun {r} x =>
+  IndependentDuodenary.CanonicalSubstrate.casesOn (motive := fun t =>
+    x = t →
+      IndependentDuodenary.canonicalFromCoefficients (IndependentDuodenary.canonicalCoefficientNatural.app r x) = x)
+    x
+    (fun state h =>
+      Eq.symm h ▸
+        Eq.refl
+          (IndependentDuodenary.canonicalFromCoefficients
+            (IndependentDuodenary.canonicalCoefficientNatural.app r { state := state })))
+    (Eq.refl x)
+'IndependentDuodenary.canonical_coefficient_roundtrip' does not depend on any axioms
+DIRECT DEPENDENCIES canonical_coefficient_roundtrip: [IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.CanonicalCoefficients,
+ IndependentDuodenary.canonicalFromCoefficients,
+ IndependentDuodenary.CanonicalSubstrate.casesOn,
+ IndependentDuodenary.CanonicalSubstrate.mk,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ Eq.ndrec,
+ Eq.refl,
+ Eq.symm,
+ Eq,
+ IndependentDuodenary.canonicalCoefficientNatural]
+theorem IndependentDuodenary.canonical_coefficient_encoding_injective : ∀ (r : ℕ),
+  Function.Injective (IndependentDuodenary.canonicalCoefficientNatural.app r) :=
+fun r ⦃x y⦄ h =>
+  let_fun hc := congrArg IndependentDuodenary.canonicalFromCoefficients h;
+  Eq.mp
+    (congr (congrArg Eq (IndependentDuodenary.canonical_coefficient_roundtrip x))
+      (IndependentDuodenary.canonical_coefficient_roundtrip y))
+    hc
+'IndependentDuodenary.canonical_coefficient_encoding_injective' does not depend on any axioms
+DIRECT DEPENDENCIES canonical_coefficient_encoding_injective: [IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ congrArg,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.CanonicalCoefficients,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ Eq.mp,
+ IndependentDuodenary.canonicalFromCoefficients,
+ Nat,
+ congr,
+ Function.Injective,
+ Fin,
+ Eq,
+ letFun,
+ IndependentDuodenary.canonical_coefficient_roundtrip,
+ IndependentDuodenary.canonicalCoefficientNatural]
+theorem IndependentDuodenary.canonical_decode_encode : ∀ {r : ℕ} (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.canonicalDecode r (IndependentDuodenary.canonicalEncodingNatural.app r x) = some x :=
+fun {r} x =>
+  IndependentDuodenary.CanonicalSubstrate.casesOn (motive := fun t =>
+    x = t → IndependentDuodenary.canonicalDecode r (IndependentDuodenary.canonicalEncodingNatural.app r x) = some x) x
+    (fun state h =>
+      Eq.symm h ▸
+        of_eq_true
+          (Eq.trans
+            (congrArg (fun x => Option.map IndependentDuodenary.canonicalPack x = some { state := state })
+              (IndependentDuodenary.register_decode_encode r state))
+            (eq_self (some { state := state }))))
+    (Eq.refl x)
+'IndependentDuodenary.canonical_decode_encode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_decode_encode: [IndependentDuodenary.decodeRegisterWords,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.canonicalDecode,
+ congrArg,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.register_decode_encode,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.CanonicalSubstrate.casesOn,
+ IndependentDuodenary.CanonicalSubstrate.mk,
+ ZMod,
+ IndependentDuodenary.RegisterState,
+ List,
+ Option.map,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ Eq.ndrec,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ IndependentDuodenary.canonicalPack,
+ Eq,
+ IndependentDuodenary.encodeRegisterState,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.canonical_encoding_injective : ∀ (r : ℕ),
+  Function.Injective (IndependentDuodenary.canonicalEncodingNatural.app r) :=
+fun r ⦃x y⦄ h =>
+  let_fun hc := congrArg (IndependentDuodenary.canonicalDecode r) h;
+  Eq.mp
+    (Eq.trans
+      (congr (congrArg Eq (IndependentDuodenary.canonical_decode_encode x))
+        (IndependentDuodenary.canonical_decode_encode y))
+      (Option.some.injEq x y))
+    hc
+'IndependentDuodenary.canonical_encoding_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_encoding_injective: [IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.canonicalDecode,
+ congrArg,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some.injEq,
+ Option.some,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ Eq.mp,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ ZMod,
+ List,
+ Nat,
+ congr,
+ Function.Injective,
+ IndependentDuodenary.canonical_decode_encode,
+ OfNat.ofNat,
+ Eq,
+ letFun,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.canonical_cycle_translation_commute : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.canonicalCycleNatural.app r (IndependentDuodenary.canonicalTranslationNatural.app r (h, x)) =
+    IndependentDuodenary.canonicalTranslationNatural.app r (h, IndependentDuodenary.canonicalCycleNatural.app r x) :=
+fun {r} h x =>
+  congrArg IndependentDuodenary.canonicalPack (IndependentDuodenary.register_cycle_commutes_translation h x.state)
+'IndependentDuodenary.canonical_cycle_translation_commute' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES canonical_cycle_translation_commute: [IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.registerCycle,
+ congrArg,
+ IndependentDuodenary.productRegisterFamily,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.canonicalCycleNatural,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ IndependentDuodenary.canonicalTranslationNatural,
+ IndependentDuodenary.registerTranslate,
+ Prod.mk,
+ Prod.fst,
+ IndependentDuodenary.RegisterState,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ IndependentDuodenary.register_cycle_commutes_translation,
+ Nat,
+ IndependentDuodenary.canonicalPack,
+ Eq,
+ Prod.snd]
+theorem IndependentDuodenary.canonical_cycle_injective : ∀ (r : ℕ),
+  Function.Injective (IndependentDuodenary.canonicalCycleNatural.app r) :=
+fun r =>
+  let_fun hcycle := fun q =>
+    funext fun i =>
+      Eq.mpr (id (congrArg (fun _a => _a = q i) (IndependentDuodenary.register_cycle_iterate 12 q i)))
+        (IndependentDuodenary.key_cycle_period_twelve (q i));
+  let_fun hinj := IndependentDuodenary.successor_period_injective IndependentDuodenary.registerCycle 11 hcycle;
+  fun ⦃x y⦄ heq =>
+  let_fun hs := congrArg IndependentDuodenary.CanonicalSubstrate.state heq;
+  Equiv.injective (IndependentDuodenary.canonicalStateEquiv r) (hinj hs)
+'IndependentDuodenary.canonical_cycle_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_cycle_injective: [Eq.mpr,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ Equiv.instFunLike,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.registerCycle,
+ IndependentDuodenary.successor_period_injective,
+ congrArg,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.canonicalCycleNatural,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.key_cycle_period_twelve,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ id,
+ Equiv,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ IndependentDuodenary.register_cycle_iterate,
+ funext,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ Nat,
+ IndependentDuodenary.canonicalStateEquiv,
+ Equiv.injective,
+ Function.Injective,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ Eq,
+ DFunLike.coe,
+ letFun]
+theorem IndependentDuodenary.canonical_translation_injective : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r),
+  Function.Injective fun x => IndependentDuodenary.canonicalTranslationNatural.app r (h, x) :=
+fun {r} h =>
+  let_fun ht := fun q =>
+    funext fun i =>
+      Eq.trans (IndependentDuodenary.translateKey_add (h i) (h i) (q i))
+        (Eq.mpr
+          (id
+            (congrArg (fun _a => IndependentDuodenary.translateKey _a (q i) = q i)
+              (IndependentDuodenary.binary_vector_double_zero (h i))))
+          (Eq.mpr (id (congrArg (fun _a => _a = q i) (IndependentDuodenary.translateKey_zero (q i)))) (Eq.refl (q i))));
+  let_fun hinj :=
+    Function.LeftInverse.injective
+      (let_fun this := ht;
+      this);
+  fun ⦃x y⦄ heq =>
+  let_fun hs := congrArg IndependentDuodenary.CanonicalSubstrate.state heq;
+  Equiv.injective (IndependentDuodenary.canonicalStateEquiv r) (hinj hs)
+'IndependentDuodenary.canonical_translation_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_translation_injective: [Function.LeftInverse.injective,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ Function.LeftInverse,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ Equiv.instFunLike,
+ IndependentDuodenary.canonicalFamily,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Pi.addSemigroup,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddMonoid.toAddSemigroup,
+ congrArg,
+ IndependentDuodenary.productRegisterFamily,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.pointwiseFamily,
+ Field.toDivisionRing,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ IndependentDuodenary.canonicalTranslationNatural,
+ id,
+ IndependentDuodenary.registerTranslate,
+ Equiv,
+ Distrib.toAdd,
+ Pi.instZero,
+ Prod.mk,
+ DivisionRing.toRing,
+ instOfNatNat,
+ Field.toSemifield,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.translateKey,
+ IndependentDuodenary.RegisterState,
+ funext,
+ instHAdd,
+ AddSemigroup.toAdd,
+ ZMod.instField,
+ Pi.instAdd,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Pi.addZeroClass,
+ Nat.fact_prime_two,
+ Nat,
+ AddZeroClass.toZero,
+ Semifield.toCommGroupWithZero,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.canonicalStateEquiv,
+ IndependentDuodenary.KeyComplement,
+ Equiv.injective,
+ IndependentDuodenary.translateKey_zero,
+ Function.Injective,
+ AddMonoidWithOne.toAddMonoid,
+ IndependentDuodenary.translateKey_add,
+ IndependentDuodenary.binary_vector_double_zero,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ Fin,
+ AddZeroClass.toAdd,
+ Eq,
+ DFunLike.coe,
+ Ring.toAddGroupWithOne,
+ letFun,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.canonical_step_injective : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r),
+  Function.Injective fun x => IndependentDuodenary.canonicalStepNatural.app r (h, x) :=
+fun {r} h =>
+  let_fun hinj :=
+    IndependentDuodenary.successor_period_injective (IndependentDuodenary.registerStep h) 11
+      (IndependentDuodenary.register_step_period_twelve h);
+  fun ⦃x y⦄ heq =>
+  let_fun hs := congrArg IndependentDuodenary.CanonicalSubstrate.state heq;
+  Equiv.injective (IndependentDuodenary.canonicalStateEquiv r) (hinj hs)
+'IndependentDuodenary.canonical_step_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_step_injective: [IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ Equiv.instFunLike,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.registerStep,
+ IndependentDuodenary.successor_period_injective,
+ congrArg,
+ IndependentDuodenary.productRegisterFamily,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ Equiv,
+ Prod.mk,
+ instOfNatNat,
+ IndependentDuodenary.RegisterState,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ IndependentDuodenary.canonicalStepNatural,
+ Nat,
+ IndependentDuodenary.canonicalStateEquiv,
+ Equiv.injective,
+ Function.Injective,
+ OfNat.ofNat,
+ Eq,
+ DFunLike.coe,
+ IndependentDuodenary.register_step_period_twelve,
+ letFun]
+theorem IndependentDuodenary.canonical_phase_translation_invariant : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.canonicalPhaseNatural.app r (IndependentDuodenary.canonicalTranslationNatural.app r (h, x)) =
+    IndependentDuodenary.canonicalPhaseNatural.app r x :=
+fun {r} h x => rfl
+'IndependentDuodenary.canonical_phase_translation_invariant' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_phase_translation_invariant: [IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.productRegisterFamily,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.canonicalPhaseNatural,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ IndependentDuodenary.canonicalTranslationNatural,
+ Prod.mk,
+ instOfNatNat,
+ ZMod,
+ Nat,
+ OfNat.ofNat,
+ Eq,
+ rfl]
+theorem IndependentDuodenary.canonical_phase_projection_not_injective : ¬Function.Injective
+    (IndependentDuodenary.canonicalPhaseNatural.app 1) :=
+fun hinj =>
+  let q := IndependentDuodenary.canonicalPack fun x => IndependentDuodenary.keyCycleWitness;
+  let h := fun x => ![1, 0];
+  let_fun heq := rfl;
+  let_fun hs := congrArg IndependentDuodenary.CanonicalSubstrate.state (hinj heq);
+  let_fun hb := congrArg (fun p => (p 0).binaryIntercept 0) hs;
+  id (fun hb => of_decide_eq_true (id (Eq.refl true)) hb) hb
+'IndependentDuodenary.canonical_phase_projection_not_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+DIRECT DEPENDENCIES canonical_phase_projection_not_injective: [IndependentDuodenary.KeyBinary,
+ instDecidableNot,
+ False,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.keyCycleWitness,
+ IndependentDuodenary.canonicalFamily,
+ Semiring.toOne,
+ of_decide_eq_true,
+ congrArg,
+ IndependentDuodenary.productRegisterFamily,
+ ZMod.decidableEq,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.canonicalPhaseNatural,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ IndependentDuodenary.canonicalTranslationNatural,
+ id,
+ Fin.instOfNat,
+ Prod.mk,
+ Ne,
+ instOfNatNat,
+ Field.toSemifield,
+ ZMod,
+ IndependentDuodenary.RegisterState,
+ Bool.true,
+ ZMod.instField,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ Semifield.toDivisionSemiring,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat.fact_prime_two,
+ Nat,
+ Semifield.toCommGroupWithZero,
+ Matrix.vecEmpty,
+ DivisionSemiring.toSemiring,
+ Bool,
+ One.toOfNat1,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.ExactKey.binaryIntercept,
+ Function.Injective,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ IndependentDuodenary.canonicalPack,
+ Eq,
+ Matrix.vecCons,
+ Not,
+ letFun,
+ rfl,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.canonical_retained_phase_injective : ∀ (r : ℕ),
+  Function.Injective ((IndependentDuodenary.retainRegisterNatural IndependentDuodenary.canonicalPhaseNatural).app r) :=
+fun r => IndependentDuodenary.retained_register_natural_injective IndependentDuodenary.canonicalPhaseNatural r
+'IndependentDuodenary.canonical_retained_phase_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_retained_phase_injective: [IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.productRegisterFamily,
+ IndependentDuodenary.canonicalPhaseNatural,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ IndependentDuodenary.retained_register_natural_injective,
+ instOfNatNat,
+ ZMod,
+ Nat,
+ Function.Injective,
+ OfNat.ofNat,
+ IndependentDuodenary.retainRegisterNatural]
+theorem IndependentDuodenary.retained_coefficient_pullback_injective : ∀ {k : ℕ} {E X V : Type} [inst : AddCommMonoid V]
+  (r : ℕ),
+  Function.Injective
+    ((IndependentDuodenary.retainRegisterNatural IndependentDuodenary.coefficientPullbackNatural).app r) :=
+fun {k} {E X V} [AddCommMonoid V] r =>
+  IndependentDuodenary.retained_register_natural_injective IndependentDuodenary.coefficientPullbackNatural r
+'IndependentDuodenary.retained_coefficient_pullback_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+DIRECT DEPENDENCIES retained_coefficient_pullback_injective: [IndependentDuodenary.ProjectedTable,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.productRegisterFamily,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ IndependentDuodenary.retained_register_natural_injective,
+ AddCommMonoid,
+ IndependentDuodenary.FullTable,
+ Nat,
+ IndependentDuodenary.coefficientPullbackNatural,
+ Function.Injective,
+ IndependentDuodenary.retainRegisterNatural]
+theorem IndependentDuodenary.canonical_coefficient_semantics : ∀ {k r : ℕ} {E X V : Type} [inst : AddCommMonoid V]
+  [inst_1 : Module (ZMod 2) V] (t : Fin r → IndependentDuodenary.ProjectedTable k E X V)
+  (p : Fin r → ZMod 2 × (Fin k → ZMod 2 × ZMod 2)),
+  (fun i => IndependentDuodenary.evaluateFullTable (IndependentDuodenary.pullbackTable (t i)) (p i)) = fun i =>
+    IndependentDuodenary.evaluateProjectedTable (t i) (IndependentDuodenary.permittedProjection (t i) (p i)) :=
+fun {k r} {E X V} [AddCommMonoid V] [Module (ZMod 2) V] t p =>
+  funext fun i => IndependentDuodenary.source_table_pullback_evaluation (t i) (p i)
+'IndependentDuodenary.canonical_coefficient_semantics' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_coefficient_semantics: [IndependentDuodenary.ProjectedTable,
+ IndependentDuodenary.pullbackTable,
+ instOfNatNat,
+ Field.toSemifield,
+ ZMod,
+ AddCommMonoid,
+ funext,
+ ZMod.instField,
+ Semifield.toDivisionSemiring,
+ Nat.fact_prime_two,
+ Nat,
+ IndependentDuodenary.evaluateProjectedTable,
+ DivisionSemiring.toSemiring,
+ IndependentDuodenary.permittedProjection,
+ IndependentDuodenary.source_table_pullback_evaluation,
+ Module,
+ Prod,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.evaluateFullTable]
+theorem IndependentDuodenary.canonical_master_induction : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (initial : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.PhaseRegular initial →
+    ∀ (n : ℕ), IndependentDuodenary.CanonicalInvariant initial n ((IndependentDuodenary.registerStep h)^[n] initial) :=
+fun {r} h initial hregular n =>
+  Nat.recAux
+    { regular := hregular, metadata := fun x => rfl,
+      phases :=
+        of_eq_true
+          (Eq.trans
+            (congrArg (Eq (IndependentDuodenary.registerPhases initial))
+              (funext fun i =>
+                Eq.trans (congrArg (HAdd.hAdd (IndependentDuodenary.registerPhases initial i)) Nat.cast_zero)
+                  (add_zero (IndependentDuodenary.registerPhases initial i))))
+            (eq_self (IndependentDuodenary.registerPhases initial))) }
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg (fun _a => IndependentDuodenary.CanonicalInvariant initial (n + 1) _a)
+            (Function.iterate_succ_apply' (IndependentDuodenary.registerStep h) n initial)))
+        {
+          regular :=
+            IndependentDuodenary.register_regular_step h ((IndependentDuodenary.registerStep h)^[n] initial) ih.regular,
+          metadata := fun i => ih.metadata i,
+          phases :=
+            Eq.mpr
+              (id
+                (congrArg (fun _a => _a = fun i => IndependentDuodenary.registerPhases initial i + ↑(n + 1))
+                  (IndependentDuodenary.register_step_phase h ((IndependentDuodenary.registerStep h)^[n] initial)
+                    ih.regular)))
+              (Eq.mpr
+                (id
+                  (congrArg
+                    (fun _a =>
+                      IndependentDuodenary.phaseAdvance _a = fun i =>
+                        IndependentDuodenary.registerPhases initial i + ↑(n + 1))
+                    ih.phases))
+                (funext fun i =>
+                  of_eq_true
+                    (Eq.trans
+                      (congr (congrArg Eq (add_assoc (IndependentDuodenary.registerPhases initial i) (↑n) 1))
+                        (congrArg (HAdd.hAdd (IndependentDuodenary.registerPhases initial i))
+                          (Eq.trans (Nat.cast_add n 1) (congrArg (HAdd.hAdd ↑n) Nat.cast_one))))
+                      (eq_self (IndependentDuodenary.registerPhases initial i + (↑n + 1)))))) })
+    n
+'IndependentDuodenary.canonical_master_induction' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_master_induction: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Function.iterate_succ_apply',
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ Nat.recAux,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.CanonicalInvariant.regular,
+ AddMonoid.toAddSemigroup,
+ IndependentDuodenary.CanonicalInvariant.mk,
+ congrArg,
+ CommSemiring.toSemiring,
+ add_assoc,
+ IndependentDuodenary.CanonicalInvariant.phases,
+ AddMonoid.toAddZeroClass,
+ AddMonoid.toZero,
+ IndependentDuodenary.CanonicalInvariant,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.PhaseRegular,
+ id,
+ Distrib.toAdd,
+ AddMonoidWithOne.toNatCast,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.phaseAdvance,
+ IndependentDuodenary.RegisterState,
+ Nat.cast_add,
+ AddMonoidWithOne.toOne,
+ funext,
+ instHAdd,
+ AddSemigroup.toAdd,
+ CommRing.toCommSemiring,
+ IndependentDuodenary.register_regular_step,
+ IndependentDuodenary.CanonicalInvariant.metadata,
+ IndependentDuodenary.register_step_phase,
+ HAdd.hAdd,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ Zero.toOfNat0,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.registerPhases,
+ Nat.cast_zero,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ OfNat.ofNat,
+ Fin,
+ Nat.succ,
+ Eq,
+ Nat.cast_one,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.ExactKey.metadata,
+ rfl,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.canonical_invariant_relative : ∀ {r n : ℕ}
+  {initial final : IndependentDuodenary.RegisterState r},
+  IndependentDuodenary.CanonicalInvariant initial n final →
+    IndependentDuodenary.ExternalRelativeEquivalent (IndependentDuodenary.registerPhases initial)
+      (IndependentDuodenary.registerPhases final) :=
+fun {r n} {initial final} h i j =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          IndependentDuodenary.relativePhases _a i j =
+            IndependentDuodenary.relativePhases (IndependentDuodenary.registerPhases initial) i j)
+        h.phases))
+    (of_eq_true
+      (Eq.trans
+        (congrArg
+          (fun x => x = IndependentDuodenary.registerPhases initial j - IndependentDuodenary.registerPhases initial i)
+          (add_sub_add_right_eq_sub (IndependentDuodenary.registerPhases initial j)
+            (IndependentDuodenary.registerPhases initial i) ↑n))
+        (eq_self (IndependentDuodenary.registerPhases initial j - IndependentDuodenary.registerPhases initial i))))
+'IndependentDuodenary.canonical_invariant_relative' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_invariant_relative: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ Ring.toSub,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.CanonicalInvariant.phases,
+ AddMonoid.toAddZeroClass,
+ IndependentDuodenary.CanonicalInvariant,
+ HSub.hSub,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ IndependentDuodenary.RegisterPhase,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.relativePhases,
+ IndependentDuodenary.RegisterState,
+ SubNegMonoid.toSub,
+ instHAdd,
+ CommRing.toCommSemiring,
+ instHSub,
+ AddGroup.toSubNegMonoid,
+ IndependentDuodenary.ExternalRelativeEquivalent,
+ HAdd.hAdd,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.registerPhases,
+ SubNegMonoid.toAddMonoid,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Fin,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ add_sub_add_right_eq_sub,
+ Eq.trans]
+theorem IndependentDuodenary.canonical_master_period : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (initial : IndependentDuodenary.RegisterState r), (IndependentDuodenary.registerStep h)^[12] initial = initial :=
+fun {r} h initial => IndependentDuodenary.register_step_period_twelve h initial
+'IndependentDuodenary.canonical_master_period' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_master_period: [IndependentDuodenary.registerStep,
+ IndependentDuodenary.RegisterTranslation,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ Nat,
+ OfNat.ofNat,
+ Eq,
+ IndependentDuodenary.register_step_period_twelve]
+theorem IndependentDuodenary.aligned_triple_noise_recovery : ∀ (word : List (ZMod 12))
+  (received : List (Fin 3 → ZMod 12)),
+  IndependentDuodenary.AlignedTripleNoise word received →
+    List.map IndependentDuodenary.tripleMajority received = word :=
+fun word received h =>
+  List.Forall₂.rec (Eq.refl (List.map IndependentDuodenary.tripleMajority []))
+    (fun {a} {triple} {word} {received} hhead a_1 ih =>
+      let_fun this :=
+        Eq.mpr
+          (id
+            (congrArg (fun _a => _a :: List.map IndependentDuodenary.tripleMajority received = a :: word)
+              (IndependentDuodenary.repetition_majority_recovery a triple hhead)))
+          (Eq.mpr (id (congrArg (fun _a => a :: _a = a :: word) ih)) (Eq.refl (a :: word)));
+      this)
+    h
+'IndependentDuodenary.aligned_triple_noise_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES aligned_triple_noise_recovery: [Eq.mpr,
+ IndependentDuodenary.tripleMajority,
+ congrArg,
+ List.Forall₂.rec,
+ IndependentDuodenary.repetitionWord,
+ List.map,
+ ZMod.decidableEq,
+ id,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ ZMod,
+ Fin.fintype,
+ List.cons,
+ List,
+ IndependentDuodenary.AlignedTripleNoise,
+ Nat,
+ List.Forall₂,
+ Eq.refl,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ letFun,
+ IndependentDuodenary.repetition_majority_recovery,
+ List.nil]
+theorem IndependentDuodenary.aligned_triple_noise_length : ∀ (word : List (ZMod 12))
+  (received : List (Fin 3 → ZMod 12)),
+  IndependentDuodenary.AlignedTripleNoise word received → word.length = received.length :=
+fun word received h => List.Forall₂.length_eq h
+'IndependentDuodenary.aligned_triple_noise_length' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES aligned_triple_noise_length: [IndependentDuodenary.repetitionWord,
+ ZMod.decidableEq,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ ZMod,
+ Fin.fintype,
+ List,
+ IndependentDuodenary.AlignedTripleNoise,
+ Nat,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ List.length,
+ List.Forall₂.length_eq]
+theorem IndependentDuodenary.protected_register_words_recovery : ∀ {r : ℕ}
+  (words : IndependentDuodenary.RegisterWords r) (received : IndependentDuodenary.ProtectedRegisterWords r),
+  IndependentDuodenary.RegisterNoiseBound words received → IndependentDuodenary.recoverRegisterWords received = words :=
+fun {r} words received h =>
+  funext fun i => IndependentDuodenary.aligned_triple_noise_recovery (words i) (received i) (h i)
+'IndependentDuodenary.protected_register_words_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protected_register_words_recovery: [IndependentDuodenary.ProtectedRegisterWords,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ ZMod,
+ IndependentDuodenary.aligned_triple_noise_recovery,
+ funext,
+ List,
+ Nat,
+ IndependentDuodenary.RegisterNoiseBound,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.recoverRegisterWords]
+theorem IndependentDuodenary.aligned_triple_noise_protect : ∀ (word : List (ZMod 12)),
+  IndependentDuodenary.AlignedTripleNoise word (List.map (IndependentDuodenary.repetitionWord 3) word) :=
+fun word =>
+  List.rec List.Forall₂.nil
+    (fun a word ih =>
+      List.Forall₂.cons
+        (of_eq_true
+          (Eq.trans
+            (congrArg (fun x => x ≤ 1)
+              (IndependentDuodenary.word_distance_self (IndependentDuodenary.repetitionWord 3 a)))
+            (Mathlib.Algebra.Order.Monoid.Canonical.Defs._auxLemma.7 1)))
+        ih)
+    word
+'IndependentDuodenary.aligned_triple_noise_protect' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES aligned_triple_noise_protect: [List.Forall₂.cons,
+ congrArg,
+ IndependentDuodenary.repetitionWord,
+ List.map,
+ CanonicallyOrderedCommSemiring.toCanonicallyOrderedAddCommMonoid,
+ ZMod.decidableEq,
+ Nat.instCanonicallyOrderedCommSemiring,
+ instOfNatNat,
+ List.rec,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ List.Forall₂.nil,
+ ZMod,
+ Fin.fintype,
+ List,
+ Mathlib.Algebra.Order.Monoid.Canonical.Defs._auxLemma.7,
+ IndependentDuodenary.AlignedTripleNoise,
+ Nat,
+ True,
+ IndependentDuodenary.word_distance_self,
+ of_eq_true,
+ OfNat.ofNat,
+ Fin,
+ Eq.trans]
+theorem IndependentDuodenary.protected_register_noise_bound : ∀ {r : ℕ} (words : IndependentDuodenary.RegisterWords r),
+  IndependentDuodenary.RegisterNoiseBound words (IndependentDuodenary.protectRegisterWords words) :=
+fun {r} words i => IndependentDuodenary.aligned_triple_noise_protect (words i)
+'IndependentDuodenary.protected_register_noise_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protected_register_noise_bound: [IndependentDuodenary.RegisterWords,
+ IndependentDuodenary.protectRegisterWords,
+ Nat,
+ IndependentDuodenary.RegisterNoiseBound,
+ IndependentDuodenary.aligned_triple_noise_protect,
+ Fin]
+theorem IndependentDuodenary.station_word_action_inverse : ∀ (e : IndependentDuodenary.StationExpr) {r : ℕ}
+  (words : IndependentDuodenary.RegisterWords r),
+  IndependentDuodenary.undoStationWordAction e (IndependentDuodenary.stationWordAction e words) = words :=
+fun e {r} words =>
+  funext fun i =>
+    of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x = words i)
+          (Eq.trans
+            (List.map_map (⇑(Equiv.symm (IndependentDuodenary.stationMeaning e)))
+              (⇑(IndependentDuodenary.stationMeaning e)) (words i))
+            (Eq.trans
+              (congrArg (fun x => List.map x (words i))
+                (funext fun x => Equiv.symm_apply_apply (IndependentDuodenary.stationMeaning e) x))
+              (congrFun List.map_id_fun' (words i)))))
+        (eq_self (words i)))
+'IndependentDuodenary.station_word_action_inverse' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_word_action_inverse: [Equiv.instFunLike,
+ congrArg,
+ Equiv.symm_apply_apply,
+ List.map,
+ Function.comp,
+ id,
+ Equiv,
+ List.map_map,
+ IndependentDuodenary.undoStationWordAction,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ funext,
+ List.map_id_fun',
+ List,
+ congrFun,
+ Equiv.Perm,
+ Nat,
+ True,
+ eq_self,
+ IndependentDuodenary.stationMeaning,
+ IndependentDuodenary.stationWordAction,
+ of_eq_true,
+ Equiv.symm,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ DFunLike.coe,
+ Eq.trans]
+theorem IndependentDuodenary.canonical_transmitted_word_length : ∀ {r : ℕ}
+  (A : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r) (n : ℕ)
+  (e : IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r) (i : Fin r),
+  (IndependentDuodenary.stationWordAction e
+        ((IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.canonicalEncodingNatural.app r x))
+        i).length =
+    17 :=
+fun {r} A n e x i =>
+  let_fun this :=
+    Eq.mpr
+      (id
+        (congrArg (fun _a => (IndependentDuodenary.stationWordAction e _a i).length = 17)
+          (IndependentDuodenary.register_transport_iterate A n x.state)))
+      (of_eq_true
+        (Eq.trans
+          (congrArg (fun x => x = 17)
+            (Eq.trans
+              (List.length_map (IndependentDuodenary.encodeExactKey (A^[n] x.state i))
+                ⇑(IndependentDuodenary.stationMeaning e))
+              (IndependentDuodenary.exact_key_encode_length (A^[n] x.state i))))
+          (eq_self 17)));
+  this
+'IndependentDuodenary.canonical_transmitted_word_length' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_transmitted_word_length: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ Equiv.instFunLike,
+ IndependentDuodenary.canonicalFamily,
+ congrArg,
+ List.map,
+ IndependentDuodenary.exact_key_encode_length,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.pointwiseFamily,
+ id,
+ IndependentDuodenary.canonicalEncodingNatural,
+ IndependentDuodenary.encodeExactKey,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.RegisterState,
+ List,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ Equiv.Perm,
+ Nat,
+ True,
+ eq_self,
+ IndependentDuodenary.stationMeaning,
+ List.length_map,
+ IndependentDuodenary.stationWordAction,
+ IndependentDuodenary.register_transport_iterate,
+ of_eq_true,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ List.length,
+ DFunLike.coe,
+ letFun,
+ IndependentDuodenary.encodeRegisterState,
+ Eq.trans]
+theorem IndependentDuodenary.canonical_received_word_length : ∀ {r : ℕ}
+  (A : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r) (n : ℕ)
+  (e : IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r)
+  (received : IndependentDuodenary.ProtectedRegisterWords r),
+  IndependentDuodenary.RegisterNoiseBound
+      (IndependentDuodenary.stationWordAction e
+        ((IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.canonicalEncodingNatural.app r x)))
+      received →
+    ∀ (i : Fin r), (received i).length = 17 :=
+fun {r} A n e x received hnoise i =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => _a = 17)
+        (Eq.symm
+          (IndependentDuodenary.aligned_triple_noise_length
+            (IndependentDuodenary.stationWordAction e
+              ((IndependentDuodenary.transportRegisterWords A)^[n]
+                (IndependentDuodenary.canonicalEncodingNatural.app r x))
+              i)
+            (received i) (hnoise i)))))
+    (IndependentDuodenary.canonical_transmitted_word_length A n e x i)
+'IndependentDuodenary.canonical_received_word_length' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_received_word_length: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ congrArg,
+ IndependentDuodenary.ProtectedRegisterWords,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.canonical_transmitted_word_length,
+ id,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.RegisterState,
+ List,
+ Nat,
+ IndependentDuodenary.stationWordAction,
+ IndependentDuodenary.RegisterNoiseBound,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Eq,
+ List.length,
+ IndependentDuodenary.aligned_triple_noise_length]
+theorem IndependentDuodenary.canonical_station_encoding_injective : ∀ (r : ℕ) (e : IndependentDuodenary.StationExpr),
+  Function.Injective fun x =>
+    IndependentDuodenary.stationWordAction e (IndependentDuodenary.canonicalEncodingNatural.app r x) :=
+fun r e ⦃x y⦄ heq =>
+  let_fun hu := congrArg (IndependentDuodenary.undoStationWordAction e) heq;
+  IndependentDuodenary.canonical_encoding_injective r
+    (Eq.mp
+      (congrArg (fun _a => IndependentDuodenary.canonicalEncodingNatural.app r x = _a)
+        (IndependentDuodenary.station_word_action_inverse e (IndependentDuodenary.canonicalEncodingNatural.app r y)))
+      (Eq.mp
+        (congrArg
+          (fun _a =>
+            _a =
+              IndependentDuodenary.undoStationWordAction e
+                ((fun x =>
+                    IndependentDuodenary.stationWordAction e (IndependentDuodenary.canonicalEncodingNatural.app r x))
+                  y))
+          (IndependentDuodenary.station_word_action_inverse e (IndependentDuodenary.canonicalEncodingNatural.app r x)))
+        hu))
+'IndependentDuodenary.canonical_station_encoding_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_station_encoding_injective: [IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ congrArg,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.pointwiseFamily,
+ Eq.mp,
+ IndependentDuodenary.station_word_action_inverse,
+ IndependentDuodenary.undoStationWordAction,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.canonical_encoding_injective,
+ List,
+ Nat,
+ IndependentDuodenary.stationWordAction,
+ Function.Injective,
+ OfNat.ofNat,
+ Eq,
+ letFun]
+theorem IndependentDuodenary.successor_triple_noise : ∀ (a : ZMod 12),
+  IndependentDuodenary.wordDistance (IndependentDuodenary.repetitionWord 3 a) ![a + 1, a, a] ≤ 1 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.successor_triple_noise' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES successor_triple_noise: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.repetitionWord,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ ZMod,
+ Fin.fintype,
+ Bool.true,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ Matrix.vecEmpty,
+ Bool,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ Matrix.vecCons,
+ Nat.decLe]
+theorem IndependentDuodenary.successor_word_noise : ∀ (word : List (ZMod 12)),
+  IndependentDuodenary.AlignedTripleNoise word (List.map (fun a => ![a + 1, a, a]) word) :=
+fun word =>
+  List.rec List.Forall₂.nil (fun a word ih => List.Forall₂.cons (IndependentDuodenary.successor_triple_noise a) ih) word
+'IndependentDuodenary.successor_word_noise' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES successor_word_noise: [List.Forall₂.cons,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.repetitionWord,
+ List.map,
+ ZMod.decidableEq,
+ Distrib.toAdd,
+ instOfNatNat,
+ List.rec,
+ LE.le,
+ instLENat,
+ IndependentDuodenary.wordDistance,
+ List.Forall₂.nil,
+ ZMod,
+ Fin.fintype,
+ List,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ IndependentDuodenary.AlignedTripleNoise,
+ Nat,
+ Matrix.vecEmpty,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.successor_triple_noise,
+ OfNat.ofNat,
+ Fin,
+ Matrix.vecCons]
+theorem IndependentDuodenary.successor_register_noise : ∀ {r : ℕ} (words : IndependentDuodenary.RegisterWords r),
+  IndependentDuodenary.RegisterNoiseBound words (IndependentDuodenary.successorCorruption words) :=
+fun {r} words i => IndependentDuodenary.successor_word_noise (words i)
+'IndependentDuodenary.successor_register_noise' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES successor_register_noise: [IndependentDuodenary.successor_word_noise,
+ IndependentDuodenary.RegisterWords,
+ IndependentDuodenary.successorCorruption,
+ Nat,
+ IndependentDuodenary.RegisterNoiseBound,
+ Fin]
+theorem IndependentDuodenary.canonical_operational_recovery : ∀ {r : ℕ}
+  (A : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r) (n : ℕ)
+  (e : IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r)
+  (received : IndependentDuodenary.ProtectedRegisterWords r),
+  IndependentDuodenary.RegisterNoiseBound
+      (IndependentDuodenary.stationWordAction e
+        ((IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.canonicalEncodingNatural.app r x)))
+      received →
+    IndependentDuodenary.recoverCanonicalOperational e received =
+      some (IndependentDuodenary.canonicalPack (A^[n] x.state)) :=
+fun {r} A n e x received hnoise =>
+  id
+    (Eq.mpr
+      (id
+        (congrArg
+          (fun _a =>
+            IndependentDuodenary.canonicalDecode r (IndependentDuodenary.undoStationWordAction e _a) =
+              some (IndependentDuodenary.canonicalPack (A^[n] x.state)))
+          (IndependentDuodenary.protected_register_words_recovery
+            (IndependentDuodenary.stationWordAction e
+              ((IndependentDuodenary.transportRegisterWords A)^[n]
+                (IndependentDuodenary.canonicalEncodingNatural.app r x)))
+            received hnoise)))
+      (Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              IndependentDuodenary.canonicalDecode r _a = some (IndependentDuodenary.canonicalPack (A^[n] x.state)))
+            (IndependentDuodenary.station_word_action_inverse e
+              ((IndependentDuodenary.transportRegisterWords A)^[n]
+                (IndependentDuodenary.canonicalEncodingNatural.app r x)))))
+        (let_fun this :=
+          Eq.mpr
+            (id
+              (congrArg
+                (fun _a =>
+                  Option.map IndependentDuodenary.canonicalPack _a =
+                    some (IndependentDuodenary.canonicalPack (A^[n] x.state)))
+                (IndependentDuodenary.register_decoded_transport_iterate A n x.state)))
+            (Eq.refl (Option.map IndependentDuodenary.canonicalPack (some (A^[n] x.state))));
+        this)))
+'IndependentDuodenary.canonical_operational_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_operational_recovery: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ IndependentDuodenary.decodeRegisterWords,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.canonicalDecode,
+ congrArg,
+ IndependentDuodenary.ProtectedRegisterWords,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.protected_register_words_recovery,
+ Option.some,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.station_word_action_inverse,
+ id,
+ IndependentDuodenary.undoStationWordAction,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ ZMod,
+ IndependentDuodenary.recoverCanonicalOperational,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.RegisterState,
+ List,
+ Option.map,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ IndependentDuodenary.register_decoded_transport_iterate,
+ Nat,
+ IndependentDuodenary.stationWordAction,
+ IndependentDuodenary.RegisterNoiseBound,
+ Eq.refl,
+ OfNat.ofNat,
+ IndependentDuodenary.canonicalPack,
+ Eq,
+ IndependentDuodenary.recoverRegisterWords,
+ letFun,
+ IndependentDuodenary.encodeRegisterState,
+ Option]
+theorem IndependentDuodenary.canonical_operational_envelope : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (e : IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.PhaseRegular x.state →
+    ∀ (received : IndependentDuodenary.ProtectedRegisterWords r),
+      IndependentDuodenary.RegisterNoiseBound
+          (IndependentDuodenary.stationWordAction e
+            ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+              (IndependentDuodenary.canonicalEncodingNatural.app r x)))
+          received →
+        IndependentDuodenary.recoverCanonicalOperational e received =
+            some (IndependentDuodenary.canonicalPack ((IndependentDuodenary.registerStep h)^[n] x.state)) ∧
+          IndependentDuodenary.CanonicalInvariant x.state n ((IndependentDuodenary.registerStep h)^[n] x.state) ∧
+            IndependentDuodenary.ExternalRelativeEquivalent (IndependentDuodenary.registerPhases x.state)
+              (IndependentDuodenary.registerPhases ((IndependentDuodenary.registerStep h)^[n] x.state)) :=
+fun {r} h n e x hregular received hnoise =>
+  let_fun hinvariant := IndependentDuodenary.canonical_master_induction h x.state hregular n;
+  ⟨IndependentDuodenary.canonical_operational_recovery (IndependentDuodenary.registerStep h) n e x received hnoise,
+    ⟨hinvariant, IndependentDuodenary.canonical_invariant_relative hinvariant⟩⟩
+'IndependentDuodenary.canonical_operational_envelope' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_operational_envelope: [IndependentDuodenary.canonical_operational_recovery,
+ IndependentDuodenary.transportRegisterWords,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.registerStep,
+ IndependentDuodenary.ProtectedRegisterWords,
+ IndependentDuodenary.CanonicalInvariant,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.PhaseRegular,
+ Option.some,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ ZMod,
+ IndependentDuodenary.recoverCanonicalOperational,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.RegisterState,
+ List,
+ And,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ IndependentDuodenary.canonical_master_induction,
+ IndependentDuodenary.ExternalRelativeEquivalent,
+ Nat,
+ And.intro,
+ IndependentDuodenary.stationWordAction,
+ IndependentDuodenary.RegisterNoiseBound,
+ IndependentDuodenary.registerPhases,
+ IndependentDuodenary.canonical_invariant_relative,
+ OfNat.ofNat,
+ IndependentDuodenary.canonicalPack,
+ Eq,
+ letFun,
+ Option]
+theorem IndependentDuodenary.canonical_successor_channel_recovery : ∀ {r : ℕ}
+  (A : IndependentDuodenary.RegisterState r → IndependentDuodenary.RegisterState r) (n : ℕ)
+  (e : IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.recoverCanonicalOperational e
+      (IndependentDuodenary.successorCorruption
+        (IndependentDuodenary.stationWordAction e
+          ((IndependentDuodenary.transportRegisterWords A)^[n]
+            (IndependentDuodenary.canonicalEncodingNatural.app r x)))) =
+    some (IndependentDuodenary.canonicalPack (A^[n] x.state)) :=
+fun {r} A n e x =>
+  IndependentDuodenary.canonical_operational_recovery A n e x
+    (IndependentDuodenary.successorCorruption
+      (IndependentDuodenary.stationWordAction e
+        ((IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.canonicalEncodingNatural.app r x))))
+    (IndependentDuodenary.successor_register_noise
+      (IndependentDuodenary.stationWordAction e
+        ((IndependentDuodenary.transportRegisterWords A)^[n] (IndependentDuodenary.canonicalEncodingNatural.app r x))))
+'IndependentDuodenary.canonical_successor_channel_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_successor_channel_recovery: [IndependentDuodenary.canonical_operational_recovery,
+ IndependentDuodenary.transportRegisterWords,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.successor_register_noise,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ ZMod,
+ IndependentDuodenary.recoverCanonicalOperational,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.RegisterState,
+ List,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ IndependentDuodenary.successorCorruption,
+ Nat,
+ IndependentDuodenary.stationWordAction,
+ OfNat.ofNat,
+ IndependentDuodenary.canonicalPack,
+ Eq,
+ Option]
+theorem IndependentDuodenary.canonical_undo_run : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ)
+  (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.undoCanonicalDynamics h n
+      (IndependentDuodenary.canonicalPack ((IndependentDuodenary.registerStep h)^[n] x.state)) =
+    x :=
+fun {r} h n x =>
+  Equiv.injective (IndependentDuodenary.canonicalStateEquiv r)
+    (Function.LeftInverse.iterate
+      (IndependentDuodenary.successor_period_left_inverse (IndependentDuodenary.registerStep h) 11
+        (IndependentDuodenary.register_step_period_twelve h))
+      n x.state)
+'IndependentDuodenary.canonical_undo_run' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_undo_run: [IndependentDuodenary.registerStep,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.undoCanonicalDynamics,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ Function.LeftInverse.iterate,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ Nat,
+ IndependentDuodenary.canonicalStateEquiv,
+ Equiv.injective,
+ IndependentDuodenary.successor_period_left_inverse,
+ OfNat.ofNat,
+ IndependentDuodenary.canonicalPack,
+ Eq,
+ IndependentDuodenary.register_step_period_twelve]
+theorem IndependentDuodenary.canonical_initial_recovery : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (e : IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r)
+  (received : IndependentDuodenary.ProtectedRegisterWords r),
+  IndependentDuodenary.RegisterNoiseBound
+      (IndependentDuodenary.stationWordAction e
+        ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+          (IndependentDuodenary.canonicalEncodingNatural.app r x)))
+      received →
+    IndependentDuodenary.recoverCanonicalInitial h n e received = some x :=
+fun {r} h n e x received hnoise =>
+  let_fun this :=
+    let_fun hr :=
+      IndependentDuodenary.canonical_operational_recovery (IndependentDuodenary.registerStep h) n e x received hnoise;
+    Trans.trans (congrArg (fun y => Option.map (IndependentDuodenary.undoCanonicalDynamics h n) y) hr)
+      (congrArg some (IndependentDuodenary.canonical_undo_run h n x));
+  this
+'IndependentDuodenary.canonical_initial_recovery' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES canonical_initial_recovery: [IndependentDuodenary.canonical_operational_recovery,
+ IndependentDuodenary.transportRegisterWords,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ Trans.trans,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.registerStep,
+ congrArg,
+ IndependentDuodenary.ProtectedRegisterWords,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.canonicalEncodingNatural,
+ IndependentDuodenary.undoCanonicalDynamics,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ ZMod,
+ IndependentDuodenary.recoverCanonicalOperational,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.RegisterState,
+ instTransEq,
+ List,
+ Option.map,
+ IndependentDuodenary.CanonicalSubstrate.state,
+ Nat,
+ IndependentDuodenary.canonical_undo_run,
+ IndependentDuodenary.stationWordAction,
+ IndependentDuodenary.recoverCanonicalInitial,
+ IndependentDuodenary.RegisterNoiseBound,
+ OfNat.ofNat,
+ IndependentDuodenary.canonicalPack,
+ Eq,
+ letFun,
+ Option]
 theorem IndependentDuodenary.cipher_stage_normal_form : ∀ (p : IndependentDuodenary.CipherPeriod),
   IndependentDuodenary.cipherStage p = 12 * p.numerator / p.denominator % 360 :=
 fun p => Nat.mod_mul_left_div_self (12 * p.numerator) p.denominator 360
@@ -4084,6 +5447,302 @@ DIRECT DEPENDENCIES zero_divisor_mod_144: [Semiring.toNatCast,
  Eq,
  instOfNatAtLeastTwo,
  instHMul]
+theorem IndependentDuodenary.station_word_action_composition : ∀ (outer inner : IndependentDuodenary.StationExpr)
+  {r : ℕ} (words : IndependentDuodenary.RegisterWords r),
+  IndependentDuodenary.stationWordAction (outer.compose inner) words =
+    IndependentDuodenary.stationWordAction outer (IndependentDuodenary.stationWordAction inner words) :=
+fun outer inner {r} words =>
+  funext fun i =>
+    of_eq_true
+      (Eq.trans
+        (congrArg
+          (Eq
+            (List.map
+              (fun x => (IndependentDuodenary.stationMeaning outer) ((IndependentDuodenary.stationMeaning inner) x))
+              (words i)))
+          (List.map_map (⇑(IndependentDuodenary.stationMeaning outer)) (⇑(IndependentDuodenary.stationMeaning inner))
+            (words i)))
+        (eq_self
+          (List.map
+            (fun x => (IndependentDuodenary.stationMeaning outer) ((IndependentDuodenary.stationMeaning inner) x))
+            (words i))))
+'IndependentDuodenary.station_word_action_composition' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_word_action_composition: [Equiv.instFunLike,
+ IndependentDuodenary.StationExpr.compose,
+ congrArg,
+ List.map,
+ Function.comp,
+ List.map_map,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ funext,
+ List,
+ Equiv.Perm,
+ Nat,
+ True,
+ eq_self,
+ IndependentDuodenary.stationMeaning,
+ IndependentDuodenary.stationWordAction,
+ of_eq_true,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ DFunLike.coe,
+ Eq.trans]
+theorem IndependentDuodenary.station_program_compilation : ∀ (ops : List IndependentDuodenary.StationExpr) {r : ℕ}
+  (words : IndependentDuodenary.RegisterWords r),
+  IndependentDuodenary.runStationProgram ops words =
+    IndependentDuodenary.stationWordAction (IndependentDuodenary.compileStationProgram ops) words :=
+fun ops {r} words =>
+  List.rec (motive := fun ops =>
+    ∀ (words : IndependentDuodenary.RegisterWords r),
+      IndependentDuodenary.runStationProgram ops words =
+        IndependentDuodenary.stationWordAction (IndependentDuodenary.compileStationProgram ops) words)
+    (fun words =>
+      funext fun i =>
+        of_eq_true (Eq.trans (congrArg (fun x => words i = x (words i)) List.map_id_fun) (eq_self (words i))))
+    (fun e es ih words =>
+      id
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                _a =
+                  IndependentDuodenary.stationWordAction ((IndependentDuodenary.compileStationProgram es).compose e)
+                    words)
+              (ih (IndependentDuodenary.stationWordAction e words))))
+          (Eq.mpr
+            (id
+              (congrArg
+                (fun _a =>
+                  IndependentDuodenary.stationWordAction (IndependentDuodenary.compileStationProgram es)
+                      (IndependentDuodenary.stationWordAction e words) =
+                    _a)
+                (IndependentDuodenary.station_word_action_composition (IndependentDuodenary.compileStationProgram es) e
+                  words)))
+            (Eq.refl
+              (IndependentDuodenary.stationWordAction (IndependentDuodenary.compileStationProgram es)
+                (IndependentDuodenary.stationWordAction e words))))))
+    ops words
+'IndependentDuodenary.station_program_compilation' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES station_program_compilation: [Eq.mpr,
+ IndependentDuodenary.StationExpr.compose,
+ congrArg,
+ List.map,
+ id,
+ instOfNatNat,
+ List.rec,
+ IndependentDuodenary.RegisterWords,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ List.cons,
+ IndependentDuodenary.runStationProgram,
+ funext,
+ List,
+ Nat,
+ True,
+ eq_self,
+ IndependentDuodenary.stationWordAction,
+ of_eq_true,
+ Eq.refl,
+ IndependentDuodenary.station_word_action_composition,
+ IndependentDuodenary.compileStationProgram,
+ List.map_id_fun,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Eq.trans,
+ List.nil]
+theorem IndependentDuodenary.pipeline_master_composition : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (ops : List IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r)
+  (received : IndependentDuodenary.ProtectedRegisterWords r),
+  IndependentDuodenary.RegisterNoiseBound (IndependentDuodenary.pipelineTransmit h n ops x) received →
+    IndependentDuodenary.recoverCanonicalInitial h n (IndependentDuodenary.compileStationProgram ops) received =
+      some x :=
+fun {r} h n ops x received hnoise =>
+  IndependentDuodenary.canonical_initial_recovery h n (IndependentDuodenary.compileStationProgram ops) x received
+    (Eq.mp
+      (congrArg (fun x => IndependentDuodenary.RegisterNoiseBound x received)
+        (IndependentDuodenary.station_program_compilation ops
+          ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+            (IndependentDuodenary.canonicalEncodingNatural.app r x))))
+      hnoise)
+'IndependentDuodenary.pipeline_master_composition' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES pipeline_master_composition: [IndependentDuodenary.transportRegisterWords,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.registerStep,
+ congrArg,
+ IndependentDuodenary.ProtectedRegisterWords,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some,
+ IndependentDuodenary.pointwiseFamily,
+ Eq.mp,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.canonical_initial_recovery,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.station_program_compilation,
+ IndependentDuodenary.runStationProgram,
+ List,
+ Nat,
+ IndependentDuodenary.stationWordAction,
+ IndependentDuodenary.recoverCanonicalInitial,
+ IndependentDuodenary.RegisterNoiseBound,
+ IndependentDuodenary.compileStationProgram,
+ OfNat.ofNat,
+ IndependentDuodenary.pipelineTransmit,
+ Eq,
+ Option]
+theorem IndependentDuodenary.pipeline_noiseless_closure : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (ops : List IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.recoverCanonicalInitial h n (IndependentDuodenary.compileStationProgram ops)
+      (IndependentDuodenary.protectRegisterWords (IndependentDuodenary.pipelineTransmit h n ops x)) =
+    some x :=
+fun {r} h n ops x =>
+  IndependentDuodenary.pipeline_master_composition h n ops x
+    (IndependentDuodenary.protectRegisterWords (IndependentDuodenary.pipelineTransmit h n ops x))
+    (IndependentDuodenary.protected_register_noise_bound (IndependentDuodenary.pipelineTransmit h n ops x))
+'IndependentDuodenary.pipeline_noiseless_closure' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES pipeline_noiseless_closure: [IndependentDuodenary.pipeline_master_composition,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some,
+ IndependentDuodenary.protected_register_noise_bound,
+ IndependentDuodenary.protectRegisterWords,
+ IndependentDuodenary.StationExpr,
+ List,
+ Nat,
+ IndependentDuodenary.recoverCanonicalInitial,
+ IndependentDuodenary.compileStationProgram,
+ IndependentDuodenary.pipelineTransmit,
+ Eq,
+ Option]
+theorem IndependentDuodenary.pipeline_successor_channel_closure : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (ops : List IndependentDuodenary.StationExpr)
+  (x : IndependentDuodenary.CanonicalSubstrate r),
+  IndependentDuodenary.recoverCanonicalInitial h n (IndependentDuodenary.compileStationProgram ops)
+      (IndependentDuodenary.successorCorruption (IndependentDuodenary.pipelineTransmit h n ops x)) =
+    some x :=
+fun {r} h n ops x =>
+  IndependentDuodenary.pipeline_master_composition h n ops x
+    (IndependentDuodenary.successorCorruption (IndependentDuodenary.pipelineTransmit h n ops x))
+    (IndependentDuodenary.successor_register_noise (IndependentDuodenary.pipelineTransmit h n ops x))
+'IndependentDuodenary.pipeline_successor_channel_closure' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES pipeline_successor_channel_closure: [IndependentDuodenary.pipeline_master_composition,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some,
+ IndependentDuodenary.successor_register_noise,
+ IndependentDuodenary.StationExpr,
+ List,
+ IndependentDuodenary.successorCorruption,
+ Nat,
+ IndependentDuodenary.recoverCanonicalInitial,
+ IndependentDuodenary.compileStationProgram,
+ IndependentDuodenary.pipelineTransmit,
+ Eq,
+ Option]
+theorem IndependentDuodenary.pipeline_transmission_injective : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (ops : List IndependentDuodenary.StationExpr),
+  Function.Injective (IndependentDuodenary.pipelineTransmit h n ops) :=
+fun {r} h n ops ⦃x y⦄ heq =>
+  let_fun hr :=
+    congrArg
+      (fun words =>
+        IndependentDuodenary.recoverCanonicalInitial h n (IndependentDuodenary.compileStationProgram ops)
+          (IndependentDuodenary.protectRegisterWords words))
+      heq;
+  Option.some.inj
+    (Eq.mp (congrArg (fun _a => some x = _a) (IndependentDuodenary.pipeline_noiseless_closure h n ops y))
+      (Eq.mp
+        (congrArg
+          (fun _a =>
+            _a =
+              IndependentDuodenary.recoverCanonicalInitial h n (IndependentDuodenary.compileStationProgram ops)
+                (IndependentDuodenary.protectRegisterWords (IndependentDuodenary.pipelineTransmit h n ops y)))
+          (IndependentDuodenary.pipeline_noiseless_closure h n ops x))
+        hr))
+'IndependentDuodenary.pipeline_transmission_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES pipeline_transmission_injective: [congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some,
+ Eq.mp,
+ Option.some.inj,
+ IndependentDuodenary.RegisterWords,
+ IndependentDuodenary.protectRegisterWords,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.pipeline_noiseless_closure,
+ List,
+ Nat,
+ IndependentDuodenary.recoverCanonicalInitial,
+ IndependentDuodenary.compileStationProgram,
+ Function.Injective,
+ IndependentDuodenary.pipelineTransmit,
+ Eq,
+ letFun,
+ Option]
+theorem IndependentDuodenary.pipeline_recovered_state_unique : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (ops : List IndependentDuodenary.StationExpr)
+  (x y : IndependentDuodenary.CanonicalSubstrate r) (received : IndependentDuodenary.ProtectedRegisterWords r),
+  IndependentDuodenary.RegisterNoiseBound (IndependentDuodenary.pipelineTransmit h n ops x) received →
+    IndependentDuodenary.recoverCanonicalInitial h n (IndependentDuodenary.compileStationProgram ops) received =
+        some y →
+      y = x :=
+fun {r} h n ops x y received hnoise hrecovered =>
+  Eq.symm
+    (Option.some.inj
+      (Eq.mp
+        (congrArg (fun _a => _a = some y) (IndependentDuodenary.pipeline_master_composition h n ops x received hnoise))
+        hrecovered))
+'IndependentDuodenary.pipeline_recovered_state_unique' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES pipeline_recovered_state_unique: [IndependentDuodenary.pipeline_master_composition,
+ congrArg,
+ IndependentDuodenary.ProtectedRegisterWords,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ Option.some,
+ Eq.mp,
+ Option.some.inj,
+ IndependentDuodenary.StationExpr,
+ List,
+ Nat,
+ IndependentDuodenary.recoverCanonicalInitial,
+ IndependentDuodenary.RegisterNoiseBound,
+ IndependentDuodenary.compileStationProgram,
+ Eq.symm,
+ IndependentDuodenary.pipelineTransmit,
+ Eq,
+ Option]
+theorem IndependentDuodenary.pipeline_empty_transmission_rejected : ∀ (h : IndependentDuodenary.RegisterTranslation 1)
+  (n : ℕ) (ops : List IndependentDuodenary.StationExpr),
+  (IndependentDuodenary.recoverCanonicalInitial h n (IndependentDuodenary.compileStationProgram ops) fun x => []) =
+    none :=
+fun h n ops => rfl
+'IndependentDuodenary.pipeline_empty_transmission_rejected' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES pipeline_empty_transmission_rejected: [IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ Option.none,
+ List,
+ Nat,
+ IndependentDuodenary.recoverCanonicalInitial,
+ IndependentDuodenary.compileStationProgram,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ rfl,
+ List.nil,
+ Option]
 theorem IndependentDuodenary.register_decode_encode : ∀ (r : ℕ) (q : IndependentDuodenary.RegisterState r),
   IndependentDuodenary.decodeRegisterWords r (IndependentDuodenary.encodeRegisterState q) = some q :=
 fun r q =>
@@ -5006,112 +6665,135 @@ theorem IndependentDuodenary.register_cycle_projection : ∀ {r s : ℕ} (select
   (q : IndependentDuodenary.RegisterState r),
   IndependentDuodenary.projectRegisters select (IndependentDuodenary.registerCycle q) =
     IndependentDuodenary.registerCycle (IndependentDuodenary.projectRegisters select q) :=
-fun {r s} select q => rfl
+fun {r s} select q =>
+  (IndependentDuodenary.pointwiseNaturalMap IndependentDuodenary.keyCoordinateCycle).naturality select q
 'IndependentDuodenary.register_cycle_projection' depends on axioms: [propext, Quot.sound]
 DIRECT DEPENDENCIES register_cycle_projection: [IndependentDuodenary.registerCycle,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.pointwiseFamily,
  IndependentDuodenary.projectRegisters,
  IndependentDuodenary.RegisterState,
  Nat,
+ IndependentDuodenary.pointwiseNaturalMap,
+ IndependentDuodenary.keyCoordinateCycle,
  Fin,
  Eq,
- rfl]
+ IndependentDuodenary.RegisterNaturalMap.naturality]
 theorem IndependentDuodenary.register_translate_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
   (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
   IndependentDuodenary.projectRegisters select (IndependentDuodenary.registerTranslate h q) =
     IndependentDuodenary.registerTranslate (fun i => h (select i)) (IndependentDuodenary.projectRegisters select q) :=
-fun {r s} select h q => rfl
+fun {r s} select h q =>
+  (IndependentDuodenary.pointwiseBinaryNaturalMap fun h q => IndependentDuodenary.translateKey h q).naturality select
+    (h, q)
 'IndependentDuodenary.register_translate_projection' depends on axioms: [propext, Quot.sound]
-DIRECT DEPENDENCIES register_translate_projection: [IndependentDuodenary.RegisterTranslation,
+DIRECT DEPENDENCIES register_translate_projection: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.productRegisterFamily,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ IndependentDuodenary.pointwiseBinaryNaturalMap,
  IndependentDuodenary.projectRegisters,
  IndependentDuodenary.registerTranslate,
+ Distrib.toAdd,
+ Prod.mk,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.translateKey,
  IndependentDuodenary.RegisterState,
+ Pi.instAdd,
  Nat,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.KeyComplement,
+ OfNat.ofNat,
  Fin,
  Eq,
- rfl]
+ IndependentDuodenary.RegisterNaturalMap.naturality,
+ IndependentDuodenary.KeyMetadata]
 theorem IndependentDuodenary.register_step_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
   (h : IndependentDuodenary.RegisterTranslation r) (q : IndependentDuodenary.RegisterState r),
   IndependentDuodenary.projectRegisters select (IndependentDuodenary.registerStep h q) =
     IndependentDuodenary.registerStep (fun i => h (select i)) (IndependentDuodenary.projectRegisters select q) :=
-fun {r s} select h q => rfl
+fun {r s} select h q =>
+  (IndependentDuodenary.pointwiseBinaryNaturalMap fun h q =>
+        IndependentDuodenary.translateKey h (IndependentDuodenary.keyCoordinateCycle q)).naturality
+    select (h, q)
 'IndependentDuodenary.register_step_projection' depends on axioms: [propext, Quot.sound]
-DIRECT DEPENDENCIES register_step_projection: [IndependentDuodenary.registerStep,
+DIRECT DEPENDENCIES register_step_projection: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ IndependentDuodenary.registerStep,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.productRegisterFamily,
  IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ IndependentDuodenary.pointwiseBinaryNaturalMap,
  IndependentDuodenary.projectRegisters,
+ Distrib.toAdd,
+ Prod.mk,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.translateKey,
  IndependentDuodenary.RegisterState,
+ Pi.instAdd,
  Nat,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.KeyComplement,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
  Fin,
  Eq,
- rfl]
+ IndependentDuodenary.RegisterNaturalMap.naturality,
+ IndependentDuodenary.KeyMetadata]
 theorem IndependentDuodenary.register_step_projection_iterate : ∀ {r s : ℕ} (select : Fin s → Fin r)
   (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (q : IndependentDuodenary.RegisterState r),
   IndependentDuodenary.projectRegisters select ((IndependentDuodenary.registerStep h)^[n] q) =
     (IndependentDuodenary.registerStep fun i => h (select i))^[n] (IndependentDuodenary.projectRegisters select q) :=
 fun {r s} select h n q =>
-  Nat.recAux (Eq.refl (IndependentDuodenary.projectRegisters select ((IndependentDuodenary.registerStep h)^[0] q)))
-    (fun n ih =>
-      Eq.mpr
-        (id
-          (congrArg
-            (fun _a =>
-              IndependentDuodenary.projectRegisters select _a =
-                (IndependentDuodenary.registerStep fun i => h (select i))^[n + 1]
-                  (IndependentDuodenary.projectRegisters select q))
-            (Function.iterate_succ_apply' (IndependentDuodenary.registerStep h) n q)))
-        (Eq.mpr
-          (id
-            (congrArg
-              (fun _a =>
-                IndependentDuodenary.projectRegisters select
-                    (IndependentDuodenary.registerStep h ((IndependentDuodenary.registerStep h)^[n] q)) =
-                  _a)
-              (Function.iterate_succ_apply' (IndependentDuodenary.registerStep fun i => h (select i)) n
-                (IndependentDuodenary.projectRegisters select q))))
-          (Eq.mpr
-            (id
-              (congrArg
-                (fun _a =>
-                  _a =
-                    IndependentDuodenary.registerStep (fun i => h (select i))
-                      ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
-                        (IndependentDuodenary.projectRegisters select q)))
-                (IndependentDuodenary.register_step_projection select h ((IndependentDuodenary.registerStep h)^[n] q))))
-            (Eq.mpr
-              (id
-                (congrArg
-                  (fun _a =>
-                    IndependentDuodenary.registerStep (fun i => h (select i)) _a =
-                      IndependentDuodenary.registerStep (fun i => h (select i))
-                        ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
-                          (IndependentDuodenary.projectRegisters select q)))
-                  ih))
-              (Eq.refl
-                (IndependentDuodenary.registerStep (fun i => h (select i))
-                  ((IndependentDuodenary.registerStep fun i => h (select i))^[n]
-                    (IndependentDuodenary.projectRegisters select q))))))))
-    n
+  IndependentDuodenary.register_natural_parameter_iterate
+    (IndependentDuodenary.pointwiseBinaryNaturalMap fun h q =>
+      IndependentDuodenary.translateKey h (IndependentDuodenary.keyCoordinateCycle q))
+    select h n q
 'IndependentDuodenary.register_step_projection_iterate' depends on axioms: [propext, Quot.sound]
-DIRECT DEPENDENCIES register_step_projection_iterate: [Function.iterate_succ_apply',
- Eq.mpr,
- Nat.recAux,
+DIRECT DEPENDENCIES register_step_projection_iterate: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
  IndependentDuodenary.registerStep,
- IndependentDuodenary.register_step_projection,
- congrArg,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
  IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.pointwiseBinaryNaturalMap,
  IndependentDuodenary.projectRegisters,
- id,
+ Distrib.toAdd,
  instOfNatNat,
  Nat.iterate,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.translateKey,
  IndependentDuodenary.RegisterState,
- instHAdd,
- HAdd.hAdd,
+ Pi.instAdd,
  Nat,
- instAddNat,
- Eq.refl,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.register_natural_parameter_iterate,
+ IndependentDuodenary.KeyComplement,
  OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
  Fin,
- Nat.succ,
- Eq]
+ Eq,
+ IndependentDuodenary.KeyMetadata]
 theorem IndependentDuodenary.register_relative_projection : ∀ {r s : ℕ} (select : Fin s → Fin r)
   (q : IndependentDuodenary.RegisterState r) (i j : Fin s),
   IndependentDuodenary.relativePhases
@@ -6607,6 +8289,123 @@ DIRECT DEPENDENCIES two_register_sum_collapse: [Semiring.toNatCast,
  Eq,
  instOfNatAtLeastTwo,
  Finset.sum]
+theorem IndependentDuodenary.retained_register_natural_injective : ∀ {F G : IndependentDuodenary.RegisterFamily}
+  (f : IndependentDuodenary.RegisterNaturalMap F G) (r : ℕ),
+  Function.Injective ((IndependentDuodenary.retainRegisterNatural f).app r) :=
+fun {F G} f r ⦃x y⦄ h => congrArg Prod.fst h
+'IndependentDuodenary.retained_register_natural_injective' depends on axioms: [propext]
+DIRECT DEPENDENCIES retained_register_natural_injective: [IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.RegisterFamily,
+ congrArg,
+ IndependentDuodenary.productRegisterFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ Prod.fst,
+ Nat,
+ IndependentDuodenary.RegisterNaturalMap,
+ Function.Injective,
+ Prod,
+ Eq,
+ IndependentDuodenary.retainRegisterNatural]
+theorem IndependentDuodenary.register_natural_parameter_iterate : ∀ {F H : IndependentDuodenary.RegisterFamily}
+  (A : IndependentDuodenary.RegisterNaturalMap (IndependentDuodenary.productRegisterFamily H F) F) {r s : ℕ}
+  (select : Fin s → Fin r) (h : H.Carrier r) (n : ℕ) (x : F.Carrier r),
+  F.restrict select ((fun y => A.app r (h, y))^[n] x) =
+    (fun y => A.app s (H.restrict select h, y))^[n] (F.restrict select x) :=
+fun {F H} A {r s} select h n x =>
+  Nat.recAux (Eq.refl (F.restrict select ((fun y => A.app r (h, y))^[0] x)))
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun _a => F.restrict select _a = (fun y => A.app s (H.restrict select h, y))^[n + 1] (F.restrict select x))
+            (Function.iterate_succ_apply' (fun y => A.app r (h, y)) n x)))
+        (Eq.mpr
+          (id
+            (congrArg (fun _a => F.restrict select (A.app r (h, (fun y => A.app r (h, y))^[n] x)) = _a)
+              (Function.iterate_succ_apply' (fun y => A.app s (H.restrict select h, y)) n (F.restrict select x))))
+          (Eq.mpr
+            (id
+              (congrArg
+                (fun _a =>
+                  _a =
+                    A.app s
+                      (H.restrict select h, (fun y => A.app s (H.restrict select h, y))^[n] (F.restrict select x)))
+                (A.naturality select (h, (fun y => A.app r (h, y))^[n] x))))
+            (let_fun this :=
+              Eq.mpr
+                (id
+                  (congrArg
+                    (fun _a =>
+                      A.app s (H.restrict select h, _a) =
+                        A.app s
+                          (H.restrict select h, (fun y => A.app s (H.restrict select h, y))^[n] (F.restrict select x)))
+                    ih))
+                (Eq.refl
+                  (A.app s
+                    (H.restrict select h, (fun y => A.app s (H.restrict select h, y))^[n] (F.restrict select x))));
+            this))))
+    n
+'IndependentDuodenary.register_natural_parameter_iterate' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES register_natural_parameter_iterate: [Function.iterate_succ_apply',
+ Eq.mpr,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ Nat.recAux,
+ IndependentDuodenary.RegisterFamily,
+ congrArg,
+ IndependentDuodenary.productRegisterFamily,
+ IndependentDuodenary.RegisterFamily.Carrier,
+ id,
+ Prod.mk,
+ instOfNatNat,
+ Nat.iterate,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ IndependentDuodenary.RegisterNaturalMap,
+ instAddNat,
+ Eq.refl,
+ OfNat.ofNat,
+ Fin,
+ Nat.succ,
+ Eq,
+ IndependentDuodenary.RegisterNaturalMap.naturality,
+ IndependentDuodenary.RegisterFamily.restrict,
+ letFun]
+theorem IndependentDuodenary.successor_period_left_inverse : ∀ {A : Type} (T : A → A) (n : ℕ),
+  (∀ (x : A), T^[n + 1] x = x) → Function.LeftInverse T^[n] T :=
+fun {A} T n hperiod x =>
+  Eq.mpr (id (congrArg (fun _a => _a = x) (Eq.symm (Function.iterate_succ_apply T n x)))) (hperiod x)
+'IndependentDuodenary.successor_period_left_inverse' does not depend on any axioms
+DIRECT DEPENDENCIES successor_period_left_inverse: [Eq.mpr,
+ Function.LeftInverse,
+ congrArg,
+ id,
+ instOfNatNat,
+ Nat.iterate,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ Function.iterate_succ_apply,
+ instAddNat,
+ OfNat.ofNat,
+ Eq.symm,
+ Nat.succ,
+ Eq]
+theorem IndependentDuodenary.successor_period_injective : ∀ {A : Type} (T : A → A) (n : ℕ),
+  (∀ (x : A), T^[n + 1] x = x) → Function.Injective T :=
+fun {A} T n hperiod => Function.LeftInverse.injective (IndependentDuodenary.successor_period_left_inverse T n hperiod)
+'IndependentDuodenary.successor_period_injective' does not depend on any axioms
+DIRECT DEPENDENCIES successor_period_injective: [Function.LeftInverse.injective,
+ instOfNatNat,
+ Nat.iterate,
+ instHAdd,
+ HAdd.hAdd,
+ Nat,
+ instAddNat,
+ Function.Injective,
+ IndependentDuodenary.successor_period_left_inverse,
+ OfNat.ofNat,
+ Eq]
 theorem IndependentDuodenary.sourceSupportBlock_pullback.{u_1, u_2, u_3} : ∀ {E : Type u_1} {X : Type u_2}
   {V : Type u_3} [inst : Zero V] [inst_1 : DecidableEq V] (b : IndependentDuodenary.FullBlock E X V),
   IndependentDuodenary.pullbackBlock (IndependentDuodenary.sourceSupportBlock b) = b :=
@@ -18270,4 +20069,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 297 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 342 theorem declarations; only standard Lean axioms permitted.

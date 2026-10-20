@@ -8,11 +8,13 @@ import sys
 root = Path(__file__).resolve().parent.parent
 modules = [root / 'IndependentDuodenary.lean', *sorted((root / 'IndependentDuodenary').rglob('*.lean'))]
 names = []
-for path in modules:
+support_modules = [root / "PipelineMain.lean", *sorted((root / "examples").glob("*.lean"))]
+for path in [*modules, *support_modules]:
     text = path.read_text()
     if re.search(r'\b(sorry|admit|native_decide|axiom)\b', text):
         sys.exit(f'Forbidden proof placeholder, native evaluator, or axiom in {path.name}')
-    names.extend(re.findall(r'^(?:theorem|lemma)\s+(\w+)', text, re.MULTILINE))
+    if path in modules:
+        names.extend(re.findall(r'^(?:theorem|lemma)\s+(\w+)', text, re.MULTILINE))
 if not names:
     sys.exit('No theorems found')
 commands = ['import IndependentDuodenary', 'import Lean.Util.FoldConsts', 'set_option pp.proofs true']

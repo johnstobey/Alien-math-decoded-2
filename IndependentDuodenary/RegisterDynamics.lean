@@ -1,4 +1,5 @@
 import IndependentDuodenary.SourceKeyRepresentation
+import IndependentDuodenary.RegisterNaturality
 
 /-! Finite products of the constructed key operator. Phase equivariance has
 an explicit one-hot boundary; it is not asserted on arbitrary binary vectors. -/
@@ -34,26 +35,27 @@ def phaseAdvance {r : ℕ} (a : RegisterPhase r) : RegisterPhase r := fun i => a
 def relativePhases {r : ℕ} (a : RegisterPhase r) (i j : Fin r) : ZMod 12 := a j - a i
 
 theorem register_cycle_projection {r s : ℕ} (select : Fin s → Fin r) (q : RegisterState r) :
-    projectRegisters select (registerCycle q) = registerCycle (projectRegisters select q) := rfl
+    projectRegisters select (registerCycle q) = registerCycle (projectRegisters select q) :=
+  (pointwiseNaturalMap keyCoordinateCycle).naturality select q
 
 theorem register_translate_projection {r s : ℕ} (select : Fin s → Fin r)
     (h : RegisterTranslation r) (q : RegisterState r) :
     projectRegisters select (registerTranslate h q) =
-      registerTranslate (fun i => h (select i)) (projectRegisters select q) := rfl
+      registerTranslate (fun i => h (select i)) (projectRegisters select q) :=
+  (pointwiseBinaryNaturalMap (fun h q => translateKey h q)).naturality select (h, q)
 
 theorem register_step_projection {r s : ℕ} (select : Fin s → Fin r)
     (h : RegisterTranslation r) (q : RegisterState r) :
     projectRegisters select (registerStep h q) =
-      registerStep (fun i => h (select i)) (projectRegisters select q) := rfl
+      registerStep (fun i => h (select i)) (projectRegisters select q) :=
+  (pointwiseBinaryNaturalMap (fun h q => translateKey h (keyCoordinateCycle q))).naturality select (h, q)
 
 theorem register_step_projection_iterate {r s : ℕ} (select : Fin s → Fin r)
     (h : RegisterTranslation r) (n : ℕ) (q : RegisterState r) :
     projectRegisters select (((registerStep h)^[n]) q) =
       (((registerStep (fun i => h (select i)))^[n]) (projectRegisters select q)) := by
-  induction n with
-  | zero => rfl
-  | succ n ih =>
-    rw [Function.iterate_succ_apply', Function.iterate_succ_apply', register_step_projection, ih]
+  exact register_natural_parameter_iterate
+    (pointwiseBinaryNaturalMap (fun h q => translateKey h (keyCoordinateCycle q))) select h n q
 
 theorem register_relative_projection {r s : ℕ} (select : Fin s → Fin r)
     (q : RegisterState r) (i j : Fin s) :

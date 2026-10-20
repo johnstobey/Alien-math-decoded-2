@@ -38,6 +38,12 @@ connects the supplied claims to the checked results and identifies the remaining
 - `RegisterDynamics`, `RegisterBridge`: product operators, subsystem
   projections, exact orbit bounds, and inductive transport of metadata and
   modular relative-phase invariants. See [formal boundaries and dependencies](verification/REGISTER_BRIDGE.md).
+- `RegisterNaturality`, `CanonicalArchitecture`: a common naturality interface,
+  canonical full-state representation, master invariant induction and bounded-error
+  recovery of final and original states. See [exact scope and dependencies](verification/CANONICAL_ENVELOPE.md).
+- `PipelineSynthesis`, `PipelineHarness`: arbitrary validated station-program
+  composition, exact recovery of initial states, and executable boundary checks.
+  See [deployment harness](verification/PIPELINE_DEPLOYMENT.md).
 - `MappingBoundary`: an explicit internal map from natural addition to modular
   addition; a general image-closure theorem **assuming** operation preservation;
   and a level-return statement **assuming** the stated level and step values.
@@ -47,6 +53,16 @@ projection, reduction, folding, and key-sharing identities. The full paper
 construction and its Unique Games result are not formalized. Residue-valued
 observables require a chosen functional and labeling; no full ring identification
 is claimed. Conditional level assumptions are not established for an external source.
+
+## Verification executable
+
+```sh
+lake build
+lake exe verifyPipeline
+```
+
+The executable runs thirteen end-to-end boundary checks and exits nonzero on
+failure. See [composition proofs, integration and exact scope](verification/PIPELINE_DEPLOYMENT.md).
 
 ## Reproduce
 

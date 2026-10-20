@@ -43,5 +43,29 @@ jobs:
           done
       - name: Verify product dynamics and modular bridge
         run: lake env lean examples/RegisterDirectives.lean
+      - name: Require warning-free canonical architecture
+        run: |
+          for proof_module in RegisterNaturality RegisterDynamics CanonicalArchitecture
+          do
+            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee canonical-check.log
+            test ! -s canonical-check.log
+          done
+      - name: Verify canonical operational envelope
+        run: lake env lean examples/CanonicalDirectives.lean
+      - name: Require warning-free synthesis and harness
+        run: |
+          for proof_module in PipelineSynthesis PipelineHarness
+          do
+            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee synthesis-check.log
+            test ! -s synthesis-check.log
+          done
+          lake env lean PipelineMain.lean 2>&1 | tee runner-check.log
+          test ! -s runner-check.log
+          lake env lean examples/PipelineRunner.lean 2>&1 | tee pipeline-runner-check.log
+          test ! -s pipeline-runner-check.log
+      - name: Check arbitrary station-program closure
+        run: lake env lean examples/PipelineDirectives.lean
+      - name: Run executable verification guard
+        run: lake exe verifyPipeline
       - name: Ensure dependency lockfile stayed unchanged
         run: git diff --exit-code -- lake-manifest.json lean-toolchain

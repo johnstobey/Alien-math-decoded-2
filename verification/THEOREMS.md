@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 297 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 342 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -583,6 +583,545 @@ Proof method: Specialization of weightLayer_card and kernel-checked computation.
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES zero_bits_count` and the printed proof in the machine-generated audit.
+
+## `canonical_coefficient_roundtrip`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_coefficient_roundtrip {r : ℕ} (x : CanonicalSubstrate r) :
+    canonicalFromCoefficients (canonicalCoefficientNatural.app r x) = x
+```
+
+Proof method: Kernel-checked tactic proof using cases. Exact terms and dependencies are in the audit.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_coefficient_roundtrip` and the printed proof in the machine-generated audit.
+
+## `canonical_coefficient_encoding_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_coefficient_encoding_injective (r : ℕ) :
+    Function.Injective (canonicalCoefficientNatural.app r)
+```
+
+Proof method: Kernel-checked tactic proof using simpa, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_coefficient_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `canonical_decode_encode`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_decode_encode {r : ℕ} (x : CanonicalSubstrate r) :
+    canonicalDecode r (canonicalEncodingNatural.app r x) = some x
+```
+
+Proof method: Kernel-checked tactic proof using cases, simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_decode_encode` and the printed proof in the machine-generated audit.
+
+## `canonical_encoding_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_encoding_injective (r : ℕ) :
+    Function.Injective (canonicalEncodingNatural.app r)
+```
+
+Proof method: Kernel-checked tactic proof using simpa, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `canonical_cycle_translation_commute`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_cycle_translation_commute {r : ℕ} (h : RegisterTranslation r)
+    (x : CanonicalSubstrate r) :
+    canonicalCycleNatural.app r (canonicalTranslationNatural.app r (h, x)) =
+      canonicalTranslationNatural.app r (h, canonicalCycleNatural.app r x)
+```
+
+Proof method: Kernel-checked tactic proof using exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_cycle_translation_commute` and the printed proof in the machine-generated audit.
+
+## `canonical_cycle_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_cycle_injective (r : ℕ) :
+    Function.Injective (canonicalCycleNatural.app r)
+```
+
+Proof method: Kernel-checked tactic proof using funext, rw, exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_cycle_injective` and the printed proof in the machine-generated audit.
+
+## `canonical_translation_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_translation_injective {r : ℕ} (h : RegisterTranslation r) :
+    Function.Injective (fun x : CanonicalSubstrate r => canonicalTranslationNatural.app r (h, x))
+```
+
+Proof method: Kernel-checked tactic proof using funext, rw, exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_translation_injective` and the printed proof in the machine-generated audit.
+
+## `canonical_step_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_step_injective {r : ℕ} (h : RegisterTranslation r) :
+    Function.Injective (fun x : CanonicalSubstrate r => canonicalStepNatural.app r (h, x))
+```
+
+Proof method: Kernel-checked tactic proof using exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_step_injective` and the printed proof in the machine-generated audit.
+
+## `canonical_phase_translation_invariant`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_phase_translation_invariant {r : ℕ} (h : RegisterTranslation r)
+    (x : CanonicalSubstrate r) :
+    canonicalPhaseNatural.app r (canonicalTranslationNatural.app r (h, x)) =
+      canonicalPhaseNatural.app r x
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_phase_translation_invariant` and the printed proof in the machine-generated audit.
+
+## `canonical_phase_projection_not_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_phase_projection_not_injective :
+    ¬ Function.Injective (canonicalPhaseNatural.app 1)
+```
+
+Proof method: Kernel-checked tactic proof using exact, change, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext,
+ Classical.choice,
+ Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_phase_projection_not_injective` and the printed proof in the machine-generated audit.
+
+## `canonical_retained_phase_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_retained_phase_injective (r : ℕ) :
+    Function.Injective ((retainRegisterNatural canonicalPhaseNatural).app r)
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_retained_phase_injective` and the printed proof in the machine-generated audit.
+
+## `retained_coefficient_pullback_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem retained_coefficient_pullback_injective {k : ℕ} {E X V : Type}
+    [AddCommMonoid V] (r : ℕ) :
+    Function.Injective ((retainRegisterNatural
+      (coefficientPullbackNatural (k
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext,
+ Classical.choice,
+ Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES retained_coefficient_pullback_injective` and the printed proof in the machine-generated audit.
+
+## `canonical_coefficient_semantics`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_coefficient_semantics {k r : ℕ} {E X V : Type}
+    [AddCommMonoid V] [Module (ZMod 2) V]
+    (t : Fin r → ProjectedTable k E X V)
+    (p : Fin r → ZMod 2 × (Fin k → ZMod 2 × ZMod 2)) :
+    (fun i => evaluateFullTable (pullbackTable (t i)) (p i)) =
+      fun i => evaluateProjectedTable (t i) (permittedProjection (t i) (p i))
+```
+
+Proof method: Kernel-checked tactic proof using funext, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_coefficient_semantics` and the printed proof in the machine-generated audit.
+
+## `canonical_master_induction`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_master_induction {r : ℕ} (h : RegisterTranslation r)
+    (initial : RegisterState r) (hregular : PhaseRegular initial) (n : ℕ) :
+    CanonicalInvariant initial n (((registerStep h)^[n]) initial)
+```
+
+Proof method: Kernel-checked tactic proof using induction, funext, rw, simp, refine, exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_master_induction` and the printed proof in the machine-generated audit.
+
+## `canonical_invariant_relative`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_invariant_relative {r n : ℕ} {initial final : RegisterState r}
+    (h : CanonicalInvariant initial n final) :
+    ExternalRelativeEquivalent (registerPhases initial) (registerPhases final)
+```
+
+Proof method: Kernel-checked tactic proof using rw, simp, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_invariant_relative` and the printed proof in the machine-generated audit.
+
+## `canonical_master_period`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_master_period {r : ℕ} (h : RegisterTranslation r)
+    (initial : RegisterState r) : ((registerStep h)^[12]) initial = initial
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_master_period` and the printed proof in the machine-generated audit.
+
+## `aligned_triple_noise_recovery`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem aligned_triple_noise_recovery (word : List (ZMod 12))
+    (received : List (Fin 3 → ZMod 12)) (h : AlignedTripleNoise word received) :
+    received.map tripleMajority = word
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw, change. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES aligned_triple_noise_recovery` and the printed proof in the machine-generated audit.
+
+## `aligned_triple_noise_length`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem aligned_triple_noise_length (word : List (ZMod 12))
+    (received : List (Fin 3 → ZMod 12)) (h : AlignedTripleNoise word received) :
+    word.length = received.length
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES aligned_triple_noise_length` and the printed proof in the machine-generated audit.
+
+## `protected_register_words_recovery`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem protected_register_words_recovery {r : ℕ} (words : RegisterWords r)
+    (received : ProtectedRegisterWords r) (h : RegisterNoiseBound words received) :
+    recoverRegisterWords received = words
+```
+
+Proof method: Kernel-checked tactic proof using funext, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protected_register_words_recovery` and the printed proof in the machine-generated audit.
+
+## `aligned_triple_noise_protect`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem aligned_triple_noise_protect (word : List (ZMod 12)) :
+    AlignedTripleNoise word (word.map (repetitionWord 3))
+```
+
+Proof method: Kernel-checked tactic proof using induction, simp, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES aligned_triple_noise_protect` and the printed proof in the machine-generated audit.
+
+## `protected_register_noise_bound`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem protected_register_noise_bound {r : ℕ} (words : RegisterWords r) :
+    RegisterNoiseBound words (protectRegisterWords words)
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protected_register_noise_bound` and the printed proof in the machine-generated audit.
+
+## `station_word_action_inverse`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem station_word_action_inverse (e : StationExpr) {r : ℕ} (words : RegisterWords r) :
+    undoStationWordAction e (stationWordAction e words) = words
+```
+
+Proof method: Kernel-checked tactic proof using funext, simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_word_action_inverse` and the printed proof in the machine-generated audit.
+
+## `canonical_transmitted_word_length`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_transmitted_word_length {r : ℕ} (A : RegisterState r → RegisterState r)
+    (n : ℕ) (e : StationExpr) (x : CanonicalSubstrate r) (i : Fin r) :
+    (stationWordAction e (((transportRegisterWords A)^[n])
+      (canonicalEncodingNatural.app r x)) i).length = 17
+```
+
+Proof method: Kernel-checked tactic proof using rw, simp, change. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_transmitted_word_length` and the printed proof in the machine-generated audit.
+
+## `canonical_received_word_length`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_received_word_length {r : ℕ} (A : RegisterState r → RegisterState r)
+    (n : ℕ) (e : StationExpr) (x : CanonicalSubstrate r) (received : ProtectedRegisterWords r)
+    (hnoise : RegisterNoiseBound
+      (stationWordAction e (((transportRegisterWords A)^[n]) (canonicalEncodingNatural.app r x))) received)
+    (i : Fin r) : (received i).length = 17
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_received_word_length` and the printed proof in the machine-generated audit.
+
+## `canonical_station_encoding_injective`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_station_encoding_injective (r : ℕ) (e : StationExpr) :
+    Function.Injective (fun x : CanonicalSubstrate r =>
+      stationWordAction e (canonicalEncodingNatural.app r x))
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_station_encoding_injective` and the printed proof in the machine-generated audit.
+
+## `successor_triple_noise`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem successor_triple_noise : ∀ a : ZMod 12,
+    wordDistance (repetitionWord 3 a) ![a + 1, a, a] ≤ 1
+```
+
+Proof method: Kernel-checked finite decision procedure (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES successor_triple_noise` and the printed proof in the machine-generated audit.
+
+## `successor_word_noise`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem successor_word_noise (word : List (ZMod 12)) :
+    AlignedTripleNoise word (word.map (fun a => ![a + 1, a, a]))
+```
+
+Proof method: Kernel-checked tactic proof using induction, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES successor_word_noise` and the printed proof in the machine-generated audit.
+
+## `successor_register_noise`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem successor_register_noise {r : ℕ} (words : RegisterWords r) :
+    RegisterNoiseBound words (successorCorruption words)
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES successor_register_noise` and the printed proof in the machine-generated audit.
+
+## `canonical_operational_recovery`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_operational_recovery {r : ℕ} (A : RegisterState r → RegisterState r)
+    (n : ℕ) (e : StationExpr) (x : CanonicalSubstrate r) (received : ProtectedRegisterWords r)
+    (hnoise : RegisterNoiseBound
+      (stationWordAction e (((transportRegisterWords A)^[n]) (canonicalEncodingNatural.app r x))) received) :
+    recoverCanonicalOperational e received = some (canonicalPack ((A^[n]) x.state))
+```
+
+Proof method: Kernel-checked tactic proof using rw, change, unfold. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_operational_recovery` and the printed proof in the machine-generated audit.
+
+## `canonical_operational_envelope`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_operational_envelope {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (e : StationExpr) (x : CanonicalSubstrate r) (hregular : PhaseRegular x.state)
+    (received : ProtectedRegisterWords r)
+    (hnoise : RegisterNoiseBound
+      (stationWordAction e (((transportRegisterWords (registerStep h))^[n])
+        (canonicalEncodingNatural.app r x))) received) :
+    recoverCanonicalOperational e received = some (canonicalPack (((registerStep h)^[n]) x.state)) ∧
+    CanonicalInvariant x.state n (((registerStep h)^[n]) x.state) ∧
+    ExternalRelativeEquivalent (registerPhases x.state)
+      (registerPhases (((registerStep h)^[n]) x.state))
+```
+
+Proof method: Kernel-checked tactic proof using exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_operational_envelope` and the printed proof in the machine-generated audit.
+
+## `canonical_successor_channel_recovery`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_successor_channel_recovery {r : ℕ} (A : RegisterState r → RegisterState r)
+    (n : ℕ) (e : StationExpr) (x : CanonicalSubstrate r) :
+    recoverCanonicalOperational e (successorCorruption (stationWordAction e
+      (((transportRegisterWords A)^[n]) (canonicalEncodingNatural.app r x)))) =
+      some (canonicalPack ((A^[n]) x.state))
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_successor_channel_recovery` and the printed proof in the machine-generated audit.
+
+## `canonical_undo_run`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_undo_run {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (x : CanonicalSubstrate r) :
+    undoCanonicalDynamics h n (canonicalPack (((registerStep h)^[n]) x.state)) = x
+```
+
+Proof method: Kernel-checked tactic proof using exact, apply. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_undo_run` and the printed proof in the machine-generated audit.
+
+## `canonical_initial_recovery`
+
+Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed**.
+
+```lean
+theorem canonical_initial_recovery {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (e : StationExpr) (x : CanonicalSubstrate r) (received : ProtectedRegisterWords r)
+    (hnoise : RegisterNoiseBound
+      (stationWordAction e (((transportRegisterWords (registerStep h))^[n])
+        (canonicalEncodingNatural.app r x))) received) :
+    recoverCanonicalInitial h n e received = some x
+```
+
+Proof method: Kernel-checked tactic proof using change, calc. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES canonical_initial_recovery` and the printed proof in the machine-generated audit.
 
 ## `cipher_stage_normal_form`
 
@@ -1491,6 +2030,137 @@ Axioms: `propext, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES zero_divisor_mod_144` and the printed proof in the machine-generated audit.
 
+## `station_word_action_composition`
+
+Source: `IndependentDuodenary/PipelineSynthesis.lean`. Compilation: **passed**.
+
+```lean
+theorem station_word_action_composition (outer inner : StationExpr) {r : ℕ}
+    (words : RegisterWords r) :
+    stationWordAction (.compose outer inner) words =
+      stationWordAction outer (stationWordAction inner words)
+```
+
+Proof method: Kernel-checked tactic proof using funext, simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_word_action_composition` and the printed proof in the machine-generated audit.
+
+## `station_program_compilation`
+
+Source: `IndependentDuodenary/PipelineSynthesis.lean`. Compilation: **passed**.
+
+```lean
+theorem station_program_compilation (ops : List StationExpr) {r : ℕ} (words : RegisterWords r) :
+    runStationProgram ops words = stationWordAction (compileStationProgram ops) words
+```
+
+Proof method: Kernel-checked tactic proof using induction, funext, rw, simp. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES station_program_compilation` and the printed proof in the machine-generated audit.
+
+## `pipeline_master_composition`
+
+Source: `IndependentDuodenary/PipelineSynthesis.lean`. Compilation: **passed**.
+
+```lean
+theorem pipeline_master_composition {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (ops : List StationExpr) (x : CanonicalSubstrate r) (received : ProtectedRegisterWords r)
+    (hnoise : RegisterNoiseBound (pipelineTransmit h n ops x) received) :
+    recoverCanonicalInitial h n (compileStationProgram ops) received = some x
+```
+
+Proof method: Kernel-checked tactic proof using simpa, apply. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES pipeline_master_composition` and the printed proof in the machine-generated audit.
+
+## `pipeline_noiseless_closure`
+
+Source: `IndependentDuodenary/PipelineSynthesis.lean`. Compilation: **passed**.
+
+```lean
+theorem pipeline_noiseless_closure {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (ops : List StationExpr) (x : CanonicalSubstrate r) :
+    recoverCanonicalInitial h n (compileStationProgram ops)
+      (protectRegisterWords (pipelineTransmit h n ops x)) = some x
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES pipeline_noiseless_closure` and the printed proof in the machine-generated audit.
+
+## `pipeline_successor_channel_closure`
+
+Source: `IndependentDuodenary/PipelineSynthesis.lean`. Compilation: **passed**.
+
+```lean
+theorem pipeline_successor_channel_closure {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (ops : List StationExpr) (x : CanonicalSubstrate r) :
+    recoverCanonicalInitial h n (compileStationProgram ops)
+      (successorCorruption (pipelineTransmit h n ops x)) = some x
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES pipeline_successor_channel_closure` and the printed proof in the machine-generated audit.
+
+## `pipeline_transmission_injective`
+
+Source: `IndependentDuodenary/PipelineSynthesis.lean`. Compilation: **passed**.
+
+```lean
+theorem pipeline_transmission_injective {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (ops : List StationExpr) : Function.Injective (pipelineTransmit h n ops)
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES pipeline_transmission_injective` and the printed proof in the machine-generated audit.
+
+## `pipeline_recovered_state_unique`
+
+Source: `IndependentDuodenary/PipelineSynthesis.lean`. Compilation: **passed**.
+
+```lean
+theorem pipeline_recovered_state_unique {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (ops : List StationExpr) (x y : CanonicalSubstrate r) (received : ProtectedRegisterWords r)
+    (hnoise : RegisterNoiseBound (pipelineTransmit h n ops x) received)
+    (hrecovered : recoverCanonicalInitial h n (compileStationProgram ops) received = some y) : y = x
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES pipeline_recovered_state_unique` and the printed proof in the machine-generated audit.
+
+## `pipeline_empty_transmission_rejected`
+
+Source: `IndependentDuodenary/PipelineSynthesis.lean`. Compilation: **passed**.
+
+```lean
+theorem pipeline_empty_transmission_rejected (h : RegisterTranslation 1) (n : ℕ)
+    (ops : List StationExpr) :
+    recoverCanonicalInitial h n (compileStationProgram ops) (fun _ => []) = none
+```
+
+Proof method: Definitional equality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES pipeline_empty_transmission_rejected` and the printed proof in the machine-generated audit.
+
 ## `register_decode_encode`
 
 Source: `IndependentDuodenary/RegisterBridge.lean`. Compilation: **passed**.
@@ -1811,7 +2481,7 @@ theorem register_cycle_projection {r s : ℕ} (select : Fin s → Fin r) (q : Re
     projectRegisters select (registerCycle q) = registerCycle (projectRegisters select q)
 ```
 
-Proof method: Definitional equality.
+Proof method: Compatibility corollary of pointwiseNaturalMap.naturality.
 
 Axioms: `propext, Quot.sound`.
 
@@ -1828,7 +2498,7 @@ theorem register_translate_projection {r s : ℕ} (select : Fin s → Fin r)
       registerTranslate (fun i => h (select i)) (projectRegisters select q)
 ```
 
-Proof method: Definitional equality.
+Proof method: Compatibility corollary of pointwiseBinaryNaturalMap.naturality.
 
 Axioms: `propext, Quot.sound`.
 
@@ -1845,7 +2515,7 @@ theorem register_step_projection {r s : ℕ} (select : Fin s → Fin r)
       registerStep (fun i => h (select i)) (projectRegisters select q)
 ```
 
-Proof method: Definitional equality.
+Proof method: Compatibility corollary of pointwiseBinaryNaturalMap.naturality.
 
 Axioms: `propext, Quot.sound`.
 
@@ -1862,7 +2532,7 @@ theorem register_step_projection_iterate {r s : ℕ} (select : Fin s → Fin r)
       (((registerStep (fun i => h (select i)))^[n]) (projectRegisters select q))
 ```
 
-Proof method: Kernel-checked tactic proof using induction, rw. Exact terms and dependencies are in the audit.
+Proof method: Instantiate the common register_natural_parameter_iterate theorem.
 
 Axioms: `propext, Quot.sound`.
 
@@ -2320,6 +2990,70 @@ Proof method: Kernel-checked finite decision procedure (decide).
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES two_register_sum_collapse` and the printed proof in the machine-generated audit.
+
+## `retained_register_natural_injective`
+
+Source: `IndependentDuodenary/RegisterNaturality.lean`. Compilation: **passed**.
+
+```lean
+theorem retained_register_natural_injective {F G : RegisterFamily}
+    (f : RegisterNaturalMap F G) (r : ℕ) :
+    Function.Injective ((retainRegisterNatural f).app r)
+```
+
+Proof method: Kernel-checked tactic proof using exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES retained_register_natural_injective` and the printed proof in the machine-generated audit.
+
+## `register_natural_parameter_iterate`
+
+Source: `IndependentDuodenary/RegisterNaturality.lean`. Compilation: **passed**.
+
+```lean
+theorem register_natural_parameter_iterate {F H : RegisterFamily}
+    (A : RegisterNaturalMap (productRegisterFamily H F) F)
+    {r s : ℕ} (select : Fin s → Fin r) (h : H.Carrier r) (n : ℕ) (x : F.Carrier r) :
+    F.restrict select (((fun y => A.app r (h, y))^[n]) x) =
+      (((fun y => A.app s (H.restrict select h, y))^[n]) (F.restrict select x))
+```
+
+Proof method: Kernel-checked tactic proof using induction, rw, change. Exact terms and dependencies are in the audit.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES register_natural_parameter_iterate` and the printed proof in the machine-generated audit.
+
+## `successor_period_left_inverse`
+
+Source: `IndependentDuodenary/RegisterNaturality.lean`. Compilation: **passed**.
+
+```lean
+theorem successor_period_left_inverse {A : Type} (T : A → A) (n : ℕ)
+    (hperiod : ∀ x, (T^[n + 1]) x = x) : Function.LeftInverse (T^[n]) T
+```
+
+Proof method: Kernel-checked tactic proof using rw, exact, intro. Exact terms and dependencies are in the audit.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES successor_period_left_inverse` and the printed proof in the machine-generated audit.
+
+## `successor_period_injective`
+
+Source: `IndependentDuodenary/RegisterNaturality.lean`. Compilation: **passed**.
+
+```lean
+theorem successor_period_injective {A : Type} (T : A → A) (n : ℕ)
+    (hperiod : ∀ x, (T^[n + 1]) x = x) : Function.Injective T
+```
+
+Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
+
+Axioms: `none`.
+
+Dependencies: see `DIRECT DEPENDENCIES successor_period_injective` and the printed proof in the machine-generated audit.
 
 ## `sourceSupportBlock_pullback`
 

@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: eighteen modules; 297 theorem declarations.
+- Project library: twenty-two modules; 342 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 297 stated Lean theorems.
+There are no incomplete obligations inside the 342 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -82,3 +82,24 @@ For this extension, the local full build and all 297 theorem audits passed.
 Both new modules elaborated with zero diagnostics; all twelve register
 walkthrough guards passed. The CI workflow repeats the warning-free checks
 and walkthrough on the pushed revision.
+
+`RegisterNaturality` and `CanonicalArchitecture` add 37 declarations. Four
+existing projection proofs now use the common naturality interface. The
+canonical full-state codec, coefficient view and dynamics are injective; the
+phase projection alone is proved noninjective. The single canonical file
+proves a master invariant and the bounded-error channel envelope, including
+original-state recovery by inverse dynamics. See [scope](CANONICAL_ENVELOPE.md).
+
+`PipelineSynthesis` adds eight theorems for arbitrary finite validated station
+programs, exact original-state recovery and injectivity. `PipelineHarness`
+provides thirteen executable boundary checks, with the native `verifyPipeline`
+launcher included in default build targets. See
+[integration and closure boundaries](PIPELINE_DEPLOYMENT.md). The local full
+build, warning-free checks, fifteen canonical guards, synthesis guards and all
+thirteen executable checks passed. The executable output is retained in
+`pipeline-execution.txt`.
+
+Final local audit: all 342 theorem declarations passed, permitting only the
+standard Lean axiom union already listed. The placeholder scan also covers
+the native launcher and example sources. All newly added modules, the
+refactored dynamics module and both runners elaborate without diagnostics.

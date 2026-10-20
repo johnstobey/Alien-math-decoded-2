@@ -1,0 +1,14 @@
+PASS empty station program
+PASS sequential/compiled station order
+PASS inverse station program
+PASS noiseless original-state recovery
+PASS one substitution in every triple
+PASS complete key fields recovered
+PASS transformed phase vector
+PASS seventeen protected blocks
+PASS empty transmission rejected
+PASS two header errors rejected
+PASS zero-register boundary
+PASS irregular-state exact recovery
+PASS truncated framing rejected
+PIPELINE PASS: 13 checks

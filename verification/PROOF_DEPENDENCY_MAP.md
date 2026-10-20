@@ -41,6 +41,10 @@ operator periods and exact representation transport to a defined modular
 relative-phase comparator. This discharges an initial typed bridge obligation;
 it does not supply the still-unspecified external theorem implication L.
 
+Canonical extension: [CANONICAL_ENVELOPE.md](CANONICAL_ENVELOPE.md) unifies
+finite-index naturality and the defined register/channel envelope. Phase
+projection is proved noninjective; full-state retention is kept explicit.
+
 ## Claims, prerequisites, and evidence
 
 | Node | Precise content | Required inputs | Status and evidence |
@@ -58,6 +62,10 @@ it does not supply the still-unspecified external theorem implication L.
 | J-model: chosen coordinate cycle | Coordinate shift on a twelve-coordinate binary complement has exact operator period 12, distinct from every binary intercept translation | Explicit finite carrier in `SourceKeyRepresentation` | Proved: `key_cycle_period_iff`, `key_cycle_distinct_from_translation`. This is not external-source identification J. |
 | K: lossless source-key representation | Encode complete keys into structured twelve-symbol words with a decoding left inverse and a compatible translated-word operation | Explicit encodings of metadata and both intercept components, framing, decoder | Proved for metadata `Fin 3`, binary intercept dimension 2 and complement dimension 12: `exact_key_decode_encode`, `exact_key_parse_sound`, `exact_key_word_translation`. C and E remain lossy observables. |
 | L-initial: typed modular bridge | Exact word iterations decode to the structural iterations; regular phase initial states preserve external relative-phase equivalence | Known register count; defined state transform; explicitly constructed regular initial state | Proved: `register_transport_iterate`, `register_word_modular_bridge_phase`. Full-key equality is stronger than the comparator. |
+| M: canonical finite substrate | Exact full-state/coefficient views and natural transformations under register reindexing | Defined register family; source coefficient maps retain their own types | Proved: `canonical_decode_encode`, `canonical_coefficient_roundtrip`, `canonical_cycle_injective`. Phase projection alone is noninjective. |
+| N: defined operational envelope | Master invariant, station action, aligned triple-noise recovery and inverse-dynamics recovery | Known transformation, register count and alignment; at most one substitution per triple; phase regularity for phase laws | Proved: `canonical_master_induction`, `canonical_operational_envelope`, `canonical_initial_recovery`. No broader intelligence claim is formulated. |
+| O: validated program composition | Arbitrary finite station programs followed by the bounded channel recover the exact initial canonical state | Grammar-validated operations, known inverse parameters, aligned bounded triple noise | Proved: `pipeline_master_composition`, `pipeline_transmission_injective`. No phase-regularity premise is needed for exact recovery. |
+| P: executable package guard | Default Lean build compiles the synthesis, fixtures and native launcher; runner propagates failures | Pinned toolchain and built repository | `lake exe verifyPipeline` runs thirteen boundary checks. See `PIPELINE_DEPLOYMENT.md` and execution log. |
 | L: stronger mathematical conclusion | A named external theorem follows from specified source/model properties | Its exact statement, source/model equivalence, and a sufficient implication | Not formulated or proved here. Neither modular closure nor the calculator's zero remainder supplies this implication. |
 
 ## Established connections and missing connections
