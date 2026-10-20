@@ -22,6 +22,10 @@ jobs:
           use-mathlib-cache: true
       - name: Check theorem inventory and axioms
         run: python3 scripts/audit.py
+      - name: Check complete theorem index
+        run: |
+          python3 scripts/render_theorem_index.py
+          git diff --exit-code -- verification/THEOREMS.md
       - name: Run station codec walkthrough
         run: lake env lean examples/StationWalkthrough.lean
       - name: Run sourced cipher walkthrough

@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 447 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All 447 named library declarations in namespace `IndependentDuodenary` compiled and passed the axiom audit. Complete source propositions are reproduced below. Exact elaborated propositions, proof terms and direct dependencies are retained in [axioms-and-proofs.txt](axioms-and-proofs.txt).
 
 ## `normalization_control_cardinality`
 
@@ -91,7 +91,8 @@ Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **pass
 
 ```lean
 theorem normalization_finish_head_boolean {a s k : ℕ} (q : ReferenceConfiguration a s k) :
-    let out
+    let out := (normalizationFinish .stateToHead q).body
+    out.tape 0 (out.head 0) = 1 ∨ out.tape 0 (out.head 0) = 2
 ```
 
 Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
@@ -106,7 +107,8 @@ Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **pass
 
 ```lean
 theorem normalization_finish_head_accepts {a s k : ℕ} (q : ReferenceConfiguration a s k) :
-    let out
+    let out := (normalizationFinish .stateToHead q).body
+    out.tape 0 (out.head 0) = 1 ↔ q.state = 0
 ```
 
 Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
@@ -245,7 +247,10 @@ Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **pass
 
 ```lean
 theorem normalization_empty_input {a s k : ℕ} (M : ReferenceDeterministicMachine a s k)
-    (mode : AcceptanceConvention) (halt : referenceTerminal (referenceInitial (a
+    (mode : AcceptanceConvention) (halt : referenceTerminal (referenceInitial (a := a) (k := k) M.initial [])) :
+    ReferenceRun (normalizationEdge M mode) 1
+      (normalizationLift (referenceInitial M.initial []))
+      (normalizationFinish mode (referenceInitial M.initial []))
 ```
 
 Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
@@ -344,7 +349,8 @@ Source: `IndependentDuodenary/AcceptanceNormalization.lean`. Compilation: **pass
 ```lean
 theorem normalization_finish_head_rejects {a s k : ℕ} (q : ReferenceConfiguration a s k)
     (halt : referenceTerminal q) :
-    let out
+    let out := (normalizationFinish .stateToHead q).body
+    out.tape 0 (out.head 0) = 2 ↔ q.state = 1
 ```
 
 Proof method: Finite-control simplification, exact run induction and reverse classification, or composition of the verified language and overhead lemmas; exact terms and dependencies are in the audit.
@@ -1130,7 +1136,7 @@ Source: `IndependentDuodenary/CanonicalArchitecture.lean`. Compilation: **passed
 theorem retained_coefficient_pullback_injective {k : ℕ} {E X V : Type}
     [AddCommMonoid V] (r : ℕ) :
     Function.Injective ((retainRegisterNatural
-      (coefficientPullbackNatural (k
+      (coefficientPullbackNatural (k := k) (E := E) (X := X) (V := V))).app r)
 ```
 
 Proof method: Direct proof term applying the named previously checked declarations; see the printed proof and dependencies.
@@ -2311,7 +2317,7 @@ Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
 
 ```lean
 theorem repetition_word_injective {n : ℕ} (hn : 0 < n) :
-    Function.Injective (repetitionWord (Alphabet
+    Function.Injective (repetitionWord (Alphabet := Alphabet) n)
 ```
 
 Proof method: Evaluate an equality of repetition words at the first coordinate, supplied by n>0.
@@ -2326,7 +2332,9 @@ Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
 
 ```lean
 theorem repetition_code_separation (n : ℕ) :
-    ∀ a ∈ Set.range (repetitionWord (Alphabet
+    ∀ a ∈ Set.range (repetitionWord (Alphabet := Alphabet) n),
+      ∀ b ∈ Set.range (repetitionWord (Alphabet := Alphabet) n),
+      a ≠ b → n ≤ wordDistance a b
 ```
 
 Proof method: Unpack both codewords from the range and use their explicit repetition-word distance.
@@ -3389,7 +3397,7 @@ Source: `IndependentDuodenary/PostMicrocode.lean`. Compilation: **passed**.
 
 ```lean
 theorem post_micro_prize_initial (s : ℕ) (input : List (Fin 4)) :
-    microPrizeConfiguration (s
+    microPrizeConfiguration (s := s) (Turing.TM0.init input) = Turing.TM0.init input
 ```
 
 Proof method: Instruction case analysis, finite control relabeling, actual-run induction or runtime-bound composition; exact elaborated terms and dependencies appear in the audit.
@@ -3586,7 +3594,7 @@ Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
 ```lean
 theorem reference_initial_heads {a s k : ℕ} (state : Fin (s + 2))
     (x : PrizeBinaryWord) (i : Fin (k + 1)) :
-    (referenceInitial (a
+    (referenceInitial (a := a) state x).head i = 0
 ```
 
 Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
@@ -3602,7 +3610,7 @@ Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
 ```lean
 theorem reference_initial_negative_blank {a s k : ℕ} (state : Fin (s + 2))
     (x : PrizeBinaryWord) (i : Fin (k + 1)) (j : ℤ) (hj : j < 0) :
-    (referenceInitial (a
+    (referenceInitial (a := a) state x).tape i j = 0
 ```
 
 Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
@@ -3618,7 +3626,7 @@ Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
 ```lean
 theorem reference_initial_other_tape_blank {a s k : ℕ} (state : Fin (s + 2))
     (x : PrizeBinaryWord) (i : Fin (k + 1)) (hi : i ≠ 0) (j : ℤ) :
-    (referenceInitial (a
+    (referenceInitial (a := a) state x).tape i j = 0
 ```
 
 Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
@@ -3634,7 +3642,7 @@ Source: `IndependentDuodenary/ReferenceMachines.lean`. Compilation: **passed**.
 ```lean
 theorem reference_initial_empty_blank {a s k : ℕ} (state : Fin (s + 2))
     (i : Fin (k + 1)) (j : ℤ) :
-    (referenceInitial (a
+    (referenceInitial (a := a) state []).tape i j = 0
 ```
 
 Proof method: Unfold the explicit reference-machine semantics and use finite-state arithmetic, transition equality, or run extension; the exact elaborated proof term and dependencies are retained in the audit.
