@@ -105,3 +105,9 @@ packet with `python3 scripts/build_intake_bundle.py` when the indexed release
 assets are present in `dist/`. Verify an extracted packet with the same script's
 `--verify-only` option. Large archives remain ignored by Git; a repository clone
 alone does not contain those binary enclosures. No institutional filing is made.
+
+[Search-boundary research report](verification/SEARCH_BOUNDARY.md) records the
+new reachability decision and global orbit-cover lower bound. The 350-theorem
+`claim_manifest.json` and administrative packet remain a historical dossier for
+commit `65e0db1`, not an index of subsequent research. Rebuild that historical
+packet from its archived revision; current research has its own audit index.

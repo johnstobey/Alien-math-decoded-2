@@ -108,7 +108,13 @@ Millennium conjecture is formalized by renaming a protocol invariant.
 
 \section{Foundations and verification evidence}
 The original 349 declarations are retained and the bounded-search equivalence
-adds one declaration. The generated appendix inventories the current library.
+adds one declaration. The search-boundary extension adds four declarations: correctness of an explicit
+Boolean reachability decision, its rejection characterization, and the global
+orbit-cover bounds. If $N$ orbit seeds cover $Q_r$, surjectivity of the map from
+seed--phase pairs to states proves $49152^r\leq12N$. In particular, one register
+requires at least 4096 seeds. This lower bound concerns explicit orbit covers;
+it is not a lower bound against all algorithms or Turing machines.
+The generated appendix inventories the current library.
 Exact propositions, proof terms, direct dependencies and transitive foundational
 requirements are in the accompanying \texttt{verification/THEOREMS.md} and
 \texttt{verification/axioms-and-proofs.txt}.

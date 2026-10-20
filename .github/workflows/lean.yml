@@ -74,6 +74,13 @@ jobs:
             lake env lean "$proof_file" 2>&1 | tee .lake/millennium-check.log
             test ! -s .lake/millennium-check.log
           done
+      - name: Check reachability decision and global search boundary
+        run: |
+          for proof_file in IndependentDuodenary/SearchBoundary.lean examples/SearchBoundary.lean
+          do
+            lake env lean "$proof_file" 2>&1 | tee .lake/search-boundary-check.log
+            test ! -s .lake/search-boundary-check.log
+          done
       - name: Install monograph compiler
         run: |
           sudo apt-get update

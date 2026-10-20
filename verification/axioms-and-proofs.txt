@@ -8935,6 +8935,384 @@ DIRECT DEPENDENCIES successor_period_injective: [Function.LeftInverse.injective,
  IndependentDuodenary.successor_period_left_inverse,
  OfNat.ofNat,
  Eq]
+theorem IndependentDuodenary.protocol_reachability_check_correct : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (q x : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.protocolReachabilityCheck h q x = true ↔ ∃ n, (IndependentDuodenary.registerStep h)^[n] q = x :=
+fun {r} h q x =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => IndependentDuodenary.protocolReachabilityCheck h q x = true ↔ _a)
+        (propext (IndependentDuodenary.protocol_reachability_iff_bounded_search h q x))))
+    (of_eq_true
+      (Eq.trans
+        (congrArg (fun x_1 => x_1 ↔ ∃ x_2, (IndependentDuodenary.registerStep h)^[↑x_2] q = x)
+          (Eq.trans Init.Data.List.Lemmas._auxLemma.29
+            (congrArg Exists
+              (funext fun x_1 =>
+                Eq.trans (congr (congrArg And (Mathlib.Data.List.FinRange._auxLemma.1 x_1)) decide_eq_true_eq)
+                  (true_and ((IndependentDuodenary.registerStep h)^[↑x_1] q = x))))))
+        (iff_self (∃ x_1, (IndependentDuodenary.registerStep h)^[↑x_1] q = x))))
+'IndependentDuodenary.protocol_reachability_check_correct' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protocol_reachability_check_correct: [Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.registerStep,
+ Init.Data.List.Lemmas._auxLemma.29,
+ congrArg,
+ ZMod.fintype,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.RepresentedKey,
+ Membership.mem,
+ Exists,
+ id,
+ IndependentDuodenary.protocolReachabilityCheck.proof_1,
+ IndependentDuodenary.protocol_reachability_iff_bounded_search,
+ instOfNatNat,
+ IndependentDuodenary.instDecidableEqExactKey,
+ Fin.val,
+ Nat.iterate,
+ ZMod,
+ Fin.fintype,
+ IndependentDuodenary.RegisterState,
+ iff_self,
+ Bool.true,
+ funext,
+ List,
+ And,
+ Iff,
+ List.instMembership,
+ Fintype.decidablePiFintype,
+ Nat,
+ congr,
+ True,
+ propext,
+ Bool,
+ of_eq_true,
+ List.any,
+ IndependentDuodenary.KeyComplement,
+ Mathlib.Data.List.FinRange._auxLemma.1,
+ decide_eq_true_eq,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ List.finRange,
+ Eq,
+ true_and,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ IndependentDuodenary.protocolReachabilityCheck]
+theorem IndependentDuodenary.protocol_reachability_check_rejects_iff : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (q x : IndependentDuodenary.RegisterState r),
+  IndependentDuodenary.protocolReachabilityCheck h q x = false ↔
+    ¬∃ n, (IndependentDuodenary.registerStep h)^[n] q = x :=
+fun {r} h q x =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => IndependentDuodenary.protocolReachabilityCheck h q x = false ↔ ¬_a)
+        (Eq.symm (propext (IndependentDuodenary.protocol_reachability_check_correct h q x)))))
+    (Bool.casesOn (motive := fun t =>
+      IndependentDuodenary.protocolReachabilityCheck h q x = t →
+        (IndependentDuodenary.protocolReachabilityCheck h q x = false ↔
+          ¬IndependentDuodenary.protocolReachabilityCheck h q x = true))
+      (IndependentDuodenary.protocolReachabilityCheck h q x)
+      (fun h_1 =>
+        Eq.symm h_1 ▸
+          of_eq_true
+            (Eq.trans
+              (congr (congrArg Iff (eq_self false)) (Eq.trans (congrArg Not Bool.false_eq_true) not_false_eq_true))
+              (iff_self True)))
+      (fun h_1 =>
+        Eq.symm h_1 ▸
+          of_eq_true
+            (Eq.trans
+              (congr (congrArg Iff Bool.true_eq_false) (Eq.trans (congrArg Not (eq_self true)) not_true_eq_false))
+              (iff_self False)))
+      (Eq.refl (IndependentDuodenary.protocolReachabilityCheck h q x)))
+'IndependentDuodenary.protocol_reachability_check_rejects_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+DIRECT DEPENDENCIES protocol_reachability_check_rejects_iff: [Eq.mpr,
+ False,
+ IndependentDuodenary.registerStep,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ Bool.false_eq_true,
+ Exists,
+ not_true_eq_false,
+ id,
+ Bool.true_eq_false,
+ IndependentDuodenary.protocol_reachability_check_correct,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ iff_self,
+ Bool.true,
+ Iff,
+ Bool.casesOn,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ propext,
+ Bool,
+ of_eq_true,
+ Eq.ndrec,
+ Eq.refl,
+ Eq.symm,
+ not_false_eq_true,
+ Bool.false,
+ Eq,
+ Not,
+ Eq.trans,
+ IndependentDuodenary.protocolReachabilityCheck]
+theorem IndependentDuodenary.protocol_global_orbit_cover_bound : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (seeds : Finset (IndependentDuodenary.RegisterState r)),
+  (∀ (x : IndependentDuodenary.RegisterState r), ∃ q ∈ seeds, x ∈ IndependentDuodenary.protocolOrbitCandidates h q) →
+    49152 ^ r ≤ 12 * seeds.card :=
+fun {r} h seeds covers =>
+  let visit := fun z => (IndependentDuodenary.registerStep h)^[↑z.2] ↑z.1;
+  let_fun hs := fun x =>
+    Exists.casesOn (covers x) fun q h_1 =>
+      And.casesOn h_1 fun hq hx =>
+        Exists.casesOn (Finset.mem_image.mp hx) fun k h_2 =>
+          And.casesOn h_2 fun left hk => Exists.intro (⟨q, hq⟩, k) hk;
+  let_fun hc := Fintype.card_le_of_surjective visit hs;
+  let_fun count :=
+    Eq.mpr (id (congrArg (fun _a => _a = 49152 ^ r) (Eq.symm Nat.card_eq_fintype_card)))
+      (Eq.mpr (id (congrArg (fun _a => _a = 49152 ^ r) (IndependentDuodenary.complete_register_cardinality r)))
+        (Eq.refl (49152 ^ r)));
+  Eq.mpr (id Init.Core._auxLemma.6)
+    (Eq.mp
+      (congrArg (LE.le (49152 ^ r))
+        (Eq.trans (Fintype.card_prod { q // q ∈ seeds } (Fin 12))
+          (Eq.trans (congr (congrArg HMul.hMul (Fintype.card_coe seeds)) (Fintype.card_fin 12))
+            (Nat.mul_comm seeds.card 12))))
+      (Eq.mp (congrArg (fun _a => _a ≤ Fintype.card ({ q // q ∈ seeds } × Fin 12)) count) hc))
+'IndependentDuodenary.protocol_global_orbit_cover_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protocol_global_orbit_cover_bound: [Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.protocolOrbitCandidates,
+ Fintype.card_fin,
+ IndependentDuodenary.protocolOrbitCandidates.proof_1,
+ HMul.hMul,
+ IndependentDuodenary.registerStep,
+ Finset.univ,
+ Finset.mem_image,
+ congrArg,
+ Finset,
+ Nat.instMonoid,
+ ZMod.fintype,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.RepresentedKey,
+ Membership.mem,
+ IndependentDuodenary.CanonicalCoefficients,
+ Exists,
+ Monoid.toNatPow,
+ Eq.mp,
+ Fintype.card,
+ id,
+ Subtype,
+ Nat.card,
+ Prod.mk,
+ instMulNat,
+ instOfNatNat,
+ Fintype.ofEquiv,
+ IndependentDuodenary.instDecidableEqExactKey,
+ Nat.mul_comm,
+ Finset.instMembership,
+ LE.le,
+ instLENat,
+ Fin.val,
+ Fintype.card_prod,
+ Nat.iterate,
+ ZMod,
+ Prod.fst,
+ Fin.fintype,
+ Subtype.mk,
+ And.casesOn,
+ IndependentDuodenary.RegisterState,
+ And,
+ Exists.casesOn,
+ HPow.hPow,
+ IndependentDuodenary.keyCoefficientEquiv,
+ Nat.instNeZeroSucc,
+ Fintype.decidablePiFintype,
+ Nat,
+ congr,
+ IndependentDuodenary.complete_register_cardinality,
+ Exists.intro,
+ Iff.mp,
+ Finset.card,
+ Pi.fintype,
+ Finset.Subtype.fintype,
+ Init.Core._auxLemma.6,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ instFintypeProd,
+ instHPow,
+ Equiv.symm,
+ Prod,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Subtype.val,
+ Eq,
+ Prod.snd,
+ Finset.image,
+ Fintype.card_coe,
+ Function.Surjective,
+ letFun,
+ Nat.card_eq_fintype_card,
+ Eq.trans,
+ Fintype.card_le_of_surjective,
+ IndependentDuodenary.KeyMetadata,
+ instHMul]
+theorem IndependentDuodenary.protocol_one_register_cover_needs_4096 : ∀ (h : IndependentDuodenary.RegisterTranslation 1)
+  (seeds : Finset (IndependentDuodenary.RegisterState 1)),
+  (∀ (x : IndependentDuodenary.RegisterState 1), ∃ q ∈ seeds, x ∈ IndependentDuodenary.protocolOrbitCandidates h q) →
+    4096 ≤ seeds.card :=
+fun h seeds covers =>
+  let_fun hc := IndependentDuodenary.protocol_global_orbit_cover_bound h seeds covers;
+  Decidable.byContradiction fun a =>
+    Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+      (Lean.Omega.Constraint.combine_sat'
+        (Lean.Omega.tidy_sat
+          (Lean.Omega.Constraint.addInequality_sat
+            (le_of_le_of_eq
+              (Int.sub_nonneg_of_le (Int.add_one_le_of_lt (Lean.Omega.Int.ofNat_lt_of_lt (Nat.lt_of_not_le a))))
+              (Eq.trans
+                (Lean.Omega.Int.sub_congr (id (Eq.refl ↑4096))
+                  (Eq.trans
+                    (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0) (id (Eq.refl 1)))
+                    (Eq.symm
+                      (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [1] } { const := 1, coeffs := [] }
+                        (Lean.Omega.Coeffs.ofList [↑seeds.card])))))
+                (Eq.symm
+                  (Lean.Omega.LinearCombo.sub_eval { const := 4096, coeffs := [] } { const := 1, coeffs := [1] }
+                    (Lean.Omega.Coeffs.ofList [↑seeds.card])))))))
+        (Lean.Omega.tidy_sat
+          (Lean.Omega.Constraint.addInequality_sat
+            (le_of_le_of_eq
+              (Int.sub_nonneg_of_le
+                (Lean.Omega.Int.ofNat_le_of_le
+                  (Eq.mp
+                    (congrArg (fun x => x ≤ 12 * seeds.card)
+                      (Mathlib.Meta.NormNum.IsNat.to_eq
+                        (Mathlib.Meta.NormNum.isNat_pow (Eq.refl HPow.hPow)
+                          (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 49152))
+                          (Mathlib.Meta.NormNum.isNat_ofNat ℕ (Eq.refl 1)) Mathlib.Meta.NormNum.natPow_one)
+                        (Eq.refl 49152)))
+                    hc)))
+              (Eq.trans
+                (Lean.Omega.Int.sub_congr
+                  (Eq.trans (Int.ofNat_mul 12 seeds.card)
+                    (Eq.trans
+                      (Lean.Omega.Int.mul_congr (id (Eq.refl ↑12)) (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0))
+                      (Eq.symm
+                        (Lean.Omega.LinearCombo.mul_eval { const := 12, coeffs := [] } { const := 0, coeffs := [1] }
+                          (Lean.Omega.Coeffs.ofList [↑seeds.card]) (of_decide_eq_true (id (Eq.refl true)))))))
+                  (id (Eq.refl ↑49152)))
+                (Eq.symm
+                  (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [12] } { const := 49152, coeffs := [] }
+                    (Lean.Omega.Coeffs.ofList [↑seeds.card]))))))))
+'IndependentDuodenary.protocol_one_register_cover_needs_4096' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protocol_one_register_cover_needs_4096: [Nat.lt_of_not_le,
+ Lean.Omega.Constraint.not_sat'_of_isImpossible,
+ IndependentDuodenary.protocolOrbitCandidates,
+ HMul.hMul,
+ of_decide_eq_true,
+ le_of_le_of_eq,
+ Lean.Omega.Constraint.mk,
+ Lean.Omega.Constraint.combine_sat',
+ congrArg,
+ Finset,
+ Nat.instMonoid,
+ Int.add_one_le_of_lt,
+ IndependentDuodenary.RegisterTranslation,
+ HSub.hSub,
+ Lean.Omega.Int.add_congr,
+ Lean.Omega.LinearCombo.eval,
+ Option.some,
+ Membership.mem,
+ Exists,
+ Monoid.toNatPow,
+ Lean.Omega.Coeffs.isZero,
+ Int.instDecidableEq,
+ Eq.mp,
+ id,
+ instDecidableEqBool,
+ Int.instNegInt,
+ Int.sub_nonneg_of_le,
+ instMulNat,
+ instOfNatNat,
+ Int,
+ Mathlib.Meta.NormNum.isNat_ofNat,
+ Lean.Omega.LinearCombo.mul_eval,
+ Finset.instMembership,
+ LE.le,
+ instLENat,
+ Nat.instAddMonoidWithOne,
+ List.decidableBAll,
+ Nat.cast,
+ Lean.Omega.Int.sub_congr,
+ List.cons,
+ Lean.Omega.LinearCombo,
+ Int.instMul,
+ IndependentDuodenary.RegisterState,
+ Bool.true,
+ Option.none,
+ instHAdd,
+ And,
+ Lean.Omega.tidy_sat,
+ instHSub,
+ HPow.hPow,
+ Lean.Omega.LinearCombo.coordinate_eval_0,
+ instOfNat,
+ HAdd.hAdd,
+ Lean.Omega.LinearCombo.mk,
+ Lean.Omega.Coeffs.ofList,
+ Nat,
+ Lean.Omega.LinearCombo.add_eval,
+ Lean.Omega.LinearCombo.sub_eval,
+ Mathlib.Meta.NormNum.IsNat.to_eq,
+ Lean.Omega.LinearCombo.coordinate,
+ Decidable.byContradiction,
+ Finset.card,
+ Bool,
+ Int.instAdd,
+ Lean.Omega.LinearCombo.instAdd,
+ Nat.instSemiring,
+ Eq.refl,
+ Lean.Omega.Int.ofNat_lt_of_lt,
+ Int.instSub,
+ Lean.Omega.Int.ofNat_le_of_le,
+ Or,
+ instNatCastInt,
+ instHPow,
+ IndependentDuodenary.protocol_global_orbit_cover_bound,
+ Int.ofNat_mul,
+ Lean.Omega.Int.mul_congr,
+ Mathlib.Meta.NormNum.natPow_one,
+ OfNat.ofNat,
+ Eq.symm,
+ Lean.Omega.Constraint.addInequality_sat,
+ Decidable.decide,
+ Eq,
+ instDecidableOr,
+ Mathlib.Meta.NormNum.isNat_pow,
+ Lean.Omega.LinearCombo.mul,
+ Lean.Omega.LinearCombo.instSub,
+ Not,
+ Nat.decLe,
+ letFun,
+ Neg.neg,
+ Int.instLEInt,
+ Eq.trans,
+ Lean.Omega.Constraint.isImpossible,
+ instHMul,
+ List.nil]
 theorem IndependentDuodenary.sourceSupportBlock_pullback.{u_1, u_2, u_3} : ∀ {E : Type u_1} {X : Type u_2}
   {V : Type u_3} [inst : Zero V] [inst_1 : DecidableEq V] (b : IndependentDuodenary.FullBlock E X V),
   IndependentDuodenary.pullbackBlock (IndependentDuodenary.sourceSupportBlock b) = b :=
@@ -20598,4 +20976,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 350 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 354 theorem declarations; only standard Lean axioms permitted.

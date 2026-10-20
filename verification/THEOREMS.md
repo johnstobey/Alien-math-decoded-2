@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 350 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 354 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -3177,6 +3177,74 @@ Proof method: Direct proof term applying the named previously checked declaratio
 Axioms: `none`.
 
 Dependencies: see `DIRECT DEPENDENCIES successor_period_injective` and the printed proof in the machine-generated audit.
+
+## `protocol_reachability_check_correct`
+
+Source: `IndependentDuodenary/SearchBoundary.lean`. Compilation: **passed**.
+
+```lean
+theorem protocol_reachability_check_correct {r : ℕ} (h : RegisterTranslation r)
+    (q x : RegisterState r) :
+    protocolReachabilityCheck h q x = true ↔ ∃ n : ℕ, ((registerStep h)^[n]) q = x
+```
+
+Proof method: List.any correctness, finite index membership and the proved bounded-search equivalence.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protocol_reachability_check_correct` and the printed proof in the machine-generated audit.
+
+## `protocol_reachability_check_rejects_iff`
+
+Source: `IndependentDuodenary/SearchBoundary.lean`. Compilation: **passed**.
+
+```lean
+theorem protocol_reachability_check_rejects_iff {r : ℕ} (h : RegisterTranslation r)
+    (q x : RegisterState r) :
+    protocolReachabilityCheck h q x = false ↔ ¬ ∃ n : ℕ, ((registerStep h)^[n]) q = x
+```
+
+Proof method: Boolean case analysis and the exact positive correctness theorem.
+
+Axioms: `propext,
+ Classical.choice,
+ Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protocol_reachability_check_rejects_iff` and the printed proof in the machine-generated audit.
+
+## `protocol_global_orbit_cover_bound`
+
+Source: `IndependentDuodenary/SearchBoundary.lean`. Compilation: **passed**.
+
+```lean
+theorem protocol_global_orbit_cover_bound {r : ℕ} (h : RegisterTranslation r)
+    (seeds : Finset (RegisterState r))
+    (covers : ∀ x : RegisterState r, ∃ q ∈ seeds, x ∈ protocolOrbitCandidates h q) :
+    49152 ^ r ≤ 12 * seeds.card
+```
+
+Proof method: Construct a surjection from seed-phase pairs onto all states and compare finite cardinalities.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protocol_global_orbit_cover_bound` and the printed proof in the machine-generated audit.
+
+## `protocol_one_register_cover_needs_4096`
+
+Source: `IndependentDuodenary/SearchBoundary.lean`. Compilation: **passed**.
+
+```lean
+theorem protocol_one_register_cover_needs_4096 (h : RegisterTranslation 1)
+    (seeds : Finset (RegisterState 1))
+    (covers : ∀ x : RegisterState 1, ∃ q ∈ seeds, x ∈ protocolOrbitCandidates h q) :
+    4096 ≤ seeds.card
+```
+
+Proof method: Specialize the cover bound to one register and discharge natural arithmetic.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protocol_one_register_cover_needs_4096` and the printed proof in the machine-generated audit.
 
 ## `sourceSupportBlock_pullback`
 

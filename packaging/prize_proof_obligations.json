@@ -1,0 +1,50 @@
+{
+  "purpose": "research obligation register; not a submission readiness certificate",
+  "current_named_theorems": 354,
+  "new_proved_results": [
+    "IndependentDuodenary.protocol_reachability_check_correct",
+    "IndependentDuodenary.protocol_reachability_check_rejects_iff",
+    "IndependentDuodenary.protocol_global_orbit_cover_bound",
+    "IndependentDuodenary.protocol_one_register_cover_needs_4096"
+  ],
+  "defined_prize_target": {
+    "name": "IndependentDuodenary.PVersusNPConjecture",
+    "direction": "class_inequality",
+    "proof_status": "unproved"
+  },
+  "obligations": [
+    {
+      "id": "standard_model_correspondence",
+      "statement": "Prove correspondence between the explicit verifier-based machine classes and conventional P and NP.",
+      "status": "unproved"
+    },
+    {
+      "id": "general_problem_reduction",
+      "statement": "For a search-compression approach, construct and prove a general-problem reduction, including input-size and output-size bounds and both directions of correctness.",
+      "status": "not_constructed"
+    },
+    {
+      "id": "seed_construction_cost",
+      "statement": "Prove that constructing the protocol operator, initial seed and target does not assume the original decision answer and has the required resource bound.",
+      "status": "unproved"
+    },
+    {
+      "id": "machine_time_simulation",
+      "statement": "Implement the protocol decision procedure in the stated Turing-machine model and prove its running-time bound as a function of encoded input length.",
+      "status": "unproved"
+    },
+    {
+      "id": "target_direction_consistency",
+      "statement": "A complete-problem reduction to a polynomial-time decision procedure would support equality, whereas the existing prize proposition states inequality; neither conclusion is established.",
+      "status": "unresolved_prize_result"
+    },
+    {
+      "id": "separation_alternative",
+      "statement": "To prove the defined inequality, exhibit a certificate-polynomial language and exclude every deterministic polynomial-time machine, rather than only explicit orbit-cover enumeration.",
+      "status": "unproved"
+    }
+  ],
+  "prize_solution_proved": false,
+  "institutional_submission_readiness": "not_established",
+  "historical_dossier_baseline": "65e0db131c5ab65cddd0b913b41ddcb588108d97"
+}

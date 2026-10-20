@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "count": 350,
+  "count": 354,
   "audit_evidence": "verification/axioms-and-proofs.txt",
   "theorems": [
     {
@@ -1429,6 +1429,34 @@
       "module": "RegisterNaturality",
       "source": "IndependentDuodenary/RegisterNaturality.lean",
       "line": 80,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protocol_reachability_check_correct",
+      "module": "SearchBoundary",
+      "source": "IndependentDuodenary/SearchBoundary.lean",
+      "line": 11,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protocol_reachability_check_rejects_iff",
+      "module": "SearchBoundary",
+      "source": "IndependentDuodenary/SearchBoundary.lean",
+      "line": 17,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protocol_global_orbit_cover_bound",
+      "module": "SearchBoundary",
+      "source": "IndependentDuodenary/SearchBoundary.lean",
+      "line": 24,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protocol_one_register_cover_needs_4096",
+      "module": "SearchBoundary",
+      "source": "IndependentDuodenary/SearchBoundary.lean",
+      "line": 42,
       "external_prize_implication_established": false
     },
     {
