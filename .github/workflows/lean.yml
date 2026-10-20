@@ -30,16 +30,16 @@ jobs:
         run: node scripts/cipher-fixtures.mjs
       - name: Require warning-free source key declarations
         run: |
-          lake env lean IndependentDuodenary/SourceKeyRepresentation.lean 2>&1 | tee source-key-check.log
-          test ! -s source-key-check.log
+          lake env lean IndependentDuodenary/SourceKeyRepresentation.lean 2>&1 | tee .lake/source-key-check.log
+          test ! -s .lake/source-key-check.log
       - name: Verify operator and exact-key directives
         run: lake env lean examples/KeyDirectives.lean
       - name: Require warning-free register declarations
         run: |
           for proof_module in RegisterDynamics RegisterBridge
           do
-            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee register-check.log
-            test ! -s register-check.log
+            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee .lake/register-check.log
+            test ! -s .lake/register-check.log
           done
       - name: Verify product dynamics and modular bridge
         run: lake env lean examples/RegisterDirectives.lean
@@ -47,8 +47,8 @@ jobs:
         run: |
           for proof_module in RegisterNaturality RegisterDynamics CanonicalArchitecture
           do
-            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee canonical-check.log
-            test ! -s canonical-check.log
+            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee .lake/canonical-check.log
+            test ! -s .lake/canonical-check.log
           done
       - name: Verify canonical operational envelope
         run: lake env lean examples/CanonicalDirectives.lean
@@ -56,16 +56,32 @@ jobs:
         run: |
           for proof_module in PipelineSynthesis PipelineHarness
           do
-            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee synthesis-check.log
-            test ! -s synthesis-check.log
+            lake env lean "IndependentDuodenary/$proof_module.lean" 2>&1 | tee .lake/synthesis-check.log
+            test ! -s .lake/synthesis-check.log
           done
-          lake env lean PipelineMain.lean 2>&1 | tee runner-check.log
-          test ! -s runner-check.log
-          lake env lean examples/PipelineRunner.lean 2>&1 | tee pipeline-runner-check.log
-          test ! -s pipeline-runner-check.log
+          lake env lean PipelineMain.lean 2>&1 | tee .lake/runner-check.log
+          test ! -s .lake/runner-check.log
+          lake env lean examples/PipelineRunner.lean 2>&1 | tee .lake/pipeline-runner-check.log
+          test ! -s .lake/pipeline-runner-check.log
       - name: Check arbitrary station-program closure
         run: lake env lean examples/PipelineDirectives.lean
       - name: Run executable verification guard
         run: lake exe verifyPipeline
+      - name: Check formal complexity boundary without diagnostics
+        run: |
+          for proof_file in IndependentDuodenary/MillenniumBridge.lean examples/MillenniumBoundary.lean
+          do
+            lake env lean "$proof_file" 2>&1 | tee .lake/millennium-check.log
+            test ! -s .lake/millennium-check.log
+          done
+      - name: Export reproducible source audit bundle
+        run: |
+          scripts/export_proof_bundle.sh --output dist
+          cd dist
+          sha256sum --check *.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: formal-audit-bundle
+          path: dist/*
       - name: Ensure dependency lockfile stayed unchanged
         run: git diff --exit-code -- lake-manifest.json lean-toolchain

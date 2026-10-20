@@ -88,7 +88,7 @@ lake env lean examples/PipelineDirectives.lean
 lake exe verifyPipeline
 ```
 
-`lakefile.toml` includes the native `verifyPipeline` executable in default build
+`lakefile.lean` includes the native `verifyPipeline` executable in default build
 targets. The library build compiles the synthesis and fixture modules. The native
 launcher invokes the Lean runtime for `examples/PipelineRunner.lean`; the runner
 executes every Boolean boundary check, prints a PASS line for each success and

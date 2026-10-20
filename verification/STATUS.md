@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: twenty-two modules; 342 theorem declarations.
+- Project library: twenty-three modules; 349 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 342 stated Lean theorems.
+There are no incomplete obligations inside the 349 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -99,7 +99,14 @@ build, warning-free checks, fifteen canonical guards, synthesis guards and all
 thirteen executable checks passed. The executable output is retained in
 `pipeline-execution.txt`.
 
-Final local audit: all 342 theorem declarations passed, permitting only the
+Final local audit: all 349 theorem declarations passed, permitting only the
 standard Lean axiom union already listed. The placeholder scan also covers
 the native launcher and example sources. All newly added modules, the
 refactored dynamics module and both runners elaborate without diagnostics.
+
+## Q/R packaging boundary
+
+The new bridge and boundary fixture type-check with zero diagnostics. The full
+build succeeds but replays existing Mathlib docPrime documentation warnings;
+it is not a zero-warning dependency build. See `MILLENNIUM_BRIDGE.md` and
+`../packaging/problem_alignment.json` for the unproved complexity obligation.

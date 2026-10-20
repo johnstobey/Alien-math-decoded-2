@@ -89,3 +89,6 @@ and `Quot.sound` are permitted. No project proof uses native evaluation.
 GitHub Actions builds and audits on pushes and pull requests. Local and remote
 verification outcomes are recorded in `verification/STATUS.md`; a configured
 workflow alone is not evidence of a successful remote run.
+
+[Formal alignment and reproducible audit bundles](verification/MILLENNIUM_BRIDGE.md)
+state the finite bounds, unproved complexity obligation and release procedure.

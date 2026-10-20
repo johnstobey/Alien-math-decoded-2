@@ -1,0 +1,2450 @@
+{
+  "schema_version": 1,
+  "count": 349,
+  "audit_evidence": "verification/axioms-and-proofs.txt",
+  "theorems": [
+    {
+      "name": "IndependentDuodenary.affine_station_composition",
+      "module": "AffineStations",
+      "source": "IndependentDuodenary/AffineStations.lean",
+      "line": 24,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.affine_station_permutation_injective",
+      "module": "AffineStations",
+      "source": "IndependentDuodenary/AffineStations.lean",
+      "line": 30,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelve_unit_count",
+      "module": "AffineStations",
+      "source": "IndependentDuodenary/AffineStations.lean",
+      "line": 60,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelve_unit_residues",
+      "module": "AffineStations",
+      "source": "IndependentDuodenary/AffineStations.lean",
+      "line": 66,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.affine_station_parameter_card",
+      "module": "AffineStations",
+      "source": "IndependentDuodenary/AffineStations.lean",
+      "line": 70,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.affine_station_group_card",
+      "module": "AffineStations",
+      "source": "IndependentDuodenary/AffineStations.lean",
+      "line": 81,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.affine_five_changes_cyclic_distance",
+      "module": "AffineStations",
+      "source": "IndependentDuodenary/AffineStations.lean",
+      "line": 89,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bitToTwelve_values",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 23,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bitTo144_values",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 25,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bitToTwelve_injective",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 27,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bitTo144_injective",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 29,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_double_zero",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 31,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelve_two_torsion",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 33,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.mod144_two_torsion",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 37,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_vector_double_zero",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 41,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.image_double_zero",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 46,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.image_in_two_stations",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 50,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.image_in_two_superstations",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 55,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_map_not_surjective_twelve",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 60,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_map_not_surjective_144",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 69,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binaryCoordinate_surjective",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 84,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binaryCoordinate_not_injective",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 89,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bridgeTwelve_preserves_addition",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 106,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bridge144_preserves_addition",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 113,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bridgeTwelve_range",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 120,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bridge144_range",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 133,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bridgeTwelve_injective_iff",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 146,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bridge144_injective_iff",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 157,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.coordinate_bridgeTwelve_range",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 168,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.coordinate_bridge144_range",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 172,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.no_binary_ring_hom_twelve",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 177,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.no_binary_ring_hom_144",
+      "module": "BinaryBridge",
+      "source": "IndependentDuodenary/BinaryBridge.lean",
+      "line": 185,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_nonzero_eq_one",
+      "module": "BinaryStructure",
+      "source": "IndependentDuodenary/BinaryStructure.lean",
+      "line": 18,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bitWeight_le",
+      "module": "BinaryStructure",
+      "source": "IndependentDuodenary/BinaryStructure.lean",
+      "line": 20,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.maximum_weight_iff",
+      "module": "BinaryStructure",
+      "source": "IndependentDuodenary/BinaryStructure.lean",
+      "line": 23,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.weightLayer_card",
+      "module": "BinaryStructure",
+      "source": "IndependentDuodenary/BinaryStructure.lean",
+      "line": 37,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.single_bit_count",
+      "module": "BinaryStructure",
+      "source": "IndependentDuodenary/BinaryStructure.lean",
+      "line": 66,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.all_bits_count",
+      "module": "BinaryStructure",
+      "source": "IndependentDuodenary/BinaryStructure.lean",
+      "line": 69,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.zero_bits_count",
+      "module": "BinaryStructure",
+      "source": "IndependentDuodenary/BinaryStructure.lean",
+      "line": 72,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_coefficient_roundtrip",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 55,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_coefficient_encoding_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 60,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_decode_encode",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 74,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_encoding_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 79,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_cycle_translation_commute",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 85,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_cycle_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 91,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_translation_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 103,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_step_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 116,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_phase_translation_invariant",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 123,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_phase_projection_not_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 128,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_retained_phase_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 140,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.retained_coefficient_pullback_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 149,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_coefficient_semantics",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 155,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_master_induction",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 170,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_invariant_relative",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 186,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_master_period",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 193,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.aligned_triple_noise_recovery",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 212,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.aligned_triple_noise_length",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 221,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protected_register_words_recovery",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 225,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.aligned_triple_noise_protect",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 231,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protected_register_noise_bound",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 237,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_word_action_inverse",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 252,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_transmitted_word_length",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 257,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_received_word_length",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 265,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_station_encoding_injective",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 273,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.successor_triple_noise",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 285,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.successor_word_noise",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 288,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.successor_register_noise",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 294,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_operational_recovery",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 304,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_operational_envelope",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 316,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_successor_channel_recovery",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 331,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_undo_run",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 342,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonical_initial_recovery",
+      "module": "CanonicalArchitecture",
+      "source": "IndependentDuodenary/CanonicalArchitecture.lean",
+      "line": 353,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_stage_normal_form",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 30,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_pipeline_correct",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 34,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_stage_bound",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 38,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_output_bound",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 42,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_zero_iff_divides",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 45,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_same_stage",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 49,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_shift_thirty_stage",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 61,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_shift_thirty_output",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 69,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_shift_thirty_distinct",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 73,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_calculate_not_injective",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 81,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_result_roundtrip",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 100,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_payload_roundtrip",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 104,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_result_encoding_injective",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 116,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_protected_result_recovery",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 124,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_pipeline_protected_recovery",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 134,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_eris_fixture",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 147,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_haumea_fixture",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 149,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_makemake_fixture",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 151,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_gonggong_fixture",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 153,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cipher_orcus_fixture",
+      "module": "CipherValidator",
+      "source": "IndependentDuodenary/CipherValidator.lean",
+      "line": 155,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.semantic_decoder_no_collision",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 7,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_decoder_injective",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 14,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_decoder_capacity",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 17,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.no_exact_decoder_over_capacity",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 22,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.no_infinite_exact_finite_decoder",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 28,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelve_symbol_word_capacity",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 33,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.natural_word_length_left_inverse",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 40,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.natural_word_encoding_injective",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 45,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.word_distance_self",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 53,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.word_distance_comm",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 56,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.word_distance_triangle",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 59,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bounded_error_unique",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 77,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.bounded_error_decoder_correct",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 90,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.repetition_word_distance",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 101,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.repetition_word_injective",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 106,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.repetition_code_separation",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 112,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.repetition_three_one_error_unique",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 120,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.two_errors_distance_lower",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 129,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.at_most_one_error_pair",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 142,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.repetition_majority_recovery",
+      "module": "EncodingIntegrity",
+      "source": "IndependentDuodenary/EncodingIntegrity.lean",
+      "line": 155,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.conditional_level_return",
+      "module": "MappingBoundary",
+      "source": "IndependentDuodenary/MappingBoundary.lean",
+      "line": 12,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.stationMap_preserves_addition",
+      "module": "MappingBoundary",
+      "source": "IndependentDuodenary/MappingBoundary.lean",
+      "line": 31,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.conditional_closure",
+      "module": "MappingBoundary",
+      "source": "IndependentDuodenary/MappingBoundary.lean",
+      "line": 37,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protocol_iterate_mod_twelve",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 8,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protocol_orbit_candidate_bound",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 20,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protocol_orbit_candidates_complete",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 24,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.complete_key_cardinality",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 35,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.complete_register_cardinality",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 40,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.majority_symbol_budget_linear",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 47,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protected_frame_width",
+      "module": "MillenniumBridge",
+      "source": "IndependentDuodenary/MillenniumBridge.lean",
+      "line": 52,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelve_returns",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 15,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.predecessor_is_nonzero",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 16,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.predecessor_successor_returns",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 17,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.three_times_twelve_returns",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 18,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelve_squared_returns",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 19,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelve_nonzero_mod_144",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 20,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.number_372_multiple",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 21,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.number_719_predecessor",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 22,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.number_10800_multiple",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 23,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_add",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 30,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.superstation_add",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 34,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.predecessor_add_one",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 37,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.predecessor_eq_neg_one",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 38,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_add_closed",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 40,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.superstation_add_closed",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 44,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.zero_divisors_mod_twelve",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 49,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.zero_divisor_mod_144",
+      "module": "ModularCore",
+      "source": "IndependentDuodenary/ModularCore.lean",
+      "line": 53,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_word_action_composition",
+      "module": "PipelineSynthesis",
+      "source": "IndependentDuodenary/PipelineSynthesis.lean",
+      "line": 18,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_program_compilation",
+      "module": "PipelineSynthesis",
+      "source": "IndependentDuodenary/PipelineSynthesis.lean",
+      "line": 25,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pipeline_master_composition",
+      "module": "PipelineSynthesis",
+      "source": "IndependentDuodenary/PipelineSynthesis.lean",
+      "line": 50,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pipeline_noiseless_closure",
+      "module": "PipelineSynthesis",
+      "source": "IndependentDuodenary/PipelineSynthesis.lean",
+      "line": 57,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pipeline_successor_channel_closure",
+      "module": "PipelineSynthesis",
+      "source": "IndependentDuodenary/PipelineSynthesis.lean",
+      "line": 63,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pipeline_transmission_injective",
+      "module": "PipelineSynthesis",
+      "source": "IndependentDuodenary/PipelineSynthesis.lean",
+      "line": 69,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pipeline_recovered_state_unique",
+      "module": "PipelineSynthesis",
+      "source": "IndependentDuodenary/PipelineSynthesis.lean",
+      "line": 78,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pipeline_empty_transmission_rejected",
+      "module": "PipelineSynthesis",
+      "source": "IndependentDuodenary/PipelineSynthesis.lean",
+      "line": 85,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_decode_encode",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 20,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_parse_sound",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 33,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_encoding_injective",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 53,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_reject_malformed",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 58,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_encoding_projection",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 67,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_transport_encode",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 78,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_transport_iterate",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 84,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_decoded_transport_iterate",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 92,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_transport_reflects_equality",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 98,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.decoded_register_property_encode",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 108,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_inductive_invariant_transport",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 113,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.external_relative_equivalence_offset",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 126,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.external_relative_equivalence_step",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 130,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_word_modular_bridge",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 136,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_word_metadata_bridge",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 144,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_word_modular_bridge_phase",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 151,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_word_projection_bridge",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 159,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_word_regular_orbit_injective",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 168,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.external_relative_equivalence_not_lossless",
+      "module": "RegisterBridge",
+      "source": "IndependentDuodenary/RegisterBridge.lean",
+      "line": 179,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_cycle_projection",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 37,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_translate_projection",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 41,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_projection",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 47,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_projection_iterate",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 53,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_relative_projection",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 60,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_cycle_commutes_translation",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 65,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_translation_vertex_invariant",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 71,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_translation_phase_invariant",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 75,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_cycle_iterate",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 78,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_cycle_period_iff",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 84,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_empty_cycle_period",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 97,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_phase_from_one_hot",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 100,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_one_hot",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 106,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.phase_register_regular",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 112,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.phase_register_label",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 115,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_regular_cycle",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 120,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_regular_translation",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 126,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_regular_step",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 129,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_regular_projection",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 133,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_cycle_phase",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 137,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_phase",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 145,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_regular_iterate",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 150,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_phase_iterate",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 156,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_relative_invariant",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 166,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_iterate_formula",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 173,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_metadata_invariant",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 184,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_period_twelve",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 190,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_regular_orbit_no_collapse",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 200,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_step_period_iff",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 208,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_regular_orbit_injective",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 222,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.relative_phases_iff_common_offset",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 231,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_aggregate_phase_formula",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 246,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.two_register_sum_collapse",
+      "module": "RegisterDynamics",
+      "source": "IndependentDuodenary/RegisterDynamics.lean",
+      "line": 254,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.retained_register_natural_injective",
+      "module": "RegisterNaturality",
+      "source": "IndependentDuodenary/RegisterNaturality.lean",
+      "line": 54,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.register_natural_parameter_iterate",
+      "module": "RegisterNaturality",
+      "source": "IndependentDuodenary/RegisterNaturality.lean",
+      "line": 61,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.successor_period_left_inverse",
+      "module": "RegisterNaturality",
+      "source": "IndependentDuodenary/RegisterNaturality.lean",
+      "line": 74,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.successor_period_injective",
+      "module": "RegisterNaturality",
+      "source": "IndependentDuodenary/RegisterNaturality.lean",
+      "line": 80,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.sourceSupportBlock_pullback",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 19,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.sourceSupportBlock_correction",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 25,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pullback_reducedSourceTable",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 36,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_module_double_zero",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 44,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_module_add_eq_zero_iff",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 50,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_single_slope_injective",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 60,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_pair_slopes_injective",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 66,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_reduction_factorization",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 86,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_reduction_projection_surjective",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 95,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_reduction_unique",
+      "module": "SourceFactorization",
+      "source": "IndependentDuodenary/SourceFactorization.lean",
+      "line": 101,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_vertex_observable",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 20,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_iterate",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 24,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_one_hot_phase",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 41,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_witness_phase",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 46,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_period_iff",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 56,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_period_twelve",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 71,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_witness_period_iff",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 75,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_orbit_equivariance",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 89,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_commutes_translation",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 96,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_no_shorter_positive_period",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 99,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_distinct_from_translation",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 106,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_cycle_no_global_station_shift",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 118,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_metadata_roundtrip",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 136,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_metadata_parse_sound",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 139,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_bit_roundtrip",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 147,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_bit_parse_sound",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 150,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.framed_key_bits_suffix",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 165,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.framed_key_bits_roundtrip",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 182,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.framed_key_bits_parse_sound",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 186,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_bits_unpack_pack",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 218,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.key_bits_pack_unpack",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 224,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_decode_encode",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 245,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_parse_sound",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 250,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_reject_malformed",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 274,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_encode_length",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 280,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_reject_length",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 283,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_encode_injective",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 290,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_reject_header",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 295,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_reject_metadata",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 299,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_reject_suffix",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 303,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_reject_nonbinary_first",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 309,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_word_translation",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 320,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_word_translation_invalid",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 324,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_word_translation_involution",
+      "module": "SourceKeyRepresentation",
+      "source": "IndependentDuodenary/SourceKeyRepresentation.lean",
+      "line": 328,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.translateKey_zero",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 31,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.translateKey_add",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 36,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.translateKey_free",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 40,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.translateKey_vertex",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 48,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonicalKey_translate",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 51,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonicalKey_idempotent",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 54,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonicalKey_reconstruct",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 57,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.keyOrbit_iff_vertex_eq",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 62,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.canonicalKey_unique",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 76,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_folding",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 92,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.exact_key_answers_equal",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 97,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.residue_folding_twelve",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 110,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.residue_folding_144",
+      "module": "SourceKeys",
+      "source": "IndependentDuodenary/SourceKeys.lean",
+      "line": 116,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.sourceBlockProjection_lift",
+      "module": "SourceProjection",
+      "source": "IndependentDuodenary/SourceProjection.lean",
+      "line": 35,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.sourceBlockProjection_surjective",
+      "module": "SourceProjection",
+      "source": "IndependentDuodenary/SourceProjection.lean",
+      "line": 46,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.permittedProjection_preserves_homogeneous",
+      "module": "SourceProjection",
+      "source": "IndependentDuodenary/SourceProjection.lean",
+      "line": 57,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.permittedProjection_surjective",
+      "module": "SourceProjection",
+      "source": "IndependentDuodenary/SourceProjection.lean",
+      "line": 61,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_block_pullback_evaluation",
+      "module": "SourceProjection",
+      "source": "IndependentDuodenary/SourceProjection.lean",
+      "line": 82,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_table_pullback_evaluation",
+      "module": "SourceProjection",
+      "source": "IndependentDuodenary/SourceProjection.lean",
+      "line": 108,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pullback_block_metadata",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 86,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pullback_block_intercept",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 98,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.pullback_reduced_intercept",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 131,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.permitted_pullback_exact_key",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 152,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.projected_exact_key_translate",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 168,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_key_translation_representable",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 175,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_canonical_key_representable",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 182,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_table_folding",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 191,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_key_sharing",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 200,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.split_binary_double_zero",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 209,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.binary_source_key_sharing",
+      "module": "SourceReduction",
+      "source": "IndependentDuodenary/SourceReduction.lean",
+      "line": 215,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.parse_station_unit_roundtrip",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 19,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.parse_station_unit_sound",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 22,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.parse_station_parameter_roundtrip",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 31,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.encode_parsed_station_parameter",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 35,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_expression_decode_encode",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 51,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_meaning_decode_encode",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 62,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_expression_semantic_roundtrip",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 67,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_parameter_encoding_injective",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 71,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_code_collision_iff",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 78,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.valid_station_decode_encode",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 94,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.valid_station_encode_decode",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 99,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.valid_station_code_card",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 113,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.raw_station_code_card",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 116,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_wire_composition",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 128,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_wire_inverse",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 134,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reject_nonunit_station_code",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 139,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reflection_example_wire",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 141,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.scale_shift_example_wire",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 143,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protected_station_wire_recovery",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 153,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.protected_station_semantic_recovery",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 161,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reflection_example_corruption_bound",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 171,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reflection_example_corruption_recovery",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 177,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.worked_examples_same_output_at_two",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 183,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.worked_examples_different_meanings",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 187,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_shift_expression_add",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 198,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.source_shift_observable_equivariance",
+      "module": "StationCodec",
+      "source": "IndependentDuodenary/StationCodec.lean",
+      "line": 205,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.affine_permutation_compose",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 39,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.affine_permutation_inverse",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 45,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_compile_correct",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 52,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.compile_parameter_expression",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 68,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_normalization_meaning",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 75,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_normalization_idempotent",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 79,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_meaning_iff_compiled",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 83,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.same_station_meaning_correct",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 95,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.meaning_parameter_roundtrip",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 105,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.parameter_meaning_roundtrip",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 108,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.station_meaning_class_card",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 121,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reflection_example_parameters",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 128,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reflection_example_meaning",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 130,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.scale_shift_example_parameters",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 137,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.scale_shift_example_at_two",
+      "module": "StationGrammar",
+      "source": "IndependentDuodenary/StationGrammar.lean",
+      "line": 139,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelveCRT_bijective",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 14,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.crt_reconstruct_coordinates",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 16,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.twelveCRT_inverse_formula",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 18,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.crt_reconstruct_original",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 23,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.rotation_twelve_returns",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 30,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.rotation_no_shorter_period",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 32,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reflection_involution",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 35,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.reflection_rotation_relation",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 38,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.antipode_involution",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 44,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.antipode_fixed_point_free",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 46,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.antipodal_pair_card",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 51,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.antipodal_pairs_cover",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 53,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.antipodal_pairs_disjoint",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 55,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.antipodal_pairs_injective",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 58,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.antipodal_pair_family_card",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 60,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.directed_difference_translation",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 67,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cyclic_distance_translation",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 74,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cyclic_distance_reflection",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 78,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cyclic_distance_bound",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 81,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cyclic_distance_all_values",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 83,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.dihedral_action_one",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 91,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.dihedral_action_mul",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 94,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.dihedral_zero_one_separates",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 110,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.dihedral_station_hom_injective",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 114,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.dihedral_twelve_card",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 120,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.dihedral_preserves_cyclic_distance",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 123,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cyclic_zero_one_separates",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 133,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cyclic_distance_one_iff",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 137,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.dihedral_matches_directed_edge",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 140,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cyclic_isometry_is_dihedral",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 148,
+      "external_prize_implication_established": false
+    },
+    {
+      "name": "IndependentDuodenary.cyclic_station_isometry_card",
+      "module": "TwelveStateStructure",
+      "source": "IndependentDuodenary/TwelveStateStructure.lean",
+      "line": 190,
+      "external_prize_implication_established": false
+    }
+  ]
+}

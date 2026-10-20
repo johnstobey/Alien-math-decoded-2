@@ -1,0 +1,18 @@
+{
+  "purpose": "independent mathematical and formal proof audit",
+  "named_problem": "P versus NP",
+  "formal_statement": "IndependentDuodenary.PVersusNPConjecture",
+  "statement_status": "defined_not_proved",
+  "equivalence_to_other_standard_machine_models": "not_formalized",
+  "prize_solution_proved": false,
+  "cmi_submission_readiness": "not_established",
+  "protocol_orbit_bound_is_general_search_bound": false,
+  "symbol_budget_is_turing_time_bound": false,
+  "zero_dependency_package": false,
+  "toolchain_and_mathlib_required": true,
+  "official_rules_check": {
+    "url": "https://www.claymath.org/millennium-problems/rules/",
+    "retrieved": false,
+    "http_status": 403
+  }
+}

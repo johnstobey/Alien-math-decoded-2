@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 342 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 349 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -1787,6 +1787,110 @@ Proof method: Choose source preimages, apply assumed source closure and operatio
 Axioms: `none`.
 
 Dependencies: see `DIRECT DEPENDENCIES conditional_closure` and the printed proof in the machine-generated audit.
+
+## `protocol_iterate_mod_twelve`
+
+Source: `IndependentDuodenary/MillenniumBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem protocol_iterate_mod_twelve {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) :
+    ((registerStep h)^[n]) q = ((registerStep h)^[n % 12]) q
+```
+
+Proof method: Divide the iteration count by twelve and use the established global period.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protocol_iterate_mod_twelve` and the printed proof in the machine-generated audit.
+
+## `protocol_orbit_candidate_bound`
+
+Source: `IndependentDuodenary/MillenniumBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem protocol_orbit_candidate_bound {r : ℕ} (h : RegisterTranslation r) (q : RegisterState r) :
+    (protocolOrbitCandidates h q).card ≤ 12
+```
+
+Proof method: The cardinality of a finite image is at most its twelve-element domain.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protocol_orbit_candidate_bound` and the printed proof in the machine-generated audit.
+
+## `protocol_orbit_candidates_complete`
+
+Source: `IndependentDuodenary/MillenniumBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem protocol_orbit_candidates_complete {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (q : RegisterState r) : ((registerStep h)^[n]) q ∈ protocolOrbitCandidates h q
+```
+
+Proof method: Reduce the exponent modulo twelve and supply its Fin 12 witness.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protocol_orbit_candidates_complete` and the printed proof in the machine-generated audit.
+
+## `complete_key_cardinality`
+
+Source: `IndependentDuodenary/MillenniumBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem complete_key_cardinality : Nat.card RepresentedKey = 49152
+```
+
+Proof method: Explicit coefficient equivalence and finite product/function cardinalities.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES complete_key_cardinality` and the printed proof in the machine-generated audit.
+
+## `complete_register_cardinality`
+
+Source: `IndependentDuodenary/MillenniumBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem complete_register_cardinality (r : ℕ) : Nat.card (RegisterState r) = 49152 ^ r
+```
+
+Proof method: Function-space cardinality and the proved full key cardinality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES complete_register_cardinality` and the printed proof in the machine-generated audit.
+
+## `majority_symbol_budget_linear`
+
+Source: `IndependentDuodenary/MillenniumBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem majority_symbol_budget_linear (r : ℕ) : majoritySymbolBudget r = 3 * (17 * r)
+```
+
+Proof method: Natural arithmetic on the defined symbol-position budget.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES majority_symbol_budget_linear` and the printed proof in the machine-generated audit.
+
+## `protected_frame_width`
+
+Source: `IndependentDuodenary/MillenniumBridge.lean`. Compilation: **passed**.
+
+```lean
+theorem protected_frame_width {r : ℕ} (h : RegisterTranslation r) (n : ℕ)
+    (ops : List StationExpr) (x : CanonicalSubstrate r) (i : Fin r) :
+    (pipelineTransmit h n ops x i).length = 17
+```
+
+Proof method: Compilation equality and the established canonical transmitted length.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES protected_frame_width` and the printed proof in the machine-generated audit.
 
 ## `twelve_returns`
 

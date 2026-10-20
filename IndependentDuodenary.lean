@@ -18,3 +18,4 @@ import IndependentDuodenary.RegisterBridge
 import IndependentDuodenary.CanonicalArchitecture
 import IndependentDuodenary.PipelineSynthesis
 import IndependentDuodenary.PipelineHarness
+import IndependentDuodenary.MillenniumBridge

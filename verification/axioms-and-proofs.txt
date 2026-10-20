@@ -5022,6 +5022,490 @@ DIRECT DEPENDENCIES conditional_closure: [Iff.mpr,
  Eq,
  Set.instMembership,
  Set]
+theorem IndependentDuodenary.protocol_iterate_mod_twelve : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  (IndependentDuodenary.registerStep h)^[n] q = (IndependentDuodenary.registerStep h)^[n % 12] q :=
+fun {r} h n q =>
+  let_fun hid := funext (IndependentDuodenary.register_step_period_twelve h);
+  Trans.trans (congrArg (fun k => (IndependentDuodenary.registerStep h)^[k] q) (Eq.symm (Nat.mod_add_div n 12)))
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => _a = (IndependentDuodenary.registerStep h)^[n % 12] q)
+          (Function.iterate_add_apply (IndependentDuodenary.registerStep h) (n % 12) (12 * (n / 12)) q)))
+      (Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              (IndependentDuodenary.registerStep h)^[n % 12] (_a q) = (IndependentDuodenary.registerStep h)^[n % 12] q)
+            (Function.iterate_mul (IndependentDuodenary.registerStep h) 12 (n / 12))))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                (IndependentDuodenary.registerStep h)^[n % 12] (_a^[n / 12] q) =
+                  (IndependentDuodenary.registerStep h)^[n % 12] q)
+              hid))
+          (of_eq_true
+            (Eq.trans
+              (congrArg
+                (fun x =>
+                  (IndependentDuodenary.registerStep h)^[n % 12] (x q) =
+                    (IndependentDuodenary.registerStep h)^[n % 12] q)
+                (Function.iterate_id (n / 12)))
+              (eq_self ((IndependentDuodenary.registerStep h)^[n % 12] q)))))))
+'IndependentDuodenary.protocol_iterate_mod_twelve' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protocol_iterate_mod_twelve: [Function.iterate_id,
+ Eq.mpr,
+ Trans.trans,
+ instHDiv,
+ HMul.hMul,
+ IndependentDuodenary.registerStep,
+ Function.iterate_add_apply,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ id,
+ HDiv.hDiv,
+ Nat.instMod,
+ instHMod,
+ instMulNat,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.RegisterState,
+ instTransEq,
+ Nat.mod_add_div,
+ funext,
+ instHAdd,
+ HMod.hMod,
+ Function.iterate_mul,
+ HAdd.hAdd,
+ Nat,
+ True,
+ eq_self,
+ Nat.instDiv,
+ of_eq_true,
+ instAddNat,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ IndependentDuodenary.register_step_period_twelve,
+ letFun,
+ Eq.trans,
+ instHMul]
+theorem IndependentDuodenary.protocol_orbit_candidate_bound : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r)
+  (q : IndependentDuodenary.RegisterState r), (IndependentDuodenary.protocolOrbitCandidates h q).card ≤ 12 :=
+fun {r} h q =>
+  LE.le.trans Finset.card_image_le
+    (of_eq_true
+      (Eq.trans (congrArg (fun x => x ≤ 12) (Fintype.card_fin 12)) (Mathlib.Order.Defs.PartialOrder._auxLemma.1 12)))
+'IndependentDuodenary.protocol_orbit_candidate_bound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protocol_orbit_candidate_bound: [IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.protocolOrbitCandidates,
+ Fintype.card_fin,
+ IndependentDuodenary.protocolOrbitCandidates.proof_1,
+ IndependentDuodenary.registerStep,
+ Finset.univ,
+ congrArg,
+ ZMod.fintype,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ IndependentDuodenary.RegisterTranslation,
+ Preorder.toLE,
+ IndependentDuodenary.RepresentedKey,
+ Fintype.card,
+ instOfNatNat,
+ IndependentDuodenary.instDecidableEqExactKey,
+ LE.le,
+ instLENat,
+ Fin.val,
+ Nat.iterate,
+ Mathlib.Order.Defs.PartialOrder._auxLemma.1,
+ ZMod,
+ Fin.fintype,
+ IndependentDuodenary.RegisterState,
+ Finset.card_image_le,
+ Nat.instPreorder,
+ Fintype.decidablePiFintype,
+ Nat,
+ True,
+ Finset.card,
+ of_eq_true,
+ IndependentDuodenary.KeyComplement,
+ LE.le.trans,
+ OfNat.ofNat,
+ Fin,
+ Finset.image,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.protocol_orbit_candidates_complete : ∀ {r : ℕ}
+  (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ) (q : IndependentDuodenary.RegisterState r),
+  (IndependentDuodenary.registerStep h)^[n] q ∈ IndependentDuodenary.protocolOrbitCandidates h q :=
+fun {r} h n q =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => _a ∈ IndependentDuodenary.protocolOrbitCandidates h q)
+        (IndependentDuodenary.protocol_iterate_mod_twelve h n q)))
+    (Finset.mem_image.mpr
+      (Exists.intro ⟨n % 12, Nat.mod_lt n (of_decide_eq_true (id (Eq.refl true)))⟩
+        ⟨Finset.mem_univ ⟨n % 12, Nat.mod_lt n (of_decide_eq_true (id (Eq.refl true)))⟩, rfl⟩))
+'IndependentDuodenary.protocol_orbit_candidates_complete' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protocol_orbit_candidates_complete: [Iff.mpr,
+ Finset.mem_univ,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.protocolOrbitCandidates,
+ IndependentDuodenary.protocolOrbitCandidates.proof_1,
+ IndependentDuodenary.registerStep,
+ of_decide_eq_true,
+ Finset.univ,
+ Finset.mem_image,
+ congrArg,
+ Finset,
+ ZMod.fintype,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.RepresentedKey,
+ Membership.mem,
+ Exists,
+ Fin.mk,
+ id,
+ Nat.instMod,
+ instHMod,
+ instOfNatNat,
+ IndependentDuodenary.instDecidableEqExactKey,
+ Finset.instMembership,
+ Fin.val,
+ Nat.iterate,
+ ZMod,
+ Nat.mod_lt,
+ Fin.fintype,
+ IndependentDuodenary.RegisterState,
+ Bool.true,
+ GT.gt,
+ HMod.hMod,
+ And,
+ Fintype.decidablePiFintype,
+ Nat,
+ And.intro,
+ Exists.intro,
+ Bool,
+ Nat.decLt,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.protocol_iterate_mod_twelve,
+ instLTNat,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ Finset.image,
+ rfl,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.complete_key_cardinality : Nat.card IndependentDuodenary.RepresentedKey = 49152 :=
+Eq.mpr (id (congrArg (fun _a => _a = 49152) (Nat.card_congr IndependentDuodenary.keyCoefficientEquiv)))
+  (of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = 49152)
+        (Eq.trans Nat.card_eq_fintype_card
+          (Eq.trans (Fintype.card_prod (Fin 3) ((Fin 2 → ZMod 2) × (ZMod 12 → ZMod 2)))
+            (congr (congrArg HMul.hMul (Fintype.card_fin 3))
+              (Eq.trans (Fintype.card_prod (Fin 2 → ZMod 2) (ZMod 12 → ZMod 2))
+                (congr
+                  (congrArg HMul.hMul
+                    (Eq.trans Fintype.card_pi
+                      (Eq.trans
+                        (Eq.trans (Finset.prod_congr (Eq.refl Finset.univ) fun x a => ZMod.card 2)
+                          (Finset.prod_const 2))
+                        (congrArg (HPow.hPow 2) (Fintype.card_fin 2)))))
+                  (Eq.trans Fintype.card_pi
+                    (Eq.trans
+                      (Eq.trans (Finset.prod_congr (Eq.refl Finset.univ) fun x a => ZMod.card 2) (Finset.prod_const 2))
+                      (congrArg (HPow.hPow 2) (ZMod.card 12))))))))))
+      (eq_self 49152)))
+'IndependentDuodenary.complete_key_cardinality' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES complete_key_cardinality: [Fintype.card_pi,
+ Eq.mpr,
+ Fintype.card_fin,
+ HMul.hMul,
+ Finset.univ,
+ congrArg,
+ Finset,
+ ZMod.fintype,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ IndependentDuodenary.RepresentedKey,
+ Membership.mem,
+ IndependentDuodenary.CanonicalCoefficients,
+ Monoid.toNatPow,
+ Fintype.card,
+ id,
+ Nat.card,
+ instMulNat,
+ instOfNatNat,
+ Finset.prod_congr,
+ Finset.instMembership,
+ Finset.prod_const,
+ Fintype.card_prod,
+ ZMod,
+ Fin.fintype,
+ Finset.prod,
+ Nat.card_congr,
+ HPow.hPow,
+ IndependentDuodenary.keyCoefficientEquiv,
+ CommMonoid.toMonoid,
+ Nat.instNeZeroSucc,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ Nat.instCommMonoid,
+ Finset.card,
+ Pi.fintype,
+ of_eq_true,
+ Eq.refl,
+ instFintypeProd,
+ instHPow,
+ Prod,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ ZMod.card,
+ Nat.card_eq_fintype_card,
+ Eq.trans,
+ instHMul]
+theorem IndependentDuodenary.complete_register_cardinality : ∀ (r : ℕ),
+  Nat.card (IndependentDuodenary.RegisterState r) = 49152 ^ r :=
+fun r =>
+  Eq.mpr (id (congrArg (fun _a => _a = 49152 ^ r) Nat.card_fun))
+    (Eq.mpr (id (congrArg (fun _a => _a ^ Nat.card (Fin r) = 49152 ^ r) IndependentDuodenary.complete_key_cardinality))
+      (of_eq_true
+        (Eq.trans (congrArg (fun x => 49152 ^ x = 49152 ^ r) (Eq.trans Nat.card_eq_fintype_card (Fintype.card_fin r)))
+          (eq_self (49152 ^ r)))))
+'IndependentDuodenary.complete_register_cardinality' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES complete_register_cardinality: [Eq.mpr,
+ Fintype.card_fin,
+ congrArg,
+ Nat.instMonoid,
+ IndependentDuodenary.complete_key_cardinality,
+ IndependentDuodenary.RepresentedKey,
+ Monoid.toNatPow,
+ Fintype.card,
+ id,
+ Nat.card,
+ instOfNatNat,
+ Finite.of_fintype,
+ Fin.fintype,
+ Nat.card_fun,
+ IndependentDuodenary.RegisterState,
+ HPow.hPow,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ instHPow,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Nat.card_eq_fintype_card,
+ Eq.trans]
+theorem IndependentDuodenary.majority_symbol_budget_linear : ∀ (r : ℕ),
+  IndependentDuodenary.majoritySymbolBudget r = 3 * (17 * r) :=
+fun r =>
+  id
+    (Decidable.byContradiction fun a =>
+      Or.casesOn (Nat.lt_or_gt_of_ne a)
+        (fun h =>
+          Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+            (Lean.Omega.tidy_sat
+              (Lean.Omega.Constraint.addInequality_sat
+                (le_of_le_of_eq (Int.sub_nonneg_of_le (Int.add_one_le_of_lt (Lean.Omega.Int.ofNat_lt_of_lt h)))
+                  (Eq.trans
+                    (Lean.Omega.Int.sub_congr
+                      (Eq.trans (Int.ofNat_mul 3 (17 * r))
+                        (Eq.trans
+                          (Lean.Omega.Int.mul_congr (id (Eq.refl ↑3))
+                            (Eq.trans (Int.ofNat_mul 17 r)
+                              (Eq.trans
+                                (Lean.Omega.Int.mul_congr (id (Eq.refl ↑17))
+                                  (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0))
+                                (Eq.symm
+                                  (Lean.Omega.LinearCombo.mul_eval { const := 17, coeffs := [] }
+                                    { const := 0, coeffs := [1] } (Lean.Omega.Coeffs.ofList [↑r])
+                                    (of_decide_eq_true (id (Eq.refl true))))))))
+                          (Eq.symm
+                            (Lean.Omega.LinearCombo.mul_eval { const := 3, coeffs := [] } { const := 0, coeffs := [17] }
+                              (Lean.Omega.Coeffs.ofList [↑r]) (of_decide_eq_true (id (Eq.refl true)))))))
+                      (Eq.trans
+                        (Lean.Omega.Int.add_congr
+                          (Eq.trans (Int.ofNat_mul 51 r)
+                            (Eq.trans
+                              (Lean.Omega.Int.mul_congr (id (Eq.refl ↑51))
+                                (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0))
+                              (Eq.symm
+                                (Lean.Omega.LinearCombo.mul_eval { const := 51, coeffs := [] }
+                                  { const := 0, coeffs := [1] } (Lean.Omega.Coeffs.ofList [↑r])
+                                  (of_decide_eq_true (id (Eq.refl true)))))))
+                          (id (Eq.refl 1)))
+                        (Eq.symm
+                          (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [51] } { const := 1, coeffs := [] }
+                            (Lean.Omega.Coeffs.ofList [↑r])))))
+                    (Eq.symm
+                      (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [51] } { const := 1, coeffs := [51] }
+                        (Lean.Omega.Coeffs.ofList [↑r]))))))))
+        fun h =>
+        Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+          (Lean.Omega.tidy_sat
+            (Lean.Omega.Constraint.addInequality_sat
+              (le_of_le_of_eq (Int.sub_nonneg_of_le (Int.add_one_le_of_lt (Lean.Omega.Int.ofNat_lt_of_lt h)))
+                (Eq.trans
+                  (Lean.Omega.Int.sub_congr
+                    (Eq.trans (Int.ofNat_mul 51 r)
+                      (Eq.trans
+                        (Lean.Omega.Int.mul_congr (id (Eq.refl ↑51)) (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0))
+                        (Eq.symm
+                          (Lean.Omega.LinearCombo.mul_eval { const := 51, coeffs := [] } { const := 0, coeffs := [1] }
+                            (Lean.Omega.Coeffs.ofList [↑r]) (of_decide_eq_true (id (Eq.refl true)))))))
+                    (Eq.trans
+                      (Lean.Omega.Int.add_congr
+                        (Eq.trans (Int.ofNat_mul 3 (17 * r))
+                          (Eq.trans
+                            (Lean.Omega.Int.mul_congr (id (Eq.refl ↑3))
+                              (Eq.trans (Int.ofNat_mul 17 r)
+                                (Eq.trans
+                                  (Lean.Omega.Int.mul_congr (id (Eq.refl ↑17))
+                                    (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0))
+                                  (Eq.symm
+                                    (Lean.Omega.LinearCombo.mul_eval { const := 17, coeffs := [] }
+                                      { const := 0, coeffs := [1] } (Lean.Omega.Coeffs.ofList [↑r])
+                                      (of_decide_eq_true (id (Eq.refl true))))))))
+                            (Eq.symm
+                              (Lean.Omega.LinearCombo.mul_eval { const := 3, coeffs := [] }
+                                { const := 0, coeffs := [17] } (Lean.Omega.Coeffs.ofList [↑r])
+                                (of_decide_eq_true (id (Eq.refl true)))))))
+                        (id (Eq.refl 1)))
+                      (Eq.symm
+                        (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [51] } { const := 1, coeffs := [] }
+                          (Lean.Omega.Coeffs.ofList [↑r])))))
+                  (Eq.symm
+                    (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [51] } { const := 1, coeffs := [51] }
+                      (Lean.Omega.Coeffs.ofList [↑r]))))))))
+'IndependentDuodenary.majority_symbol_budget_linear' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES majority_symbol_budget_linear: [False,
+ Lean.Omega.Constraint.not_sat'_of_isImpossible,
+ HMul.hMul,
+ of_decide_eq_true,
+ le_of_le_of_eq,
+ Lean.Omega.Constraint.mk,
+ Int.add_one_le_of_lt,
+ IndependentDuodenary.majoritySymbolBudget,
+ HSub.hSub,
+ Lean.Omega.Int.add_congr,
+ Lean.Omega.LinearCombo.eval,
+ Option.some,
+ Lean.Omega.Coeffs.isZero,
+ Int.instDecidableEq,
+ id,
+ instDecidableEqBool,
+ Int.instNegInt,
+ Int.sub_nonneg_of_le,
+ instMulNat,
+ instOfNatNat,
+ Int,
+ Lean.Omega.LinearCombo.mul_eval,
+ List.decidableBAll,
+ Nat.cast,
+ Lean.Omega.Int.sub_congr,
+ Or.casesOn,
+ List.cons,
+ Lean.Omega.LinearCombo,
+ Int.instMul,
+ Bool.true,
+ GT.gt,
+ Option.none,
+ instHAdd,
+ Lean.Omega.tidy_sat,
+ instHSub,
+ Lean.Omega.LinearCombo.coordinate_eval_0,
+ instOfNat,
+ HAdd.hAdd,
+ Lean.Omega.LinearCombo.mk,
+ Lean.Omega.Coeffs.ofList,
+ Nat,
+ LT.lt,
+ Lean.Omega.LinearCombo.add_eval,
+ Lean.Omega.LinearCombo.sub_eval,
+ Lean.Omega.LinearCombo.coordinate,
+ Decidable.byContradiction,
+ Bool,
+ Int.instAdd,
+ Lean.Omega.LinearCombo.instAdd,
+ Eq.refl,
+ Lean.Omega.Int.ofNat_lt_of_lt,
+ Int.instSub,
+ instDecidableEqNat,
+ Or,
+ instNatCastInt,
+ instLTNat,
+ Int.ofNat_mul,
+ Lean.Omega.Int.mul_congr,
+ OfNat.ofNat,
+ Eq.symm,
+ Lean.Omega.Constraint.addInequality_sat,
+ Decidable.decide,
+ Eq,
+ instDecidableOr,
+ Lean.Omega.LinearCombo.mul,
+ Lean.Omega.LinearCombo.instSub,
+ Not,
+ Neg.neg,
+ Nat.lt_or_gt_of_ne,
+ Int.instLEInt,
+ Eq.trans,
+ Lean.Omega.Constraint.isImpossible,
+ instHMul,
+ List.nil]
+theorem IndependentDuodenary.protected_frame_width : ∀ {r : ℕ} (h : IndependentDuodenary.RegisterTranslation r) (n : ℕ)
+  (ops : List IndependentDuodenary.StationExpr) (x : IndependentDuodenary.CanonicalSubstrate r) (i : Fin r),
+  (IndependentDuodenary.pipelineTransmit h n ops x i).length = 17 :=
+fun {r} h n ops x i =>
+  id
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => (_a i).length = 17)
+          (IndependentDuodenary.station_program_compilation ops
+            ((IndependentDuodenary.transportRegisterWords (IndependentDuodenary.registerStep h))^[n]
+              (IndependentDuodenary.canonicalEncodingNatural.app r x)))))
+      (IndependentDuodenary.canonical_transmitted_word_length (IndependentDuodenary.registerStep h) n
+        (IndependentDuodenary.compileStationProgram ops) x i))
+'IndependentDuodenary.protected_frame_width' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES protected_frame_width: [IndependentDuodenary.transportRegisterWords,
+ Eq.mpr,
+ IndependentDuodenary.RegisterNaturalMap.app,
+ IndependentDuodenary.canonicalFamily,
+ IndependentDuodenary.registerStep,
+ congrArg,
+ IndependentDuodenary.RegisterTranslation,
+ IndependentDuodenary.CanonicalSubstrate,
+ IndependentDuodenary.pointwiseFamily,
+ IndependentDuodenary.canonical_transmitted_word_length,
+ id,
+ IndependentDuodenary.canonicalEncodingNatural,
+ instOfNatNat,
+ IndependentDuodenary.RegisterWords,
+ Nat.iterate,
+ ZMod,
+ IndependentDuodenary.StationExpr,
+ IndependentDuodenary.station_program_compilation,
+ IndependentDuodenary.runStationProgram,
+ List,
+ Nat,
+ IndependentDuodenary.stationWordAction,
+ IndependentDuodenary.compileStationProgram,
+ OfNat.ofNat,
+ Fin,
+ IndependentDuodenary.pipelineTransmit,
+ Eq,
+ List.length]
 theorem IndependentDuodenary.twelve_returns : IndependentDuodenary.station 12 = 0 :=
 of_decide_eq_true (id (Eq.refl true))
 'IndependentDuodenary.twelve_returns' depends on axioms: [propext, Quot.sound]
@@ -20069,4 +20553,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 342 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 349 theorem declarations; only standard Lean axioms permitted.
