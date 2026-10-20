@@ -111,3 +111,9 @@ new reachability decision and global orbit-cover lower bound. The 350-theorem
 `claim_manifest.json` and administrative packet remain a historical dossier for
 commit `65e0db1`, not an index of subsequent research. Rebuild that historical
 packet from its archived revision; current research has its own audit index.
+
+[Atomic bridge specification](verification/ATOMIC_BRIDGE_SPECIFICATION.md)
+expands the four missing complexity bridges into 77 explicit obligations and
+an acyclic dependency graph. Five initial encoding facts are checked as unnamed
+Lean examples; the library theorem count remains 354. The general SAT reduction
+and polynomial-time machine proof remain absent.

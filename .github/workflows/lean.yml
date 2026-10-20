@@ -81,6 +81,12 @@ jobs:
             lake env lean "$proof_file" 2>&1 | tee .lake/search-boundary-check.log
             test ! -s .lake/search-boundary-check.log
           done
+      - name: Verify initial complexity encoding facts and obligation graph
+        run: |
+          lake env lean examples/ComplexityEncodingBoundary.lean 2>&1 | tee .lake/complexity-encoding-check.log
+          test ! -s .lake/complexity-encoding-check.log
+          python3 scripts/render_atomic_bridge.py
+          git diff --exit-code -- verification/ATOMIC_BRIDGE_SPECIFICATION.md
       - name: Install monograph compiler
         run: |
           sudo apt-get update

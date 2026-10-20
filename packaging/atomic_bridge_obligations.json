@@ -1,0 +1,881 @@
+{
+  "schema_version": 1,
+  "baseline_research_commit": "abd326b48e1ed4bf2292a48c9290e6f42a568815",
+  "library_named_theorems": 354,
+  "annotation_context": [
+    "Missing mathematical bridge between finite protocol results and a Millennium Prize statement",
+    "An archival dossier or checksum does not discharge a mathematical obligation"
+  ],
+  "specification": "# Atomic specification of the four missing bridges\n\nThis expands the annotated statements about the missing prize bridge and the\nincompleteness of packaging as mathematical proof. It is an obligation register,\nnot a completed P-versus-NP proof. The baseline library has 354 named theorem\ndeclarations. Five additional unnamed encoding examples are checked separately;\nthey do not increase that library count.\n\nThis is one concrete equality-route specification; alternative encodings and\nreference models are possible. Many open entries are standard known mathematics\nnot yet formalized for these exact interfaces. The absent general reduction is\na substantive research gap, not merely missing theorem transcription.\n\nEach numbered atom below has one inspectable construction or proof acceptance\ncriterion and explicit prerequisites. `open` means that the stated construction\nor proof is not supplied. No open item is added to Lean as an assumed theorem.\nDefinitions and theorems must be distinguished: naming a proposition does not\nprove it. Some compiler/loop atoms require further transition-level expansion\nonce an actual implementation exists; no transition table is claimed for the\ncurrently unconstructed SAT-to-protocol reduction.\n\n## Scope of the annotations\n\nThe annotated claim was that the repository's finite results do not yet establish\na prize result. Its exact content is: the existing orbit decision is correct\nfor the constructed fixed operator, but no general-problem reduction, resource\nproof or equivalence with conventional P and NP has been established. The\nhistorical administrative dossier proves none of those missing implications.\nThe concrete missing links are the four groups below.\n\n## Fixed notation and quantifiers\n\n- A binary input is a finite list of Bool; N is its encoded bit length, not the\n  number of abstract registers or clauses.\n- A polynomial bound has the form c(N+1)^d, with fixed natural c,d. The constants\n  may depend on a fixed machine or reduction but never on its particular input.\n- P_ref and NP_ref are proposed conventional multi-tape, accept-state reference\n  classes. Their exact formal definitions are still owed in 1.01\u20131.04. They are\n  not existing Lean declarations asserted by this document.\n- The repository classes and finite TM0 model are actual definitions in\n  `IndependentDuodenary/MillenniumBridge.lean`. Its input alphabet is Fin 4:\n  blank 0; binary symbols 1 and 2; pair separator 3.\n- SAT_u and Q below are proposed languages with specified encodings. Their\n  machine implementations and language-class theorems are not supplied.\n\n## Concrete source-language design\n\nFor this specification choose `u(n) = true^n ++ [false]`, a unary count code.\nA literal is `(negated : Bool, variable : Nat)` with code `negated :: u(variable)`.\nA clause is `u(number of literals)` followed by its literal codes; a formula\nis `u(number of clauses)` followed by its clause codes. All input must be\nconsumed. True negates a literal; false leaves it positive. Literal evaluation\nis the assignment bit, or its Boolean negation. Clauses use disjunction,\nformulas conjunction. An empty clause is false; an empty formula is true.\n\nFor m clauses, L total literals and variable indices i_j, the specified encoder\nwould have the exact length\n\n    |encode(F)| = 1 + 2m + 3L + sum_j i_j.\n\nDerivation: the formula count contributes m+1 bits; every clause contributes\none count terminator plus its literal count; every literal contributes one\nsign bit and i_j+1 count bits. Summing yields the formula above. This is a\nmathematical design calculation; there is no implemented formula encoder or\nLean length theorem yet. Unary indices make raw index size visible in input\nlength. Translating other SAT formats still requires compact renaming and a\npolynomial-size proof. SAT completeness must be proved for this exact language,\nnot imported from a differently encoded problem without a bridge.\n\n## Concrete target-language design\n\nA protocol instance is `(r,h,q,x)` with one fixed step `registerStep h`.\nUse canonical coordinate order. The proposed direct binary key format contains\n2 metadata bits (00,01,10; reject 11), 2 binary-intercept bits, and 12 complement\nbits: 16 bits per key. h requires 2 bits per register. Put a unary r header\nbefore h, q and x. The proposed instance length is\n\n    (r+1) + 2r + 16r + 16r = 35r+1.\n\nThis is a design specification, not an implemented or proved binary codec.\nIt is separate from the already-proved 17-symbol ZMod-12 frame and its noisy\ntransmission codec. The additional protocol binary codec and its parser are\nexplicit obligations 2.18\u20132.19. Q must reject invalid encodings and otherwise\ndecide reachability of the full target state. No noise, extra station program\nor oracle parameter is hidden in Q.\n\n## Required reduction statements\n\nOne total machine-computable bit-word function f must satisfy\n\n    for every binary word y: SAT_u(y) iff Q(f(y)),\n    |f(y)| <= c_S (|y|+1)^d_S,\n    time_G(y) <= c_R (|y|+1)^d_R.\n\nWriting `if SAT_u(y) then yesInstance else noInstance` is not an efficient\nconstruction unless a polynomial SAT decider has already been independently\nproved and implemented. It would hide precisely the problem being reduced.\nA noncomputable selection, supplied satisfying assignment, arbitrary finite\ntable indexed by all inputs, or instance-dependent advice is insufficient.\n\n## Required machine-time composition\n\nSuppose the missing implementations eventually establish\n\n    time_G(N) <= a(N+1)^b,\n    |f(y)| <= c(N+1)^d,\n    time_Q(M) <= e(M+1)^k,\n    transfer(N) <= g(N+1)^h.\n\nThen, since N+1 >= 1 and c(N+1)^d+1 <= (c+1)(N+1)^d,\n\n    total_time(N)\n      <= [a + e(c+1)^k + g] (N+1)^max(b, d*k, h).\n\nThis algebra composes already-proved cost bounds; it does not establish any of\nthe missing machine constructions or their local costs. All preprocessing and\nrejection paths must be counted. The existing twelve-candidate theorem bounds\na number of candidates, not the cost of constructing and comparing them.\n\n## Consequence and direction\n\nCompleting all four groups, including the actual general reduction and its\npolynomial machine bounds, would support P = NP through SAT completeness.\nThe existing `PVersusNPConjecture` instead asserts inequality. Such an equality\nresult would contradict that defined proposition; it would not prove it.\nNo equality, inequality, conventional-model equivalence or prize resolution is\ncurrently established. A separation route would require a different universal\nlower-bound argument; the bound on explicit orbit covers is not one.\n\n## Dependency and status interpretation\n\nThe machine-readable companion is `packaging/atomic_bridge_obligations.json`.\nDependencies refer to the numbered atoms, not to assumed Lean facts. The five\nproved entries identify actual checked unnamed Lean examples. Existing library\nreachability correctness and cover bounds are separately listed as verified\nbaseline evidence. The dependency graph has no cycles; the absent reduction\n2.21 remains a genuine missing construction rather than a renamed hypothesis.\n",
+  "existing_verified_evidence": [
+    "IndependentDuodenary.protocol_reachability_iff_bounded_search",
+    "IndependentDuodenary.protocol_reachability_check_correct",
+    "IndependentDuodenary.protocol_reachability_check_rejects_iff",
+    "IndependentDuodenary.protocol_global_orbit_cover_bound"
+  ],
+  "groups": [
+    {
+      "item": 1,
+      "title": "Standard-model correspondence",
+      "atoms": [
+        {
+          "id": "1.01",
+          "title": "Reference machine syntax",
+          "acceptance_criterion": "Define a conventional finite multi-tape deterministic Turing machine and a finitely branching nondeterministic counterpart: finite alphabets, blank, states, initial state, accepting/rejecting states and one-transition semantics.",
+          "requires": [],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.02",
+          "title": "Reference runs and time",
+          "acceptance_criterion": "Define configurations, initial input placement, finite runs, halting and acceptance. Count one actual reference-machine transition as one time step; specify whether all nondeterministic branches must halt within the bound.",
+          "requires": [
+            "1.01"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.03",
+          "title": "Reference P",
+          "acceptance_criterion": "Define P_ref(L): one fixed deterministic reference machine decides every binary input x within a polynomial in |x|, with constants independent of x. Invalid encodings remain inputs and require a total answer.",
+          "requires": [
+            "1.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.04",
+          "title": "Reference NP",
+          "acceptance_criterion": "Define NP_ref(L): one fixed nondeterministic reference machine has an accepting branch exactly for x in L and all branches obey a polynomial transition bound.",
+          "requires": [
+            "1.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.05",
+          "title": "Existing word length",
+          "acceptance_criterion": "Prove |prizeEncodeWord(x)| = |x|.",
+          "requires": [],
+          "status": "proved_in_Lean_example",
+          "evidence": "examples/ComplexityEncodingBoundary.lean"
+        },
+        {
+          "id": "1.06",
+          "title": "Existing pair length",
+          "acceptance_criterion": "Prove |prizeEncodePair(x,w)| = |x| + |w| + 1.",
+          "requires": [
+            "1.05"
+          ],
+          "status": "proved_in_Lean_example",
+          "evidence": "examples/ComplexityEncodingBoundary.lean"
+        },
+        {
+          "id": "1.07",
+          "title": "Bit-symbol distinction",
+          "acceptance_criterion": "Prove that the map false -> 1 and true -> 2 in Fin 4 is injective.",
+          "requires": [],
+          "status": "proved_in_Lean_example",
+          "evidence": "examples/ComplexityEncodingBoundary.lean"
+        },
+        {
+          "id": "1.08",
+          "title": "Blank exclusion",
+          "acceptance_criterion": "Prove symbol 0 never occurs in prizeEncodeWord(x).",
+          "requires": [],
+          "status": "proved_in_Lean_example",
+          "evidence": "examples/ComplexityEncodingBoundary.lean"
+        },
+        {
+          "id": "1.09",
+          "title": "Separator exclusion",
+          "acceptance_criterion": "Prove symbol 3 never occurs in prizeEncodeWord(x).",
+          "requires": [],
+          "status": "proved_in_Lean_example",
+          "evidence": "examples/ComplexityEncodingBoundary.lean"
+        },
+        {
+          "id": "1.10",
+          "title": "Word decoder",
+          "acceptance_criterion": "Supply a total partial decoder on Fin-4 words, prove decode(encode(x)) = some x and uniqueness, and reject symbols outside {1,2}. A left inverse only on words actually in the image is insufficient for malformed-input handling.",
+          "requires": [
+            "1.07",
+            "1.08",
+            "1.09"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.11",
+          "title": "Pair decoder",
+          "acceptance_criterion": "Supply a total pair parser. Prove its left inverse, uniqueness of the separator split, rejection of absent/multiple separators and invalid bit symbols, and no ignored trailing data.",
+          "requires": [
+            "1.10",
+            "1.09"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.12",
+          "title": "Halted-run persistence",
+          "acceptance_criterion": "Prove the repository saturated iterator freezes configurations after halting: halted at t implies same configuration, halting status and output at every t+s. This connects checking at the exact polynomial bound to halting by that bound.",
+          "requires": [],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.13",
+          "title": "Acceptance convention conversion",
+          "acceptance_criterion": "Convert accept/reject control states to halted head symbols 1/2 and back. Prove language preservation, correct handling of empty input, and an explicit time overhead independent of the particular input.",
+          "requires": [
+            "1.02",
+            "1.12"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.14",
+          "title": "Reference-to-repository simulator",
+          "acceptance_criterion": "For deterministic reference machines, including a single nondeterministic branch controlled by a supplied choice certificate, construct a uniform finite transition-table compiler into PrizeMachine. Encode every tape, head marker and state over four symbols. Prove initialization, one-step simulation and finite-run simulation by induction with acceptance preservation. This must not assume a polynomial deterministic simulation of all nondeterministic branches.",
+          "requires": [
+            "1.01",
+            "1.02",
+            "1.10",
+            "1.13"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.15",
+          "title": "Repository-to-reference simulator",
+          "acceptance_criterion": "Construct the reverse compiler for any finite PrizeMachine. Prove configuration decoding, initialization, step simulation and acceptance/rejection preservation, with an explicit polynomial time overhead.",
+          "requires": [
+            "1.01",
+            "1.02",
+            "1.12",
+            "1.13"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.16",
+          "title": "Simulation polynomial closure",
+          "acceptance_criterion": "For each fixed source machine, exhibit natural coefficient/exponent constants for the whole simulation. Prove overhead remains polynomial after input encoding, tape growth, step simulation and output normalization. Constants may depend on the machine, not on x or w.",
+          "requires": [
+            "1.05",
+            "1.06",
+            "1.14",
+            "1.15"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.17",
+          "title": "Deterministic class equality",
+          "acceptance_criterion": "Prove for every language L: P_ref(L) iff PrizeDeterministicPolynomial(L), using the actual compilers and their cost proofs rather than declaring the classes equivalent by definition.",
+          "requires": [
+            "1.03",
+            "1.16"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.18",
+          "title": "Nondeterministic run to certificate",
+          "acceptance_criterion": "Encode a bounded accepting branch as a polynomial-length choice word. Construct a deterministic verifier that checks each actual branch choice and simulates that branch; prove both accepting-run completeness and rejection of invalid certificates, with a uniform polynomial bound for every x,w.",
+          "requires": [
+            "1.04",
+            "1.11",
+            "1.16"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.19",
+          "title": "Certificate to nondeterministic run",
+          "acceptance_criterion": "Construct a machine that guesses a certificate of length at most the stated polynomial and executes the verifier. Prove all branches halt in polynomial time and an accepting branch exists exactly when a valid witness exists, including the empty witness.",
+          "requires": [
+            "1.04",
+            "1.06",
+            "1.16"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.20",
+          "title": "Nondeterministic class equality",
+          "acceptance_criterion": "Prove for every language L: NP_ref(L) iff PrizeCertificatePolynomial(L), tracking both certificate-length and verifier-time bounds through the compilers.",
+          "requires": [
+            "1.18",
+            "1.19"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "1.21",
+          "title": "P inclusion in NP",
+          "acceptance_criterion": "Construct a total pair-input verifier that ignores the certificate, simulates a deterministic decider and accepts the empty certificate exactly for positive instances. Prove PrizeDeterministicPolynomial(L) implies PrizeCertificatePolynomial(L).",
+          "requires": [
+            "1.11",
+            "1.12",
+            "1.16"
+          ],
+          "status": "open",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "item": 2,
+      "title": "General-problem reduction and its source/target languages",
+      "atoms": [
+        {
+          "id": "2.01",
+          "title": "CNF syntax",
+          "acceptance_criterion": "Define Literal = variable index plus negation bit, Clause = finite list of literals, and Formula = finite list of clauses. Choose the exact unary-count binary serialization described in this specification.",
+          "requires": [],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.02",
+          "title": "Unary-count parser",
+          "acceptance_criterion": "Implement u(n) = true^n ++ [false] and a total parser consuming a prefix. Prove round trip, uniqueness, exact consumption, and termination/rejection when the terminating false bit is absent.",
+          "requires": [
+            "2.01"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.03",
+          "title": "Formula codec",
+          "acceptance_criterion": "Implement length-prefixed literal/clause/formula parsing. Prove parse(encode(F)) = some F, exact input consumption and rejection of trailing or truncated data. Prove the exact encoded length 1 + 2m + 3L + sum(variable indices).",
+          "requires": [
+            "2.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.04",
+          "title": "Variable indexing bounds",
+          "acceptance_criterion": "Prove every unary-coded variable index is at most input length. When translating other SAT encodings, construct a polynomial-time renaming to compact indices and prove satisfiability is preserved in both directions. Do not expand an enormous binary index without this bound.",
+          "requires": [
+            "2.03"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.05",
+          "title": "Boolean semantics",
+          "acceptance_criterion": "Define literal evaluation, disjunction for clauses and conjunction for formulas. Prove empty clause is false, empty formula is true, and specify repeated literals, negation and out-of-range certificate access.",
+          "requires": [
+            "2.01"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.06",
+          "title": "Finite assignment domain",
+          "acceptance_criterion": "Restrict assignments to the occurring or maximum-index variable domain and prove extension/restriction preserves formula evaluation. This connects finite certificate words to ordinary variable assignments.",
+          "requires": [
+            "2.04",
+            "2.05"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.07",
+          "title": "Binary SAT language",
+          "acceptance_criterion": "Define SAT_u(x): x parses as F and F has a satisfying assignment. Prove every malformed binary input is outside the language.",
+          "requires": [
+            "2.03",
+            "2.06"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.08",
+          "title": "SAT verification machine",
+          "acceptance_criterion": "Construct a deterministic TM certificate verifier for SAT_u, prove correctness for every x,w and a polynomial certificate bound and transition bound. Include malformed formulas and short/invalid witnesses in the total behavior.",
+          "requires": [
+            "1.11",
+            "1.16",
+            "2.07"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.09",
+          "title": "Clocked source computation",
+          "acceptance_criterion": "For an arbitrary fixed NP_ref machine with polynomial time bound T(n), derive a polynomial tape window and normalize accepting computations so that accepting early can be padded safely to T(n).",
+          "requires": [
+            "1.04"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.10",
+          "title": "Tableau variables",
+          "acceptance_criterion": "Explicitly allocate Boolean variables for every needed time, cell, symbol, head and control-state position in the bounded computation tableau. Prove allocation is collision-free and polynomially bounded.",
+          "requires": [
+            "2.09"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.11",
+          "title": "Initial and well-formed tableau clauses",
+          "acceptance_criterion": "Generate clauses for the encoded input row, blank boundaries, legal state/head positions and exactly-one symbol/state constraints. Prove each constraint family has its stated semantics and polynomial size.",
+          "requires": [
+            "2.10"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.12",
+          "title": "Transition clauses",
+          "acceptance_criterion": "Generate bounded-locality clauses enforcing precisely one legal source transition between consecutive tableau rows, including nondeterministic choices. Prove local clauses are equivalent to the intended step relation under the well-formedness conditions.",
+          "requires": [
+            "2.11"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.13",
+          "title": "Acceptance clauses",
+          "acceptance_criterion": "Generate and prove the accepting condition on the padded tableau. Ensure early acceptance, rejecting halts and clock exhaustion have the intended distinct meanings.",
+          "requires": [
+            "2.09",
+            "2.12"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.14",
+          "title": "Run-to-assignment proof",
+          "acceptance_criterion": "From any accepting clocked computation, construct a satisfying assignment of the generated CNF and prove every clause family true.",
+          "requires": [
+            "2.11",
+            "2.12",
+            "2.13"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.15",
+          "title": "Assignment-to-run proof",
+          "acceptance_criterion": "From any satisfying assignment, reconstruct a legal accepting source computation. Prove uniqueness/consistency of each decoded row and validity of every transition.",
+          "requires": [
+            "2.11",
+            "2.12",
+            "2.13"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.16",
+          "title": "Tableau generator resource proof",
+          "acceptance_criterion": "Implement the tableau-to-unary-CNF generator as a uniform machine and prove polynomial output length and transition count, including the unary encoding of allocated variable indices. Combine the preceding directions to establish SAT_u completeness for NP_ref.",
+          "requires": [
+            "2.03",
+            "2.10",
+            "2.14",
+            "2.15"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.17",
+          "title": "Protocol instance domain",
+          "acceptance_criterion": "Define a dependent instance (r,h,q,x), with h : RegisterTranslation r and q,x : RegisterState r. Fix the operator to registerStep h. No unencoded extra operation, oracle, noise advice or hidden phase is allowed.",
+          "requires": [],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.18",
+          "title": "Protocol binary encoder",
+          "acceptance_criterion": "Implement the proposed canonical coefficient encoding: two metadata bits, two binary-intercept bits and twelve complement bits per key; two bits per register for h; unary r header. Prove encoder determinism and canonical coordinate ordering.",
+          "requires": [
+            "2.17"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.19",
+          "title": "Protocol decoder and exact length",
+          "acceptance_criterion": "Implement a total decoder; reject metadata code 11 and malformed lengths. Prove decoder left inverse, soundness, unique full consumption and total length 35r+1 for this proposed direct-coefficient format. This format is separate from the existing 17-symbol framed channel codec.",
+          "requires": [
+            "2.02",
+            "2.18"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.20",
+          "title": "Protocol binary language",
+          "acceptance_criterion": "Define Q(x) to reject malformed protocol encodings and otherwise return protocolReachabilityCheck h q x_target. Connect its Boolean result to existence of a natural iterate using the existing correctness theorem.",
+          "requires": [
+            "2.19"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.21",
+          "title": "Actual SAT-to-protocol construction",
+          "acceptance_criterion": "Construct a single total effective function f on binary words whose output is a protocol instance encoding. This is the missing mathematical reduction, not an assumption or a function supplied with a SAT-answer oracle. No such f is currently implemented.",
+          "requires": [
+            "2.07",
+            "2.20"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.22",
+          "title": "Reduction forward direction",
+          "acceptance_criterion": "For every satisfiable well-formed F, prove that f(encode(F)) decodes to a protocol instance with a reachable target. The witness construction must use the actual f, not redefine f from satisfiability.",
+          "requires": [
+            "2.21"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.23",
+          "title": "Reduction reverse direction",
+          "acceptance_criterion": "For every well-formed F, prove that target reachability for f(encode(F)) yields a satisfying assignment of F. This must exclude all false positive protocol instances.",
+          "requires": [
+            "2.21"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.24",
+          "title": "Malformed source behavior",
+          "acceptance_criterion": "Prove malformed formula strings map to a fixed valid rejecting protocol instance, or another explicitly proved rejecting output. A one-register zero state and a target with different metadata supply a possible rejecting-instance design.",
+          "requires": [
+            "2.07",
+            "2.20",
+            "2.21"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "2.25",
+          "title": "Complete many-one reduction",
+          "acceptance_criterion": "Combine correctness on well-formed and malformed words with the actual generator and resource proofs to obtain, for every binary x, SAT_u(x) iff Q(f(x)), with polynomial generation time and polynomial output length.",
+          "requires": [
+            "2.22",
+            "2.23",
+            "2.24",
+            "3.11",
+            "3.12"
+          ],
+          "status": "open",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "item": 3,
+      "title": "Efficient and non-circular instance construction",
+      "atoms": [
+        {
+          "id": "3.01",
+          "title": "Uniform generator",
+          "acceptance_criterion": "Supply one finite machine G independent of the input, implementing the reduction. A separate hard-coded answer or machine for each formula is not a uniform algorithm.",
+          "requires": [
+            "2.21"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.02",
+          "title": "Parsing cost",
+          "acceptance_criterion": "Bound the transition count for reading, validating and parsing an input of N bits, including rejection paths and end-of-input checks.",
+          "requires": [
+            "2.03",
+            "3.01"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.03",
+          "title": "Register-count computation",
+          "acceptance_criterion": "Give the actual computation of r from the formula syntax. Prove termination and correctness of that computation without using a satisfiability decision as a primitive.",
+          "requires": [
+            "3.01",
+            "3.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.04",
+          "title": "Translation construction",
+          "acceptance_criterion": "Give the algorithm producing every bit of h from the parsed input and prove each produced bit equals the intended construction. Count all tape scans and writes.",
+          "requires": [
+            "3.03"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.05",
+          "title": "Initial-state construction",
+          "acceptance_criterion": "Give the algorithm producing metadata and all fourteen binary coefficients of every q register. Prove its output does not presuppose an unknown satisfying assignment.",
+          "requires": [
+            "3.03"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.06",
+          "title": "Target-state construction",
+          "acceptance_criterion": "Give the analogous algorithm for x_target, with a proof connecting its fields to the actual reduction rather than a precomputed SAT truth value.",
+          "requires": [
+            "3.03"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.07",
+          "title": "Register bound",
+          "acceptance_criterion": "Prove r(F) <= c_r (N+1)^d_r for explicit constants independent of F, and combine it with the fixed-width coordinate format to bound output length. A bound on r alone is insufficient if any field silently carries an unbounded integer.",
+          "requires": [
+            "2.19",
+            "3.03",
+            "3.04",
+            "3.05",
+            "3.06"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.08",
+          "title": "Intermediate-value sizes",
+          "acceptance_criterion": "Bound the bit lengths of counters, indices, addresses and arithmetic intermediates. Prove that operations on these values have their stated machine costs rather than unit-cost arithmetic on unbounded integers.",
+          "requires": [
+            "3.02",
+            "3.07"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.09",
+          "title": "Total generation",
+          "acceptance_criterion": "Prove every source input produces an answer within a finite bound, including invalid formulas. Prove any exceptional branch produces the specified rejecting encoding.",
+          "requires": [
+            "2.24",
+            "3.04",
+            "3.05",
+            "3.06"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.10",
+          "title": "Generator instruction accounting",
+          "acceptance_criterion": "Implement all loops, scans, copies, index calculations and output writes in the chosen machine model. Prove local loop invariants and costs; sum them without assuming syntax-level operations take one transition.",
+          "requires": [
+            "1.14",
+            "1.16",
+            "3.08",
+            "3.09"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.11",
+          "title": "Exact generator realization",
+          "acceptance_criterion": "Prove that the halted machine output is precisely the bit word f(x), including the complete header and every field, and that no unread or unvalidated data changes its meaning.",
+          "requires": [
+            "3.10"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "3.12",
+          "title": "Generator polynomial witnesses",
+          "acceptance_criterion": "Exhibit fixed c_R,d_R with T_R(N) <= c_R (N+1)^d_R for every input. Separately prove the encoded output bound; time alone bounds length only after the output/write model has been justified.",
+          "requires": [
+            "3.07",
+            "3.11"
+          ],
+          "status": "open",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "item": 4,
+      "title": "Protocol Turing-machine implementation and final time composition",
+      "atoms": [
+        {
+          "id": "4.01",
+          "title": "Protocol parsing machine",
+          "acceptance_criterion": "Implement the protocol decoder in the machine model and prove its relation to the mathematical decoder, including rejection and a transition bound on all input strings.",
+          "requires": [
+            "1.14",
+            "2.19"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.02",
+          "title": "Machine storage representation",
+          "acceptance_criterion": "Specify exactly how the unary header, h bits, current state, target state, scratch area and counters are laid out on tapes. Prove that the encoding relation is unambiguous.",
+          "requires": [
+            "4.01"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.03",
+          "title": "Rotation implementation",
+          "acceptance_criterion": "Implement complement-coordinate rotation in the fixed 12-coordinate order, using scratch space or another proved method that does not overwrite unread source bits.",
+          "requires": [
+            "4.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.04",
+          "title": "XOR implementation",
+          "acceptance_criterion": "Implement addition in ZMod 2 as a finite transition routine and prove its four input cases, including correct h-coordinate lookup.",
+          "requires": [
+            "4.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.05",
+          "title": "Metadata copying",
+          "acceptance_criterion": "Implement and prove preservation of each two-bit metadata field and preservation of register count and key-field boundaries.",
+          "requires": [
+            "4.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.06",
+          "title": "One-step simulation",
+          "acceptance_criterion": "Prove that the combined rotation, XOR and metadata routines transform a well-encoded q to a well-encoded registerStep h q, with an explicit transition cost bound and unchanged h and target buffers.",
+          "requires": [
+            "4.03",
+            "4.04",
+            "4.05"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.07",
+          "title": "Loop initialization",
+          "acceptance_criterion": "Prove that the current-state buffer initially contains q, the phase counter is zero and every fixed buffer remains valid.",
+          "requires": [
+            "4.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.08",
+          "title": "Full equality routine",
+          "acceptance_criterion": "Implement comparison of all metadata, binary-intercept and complement bits against the target. Prove true iff equality of full RegisterState values; phase equality alone is insufficient.",
+          "requires": [
+            "4.02"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.09",
+          "title": "Phase-loop invariant",
+          "acceptance_criterion": "Prove that at loop entry k the current buffer represents (registerStep h)^k(q), h and the target remain unchanged, and 0 <= k < 12.",
+          "requires": [
+            "4.06",
+            "4.07"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.10",
+          "title": "Successful comparison correctness",
+          "acceptance_criterion": "Prove any accepting comparison produces a genuine finite-index witness of target reachability.",
+          "requires": [
+            "4.08",
+            "4.09"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.11",
+          "title": "Twelve-failure correctness",
+          "acceptance_criterion": "Prove that rejecting after all twelve comparisons means no natural iterate reaches the target, using the period theorem and the existing Boolean rejection theorem.",
+          "requires": [
+            "4.08",
+            "4.09"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.12",
+          "title": "Loop termination and count",
+          "acceptance_criterion": "Prove the phase counter advances, cannot overflow its intended representation, and makes at most twelve comparisons and at most eleven necessary step updates. Count initialization, updates and final exit.",
+          "requires": [
+            "4.09"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.13",
+          "title": "Malformed-input rejection",
+          "acceptance_criterion": "Prove all malformed binary instance strings terminate and reject, and cannot accidentally reach the successful-comparison branch.",
+          "requires": [
+            "4.01"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.14",
+          "title": "Output and halting convention",
+          "acceptance_criterion": "Implement and prove halted symbol 1 for acceptance and 2 for rejection at the observed head position, matching prizeAccepts and prizeBooleanOutput exactly.",
+          "requires": [
+            "1.12",
+            "1.13",
+            "4.10",
+            "4.11",
+            "4.13"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.15",
+          "title": "Protocol-machine polynomial witnesses",
+          "acceptance_criterion": "Exhibit fixed c_Q,d_Q with T_Q(M) <= c_Q (M+1)^d_Q for every M-bit input. Include parsing, repeated comparisons, scans, copies, at most twelve candidates and all failure branches.",
+          "requires": [
+            "4.06",
+            "4.08",
+            "4.12",
+            "4.14"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.16",
+          "title": "Generator/decider composition",
+          "acceptance_criterion": "Construct an actual finite machine running G, preparing its output as the input to Q, and then running Q. Prove state-renaming, head positioning, delimiter handling and buffer transfer, with an explicit communication cost.",
+          "requires": [
+            "1.14",
+            "3.11",
+            "4.14"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.17",
+          "title": "Composed decision correctness",
+          "acceptance_criterion": "Prove the composed machine accepts exactly SAT_u on every binary input, by the reduction equivalence and the protocol-machine correctness, and rejects otherwise.",
+          "requires": [
+            "2.25",
+            "4.10",
+            "4.11",
+            "4.13",
+            "4.16"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.18",
+          "title": "Composed polynomial time",
+          "acceptance_criterion": "Substitute the output-length polynomial into T_Q and add generation and communication costs. Exhibit one coefficient and exponent independent of the input, as detailed in the composition formula in this specification.",
+          "requires": [
+            "3.12",
+            "4.15",
+            "4.16"
+          ],
+          "status": "open",
+          "evidence": null
+        },
+        {
+          "id": "4.19",
+          "title": "Class-equality consequence",
+          "acceptance_criterion": "Use SAT_u completeness and closure of polynomial reductions to give a polynomial decider for every NP_ref language; combine with P inclusion in NP and model correspondence to obtain class equality. This would oppose the existing inequality conjecture; no such equality is currently proved.",
+          "requires": [
+            "1.17",
+            "1.20",
+            "1.21",
+            "2.16",
+            "4.17",
+            "4.18"
+          ],
+          "status": "open",
+          "evidence": null
+        }
+      ]
+    }
+  ],
+  "prize_solution_proved": false,
+  "conventional_class_correspondence_proved": false,
+  "SAT_to_protocol_reduction_constructed": false,
+  "polynomial_machine_implementation_proved": false
+}
