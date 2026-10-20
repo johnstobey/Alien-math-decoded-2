@@ -2,6 +2,8 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={Finite Protocol Verification and the Boundary of a Complexity Claim},
+pdfauthor={Independent Duodenary Verification Project}}
 \input{theorem-count.tex}
 \title{Finite Protocol Verification and the Boundary of a Complexity Claim}
 \author{Independent Duodenary Verification Project}
@@ -127,7 +129,8 @@ with zero diagnostics. Full builds retain existing upstream Mathlib
 \section{Archival and public-record specification}
 The claim-bundle script builds the library, audits every named theorem, runs
 the thirteen-check guard, compiles this monograph twice, hashes payload files,
-and emits a compressed archive and a separate SHA-256 sidecar. A release export
+and includes the compiled project artifacts in a compressed archive with a
+separate SHA-256 sidecar. A release export
 requires a clean committed checkout. Development exports are marked dirty.
 Exact-commit successful CI evidence may be included explicitly. The manifest
 identifies public HTML evidence separately from raw CI logs.

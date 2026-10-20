@@ -173,6 +173,8 @@ def main():
         if args.translation:
             records.append(checked_command(['python3', 'scripts/build_translation.py', '--output',
                                             str(stage / 'publication')], logs / 'translation.log'))
+        if args.translation:
+            shutil.copytree(ROOT / '.lake/build', stage / '.lake/build')
         audit = (logs / 'audit.log').read_text()
         match = re.search(r'AUDIT PASSED: (\d+) theorem declarations', audit)
         if not match:
@@ -184,7 +186,8 @@ def main():
                     'toolchain': (ROOT / 'lean-toolchain').read_text().strip(),
                     'vendor_dependencies': args.vendor, 'dependency_build_caches_included': args.vendor,
                     'toolchain_included': False, 'translation_included': args.translation,
-                    'institutional_submission_performed': False, 'theorem_count': int(match[1]),
+                    'institutional_submission_performed': False,
+                    'project_build_artifacts_included': args.translation, 'theorem_count': int(match[1]),
                     'verification': records, 'prize_alignment': json.loads((ROOT / 'packaging/problem_alignment.json').read_text()),
                     'ci': None}
         write_json(stage / 'DEPENDENCIES.json', json.loads((ROOT / 'lake-manifest.json').read_text()))

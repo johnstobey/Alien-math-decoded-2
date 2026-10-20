@@ -126,7 +126,8 @@ undefined references and overfull boxes fail the builder. `--vendor` and
 `--ci-url` retain the exporter's existing meanings. The resulting filename ends
 in `-translation.tar.gz`. The archive contains `publication/` with the PDF,
 all generated TeX inputs, source, compilation logs and a translation manifest.
-The ordinary build manifests remain pinned and unchanged.
+Compiled project artifacts are included under `.lake/build` and covered by
+the payload checksums. The ordinary build manifests remain pinned and unchanged.
 
 The new equivalence has domain `RegisterState r` for a fixed `registerStep h`.
 It reduces its unbounded iteration count to Fin 12. It is not an equivalence to
