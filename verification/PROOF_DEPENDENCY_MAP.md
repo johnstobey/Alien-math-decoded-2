@@ -31,6 +31,11 @@ which all 211 results are premises. The main proposed connection we can make
 precise is the **source-operation-to-station correspondence**. The table below
 separates its proved restricted version from stronger versions.
 
+Current finite-instance extension: [operator and key codec](KEY_DIRECTIVES.md).
+The 211-theorem baseline below is retained as provenance; the extension adds
+34 checked statements. It constructs a coordinate cycle without identifying
+that cycle in the external paper.
+
 ## Claims, prerequisites, and evidence
 
 | Node | Precise content | Required inputs | Status and evidence |
@@ -45,7 +50,8 @@ separates its proved restricted version from stronger versions.
 | H: protected calculator result | Recover G's residue after at most one substitution per digit triple | G and the separate result-payload codec | Proved: `cipher_pipeline_protected_recovery`. It does not recover the period. |
 | I: fixed binary fold as a one-station rotation | For a fixed binary h and nonempty key carrier, `f(translateKey h q) = f(q)+1` for every q | An unrestricted observable f with this preservation equation | Impossible: the source operation squares to identity, while the target shift by 1 does not. See the derivation below. |
 | J: some other genuine source operator has exact period 12 | Identify a source-defined T and prove its twelve iterates return, with no shorter positive period, together with a compatible station map | A different explicitly sourced operator, its carrier, and a preservation equation | Unresolved: no such source operator is identified in the examined material. A's local rotation does not supply it. |
-| K: lossless source-key representation | Encode complete keys into structured twelve-symbol words with a decoding left inverse and a compatible translated-word operation | Explicit encodings of metadata and both intercept components, framing, decoder | Not constructed. C and E are observables and do not provide a decoder for full keys. |
+| J-model: chosen coordinate cycle | Coordinate shift on a twelve-coordinate binary complement has exact operator period 12, distinct from every binary intercept translation | Explicit finite carrier in `SourceKeyRepresentation` | Proved: `key_cycle_period_iff`, `key_cycle_distinct_from_translation`. This is not external-source identification J. |
+| K: lossless source-key representation | Encode complete keys into structured twelve-symbol words with a decoding left inverse and a compatible translated-word operation | Explicit encodings of metadata and both intercept components, framing, decoder | Proved for metadata `Fin 3`, binary intercept dimension 2 and complement dimension 12: `exact_key_decode_encode`, `exact_key_parse_sound`, `exact_key_word_translation`. C and E remain lossy observables. |
 | L: stronger mathematical conclusion | A named external theorem follows from specified source/model properties | Its exact statement, source/model equivalence, and a sufficient implication | Not formulated or proved here. Neither modular closure nor the calculator's zero remainder supplies this implication. |
 
 ## Established connections and missing connections
@@ -58,7 +64,7 @@ flowchart TD
   D --> E
   D --> F[Operation codec and recovery: proved]
   G[Exact calculator: proved] --> H[Result codec and recovery: proved]
-  B -. requires full encoders and decoder .-> K[Lossless key words: not constructed]
+  B --> K[Lossless finite-instance key words: proved]
   B -. fixed translation cannot supply this .-> J[Different source operator of exact period 12: unidentified]
   J -. would still require a sufficient implication .-> L[External theorem: not formulated]
 ```
@@ -101,27 +107,28 @@ period and preservation law**. Assuming twelve levels in
 `conditional_level_return` does not discharge that obligation. Reinterpreting
 the same fixed binary translation as a twelve-step rotation cannot discharge it.
 
-## Concrete continuation that the supplied model supports
+## Finite-instance continuation now completed
 
-The ledger's structured-sequence route offers a separate, well-defined next
-construction: K, a lossless encoding of complete keys. This would preserve more
+The ledger's structured-sequence route supplies construction K, now completed
+for the explicitly chosen finite carrier in [KEY_DIRECTIVES.md](KEY_DIRECTIVES.md). This preserves more
 source information without claiming an exact twelve-cycle in the source.
 
-1. Fix a finite binary dimension and metadata with an explicitly supplied
-   encoding/decoder. Give encodings for both intercept components.
-2. Define a framed word encoder `E : ExactKey M K W → List (ZMod 12)` and a
+1. The finite dimensions and metadata encodings are fixed explicitly. Both
+   intercept components have supplied encodings.
+2. The framed word encoder and partial decoder have types `E : ExactKey M K W → List (ZMod 12)` and a
    total partial decoder `D : List (ZMod 12) → Option (ExactKey M K W)`.
-3. Prove `D(E(q)) = some q` for every key. Reject malformed framing explicitly.
-   Recover all metadata and both intercept components, not just R(q).
-4. Define a translated-word operation U_h and prove
-   `U_h(E(q)) = E(translateKey h q)`. Prove its two-step return for binary h.
+3. `D(E(q)) = some q` is proved for every key. Malformed framing is rejected;
+   all metadata and both intercept components are recovered.
+4. The translated-word operation U_h satisfies the proved identities
+   `U_h(E(q)) = E(translateKey h q)` and two-step return on valid words.
 5. If robustness is needed, state a framed-word error model and prove its
    recovery bound. Existing fixed-triple guarantees do not cover insertion,
    deletion, or framing loss automatically.
 
-Completion criterion: a compiled left-inverse and source-action transport
-proof for these actual structured keys. This would advance the ledger's
-reversible-representation claim. It would not by itself prove J or L.
+The left-inverse and source-action transport proofs are compiled for this finite
+instance. Generic metadata encodings and noisy framing remain beyond it.
+This establishes reversible representation for these keys; it does not prove
+external-source operator identification J or external theorem implication L.
 
 ## Research end point and prize assessment
 

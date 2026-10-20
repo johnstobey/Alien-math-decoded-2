@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All names below are in namespace `IndependentDuodenary`. All 211 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
+All names below are in namespace `IndependentDuodenary`. All 245 declarations compiled and passed the axiom audit. Exact elaborated propositions, proof terms, and direct dependency lists are in [axioms-and-proofs.txt](axioms-and-proofs.txt), under the matching theorem name and `DIRECT DEPENDENCIES` record. The Lean source propositions are reproduced below. Standard library infrastructure dependencies are included in that machine-generated record.
 
 ## `affine_station_composition`
 
@@ -1649,6 +1649,522 @@ Proof method: Use a preimage of every support point; both functions agree by the
 Axioms: `propext, Classical.choice, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES source_reduction_unique` and the printed proof in the machine-generated audit.
+
+## `key_cycle_vertex_observable`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_vertex_observable (q : RepresentedKey) :
+    keyVertexObservable (keyVertex (keyCoordinateCycle q)) =
+      fun i => keyVertexObservable (keyVertex q) (i + 1)
+```
+
+Proof method: Definitional equality of the rotated complement and the chosen vertex observable.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_vertex_observable` and the printed proof in the machine-generated audit.
+
+## `key_cycle_iterate`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_iterate (n : ℕ) (q : RepresentedKey) :
+    (keyCoordinateCycle^[n]) q =
+      ⟨q.metadata, q.binaryIntercept, fun i => q.complementIntercept (i + (n : ZMod 12))⟩
+```
+
+Proof method: Induction on iteration count, then associativity and commutativity of residue addition.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_iterate` and the printed proof in the machine-generated audit.
+
+## `key_one_hot_phase`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_one_hot_phase : ∀ a : ZMod 12,
+    keyPhaseLabel (0, keyOneHot a) = a
+```
+
+Proof method: Simplify the one-hot predicate and its finite sum at the unique nonzero coordinate.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_one_hot_phase` and the printed proof in the machine-generated audit.
+
+## `key_cycle_witness_phase`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_witness_phase (n : ℕ) :
+    keyPhaseLabel (keyVertex ((keyCoordinateCycle^[n]) keyCycleWitness)) = (n : ZMod 12)
+```
+
+Proof method: Iteration formula, equality of the shifted one-hot vector, and key_one_hot_phase.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_witness_phase` and the printed proof in the machine-generated audit.
+
+## `key_cycle_period_iff`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_period_iff (n : ℕ) :
+    (∀ q : RepresentedKey, (keyCoordinateCycle^[n]) q = q) ↔ 12 ∣ n
+```
+
+Proof method: Necessity from the witness phase; sufficiency from the iterate formula and cast/divisibility equivalence.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_period_iff` and the printed proof in the machine-generated audit.
+
+## `key_cycle_period_twelve`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_period_twelve :
+    ∀ q : RepresentedKey, (keyCoordinateCycle^[12]) q = q
+```
+
+Proof method: Specialize key_cycle_period_iff to divisibility of 12 by itself.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_period_twelve` and the printed proof in the machine-generated audit.
+
+## `key_cycle_witness_period_iff`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_witness_period_iff (n : ℕ) :
+    (keyCoordinateCycle^[n]) keyCycleWitness = keyCycleWitness ↔ 12 ∣ n
+```
+
+Proof method: Witness phase yields the divisibility condition; the operator period theorem gives its converse.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_witness_period_iff` and the printed proof in the machine-generated audit.
+
+## `key_cycle_orbit_equivariance`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_orbit_equivariance (n : ℕ) :
+    keyPhaseLabel (keyVertex (keyCoordinateCycle ((keyCoordinateCycle^[n]) keyCycleWitness))) =
+      keyPhaseLabel (keyVertex ((keyCoordinateCycle^[n]) keyCycleWitness)) + 1
+```
+
+Proof method: Relate the next orbit point to successor iteration, then use its phase formula.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_orbit_equivariance` and the printed proof in the machine-generated audit.
+
+## `key_cycle_commutes_translation`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_commutes_translation (h : KeyBinary) (q : RepresentedKey) :
+    keyCoordinateCycle (translateKey h q) = translateKey h (keyCoordinateCycle q)
+```
+
+Proof method: Definitional equality: the coordinate cycle and binary translation act on different fields.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_commutes_translation` and the printed proof in the machine-generated audit.
+
+## `key_cycle_no_shorter_positive_period`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_no_shorter_positive_period (n : ℕ) (hn : 0 < n) (hlt : n < 12) :
+    ¬ (∀ q : RepresentedKey, (keyCoordinateCycle^[n]) q = q)
+```
+
+Proof method: The period theorem and the lower bound for a positive multiple of 12.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_no_shorter_positive_period` and the printed proof in the machine-generated audit.
+
+## `key_cycle_distinct_from_translation`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_distinct_from_translation (h : KeyBinary) :
+    keyCoordinateCycle ≠ translateKey h
+```
+
+Proof method: Evaluate both candidate functions on the one-hot witness and its zero coordinate.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_distinct_from_translation` and the printed proof in the machine-generated audit.
+
+## `key_cycle_no_global_station_shift`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_cycle_no_global_station_shift :
+    ¬ ∃ f : RepresentedKey → ZMod 12, ∀ q, f (keyCoordinateCycle q) = f q + 1
+```
+
+Proof method: The all-zero key is fixed; additive cancellation contradicts the nonzero residue 1.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_cycle_no_global_station_shift` and the printed proof in the machine-generated audit.
+
+## `key_metadata_roundtrip`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_metadata_roundtrip : ∀ m : KeyMetadata,
+    decodeKeyMetadata (encodeKeyMetadata m) = some m
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_metadata_roundtrip` and the printed proof in the machine-generated audit.
+
+## `key_metadata_parse_sound`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_metadata_parse_sound : ∀ x : ZMod 12, ∀ m : KeyMetadata,
+    decodeKeyMetadata x = some m → encodeKeyMetadata m = x
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_metadata_parse_sound` and the printed proof in the machine-generated audit.
+
+## `key_bit_roundtrip`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_bit_roundtrip : ∀ b : ZMod 2,
+    decodeKeyBit (encodeKeyBit b) = some b
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_bit_roundtrip` and the printed proof in the machine-generated audit.
+
+## `key_bit_parse_sound`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_bit_parse_sound : ∀ x : ZMod 12, ∀ b : ZMod 2,
+    decodeKeyBit x = some b → encodeKeyBit b = x
+```
+
+Proof method: Kernel-checked decidable computation (decide).
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_bit_parse_sound` and the printed proof in the machine-generated audit.
+
+## `framed_key_bits_suffix`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem framed_key_bits_suffix (n : ℕ) (b : Fin n → ZMod 2) (tail : List (ZMod 12)) :
+    decodeFramedKeyBits n (encodeKeyBits b ++ tail) =
+      if tail = [10] then some b else none
+```
+
+Proof method: Induction on binary dimension, the bit parser round trip and Fin.cons_self_tail.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES framed_key_bits_suffix` and the printed proof in the machine-generated audit.
+
+## `framed_key_bits_roundtrip`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem framed_key_bits_roundtrip (n : ℕ) (b : Fin n → ZMod 2) :
+    decodeFramedKeyBits n (encodeKeyBits b ++ [10]) = some b
+```
+
+Proof method: Specialize the suffix theorem to the sole terminator word.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES framed_key_bits_roundtrip` and the printed proof in the machine-generated audit.
+
+## `framed_key_bits_parse_sound`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem framed_key_bits_parse_sound (n : ℕ) (xs : List (ZMod 12))
+    (b : Fin n → ZMod 2) (h : decodeFramedKeyBits n xs = some b) :
+    xs = encodeKeyBits b ++ [10]
+```
+
+Proof method: Induction on dimension and parser cases; reconstruct each digit from parser soundness.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES framed_key_bits_parse_sound` and the printed proof in the machine-generated audit.
+
+## `key_bits_unpack_pack`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_bits_unpack_pack (q : RepresentedKey) :
+    unpackKeyBits q.metadata (packKeyBits q) = q
+```
+
+Proof method: Record decomposition, the two Fin.append projection laws and residue value/cast round trip.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_bits_unpack_pack` and the printed proof in the machine-generated audit.
+
+## `key_bits_pack_unpack`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem key_bits_pack_unpack (m : KeyMetadata) (b : Fin 14 → ZMod 2) :
+    packKeyBits (unpackKeyBits m b) = b
+```
+
+Proof method: Split the fourteen indices into the two binary and twelve complement coordinates.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES key_bits_pack_unpack` and the printed proof in the machine-generated audit.
+
+## `exact_key_decode_encode`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_decode_encode (q : RepresentedKey) :
+    decodeExactKey (encodeExactKey q) = some q
+```
+
+Proof method: Metadata and framed-bit round trips followed by full-record unpack/pack equality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_decode_encode` and the printed proof in the machine-generated audit.
+
+## `exact_key_parse_sound`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_parse_sound (xs : List (ZMod 12)) (q : RepresentedKey)
+    (h : decodeExactKey xs = some q) : xs = encodeExactKey q
+```
+
+Proof method: Case analysis on framing and parsers, framed-bit soundness, and pack/unpack equality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_parse_sound` and the printed proof in the machine-generated audit.
+
+## `exact_key_reject_malformed`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_reject_malformed (xs : List (ZMod 12))
+    (h : ∀ q : RepresentedKey, xs ≠ encodeExactKey q) : decodeExactKey xs = none
+```
+
+Proof method: A successful parse would reconstruct an encoded word, contradicting the hypothesis.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_reject_malformed` and the printed proof in the machine-generated audit.
+
+## `exact_key_encode_length`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_encode_length (q : RepresentedKey) : (encodeExactKey q).length = 17
+```
+
+Proof method: Length of the fixed frame and List.ofFn payload.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_encode_length` and the printed proof in the machine-generated audit.
+
+## `exact_key_reject_length`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_reject_length (xs : List (ZMod 12)) (h : xs.length ≠ 17) :
+    decodeExactKey xs = none
+```
+
+Proof method: Parse soundness and the fixed encoded length rule out successful decoding.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_reject_length` and the printed proof in the machine-generated audit.
+
+## `exact_key_encode_injective`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_encode_injective : Function.Injective encodeExactKey
+```
+
+Proof method: Apply the decoder to equal encoded words and use the proved left inverse.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_encode_injective` and the printed proof in the machine-generated audit.
+
+## `exact_key_reject_header`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_reject_header (header metadata : ZMod 12) (body : List (ZMod 12))
+    (h : header ≠ 11) : decodeExactKey (header :: metadata :: body) = none
+```
+
+Proof method: The header test fails under the explicit inequality.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_reject_header` and the printed proof in the machine-generated audit.
+
+## `exact_key_reject_metadata`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_reject_metadata (metadata : ZMod 12) (body : List (ZMod 12))
+    (h : ¬ metadata.val < 3) : decodeExactKey (11 :: metadata :: body) = none
+```
+
+Proof method: The metadata range test fails under the explicit bound.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_reject_metadata` and the printed proof in the machine-generated audit.
+
+## `exact_key_reject_suffix`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_reject_suffix (q : RepresentedKey) (tail : List (ZMod 12))
+    (h : tail ≠ [10]) :
+    decodeExactKey (11 :: encodeKeyMetadata q.metadata ::
+      (encodeKeyBits (packKeyBits q) ++ tail)) = none
+```
+
+Proof method: The framed-bit suffix theorem rejects every suffix other than the single terminator.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_reject_suffix` and the printed proof in the machine-generated audit.
+
+## `exact_key_reject_nonbinary_first`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_reject_nonbinary_first (metadata x : ZMod 12) (xs : List (ZMod 12))
+    (hzero : x ≠ 0) (hone : x ≠ 1) :
+    decodeExactKey (11 :: metadata :: x :: xs) = none
+```
+
+Proof method: The first bit parser rejects a digit different from both zero and one.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_reject_nonbinary_first` and the printed proof in the machine-generated audit.
+
+## `exact_key_word_translation`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_word_translation (h : KeyBinary) (q : RepresentedKey) :
+    translateKeyWord h (encodeExactKey q) = encodeExactKey (translateKey h q)
+```
+
+Proof method: Decode the encoded key by the left inverse and evaluate the transported operation.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_word_translation` and the printed proof in the machine-generated audit.
+
+## `exact_key_word_translation_invalid`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_word_translation_invalid (h : KeyBinary) (word : List (ZMod 12))
+    (hinvalid : decodeExactKey word = none) : translateKeyWord h word = []
+```
+
+Proof method: Evaluate the transported operation at the explicitly failed parse.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_word_translation_invalid` and the printed proof in the machine-generated audit.
+
+## `exact_key_word_translation_involution`
+
+Source: `IndependentDuodenary/SourceKeyRepresentation.lean`. Compilation: **passed**.
+
+```lean
+theorem exact_key_word_translation_involution (h : KeyBinary) (q : RepresentedKey) :
+    translateKeyWord h (translateKeyWord h (encodeExactKey q)) = encodeExactKey q
+```
+
+Proof method: Apply transport twice, translation composition, binary exponent two and translation by zero.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES exact_key_word_translation_involution` and the printed proof in the machine-generated audit.
 
 ## `translateKey_zero`
 

@@ -2,7 +2,7 @@
 
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
-- Project library: fifteen modules; 211 theorem declarations.
+- Project library: sixteen modules; 245 theorem declarations.
 - `lake build`: passed, exit status 0; see `local-build.txt`.
 - `python3 scripts/audit.py`: passed, exit status 0; see
   `axioms-and-proofs.txt` and the per-theorem index `THEOREMS.md`.
@@ -37,7 +37,7 @@ The complete Unique Games construction and its theorem remain outside this
 formalization. A faithful or surjective map to the full residue rings is not
 established; a surjective additive map from an exponent-two source is ruled out.
 The level-return theorem still assumes the supplied level and step values.
-There are no incomplete obligations inside the 211 stated Lean theorems.
+There are no incomplete obligations inside the 245 stated Lean theorems.
 
 The independent structural ledger is now formalized as described in
 `STRUCTURAL_LEDGER.md`, including cyclic/affine symmetries and exact/robust
@@ -58,5 +58,15 @@ cipher walkthrough (nine guards) and five isolated JavaScript fixtures passed.
 The [proof dependency map](PROOF_DEPENDENCY_MAP.md) separates the proved
 restricted correspondence from the obstructed fixed-fold/twelve-cycle proposal,
 the unidentified alternative source operator, and the unformulated external
-theorem implication. It proposes lossless structured key encoding as a concrete
-continuation. This documentation milestone adds no Lean declarations.
+theorem implication. Its subsequent finite-instance extension supplies lossless structured key
+encoding. The original map-only milestone added no Lean declarations.
+
+`SourceKeyRepresentation` adds 34 theorems for the chosen finite key carrier.
+Its coordinate permutation has exact global period twelve, with a station
+label on a one-hot orbit; it is not identified as an external-source operator.
+The framed full-key codec has both round-trip and parse-soundness proofs,
+malformed-word rejection, and transported binary translation. See
+[exact statements](KEY_DIRECTIVES.md). CI separately requires the new module
+to elaborate without diagnostics and checks twelve executable guards. Local
+build, all 245 theorem audits, warning-free module elaboration and all twelve
+guards passed.

@@ -6244,6 +6244,2773 @@ DIRECT DEPENDENCIES source_reduction_unique: [Eq.mpr,
  IndependentDuodenary.ProjectedCoordinates,
  DecidableEq,
  IndependentDuodenary.evaluateFullTable]
+theorem IndependentDuodenary.key_cycle_vertex_observable : ∀ (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.keyVertexObservable
+      (IndependentDuodenary.keyVertex (IndependentDuodenary.keyCoordinateCycle q)) =
+    fun i => IndependentDuodenary.keyVertexObservable (IndependentDuodenary.keyVertex q) (i + 1) :=
+fun q => rfl
+'IndependentDuodenary.key_cycle_vertex_observable' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_vertex_observable: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.keyVertex,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.keyVertexObservable,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ Nat,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.KeyComplement,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Eq,
+ rfl,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.key_cycle_iterate : ∀ (n : ℕ) (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.keyCoordinateCycle^[n] q =
+    { metadata := q.metadata, binaryIntercept := q.binaryIntercept,
+      complementIntercept := fun i => q.complementIntercept (i + ↑n) } :=
+fun n q =>
+  Nat.recAux
+    (of_eq_true
+      (Eq.trans
+        (congrArg
+          (fun x => q = { metadata := q.metadata, binaryIntercept := q.binaryIntercept, complementIntercept := x })
+          (funext fun i =>
+            congrArg q.complementIntercept (Eq.trans (congrArg (HAdd.hAdd i) Nat.cast_zero) (add_zero i))))
+        (eq_self q)))
+    (fun n ih =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              _a =
+                { metadata := q.metadata, binaryIntercept := q.binaryIntercept,
+                  complementIntercept := fun i => q.complementIntercept (i + ↑(n + 1)) })
+            (Function.iterate_succ_apply' IndependentDuodenary.keyCoordinateCycle n q)))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                IndependentDuodenary.keyCoordinateCycle _a =
+                  { metadata := q.metadata, binaryIntercept := q.binaryIntercept,
+                    complementIntercept := fun i => q.complementIntercept (i + ↑(n + 1)) })
+              ih))
+          (of_eq_true
+            (Eq.trans
+              (congr
+                (congrArg
+                  (fun x =>
+                    Eq { metadata := q.metadata, binaryIntercept := q.binaryIntercept, complementIntercept := x })
+                  (funext fun i =>
+                    congrArg q.complementIntercept (Eq.trans (add_comm (i + 1) ↑n) (add_left_comm (↑n) i 1))))
+                (congrArg (IndependentDuodenary.ExactKey.mk q.metadata q.binaryIntercept)
+                  (funext fun i =>
+                    congrArg (fun x => q.complementIntercept (i + x))
+                      (Eq.trans (Nat.cast_add n 1) (congrArg (HAdd.hAdd ↑n) Nat.cast_one)))))
+              (eq_self
+                { metadata := q.metadata, binaryIntercept := q.binaryIntercept,
+                  complementIntercept := fun i => q.complementIntercept (i + (↑n + 1)) })))))
+    n
+'IndependentDuodenary.key_cycle_iterate' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_iterate: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Function.iterate_succ_apply',
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ Nat.recAux,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddMonoid.toAddSemigroup,
+ add_left_comm,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ AddMonoid.toZero,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RepresentedKey,
+ id,
+ IndependentDuodenary.ExactKey.mk,
+ Distrib.toAdd,
+ AddMonoidWithOne.toNatCast,
+ instOfNatNat,
+ Nat.iterate,
+ Nat.cast,
+ add_comm,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ Nat.cast_add,
+ AddMonoidWithOne.toOne,
+ funext,
+ instHAdd,
+ AddSemigroup.toAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ Nat,
+ congr,
+ True,
+ eq_self,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ Zero.toOfNat0,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.ExactKey.binaryIntercept,
+ AddCommSemigroup.toAddCommMagma,
+ Nat.cast_zero,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ OfNat.ofNat,
+ AddCommMonoid.toAddCommSemigroup,
+ IndependentDuodenary.keyCoordinateCycle,
+ Nat.succ,
+ Eq,
+ Nat.cast_one,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.ExactKey.metadata,
+ Eq.trans,
+ AddCommMagma.toAdd,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.key_one_hot_phase : ∀ (a : ZMod 12),
+  IndependentDuodenary.keyPhaseLabel (0, IndependentDuodenary.keyOneHot a) = a :=
+fun a =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = a)
+        (Eq.trans
+          (Eq.trans
+            (Finset.sum_congr (Eq.refl Finset.univ) fun x a_1 =>
+              ite_congr
+                (Eq.trans
+                  (Eq.trans
+                    (congrArg (fun x => x = 1)
+                      (ite_congr IndependentDuodenary.SourceKeyRepresentation._auxLemma.1 (fun a => Eq.refl 1) fun a =>
+                        Eq.refl 0))
+                    Init.PropLemmas._auxLemma.65)
+                  (Eq.trans
+                    (Eq.trans (implies_congr (Eq.refl ¬x = -a) Mathlib.Algebra.NeZero._auxLemma.2)
+                      Init.Core._auxLemma.5)
+                    Init.PropLemmas._auxLemma.52))
+                (fun a => Eq.refl (-x)) fun a => Eq.refl 0)
+            (Finset.sum_ite_eq' Finset.univ (-a) Neg.neg))
+          (Eq.trans (ite_cond_eq_true (- -a) 0 (Mathlib.Data.Fintype.Basic._auxLemma.1 (-a))) (neg_neg a))))
+      (eq_self a))
+'IndependentDuodenary.key_one_hot_phase' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_one_hot_phase: [AddGroup.toSubtractionMonoid,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ NegZeroClass.toNeg,
+ False,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ NeZero.one,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ Finset.univ,
+ ZMod.commRing,
+ Ring.toNeg,
+ NonUnitalNonAssocRing.toMul,
+ Finset.sum_ite_eq',
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ IndependentDuodenary.SourceKeyRepresentation._auxLemma.1,
+ Finset,
+ ZMod.fintype,
+ AddMonoid.toZero,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ Membership.mem,
+ neg_neg,
+ Fin.instOfNat,
+ Distrib.toAdd,
+ Prod.mk,
+ IndependentDuodenary.keyOneHot,
+ SubtractionMonoid.toSubNegZeroMonoid,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ Finset.instMembership,
+ ite_cond_eq_true,
+ SubNegZeroMonoid.toNegZeroClass,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ Field.toSemifield,
+ ZMod,
+ Nat.Prime.one_lt',
+ NonUnitalNonAssocRing.toHasDistribNeg,
+ Init.PropLemmas._auxLemma.52,
+ NonUnitalNonAssocSemiring.toAddCommMonoid,
+ instHAdd,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ Semifield.toDivisionSemiring,
+ Init.PropLemmas._auxLemma.65,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ implies_congr,
+ IndependentDuodenary.keyPhaseLabel,
+ Nat.fact_prime_two,
+ Nat,
+ Init.Core._auxLemma.5,
+ ZMod.nontrivial,
+ Semifield.toCommGroupWithZero,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocRing,
+ True,
+ eq_self,
+ DivisionSemiring.toSemiring,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ AddCommMonoid.toAddMonoid,
+ Mathlib.Data.Fintype.Basic._auxLemma.1,
+ HasDistribNeg.toInvolutiveNeg,
+ CommRing.toRing,
+ ite_congr,
+ Finset.decidableMem,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Prod.snd,
+ Ring.toAddGroupWithOne,
+ Not,
+ Finset.sum_congr,
+ Finset.sum,
+ Neg.neg,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ IndependentDuodenary.keyPhaseLabel.proof_1,
+ ite]
+theorem IndependentDuodenary.key_cycle_witness_phase : ∀ (n : ℕ),
+  IndependentDuodenary.keyPhaseLabel
+      (IndependentDuodenary.keyVertex
+        (IndependentDuodenary.keyCoordinateCycle^[n] IndependentDuodenary.keyCycleWitness)) =
+    ↑n :=
+fun n =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => IndependentDuodenary.keyPhaseLabel (IndependentDuodenary.keyVertex _a) = ↑n)
+        (IndependentDuodenary.key_cycle_iterate n IndependentDuodenary.keyCycleWitness)))
+    (let_fun this :=
+      let_fun hw :=
+        funext fun i =>
+          of_eq_true
+            (Eq.trans
+              (congrArg (fun x => x = if i + ↑n = 0 then 1 else 0)
+                (ite_congr (congrArg (fun x => x = 0) (add_zero (i + ↑n))) (fun a => Eq.refl 1) fun a => Eq.refl 0))
+              (eq_self (if i + ↑n = 0 then 1 else 0)));
+      Eq.mpr (id (congrArg (fun _a => IndependentDuodenary.keyPhaseLabel (0, _a) = ↑n) hw))
+        (IndependentDuodenary.key_one_hot_phase ↑n);
+    this)
+'IndependentDuodenary.key_cycle_witness_phase' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_witness_phase: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.keyCycleWitness,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ ZMod.decidableEq,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RepresentedKey,
+ CommSemiring.toCommMonoidWithZero,
+ IndependentDuodenary.keyVertex,
+ id,
+ Fin.instOfNat,
+ IndependentDuodenary.ExactKey.mk,
+ Distrib.toAdd,
+ Prod.mk,
+ IndependentDuodenary.keyOneHot,
+ instOfNatNat,
+ Nat.iterate,
+ Nat.cast,
+ Field.toSemifield,
+ ZMod,
+ funext,
+ instHAdd,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ Semifield.toDivisionSemiring,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ IndependentDuodenary.keyPhaseLabel,
+ Nat.fact_prime_two,
+ Nat,
+ IndependentDuodenary.key_cycle_iterate,
+ AddZeroClass.toZero,
+ Semifield.toCommGroupWithZero,
+ True,
+ eq_self,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ DivisionSemiring.toSemiring,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.key_one_hot_phase,
+ IndependentDuodenary.ExactKey.binaryIntercept,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ ite_congr,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.ExactKey.metadata,
+ Not,
+ letFun,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ ite]
+theorem IndependentDuodenary.key_cycle_period_iff : ∀ (n : ℕ),
+  (∀ (q : IndependentDuodenary.RepresentedKey), IndependentDuodenary.keyCoordinateCycle^[n] q = q) ↔ 12 ∣ n :=
+fun n =>
+  {
+    mp := fun h =>
+      let_fun hp :=
+        congrArg (fun q => IndependentDuodenary.keyPhaseLabel (IndependentDuodenary.keyVertex q))
+          (h IndependentDuodenary.keyCycleWitness);
+      id
+        (fun hp =>
+          let_fun hz := IndependentDuodenary.key_one_hot_phase 0;
+          (ZMod.natCast_zmod_eq_zero_iff_dvd n 12).mp
+            (Eq.mp (congrArg (fun _a => ↑n = _a) hz)
+              (Eq.mp
+                (congrArg
+                  (fun _a =>
+                    _a =
+                      IndependentDuodenary.keyPhaseLabel
+                        (IndependentDuodenary.keyVertex IndependentDuodenary.keyCycleWitness))
+                  (IndependentDuodenary.key_cycle_witness_phase n))
+                hp)))
+        hp,
+    mpr := fun h q =>
+      Eq.mpr (id (congrArg (fun _a => _a = q) (IndependentDuodenary.key_cycle_iterate n q)))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                { metadata := q.metadata, binaryIntercept := q.binaryIntercept,
+                    complementIntercept := fun i => q.complementIntercept (i + _a) } =
+                  q)
+              ((ZMod.natCast_zmod_eq_zero_iff_dvd n 12).mpr h)))
+          (of_eq_true
+            (Eq.trans
+              (congrArg
+                (fun x =>
+                  { metadata := q.metadata, binaryIntercept := q.binaryIntercept, complementIntercept := x } = q)
+                (funext fun i => congrArg q.complementIntercept (add_zero i)))
+              (eq_self
+                { metadata := q.metadata, binaryIntercept := q.binaryIntercept,
+                  complementIntercept := fun i => q.complementIntercept i })))) }
+'IndependentDuodenary.key_cycle_period_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_period_iff: [Iff.mpr,
+ Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.keyCycleWitness,
+ Dvd.dvd,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.key_cycle_witness_phase,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RepresentedKey,
+ CommSemiring.toCommMonoidWithZero,
+ Eq.mp,
+ IndependentDuodenary.keyVertex,
+ id,
+ IndependentDuodenary.ExactKey.mk,
+ Distrib.toAdd,
+ instOfNatNat,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ funext,
+ instHAdd,
+ CommRing.toCommSemiring,
+ Iff,
+ Nat.instDvd,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.keyPhaseLabel,
+ Nat,
+ IndependentDuodenary.key_cycle_iterate,
+ AddZeroClass.toZero,
+ True,
+ Iff.intro,
+ eq_self,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ Iff.mp,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.key_one_hot_phase,
+ IndependentDuodenary.ExactKey.binaryIntercept,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ ZMod.natCast_zmod_eq_zero_iff_dvd,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.ExactKey.metadata,
+ letFun,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.key_cycle_period_twelve : ∀ (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.keyCoordinateCycle^[12] q = q :=
+(IndependentDuodenary.key_cycle_period_iff 12).mpr (dvd_refl 12)
+'IndependentDuodenary.key_cycle_period_twelve' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_period_twelve: [Iff.mpr,
+ Dvd.dvd,
+ Nat.instMonoid,
+ IndependentDuodenary.RepresentedKey,
+ instOfNatNat,
+ Nat.iterate,
+ Nat.instDvd,
+ Nat,
+ IndependentDuodenary.key_cycle_period_iff,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ dvd_refl,
+ Eq]
+theorem IndependentDuodenary.key_cycle_witness_period_iff : ∀ (n : ℕ),
+  IndependentDuodenary.keyCoordinateCycle^[n] IndependentDuodenary.keyCycleWitness =
+      IndependentDuodenary.keyCycleWitness ↔
+    12 ∣ n :=
+fun n =>
+  {
+    mp := fun h =>
+      let_fun hp := congrArg (fun q => IndependentDuodenary.keyPhaseLabel (IndependentDuodenary.keyVertex q)) h;
+      id
+        (fun hp =>
+          let_fun hz := IndependentDuodenary.key_one_hot_phase 0;
+          (ZMod.natCast_zmod_eq_zero_iff_dvd n 12).mp
+            (Eq.mp (congrArg (fun _a => ↑n = _a) hz)
+              (Eq.mp
+                (congrArg
+                  (fun _a =>
+                    _a =
+                      IndependentDuodenary.keyPhaseLabel
+                        (IndependentDuodenary.keyVertex IndependentDuodenary.keyCycleWitness))
+                  (IndependentDuodenary.key_cycle_witness_phase n))
+                hp)))
+        hp,
+    mpr := fun h => (IndependentDuodenary.key_cycle_period_iff n).mpr h IndependentDuodenary.keyCycleWitness }
+'IndependentDuodenary.key_cycle_witness_period_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_witness_period_iff: [Iff.mpr,
+ Semiring.toNatCast,
+ IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.keyCycleWitness,
+ Dvd.dvd,
+ ZMod.commRing,
+ IndependentDuodenary.key_cycle_witness_phase,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.RepresentedKey,
+ CommSemiring.toCommMonoidWithZero,
+ Eq.mp,
+ IndependentDuodenary.keyVertex,
+ id,
+ instOfNatNat,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ CommRing.toCommSemiring,
+ Iff,
+ Nat.instDvd,
+ CommMonoidWithZero.toZero,
+ IndependentDuodenary.keyPhaseLabel,
+ Nat,
+ IndependentDuodenary.key_cycle_period_iff,
+ Iff.intro,
+ Iff.mp,
+ Zero.toOfNat0,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.key_one_hot_phase,
+ ZMod.natCast_zmod_eq_zero_iff_dvd,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Eq,
+ letFun,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.key_cycle_orbit_equivariance : ∀ (n : ℕ),
+  IndependentDuodenary.keyPhaseLabel
+      (IndependentDuodenary.keyVertex
+        (IndependentDuodenary.keyCoordinateCycle
+          (IndependentDuodenary.keyCoordinateCycle^[n] IndependentDuodenary.keyCycleWitness))) =
+    IndependentDuodenary.keyPhaseLabel
+        (IndependentDuodenary.keyVertex
+          (IndependentDuodenary.keyCoordinateCycle^[n] IndependentDuodenary.keyCycleWitness)) +
+      1 :=
+fun n =>
+  Eq.mpr
+    (id
+      (congrArg
+        (fun _a =>
+          IndependentDuodenary.keyPhaseLabel (IndependentDuodenary.keyVertex _a) =
+            IndependentDuodenary.keyPhaseLabel
+                (IndependentDuodenary.keyVertex
+                  (IndependentDuodenary.keyCoordinateCycle^[n] IndependentDuodenary.keyCycleWitness)) +
+              1)
+        (Eq.symm
+          (Function.iterate_succ_apply' IndependentDuodenary.keyCoordinateCycle n
+            IndependentDuodenary.keyCycleWitness))))
+    (Eq.mpr
+      (id
+        (congrArg
+          (fun _a =>
+            _a =
+              IndependentDuodenary.keyPhaseLabel
+                  (IndependentDuodenary.keyVertex
+                    (IndependentDuodenary.keyCoordinateCycle^[n] IndependentDuodenary.keyCycleWitness)) +
+                1)
+          (IndependentDuodenary.key_cycle_witness_phase n.succ)))
+      (Eq.mpr (id (congrArg (fun _a => ↑n.succ = _a + 1) (IndependentDuodenary.key_cycle_witness_phase n)))
+        (of_eq_true
+          (Eq.trans
+            (congrArg (fun x => x = ↑n + 1) (Eq.trans (Nat.cast_add n 1) (congrArg (HAdd.hAdd ↑n) Nat.cast_one)))
+            (eq_self (↑n + 1))))))
+'IndependentDuodenary.key_cycle_orbit_equivariance' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_orbit_equivariance: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Function.iterate_succ_apply',
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ IndependentDuodenary.keyCycleWitness,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddMonoid.toAddSemigroup,
+ IndependentDuodenary.key_cycle_witness_phase,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.keyVertex,
+ id,
+ Distrib.toAdd,
+ AddMonoidWithOne.toNatCast,
+ instOfNatNat,
+ Nat.iterate,
+ Nat.cast,
+ ZMod,
+ Nat.cast_add,
+ AddMonoidWithOne.toOne,
+ instHAdd,
+ AddSemigroup.toAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ IndependentDuodenary.keyPhaseLabel,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ instAddNat,
+ IndependentDuodenary.KeyComplement,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ OfNat.ofNat,
+ Eq.symm,
+ IndependentDuodenary.keyCoordinateCycle,
+ Nat.succ,
+ Eq,
+ Nat.cast_one,
+ Ring.toAddGroupWithOne,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.key_cycle_commutes_translation : ∀ (h : IndependentDuodenary.KeyBinary)
+  (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.keyCoordinateCycle (IndependentDuodenary.translateKey h q) =
+    IndependentDuodenary.translateKey h (IndependentDuodenary.keyCoordinateCycle q) :=
+fun h q => rfl
+'IndependentDuodenary.key_cycle_commutes_translation' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_commutes_translation: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.RepresentedKey,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ IndependentDuodenary.translateKey,
+ Pi.instAdd,
+ Nat,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.KeyComplement,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ Eq,
+ rfl,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.key_cycle_no_shorter_positive_period : ∀ (n : ℕ),
+  0 < n → n < 12 → ¬∀ (q : IndependentDuodenary.RepresentedKey), IndependentDuodenary.keyCoordinateCycle^[n] q = q :=
+fun n hn hlt h =>
+  let_fun hd := (IndependentDuodenary.key_cycle_period_iff n).mp h;
+  let_fun this := Nat.le_of_dvd hn hd;
+  Lean.Omega.Constraint.not_sat'_of_isImpossible (of_decide_eq_true (id (Eq.refl true)))
+    (Lean.Omega.tidy_sat
+      (Lean.Omega.combo_sat' { lowerBound := some 0, upperBound := some 0 }
+        { lowerBound := some 1, upperBound := some 11 } (-1) [1, -12] 1 [1] (Lean.Omega.Coeffs.ofList [↑n, ↑n / 12])
+        (Lean.Omega.Constraint.addEquality_sat
+          (Eq.trans
+            (Eq.symm
+              (Eq.trans
+                (Lean.Omega.Int.sub_congr
+                  (Eq.trans (Int.ofNat_emod n 12)
+                    (Eq.trans (Int.emod_def (↑n) 12)
+                      (Eq.trans
+                        (Lean.Omega.Int.sub_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0)
+                          (Eq.trans
+                            (Lean.Omega.Int.mul_congr (id (Eq.refl 12))
+                              (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_1))
+                            (Eq.symm
+                              (Lean.Omega.LinearCombo.mul_eval { const := 12, coeffs := [] }
+                                { const := 0, coeffs := [0, 1] } (Lean.Omega.Coeffs.ofList [↑n, ↑n / 12])
+                                (of_decide_eq_true (id (Eq.refl true)))))))
+                        (Eq.symm
+                          (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [1] }
+                            { const := 0, coeffs := [0, 12] } (Lean.Omega.Coeffs.ofList [↑n, ↑n / 12]))))))
+                  (id (Eq.refl ↑0)))
+                (Eq.symm
+                  (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [1, -12] } { const := 0, coeffs := [] }
+                    (Lean.Omega.Coeffs.ofList [↑n, ↑n / 12])))))
+            (Int.sub_eq_zero_of_eq (Lean.Omega.Int.ofNat_congr (Nat.mod_eq_zero_of_dvd hd)))))
+        (Lean.Omega.Constraint.combine_sat'
+          (Lean.Omega.tidy_sat
+            (Lean.Omega.Constraint.addInequality_sat
+              (le_of_le_of_eq (Int.sub_nonneg_of_le (Int.add_one_le_of_lt (Lean.Omega.Int.ofNat_lt_of_lt hlt)))
+                (Eq.trans
+                  (Lean.Omega.Int.sub_congr (id (Eq.refl ↑12))
+                    (Eq.trans
+                      (Lean.Omega.Int.add_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0) (id (Eq.refl 1)))
+                      (Eq.symm
+                        (Lean.Omega.LinearCombo.add_eval { const := 0, coeffs := [1] } { const := 1, coeffs := [] }
+                          (Lean.Omega.Coeffs.ofList [↑n, ↑n / 12])))))
+                  (Eq.symm
+                    (Lean.Omega.LinearCombo.sub_eval { const := 12, coeffs := [] } { const := 1, coeffs := [1] }
+                      (Lean.Omega.Coeffs.ofList [↑n, ↑n / 12])))))))
+          (Lean.Omega.Constraint.addInequality_sat
+            (le_of_le_of_eq (Int.sub_nonneg_of_le (Int.add_one_le_of_lt (Lean.Omega.Int.ofNat_lt_of_lt hn)))
+              (Eq.trans
+                (Lean.Omega.Int.sub_congr (Eq.symm Lean.Omega.LinearCombo.coordinate_eval_0) (id (Eq.refl (↑0 + 1))))
+                (Eq.symm
+                  (Lean.Omega.LinearCombo.sub_eval { const := 0, coeffs := [1] } { const := 1, coeffs := [] }
+                    (Lean.Omega.Coeffs.ofList [↑n, ↑n / 12])))))))))
+'IndependentDuodenary.key_cycle_no_shorter_positive_period' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_no_shorter_positive_period: [Int.instDiv,
+ False,
+ Lean.Omega.Constraint.not_sat'_of_isImpossible,
+ Dvd.dvd,
+ instHDiv,
+ HMul.hMul,
+ of_decide_eq_true,
+ le_of_le_of_eq,
+ Lean.Omega.Constraint.mk,
+ Lean.Omega.Constraint.combine_sat',
+ Int.add_one_le_of_lt,
+ HSub.hSub,
+ Lean.Omega.Int.add_congr,
+ Lean.Omega.LinearCombo.eval,
+ IndependentDuodenary.RepresentedKey,
+ Option.some,
+ Lean.Omega.Coeffs.isZero,
+ Int.instDecidableEq,
+ Lean.Omega.combo_sat',
+ id,
+ HDiv.hDiv,
+ Nat.instMod,
+ instDecidableEqBool,
+ instHMod,
+ Int.instNegInt,
+ Int.sub_nonneg_of_le,
+ instOfNatNat,
+ Int,
+ Lean.Omega.LinearCombo.mul_eval,
+ LE.le,
+ instLENat,
+ Nat.iterate,
+ List.decidableBAll,
+ Nat.cast,
+ Lean.Omega.Int.sub_congr,
+ List.cons,
+ Lean.Omega.LinearCombo,
+ Int.instMul,
+ Bool.true,
+ Option.none,
+ instHAdd,
+ HMod.hMod,
+ Lean.Omega.tidy_sat,
+ instHSub,
+ Nat.instDvd,
+ Lean.Omega.LinearCombo.coordinate_eval_0,
+ instOfNat,
+ HAdd.hAdd,
+ Lean.Omega.LinearCombo.mk,
+ Nat.mod_eq_zero_of_dvd,
+ Lean.Omega.Coeffs.ofList,
+ Nat,
+ Lean.Omega.Constraint.addEquality_sat,
+ IndependentDuodenary.key_cycle_period_iff,
+ LT.lt,
+ Lean.Omega.LinearCombo.add_eval,
+ Lean.Omega.LinearCombo.sub_eval,
+ Lean.Omega.LinearCombo.coordinate,
+ Iff.mp,
+ Bool,
+ Int.instAdd,
+ Lean.Omega.LinearCombo.instAdd,
+ Int.instMod,
+ Int.ofNat_emod,
+ Eq.refl,
+ Lean.Omega.Int.ofNat_lt_of_lt,
+ Int.instSub,
+ Or,
+ instNatCastInt,
+ instLTNat,
+ Lean.Omega.Int.mul_congr,
+ Lean.Omega.Int.ofNat_congr,
+ OfNat.ofNat,
+ Eq.symm,
+ IndependentDuodenary.keyCoordinateCycle,
+ Int.emod_def,
+ Lean.Omega.Constraint.addInequality_sat,
+ Nat.le_of_dvd,
+ Decidable.decide,
+ Eq,
+ instDecidableOr,
+ Lean.Omega.LinearCombo.mul,
+ Lean.Omega.LinearCombo.instSub,
+ Not,
+ letFun,
+ Neg.neg,
+ Int.instLEInt,
+ Eq.trans,
+ Lean.Omega.Constraint.isImpossible,
+ Int.sub_eq_zero_of_eq,
+ instHMul,
+ List.nil,
+ Lean.Omega.LinearCombo.coordinate_eval_1]
+theorem IndependentDuodenary.key_cycle_distinct_from_translation : ∀ (h : IndependentDuodenary.KeyBinary),
+  IndependentDuodenary.keyCoordinateCycle ≠ IndependentDuodenary.translateKey h :=
+fun h heq =>
+  let_fun hc := congrArg (fun q => q.complementIntercept) (congrFun heq IndependentDuodenary.keyCycleWitness);
+  let_fun hv := congrFun hc 0;
+  id
+    (fun hv =>
+      of_decide_eq_true (id (Eq.refl true))
+        (Eq.mp
+          (Eq.trans
+            (Eq.trans
+              (congr
+                (congrArg Eq
+                  (ite_congr
+                    (congrArg (fun x => x = 0)
+                      (Mathlib.Meta.NormNum.IsNat.to_eq
+                        (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                          (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                            (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero)
+                            (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one) (Eq.refl 1))
+                          (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero) (Eq.refl 1))
+                        Nat.cast_one))
+                    (fun a => Eq.refl 1) fun a => Eq.refl 0))
+                (ite_congr
+                  (eq_true
+                    (Mathlib.Meta.NormNum.isNat_eq_true
+                      (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                        (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero)
+                        (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero) (Eq.refl 0))
+                      (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero)))
+                  (fun a => Eq.refl 1) fun a => Eq.refl 0))
+              Init.PropLemmas._auxLemma.65)
+            (Eq.trans
+              (Eq.trans
+                (implies_congr (Eq.refl ¬1 = 0) (Eq.trans Mathlib.Algebra.NeZero._auxLemma.2 (eq_false not_false)))
+                Init.Core._auxLemma.5)
+              Init.PropLemmas._auxLemma.52))
+          hv))
+    hv
+'IndependentDuodenary.key_cycle_distinct_from_translation' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_distinct_from_translation: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ instDecidableNot,
+ False,
+ Mathlib.Meta.NormNum.isNat_add,
+ IndependentDuodenary.keyCycleWitness,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ NeZero.one,
+ Semiring.toOne,
+ instDecidableTrue,
+ CommRing.toNonUnitalCommRing,
+ Mathlib.Meta.NormNum.isNat_eq_true,
+ of_decide_eq_true,
+ ZMod.commRing,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RepresentedKey,
+ CommSemiring.toCommMonoidWithZero,
+ Eq.mp,
+ id,
+ Distrib.toAdd,
+ Ne,
+ NonAssocSemiring.toMulZeroOneClass,
+ instOfNatNat,
+ Mathlib.Meta.NormNum.isNat_ofNat,
+ Mathlib.Algebra.NeZero._auxLemma.2,
+ Field.toSemifield,
+ ZMod,
+ Nat.Prime.one_lt',
+ IndependentDuodenary.translateKey,
+ Init.PropLemmas._auxLemma.52,
+ AddMonoidWithOne.toOne,
+ Bool.true,
+ instHAdd,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ not_false,
+ Pi.instAdd,
+ Semifield.toDivisionSemiring,
+ Init.PropLemmas._auxLemma.65,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ congrFun,
+ implies_congr,
+ Nat.fact_prime_two,
+ Nat,
+ Init.Core._auxLemma.5,
+ ZMod.nontrivial,
+ congr,
+ Semifield.toCommGroupWithZero,
+ True,
+ IndependentDuodenary.ExactKey.complementIntercept,
+ Mathlib.Meta.NormNum.IsNat.to_eq,
+ eq_true,
+ DivisionSemiring.toSemiring,
+ Bool,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ Nat.cast_zero,
+ CommRing.toRing,
+ ite_congr,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ Decidable.decide,
+ Semiring.toNonAssocSemiring,
+ Eq,
+ Nat.cast_one,
+ Ring.toAddGroupWithOne,
+ Not,
+ letFun,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ ite]
+theorem IndependentDuodenary.key_cycle_no_global_station_shift : ¬∃ f,
+    ∀ (q : IndependentDuodenary.RepresentedKey), f (IndependentDuodenary.keyCoordinateCycle q) = f q + 1 :=
+fun a =>
+  Exists.casesOn a fun f hf =>
+    let q := { metadata := 0, binaryIntercept := 0, complementIntercept := 0 };
+    let_fun hfix := rfl;
+    let_fun heq := hf q;
+    let_fun hzero :=
+      add_left_cancel
+        (Eq.mpr
+          (id (Eq.trans (congrArg (fun x => x = f q + 1) (add_zero (f q))) Mathlib.Algebra.Group.Basic._auxLemma.8))
+          (Eq.mp Mathlib.Algebra.Group.Basic._auxLemma.8 (Eq.mp (congrArg (fun _a => f _a = f q + 1) hfix) heq)));
+    of_decide_eq_true (id (Eq.refl true)) hzero
+'IndependentDuodenary.key_cycle_no_global_station_shift' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_cycle_no_global_station_shift: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ instDecidableNot,
+ False,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Mathlib.Algebra.Group.Basic._auxLemma.8,
+ Semiring.toOne,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ AddGroupWithOne.toAddGroup,
+ congrArg,
+ CommSemiring.toSemiring,
+ AddMonoid.toAddZeroClass,
+ IsCancelAdd.toIsLeftCancelAdd,
+ AddMonoid.toZero,
+ ZMod.decidableEq,
+ AddGroupWithOne.toAddMonoidWithOne,
+ AddCancelMonoid.toIsCancelAdd,
+ AddCommGroup.toAddCancelCommMonoid,
+ IndependentDuodenary.RepresentedKey,
+ CommSemiring.toCommMonoidWithZero,
+ Exists,
+ Eq.mp,
+ id,
+ Fin.instOfNat,
+ IndependentDuodenary.ExactKey.mk,
+ Distrib.toAdd,
+ Pi.instZero,
+ Ne,
+ instOfNatNat,
+ add_left_cancel,
+ Field.toSemifield,
+ ZMod,
+ Bool.true,
+ instHAdd,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ Exists.casesOn,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat.fact_prime_two,
+ Ring.toAddCommGroup,
+ Nat,
+ AddZeroClass.toZero,
+ Semifield.toCommGroupWithZero,
+ Bool,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ AddMonoidWithOne.toAddMonoid,
+ CommRing.toRing,
+ add_zero,
+ AddGroup.toAddCancelMonoid,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ IndependentDuodenary.keyCoordinateCycle,
+ Fin,
+ AddZeroClass.toAdd,
+ Decidable.decide,
+ Eq,
+ Ring.toAddGroupWithOne,
+ Not,
+ AddLeftCancelMonoid.toAddMonoid,
+ AddCancelCommMonoid.toAddLeftCancelMonoid,
+ letFun,
+ rfl,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata]
+theorem IndependentDuodenary.key_metadata_roundtrip : ∀ (m : IndependentDuodenary.KeyMetadata),
+  IndependentDuodenary.decodeKeyMetadata (IndependentDuodenary.encodeKeyMetadata m) = some m :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.key_metadata_roundtrip' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES key_metadata_roundtrip: [Option.instDecidableEq,
+ of_decide_eq_true,
+ instDecidableEqFin,
+ Option.some,
+ id,
+ instOfNatNat,
+ Bool.true,
+ Nat,
+ IndependentDuodenary.encodeKeyMetadata,
+ Bool,
+ IndependentDuodenary.decodeKeyMetadata,
+ Eq.refl,
+ Nat.decidableForallFin,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.KeyMetadata,
+ Option]
+theorem IndependentDuodenary.key_metadata_parse_sound : ∀ (x : ZMod 12) (m : IndependentDuodenary.KeyMetadata),
+  IndependentDuodenary.decodeKeyMetadata x = some m → IndependentDuodenary.encodeKeyMetadata m = x :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.key_metadata_parse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_metadata_parse_sound: [Option.instDecidableEq,
+ of_decide_eq_true,
+ ZMod.fintype,
+ instDecidableEqFin,
+ ZMod.decidableEq,
+ Option.some,
+ id,
+ forall_prop_decidable,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Nat.instNeZeroSucc,
+ Nat,
+ IndependentDuodenary.encodeKeyMetadata,
+ Bool,
+ IndependentDuodenary.decodeKeyMetadata,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ Nat.decidableForallFin,
+ OfNat.ofNat,
+ Fin,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.KeyMetadata,
+ Option]
+theorem IndependentDuodenary.key_bit_roundtrip : ∀ (b : ZMod 2),
+  IndependentDuodenary.decodeKeyBit (IndependentDuodenary.encodeKeyBit b) = some b :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.key_bit_roundtrip' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_bit_roundtrip: [Option.instDecidableEq,
+ of_decide_eq_true,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Option.some,
+ id,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ IndependentDuodenary.decodeKeyBit,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.encodeKeyBit,
+ Option]
+theorem IndependentDuodenary.key_bit_parse_sound : ∀ (x : ZMod 12) (b : ZMod 2),
+  IndependentDuodenary.decodeKeyBit x = some b → IndependentDuodenary.encodeKeyBit b = x :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.key_bit_parse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES key_bit_parse_sound: [Option.instDecidableEq,
+ of_decide_eq_true,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Option.some,
+ id,
+ forall_prop_decidable,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ IndependentDuodenary.decodeKeyBit,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ Fintype.decidableForallFintype,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ IndependentDuodenary.encodeKeyBit,
+ Option]
+theorem IndependentDuodenary.framed_key_bits_suffix : ∀ (n : ℕ) (b : Fin n → ZMod 2) (tail : List (ZMod 12)),
+  IndependentDuodenary.decodeFramedKeyBits n (IndependentDuodenary.encodeKeyBits b ++ tail) =
+    if tail = [10] then some b else none :=
+fun n b tail =>
+  Nat.recAux (motive := fun n =>
+    ∀ (b : Fin n → ZMod 2),
+      IndependentDuodenary.decodeFramedKeyBits n (IndependentDuodenary.encodeKeyBits b ++ tail) =
+        if tail = [10] then some b else none)
+    (fun b =>
+      let_fun hb := Subsingleton.elim b Fin.elim0;
+      of_eq_true
+        (Eq.trans
+          (congr
+            (congrArg Eq
+              (ite_congr
+                (congrArg (fun x => x ++ tail = [10])
+                  (Eq.trans
+                    (congrArg List.ofFn
+                      (funext fun i => congrArg (fun x => IndependentDuodenary.encodeKeyBit (x i)) hb))
+                    (List.ofFn_zero fun i => IndependentDuodenary.encodeKeyBit i.elim0)))
+                (fun a => Eq.refl (some Fin.elim0)) fun a => Eq.refl none))
+            (ite_congr (Eq.refl (tail = [10])) (fun a => congrArg some hb) fun a => Eq.refl none))
+          (eq_self (if tail = [10] then some Fin.elim0 else none))))
+    (fun n ih b =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun _a =>
+              IndependentDuodenary.decodeFramedKeyBits (n + 1) (_a ++ tail) = if tail = [10] then some b else none)
+            (IndependentDuodenary.encodeKeyBits.eq_1 b)))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                IndependentDuodenary.decodeFramedKeyBits (n + 1) (_a ++ tail) = if tail = [10] then some b else none)
+              (List.ofFn_succ fun i => IndependentDuodenary.encodeKeyBit (b i))))
+          (Eq.mpr
+            (id
+              (congrArg
+                (fun _a => IndependentDuodenary.decodeFramedKeyBits (n + 1) _a = if tail = [10] then some b else none)
+                (List.cons_append (IndependentDuodenary.encodeKeyBit (b 0))
+                  (List.ofFn fun i => IndependentDuodenary.encodeKeyBit (b i.succ)) tail)))
+            (Eq.mpr
+              (id
+                (congrArg
+                  (fun x =>
+                    (do
+                        let b_1 ← x
+                        let bs ←
+                          IndependentDuodenary.decodeFramedKeyBits n
+                              ((List.ofFn fun i => IndependentDuodenary.encodeKeyBit (b i.succ)) ++ tail)
+                        pure (Fin.cons b_1 bs)) =
+                      if tail = [10] then some b else none)
+                  (IndependentDuodenary.key_bit_roundtrip (b 0))))
+              (let_fun this :=
+                Eq.mpr
+                  (id
+                    (congrArg
+                      (fun _a => (_a.bind fun bs => some (Fin.cons (b 0) bs)) = if tail = [10] then some b else none)
+                      (ih fun i => b i.succ)))
+                  (Decidable.casesOn (instDecidableEqList tail [10])
+                    (fun h =>
+                      Eq.mpr
+                        (id
+                          (congr
+                            (congrArg Eq (Option.bind_congr' (if_neg h) fun a a_1 => Eq.refl (some (Fin.cons (b 0) a))))
+                            (if_neg h)))
+                        (Eq.refl (none.bind fun a => some (Fin.cons (b 0) a))))
+                    fun h =>
+                    Eq.mpr
+                      (id
+                        (congr
+                          (congrArg Eq (Option.bind_congr' (if_pos h) fun a a_1 => Eq.refl (some (Fin.cons (b 0) a))))
+                          (if_pos h)))
+                      (Eq.mpr
+                        (id
+                          (Eq.trans
+                            (congrArg (fun x => x = some b)
+                              (Option.bind_congr' (Eq.refl (some fun i => b i.succ)) fun a a_1 =>
+                                Eq.refl (some (Fin.cons (b 0) a))))
+                            (Option.some.injEq (Fin.cons (b 0) fun i => b i.succ) b)))
+                        (Fin.cons_self_tail b)));
+              this)))))
+    n b
+'IndependentDuodenary.framed_key_bits_suffix' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES framed_key_bits_suffix: [Pure.pure,
+ Semiring.toNatCast,
+ Eq.mpr,
+ instAlternativeOption,
+ Decidable.casesOn,
+ Option.bind_congr',
+ Nat.recAux,
+ ZMod.commRing,
+ IndependentDuodenary.decodeFramedKeyBits.proof_2,
+ Fin.succ,
+ congrArg,
+ CommSemiring.toSemiring,
+ Option.instMembership,
+ Pi.uniqueOfIsEmpty,
+ ZMod.decidableEq,
+ IndependentDuodenary.encodeKeyBits.eq_1,
+ List.ofFn,
+ Decidable,
+ Fin.cons,
+ Option.some.injEq,
+ Option.some,
+ Membership.mem,
+ Option.bind,
+ id,
+ Fin.instOfNat,
+ instOfNatNat,
+ Applicative.toPure,
+ if_pos,
+ ZMod,
+ Fin.cons_self_tail,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ instMonadOption,
+ funext,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ List.ofFn_zero,
+ instHAdd,
+ Unique.instSubsingleton,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ IndependentDuodenary.decodeKeyBit,
+ IndependentDuodenary.key_bit_roundtrip,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ instDecidableEqList,
+ IndependentDuodenary.encodeKeyBits,
+ Nat,
+ Fin.isEmpty',
+ congr,
+ True,
+ eq_self,
+ of_eq_true,
+ Alternative.toApplicative,
+ instAddNat,
+ Monad.toBind,
+ Eq.refl,
+ Bind.bind,
+ List.instAppend,
+ Subsingleton.elim,
+ ite_congr,
+ OfNat.ofNat,
+ Fin,
+ Nat.succ,
+ Eq,
+ if_neg,
+ List.cons_append,
+ instOfNatAtLeastTwo,
+ Not,
+ List.ofFn_succ,
+ HAppend.hAppend,
+ letFun,
+ IndependentDuodenary.encodeKeyBit,
+ Eq.trans,
+ Fin.elim0,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.framed_key_bits_roundtrip : ∀ (n : ℕ) (b : Fin n → ZMod 2),
+  IndependentDuodenary.decodeFramedKeyBits n (IndependentDuodenary.encodeKeyBits b ++ [10]) = some b :=
+fun n b =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = some b)
+        (Eq.trans (IndependentDuodenary.framed_key_bits_suffix n b [10])
+          (ite_cond_eq_true (some b) none (eq_self [10]))))
+      (eq_self (some b)))
+'IndependentDuodenary.framed_key_bits_roundtrip' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES framed_key_bits_roundtrip: [Semiring.toNatCast,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ ZMod.decidableEq,
+ Option.some,
+ instOfNatNat,
+ ite_cond_eq_true,
+ ZMod,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ instDecidableEqList,
+ IndependentDuodenary.encodeKeyBits,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ List.instAppend,
+ OfNat.ofNat,
+ IndependentDuodenary.framed_key_bits_suffix,
+ Fin,
+ Eq,
+ instOfNatAtLeastTwo,
+ HAppend.hAppend,
+ Eq.trans,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.framed_key_bits_parse_sound : ∀ (n : ℕ) (xs : List (ZMod 12)) (b : Fin n → ZMod 2),
+  IndependentDuodenary.decodeFramedKeyBits n xs = some b → xs = IndependentDuodenary.encodeKeyBits b ++ [10] :=
+fun n xs b h =>
+  Nat.recAux (motive := fun n =>
+    ∀ (xs : List (ZMod 12)) (b : Fin n → ZMod 2),
+      IndependentDuodenary.decodeFramedKeyBits n xs = some b → xs = IndependentDuodenary.encodeKeyBits b ++ [10])
+    (fun xs b h =>
+      Decidable.casesOn (instDecidableEqList xs [10])
+        (fun h_1 => Option.noConfusion (Eq.mp (congrArg (fun x => x = some b) (if_neg h_1)) h)) fun h =>
+        Eq.mpr
+          (id (congrArg (fun x => xs = x ++ [10]) (List.ofFn_zero fun i => IndependentDuodenary.encodeKeyBit (b i)))) h)
+    (fun n ih xs b h =>
+      List.casesOn (motive := fun t => xs = t → xs = IndependentDuodenary.encodeKeyBits b ++ [10]) xs
+        (fun h_1 =>
+          Eq.ndrec (motive := fun xs =>
+            IndependentDuodenary.decodeFramedKeyBits (n + 1) xs = some b →
+              xs = IndependentDuodenary.encodeKeyBits b ++ [10])
+            (fun h => False.elim (Eq.mp (eq_false' fun h => Option.noConfusion h) h)) (Eq.symm h_1) h)
+        (fun x xs_1 h_1 =>
+          Eq.ndrec (motive := fun xs =>
+            IndependentDuodenary.decodeFramedKeyBits (n + 1) xs = some b →
+              xs = IndependentDuodenary.encodeKeyBits b ++ [10])
+            (fun h =>
+              Option.casesOn (motive := fun t =>
+                IndependentDuodenary.decodeKeyBit x = t → x :: xs_1 = IndependentDuodenary.encodeKeyBits b ++ [10])
+                (IndependentDuodenary.decodeKeyBit x)
+                (fun h_2 =>
+                  Eq.ndrec (motive := fun x_1 =>
+                    IndependentDuodenary.decodeKeyBit x = x_1 →
+                      x :: xs_1 = IndependentDuodenary.encodeKeyBits b ++ [10])
+                    (fun hx =>
+                      False.elim
+                        (Eq.mp
+                          (Eq.trans
+                            (congrArg
+                              (fun x =>
+                                (do
+                                    let b ← x
+                                    (IndependentDuodenary.decodeFramedKeyBits n xs_1).bind fun bs =>
+                                        some (Fin.cons b bs)) =
+                                  some b)
+                              hx)
+                            (eq_false' fun h => Option.noConfusion h))
+                          h))
+                    (Eq.symm h_2) (Eq.refl (IndependentDuodenary.decodeKeyBit x)))
+                (fun bit h_2 =>
+                  Eq.ndrec (motive := fun x_1 =>
+                    IndependentDuodenary.decodeKeyBit x = x_1 →
+                      x :: xs_1 = IndependentDuodenary.encodeKeyBits b ++ [10])
+                    (fun hx =>
+                      Option.casesOn (motive := fun t =>
+                        IndependentDuodenary.decodeFramedKeyBits n xs_1 = t →
+                          x :: xs_1 = IndependentDuodenary.encodeKeyBits b ++ [10])
+                        (IndependentDuodenary.decodeFramedKeyBits n xs_1)
+                        (fun h_3 =>
+                          Eq.ndrec (motive := fun x_1 =>
+                            IndependentDuodenary.decodeFramedKeyBits n xs_1 = x_1 →
+                              x :: xs_1 = IndependentDuodenary.encodeKeyBits b ++ [10])
+                            (fun ht =>
+                              False.elim
+                                (Eq.mp
+                                  (Eq.trans
+                                    (congrArg (fun x => x = some b)
+                                      (Eq.trans
+                                        (congr (congrArg bind hx)
+                                          (funext fun b =>
+                                            congrArg
+                                              (fun x => do
+                                                let bs ← x
+                                                some (Fin.cons b bs))
+                                              ht))
+                                        (Option.bind_none (some bit))))
+                                    (eq_false' fun h => Option.noConfusion h))
+                                  h))
+                            (Eq.symm h_3) (Eq.refl (IndependentDuodenary.decodeFramedKeyBits n xs_1)))
+                        (fun bits h_3 =>
+                          Eq.ndrec (motive := fun x_1 =>
+                            IndependentDuodenary.decodeFramedKeyBits n xs_1 = x_1 →
+                              x :: xs_1 = IndependentDuodenary.encodeKeyBits b ++ [10])
+                            (fun ht =>
+                              let_fun hb :=
+                                Eq.mp
+                                  (Eq.trans
+                                    (congrArg (fun x => x = some b)
+                                      (congr (congrArg bind hx)
+                                        (funext fun b =>
+                                          congrArg
+                                            (fun x => do
+                                              let bs ← x
+                                              some (Fin.cons b bs))
+                                            ht)))
+                                    (Option.some.injEq (Fin.cons bit bits) b))
+                                  h;
+                              Eq.ndrec (motive := fun b =>
+                                IndependentDuodenary.decodeFramedKeyBits (n + 1) (x :: xs_1) = some b →
+                                  x :: xs_1 = IndependentDuodenary.encodeKeyBits b ++ [10])
+                                (fun h =>
+                                  Eq.mpr
+                                    (id
+                                      (congrArg
+                                        (fun _a =>
+                                          x :: _a = IndependentDuodenary.encodeKeyBits (Fin.cons bit bits) ++ [10])
+                                        (ih xs_1 bits ht)))
+                                    (of_eq_true
+                                      (Eq.trans
+                                        (congrArg
+                                          (fun x_1 =>
+                                            x ::
+                                                ((List.ofFn fun i => IndependentDuodenary.encodeKeyBit (bits i)) ++
+                                                  [10]) =
+                                              x_1 ++ [10])
+                                          (Eq.trans
+                                            (List.ofFn_succ fun i =>
+                                              IndependentDuodenary.encodeKeyBit (Fin.cons bit bits i))
+                                            (congr
+                                              (congrArg List.cons
+                                                (Eq.trans
+                                                  (congrArg IndependentDuodenary.encodeKeyBit (Fin.cons_zero bit bits))
+                                                  (IndependentDuodenary.key_bit_parse_sound x bit hx)))
+                                              (congrArg List.ofFn
+                                                (funext fun i =>
+                                                  congrArg IndependentDuodenary.encodeKeyBit
+                                                    (Fin.cons_succ bit bits i))))))
+                                        (eq_self
+                                          (x ::
+                                            ((List.ofFn fun i => IndependentDuodenary.encodeKeyBit (bits i)) ++
+                                              [10]))))))
+                                hb h)
+                            (Eq.symm h_3) (Eq.refl (IndependentDuodenary.decodeFramedKeyBits n xs_1)))
+                        (Eq.refl (IndependentDuodenary.decodeFramedKeyBits n xs_1)))
+                    (Eq.symm h_2) (Eq.refl (IndependentDuodenary.decodeKeyBit x)))
+                (Eq.refl (IndependentDuodenary.decodeKeyBit x)))
+            (Eq.symm h_1) h)
+        (Eq.refl xs))
+    n xs b h
+'IndependentDuodenary.framed_key_bits_parse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES framed_key_bits_parse_sound: [Semiring.toNatCast,
+ Eq.mpr,
+ False,
+ Decidable.casesOn,
+ Nat.recAux,
+ Fin.cons_succ,
+ ZMod.commRing,
+ IndependentDuodenary.decodeFramedKeyBits.proof_2,
+ Fin.succ,
+ Option.noConfusion,
+ congrArg,
+ CommSemiring.toSemiring,
+ False.elim,
+ ZMod.decidableEq,
+ Option.casesOn,
+ List.ofFn,
+ Decidable,
+ Fin.cons,
+ Option.some.injEq,
+ Option.some,
+ Option.bind,
+ Eq.mp,
+ IndependentDuodenary.key_bit_parse_sound,
+ id,
+ Fin.instOfNat,
+ instOfNatNat,
+ ZMod,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ instMonadOption,
+ funext,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ List.ofFn_zero,
+ instHAdd,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ IndependentDuodenary.decodeKeyBit,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ instDecidableEqList,
+ Option.bind_none,
+ IndependentDuodenary.encodeKeyBits,
+ Nat,
+ congr,
+ True,
+ List.casesOn,
+ eq_self,
+ of_eq_true,
+ Eq.ndrec,
+ instAddNat,
+ Monad.toBind,
+ Eq.refl,
+ Bind.bind,
+ List.instAppend,
+ OfNat.ofNat,
+ Eq.symm,
+ eq_false',
+ Fin,
+ Nat.succ,
+ Eq,
+ if_neg,
+ instOfNatAtLeastTwo,
+ Not,
+ List.ofFn_succ,
+ HAppend.hAppend,
+ letFun,
+ IndependentDuodenary.encodeKeyBit,
+ Eq.trans,
+ Fin.cons_zero,
+ Fin.elim0,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.key_bits_unpack_pack : ∀ (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.unpackKeyBits q.metadata (IndependentDuodenary.packKeyBits q) = q :=
+fun q =>
+  IndependentDuodenary.ExactKey.casesOn (motive := fun t =>
+    q = t → IndependentDuodenary.unpackKeyBits q.metadata (IndependentDuodenary.packKeyBits q) = q) q
+    (fun metadata binaryIntercept complementIntercept h =>
+      Eq.symm h ▸
+        of_eq_true
+          (Eq.trans
+            (congrArg
+              (fun x =>
+                x =
+                  { metadata := metadata, binaryIntercept := binaryIntercept,
+                    complementIntercept := complementIntercept })
+              (congr
+                (congrArg (IndependentDuodenary.ExactKey.mk metadata)
+                  (funext fun i => Fin.append_left binaryIntercept (fun i => complementIntercept ↑↑i) i))
+                (funext fun i =>
+                  Eq.trans
+                    (Fin.append_right binaryIntercept (fun i => complementIntercept ↑↑i)
+                      ⟨i.val, IndependentDuodenary.unpackKeyBits.proof_1 i⟩)
+                    (congrArg complementIntercept (ZMod.natCast_zmod_val i)))))
+            (eq_self
+              { metadata := metadata, binaryIntercept := fun i => binaryIntercept i,
+                complementIntercept := fun i => complementIntercept i })))
+    (Eq.refl q)
+'IndependentDuodenary.key_bits_unpack_pack' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES key_bits_unpack_pack: [Semiring.toNatCast,
+ IndependentDuodenary.KeyBinary,
+ Fin.natAdd,
+ ZMod.commRing,
+ Fin.castAdd,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.unpackKeyBits,
+ Fin.mk,
+ IndependentDuodenary.ExactKey.mk,
+ Fin.append_right,
+ instOfNatNat,
+ Fin.val,
+ IndependentDuodenary.unpackKeyBits.proof_1,
+ Nat.cast,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.ExactKey.casesOn,
+ ZMod.natCast_zmod_val,
+ funext,
+ CommRing.toCommSemiring,
+ Nat.instNeZeroSucc,
+ Nat,
+ congr,
+ True,
+ Fin.append_left,
+ eq_self,
+ of_eq_true,
+ Eq.ndrec,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.packKeyBits,
+ OfNat.ofNat,
+ Eq.symm,
+ Fin,
+ Eq,
+ IndependentDuodenary.ExactKey.metadata,
+ Fin.append,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ ZMod.val]
+theorem IndependentDuodenary.key_bits_pack_unpack : ∀ (m : IndependentDuodenary.KeyMetadata) (b : Fin 14 → ZMod 2),
+  IndependentDuodenary.packKeyBits (IndependentDuodenary.unpackKeyBits m b) = b :=
+fun m b =>
+  funext fun i =>
+    Fin.addCases
+      (fun j =>
+        of_eq_true
+          (Eq.trans
+            (congrArg (fun x => x = b (Fin.castAdd 12 j))
+              (Eq.trans
+                (congrArg (fun x => Fin.append (fun i => b (Fin.castAdd 12 i)) x (Fin.castAdd 12 j))
+                  (funext fun i =>
+                    congrArg b
+                      ((fun {n} val val_1 e_val =>
+                          Eq.rec (motive := fun val_2 e_val => ∀ (isLt : val < n), ⟨val, isLt⟩ = ⟨val_2, e_val ▸ isLt⟩)
+                            (fun isLt => Eq.refl ⟨val, isLt⟩) e_val)
+                        (2 + (↑↑i).val) (2 + ↑i % 12) (congrArg (HAdd.hAdd 2) (ZMod.val_natCast ↑i))
+                        (Nat.add_lt_add_left (IndependentDuodenary.unpackKeyBits.proof_1 ↑↑i) 2))))
+                (Fin.append_left (fun i => b (Fin.castAdd 12 i))
+                  (fun i =>
+                    b
+                      ⟨2 + ↑i % 12,
+                        congrArg (HAdd.hAdd 2) (ZMod.val_natCast ↑i) ▸
+                          Nat.add_lt_add_left (IndependentDuodenary.unpackKeyBits.proof_1 ↑↑i) 2⟩)
+                  j)))
+            (eq_self (b (Fin.castAdd 12 j)))))
+      (fun j =>
+        of_eq_true
+          (Eq.trans
+            (congrArg (fun x => x = b (Fin.natAdd 2 j))
+              (Eq.trans
+                (Eq.trans
+                  (congrArg (fun x => Fin.append (fun i => b (Fin.castAdd 12 i)) x (Fin.natAdd 2 j))
+                    (funext fun i =>
+                      congrArg (fun x => b (Fin.natAdd 2 x))
+                        ((fun {n} val val_1 e_val =>
+                            Eq.rec (motive := fun val_2 e_val =>
+                              ∀ (isLt : val < n), ⟨val, isLt⟩ = ⟨val_2, e_val ▸ isLt⟩) (fun isLt => Eq.refl ⟨val, isLt⟩)
+                              e_val)
+                          (↑↑i).val (↑i % 12) (ZMod.val_natCast ↑i) (IndependentDuodenary.unpackKeyBits.proof_1 ↑↑i))))
+                  (Fin.append_right (fun i => b (Fin.castAdd 12 i))
+                    (fun i =>
+                      b (Fin.natAdd 2 ⟨↑i % 12, ZMod.val_natCast ↑i ▸ IndependentDuodenary.unpackKeyBits.proof_1 ↑↑i⟩))
+                    j))
+                (congrArg (fun x => b (Fin.natAdd 2 x))
+                  ((fun {n} val val_1 e_val =>
+                      Eq.rec (motive := fun val_2 e_val => ∀ (isLt : val < n), ⟨val, isLt⟩ = ⟨val_2, e_val ▸ isLt⟩)
+                        (fun isLt => Eq.refl ⟨val, isLt⟩) e_val)
+                    (↑j % 12) (↑j) (Nat.mod_eq_of_lt j.isLt)
+                    (ZMod.val_natCast ↑j ▸ IndependentDuodenary.unpackKeyBits.proof_1 ↑↑j)))))
+            (eq_self
+              (b
+                (Fin.natAdd 2
+                  ⟨↑j,
+                    Nat.mod_eq_of_lt j.isLt ▸ ZMod.val_natCast ↑j ▸ IndependentDuodenary.unpackKeyBits.proof_1 ↑↑j⟩)))))
+      i
+'IndependentDuodenary.key_bits_pack_unpack' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES key_bits_pack_unpack: [Semiring.toNatCast,
+ Fin.natAdd,
+ ZMod.commRing,
+ Fin.castAdd,
+ congrArg,
+ CommSemiring.toSemiring,
+ Fin.isLt,
+ Eq.rec,
+ IndependentDuodenary.unpackKeyBits,
+ Fin.mk,
+ Nat.instMod,
+ instHMod,
+ Fin.addCases,
+ Fin.append_right,
+ instOfNatNat,
+ Nat.mod_eq_of_lt,
+ Fin.val,
+ IndependentDuodenary.unpackKeyBits.proof_1,
+ Nat.cast,
+ ZMod,
+ funext,
+ instHAdd,
+ HMod.hMod,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ Nat,
+ ZMod.val_natCast,
+ LT.lt,
+ True,
+ Fin.append_left,
+ Nat.add_lt_add_left,
+ eq_self,
+ of_eq_true,
+ Eq.ndrec,
+ instAddNat,
+ Eq.refl,
+ instLTNat,
+ IndependentDuodenary.packKeyBits,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Fin.append,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ ZMod.val]
+theorem IndependentDuodenary.exact_key_decode_encode : ∀ (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.decodeExactKey (IndependentDuodenary.encodeExactKey q) = some q :=
+fun q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = some q)
+        (Eq.trans
+          (ite_cond_eq_true
+            (do
+              let m ← IndependentDuodenary.decodeKeyMetadata (IndependentDuodenary.encodeKeyMetadata q.metadata)
+              let b ←
+                IndependentDuodenary.decodeFramedKeyBits 14
+                    (IndependentDuodenary.encodeKeyBits (IndependentDuodenary.packKeyBits q) ++ [10])
+              pure (IndependentDuodenary.unpackKeyBits m b))
+            none (eq_self 11))
+          (Eq.trans
+            (congr (congrArg bind (IndependentDuodenary.key_metadata_roundtrip q.metadata))
+              (funext fun m =>
+                congrArg
+                  (fun x => do
+                    let b ← x
+                    some (IndependentDuodenary.unpackKeyBits m b))
+                  (IndependentDuodenary.framed_key_bits_roundtrip 14 (IndependentDuodenary.packKeyBits q))))
+            (congrArg some (IndependentDuodenary.key_bits_unpack_pack q)))))
+      (eq_self (some q)))
+'IndependentDuodenary.exact_key_decode_encode' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_decode_encode: [Pure.pure,
+ Semiring.toNatCast,
+ IndependentDuodenary.decodeExactKey.proof_1,
+ IndependentDuodenary.KeyBinary,
+ instAlternativeOption,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.key_metadata_roundtrip,
+ IndependentDuodenary.decodeExactKey,
+ ZMod.decidableEq,
+ IndependentDuodenary.RepresentedKey,
+ Option.some,
+ IndependentDuodenary.unpackKeyBits,
+ IndependentDuodenary.encodeExactKey,
+ instOfNatNat,
+ ite_cond_eq_true,
+ Applicative.toPure,
+ ZMod,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ instMonadOption,
+ IndependentDuodenary.framed_key_bits_roundtrip,
+ funext,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ IndependentDuodenary.encodeKeyBits,
+ IndependentDuodenary.encodeExactKey.proof_2,
+ Nat,
+ congr,
+ True,
+ IndependentDuodenary.encodeKeyMetadata,
+ eq_self,
+ IndependentDuodenary.encodeExactKey.proof_1,
+ of_eq_true,
+ IndependentDuodenary.decodeKeyMetadata,
+ Alternative.toApplicative,
+ Monad.toBind,
+ IndependentDuodenary.KeyComplement,
+ Bind.bind,
+ IndependentDuodenary.packKeyBits,
+ IndependentDuodenary.key_bits_unpack_pack,
+ List.instAppend,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ IndependentDuodenary.ExactKey.metadata,
+ instOfNatAtLeastTwo,
+ HAppend.hAppend,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.exact_key_parse_sound : ∀ (xs : List (ZMod 12)) (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.decodeExactKey xs = some q → xs = IndependentDuodenary.encodeExactKey q :=
+fun xs q h =>
+  List.casesOn (motive := fun t => xs = t → xs = IndependentDuodenary.encodeExactKey q) xs
+    (fun h_1 =>
+      Eq.ndrec (motive := fun xs =>
+        IndependentDuodenary.decodeExactKey xs = some q → xs = IndependentDuodenary.encodeExactKey q)
+        (fun h => False.elim (Eq.mp (eq_false' fun h => Option.noConfusion h) h)) (Eq.symm h_1) h)
+    (fun header xs_1 h_1 =>
+      Eq.ndrec (motive := fun xs =>
+        IndependentDuodenary.decodeExactKey xs = some q → xs = IndependentDuodenary.encodeExactKey q)
+        (fun h =>
+          List.casesOn (motive := fun t => xs_1 = t → header :: xs_1 = IndependentDuodenary.encodeExactKey q) xs_1
+            (fun h_2 =>
+              Eq.ndrec (motive := fun xs =>
+                IndependentDuodenary.decodeExactKey (header :: xs) = some q →
+                  header :: xs = IndependentDuodenary.encodeExactKey q)
+                (fun h => False.elim (Eq.mp (eq_false' fun h => Option.noConfusion h) h)) (Eq.symm h_2) h)
+            (fun metadata body h_2 =>
+              Eq.ndrec (motive := fun xs =>
+                IndependentDuodenary.decodeExactKey (header :: xs) = some q →
+                  header :: xs = IndependentDuodenary.encodeExactKey q)
+                (fun h =>
+                  if hh : header = 11 then
+                    Eq.ndrec (motive := fun header =>
+                      IndependentDuodenary.decodeExactKey (header :: metadata :: body) = some q →
+                        header :: metadata :: body = IndependentDuodenary.encodeExactKey q)
+                      (fun h =>
+                        Option.casesOn (motive := fun t =>
+                          IndependentDuodenary.decodeKeyMetadata metadata = t →
+                            11 :: metadata :: body = IndependentDuodenary.encodeExactKey q)
+                          (IndependentDuodenary.decodeKeyMetadata metadata)
+                          (fun h_3 =>
+                            Eq.ndrec (motive := fun x =>
+                              IndependentDuodenary.decodeKeyMetadata metadata = x →
+                                11 :: metadata :: body = IndependentDuodenary.encodeExactKey q)
+                              (fun hm =>
+                                False.elim
+                                  (Eq.mp
+                                    (Eq.trans
+                                      (congrArg (fun x => x = some q)
+                                        (Eq.trans
+                                          (ite_cond_eq_true
+                                            (do
+                                              let m ← IndependentDuodenary.decodeKeyMetadata metadata
+                                              let b ← IndependentDuodenary.decodeFramedKeyBits 14 body
+                                              pure (IndependentDuodenary.unpackKeyBits m b))
+                                            none (eq_self 11))
+                                          (congrArg
+                                            (fun x => do
+                                              let m ← x
+                                              (IndependentDuodenary.decodeFramedKeyBits 14 body).bind fun b =>
+                                                  some (IndependentDuodenary.unpackKeyBits m b))
+                                            hm)))
+                                      (eq_false' fun h => Option.noConfusion h))
+                                    h))
+                              (Eq.symm h_3) (Eq.refl (IndependentDuodenary.decodeKeyMetadata metadata)))
+                          (fun m h_3 =>
+                            Eq.ndrec (motive := fun x =>
+                              IndependentDuodenary.decodeKeyMetadata metadata = x →
+                                11 :: metadata :: body = IndependentDuodenary.encodeExactKey q)
+                              (fun hm =>
+                                Option.casesOn (motive := fun t =>
+                                  IndependentDuodenary.decodeFramedKeyBits 14 body = t →
+                                    11 :: metadata :: body = IndependentDuodenary.encodeExactKey q)
+                                  (IndependentDuodenary.decodeFramedKeyBits 14 body)
+                                  (fun h_4 =>
+                                    Eq.ndrec (motive := fun x =>
+                                      IndependentDuodenary.decodeFramedKeyBits 14 body = x →
+                                        11 :: metadata :: body = IndependentDuodenary.encodeExactKey q)
+                                      (fun hb =>
+                                        False.elim
+                                          (Eq.mp
+                                            (Eq.trans
+                                              (congrArg (fun x => x = some q)
+                                                (Eq.trans
+                                                  (ite_cond_eq_true
+                                                    (do
+                                                      let m ← IndependentDuodenary.decodeKeyMetadata metadata
+                                                      let b ← IndependentDuodenary.decodeFramedKeyBits 14 body
+                                                      pure (IndependentDuodenary.unpackKeyBits m b))
+                                                    none (eq_self 11))
+                                                  (Eq.trans
+                                                    (congr (congrArg bind hm)
+                                                      (funext fun m =>
+                                                        congrArg
+                                                          (fun x => do
+                                                            let b ← x
+                                                            some (IndependentDuodenary.unpackKeyBits m b))
+                                                          hb))
+                                                    (Option.bind_none (some m)))))
+                                              (eq_false' fun h => Option.noConfusion h))
+                                            h))
+                                      (Eq.symm h_4) (Eq.refl (IndependentDuodenary.decodeFramedKeyBits 14 body)))
+                                  (fun b h_4 =>
+                                    Eq.ndrec (motive := fun x =>
+                                      IndependentDuodenary.decodeFramedKeyBits 14 body = x →
+                                        11 :: metadata :: body = IndependentDuodenary.encodeExactKey q)
+                                      (fun hb =>
+                                        let_fun hq :=
+                                          Eq.mp
+                                            (Eq.trans
+                                              (congrArg (fun x => x = some q)
+                                                (Eq.trans
+                                                  (ite_cond_eq_true
+                                                    (do
+                                                      let m ← IndependentDuodenary.decodeKeyMetadata metadata
+                                                      let b ← IndependentDuodenary.decodeFramedKeyBits 14 body
+                                                      pure (IndependentDuodenary.unpackKeyBits m b))
+                                                    none (eq_self 11))
+                                                  (congr (congrArg bind hm)
+                                                    (funext fun m =>
+                                                      congrArg
+                                                        (fun x => do
+                                                          let b ← x
+                                                          some (IndependentDuodenary.unpackKeyBits m b))
+                                                        hb))))
+                                              (Option.some.injEq (IndependentDuodenary.unpackKeyBits m b) q))
+                                            h;
+                                        Eq.ndrec (motive := fun q =>
+                                          IndependentDuodenary.decodeExactKey (11 :: metadata :: body) = some q →
+                                            11 :: metadata :: body = IndependentDuodenary.encodeExactKey q)
+                                          (fun h =>
+                                            Eq.mpr
+                                              (id
+                                                (congrArg
+                                                  (fun _a =>
+                                                    11 :: metadata :: _a =
+                                                      IndependentDuodenary.encodeExactKey
+                                                        (IndependentDuodenary.unpackKeyBits m b))
+                                                  (IndependentDuodenary.framed_key_bits_parse_sound 14 body b hb)))
+                                              (let_fun this :=
+                                                Eq.mpr
+                                                  (id
+                                                    (congrArg
+                                                      (fun _a =>
+                                                        11 ::
+                                                            metadata :: (IndependentDuodenary.encodeKeyBits b ++ [10]) =
+                                                          11 ::
+                                                            IndependentDuodenary.encodeKeyMetadata m ::
+                                                              (IndependentDuodenary.encodeKeyBits _a ++ [10]))
+                                                      (IndependentDuodenary.key_bits_pack_unpack m b)))
+                                                  (Eq.mpr
+                                                    (id
+                                                      (congrArg
+                                                        (fun _a =>
+                                                          11 ::
+                                                              metadata ::
+                                                                (IndependentDuodenary.encodeKeyBits b ++ [10]) =
+                                                            11 :: _a :: (IndependentDuodenary.encodeKeyBits b ++ [10]))
+                                                        (IndependentDuodenary.key_metadata_parse_sound metadata m hm)))
+                                                    (Eq.refl
+                                                      (11 ::
+                                                        metadata :: (IndependentDuodenary.encodeKeyBits b ++ [10]))));
+                                              this))
+                                          hq h)
+                                      (Eq.symm h_4) (Eq.refl (IndependentDuodenary.decodeFramedKeyBits 14 body)))
+                                  (Eq.refl (IndependentDuodenary.decodeFramedKeyBits 14 body)))
+                              (Eq.symm h_3) (Eq.refl (IndependentDuodenary.decodeKeyMetadata metadata)))
+                          (Eq.refl (IndependentDuodenary.decodeKeyMetadata metadata)))
+                      (Eq.symm hh) h
+                  else
+                    False.elim
+                      (Eq.mp
+                        (Eq.trans
+                          (congrArg (fun x => x = some q)
+                            (ite_cond_eq_false
+                              (do
+                                let m ← IndependentDuodenary.decodeKeyMetadata metadata
+                                let b ← IndependentDuodenary.decodeFramedKeyBits 14 body
+                                pure (IndependentDuodenary.unpackKeyBits m b))
+                              none (eq_false hh)))
+                          (eq_false' fun h => Option.noConfusion h))
+                        h))
+                (Eq.symm h_2) h)
+            (Eq.refl xs_1))
+        (Eq.symm h_1) h)
+    (Eq.refl xs)
+'IndependentDuodenary.exact_key_parse_sound' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_parse_sound: [Pure.pure,
+ Semiring.toNatCast,
+ Eq.mpr,
+ IndependentDuodenary.decodeExactKey.proof_1,
+ False,
+ instAlternativeOption,
+ ZMod.commRing,
+ eq_false,
+ Option.noConfusion,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.decodeExactKey,
+ False.elim,
+ ZMod.decidableEq,
+ Option.casesOn,
+ IndependentDuodenary.RepresentedKey,
+ Option.some.injEq,
+ IndependentDuodenary.key_metadata_parse_sound,
+ Option.some,
+ Option.bind,
+ IndependentDuodenary.unpackKeyBits,
+ Eq.mp,
+ id,
+ IndependentDuodenary.encodeExactKey,
+ instOfNatNat,
+ ite_cond_eq_true,
+ Applicative.toPure,
+ ZMod,
+ dite,
+ IndependentDuodenary.framed_key_bits_parse_sound,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ instMonadOption,
+ funext,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Option.bind_none,
+ IndependentDuodenary.encodeKeyBits,
+ IndependentDuodenary.encodeExactKey.proof_2,
+ Nat,
+ congr,
+ List.casesOn,
+ IndependentDuodenary.encodeKeyMetadata,
+ eq_self,
+ IndependentDuodenary.key_bits_pack_unpack,
+ Eq.ndrec,
+ IndependentDuodenary.decodeKeyMetadata,
+ Alternative.toApplicative,
+ Monad.toBind,
+ Eq.refl,
+ Bind.bind,
+ IndependentDuodenary.packKeyBits,
+ List.instAppend,
+ OfNat.ofNat,
+ Eq.symm,
+ ite_cond_eq_false,
+ eq_false',
+ Fin,
+ Eq,
+ instOfNatAtLeastTwo,
+ Not,
+ HAppend.hAppend,
+ letFun,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.exact_key_reject_malformed : ∀ (xs : List (ZMod 12)),
+  (∀ (q : IndependentDuodenary.RepresentedKey), xs ≠ IndependentDuodenary.encodeExactKey q) →
+    IndependentDuodenary.decodeExactKey xs = none :=
+fun xs h =>
+  Option.casesOn (motive := fun t =>
+    IndependentDuodenary.decodeExactKey xs = t → IndependentDuodenary.decodeExactKey xs = none)
+    (IndependentDuodenary.decodeExactKey xs)
+    (fun h =>
+      Eq.ndrec (motive := fun x => IndependentDuodenary.decodeExactKey xs = x → x = none) (fun hd => Eq.refl none)
+        (Eq.symm h) (Eq.refl (IndependentDuodenary.decodeExactKey xs)))
+    (fun q h_1 =>
+      Eq.ndrec (motive := fun x => IndependentDuodenary.decodeExactKey xs = x → x = none)
+        (fun hd => False.elim (h q (IndependentDuodenary.exact_key_parse_sound xs q hd))) (Eq.symm h_1)
+        (Eq.refl (IndependentDuodenary.decodeExactKey xs)))
+    (Eq.refl (IndependentDuodenary.decodeExactKey xs))
+'IndependentDuodenary.exact_key_reject_malformed' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_reject_malformed: [IndependentDuodenary.decodeExactKey,
+ False.elim,
+ Option.casesOn,
+ IndependentDuodenary.RepresentedKey,
+ Option.some,
+ IndependentDuodenary.encodeExactKey,
+ Ne,
+ instOfNatNat,
+ IndependentDuodenary.exact_key_parse_sound,
+ ZMod,
+ Option.none,
+ List,
+ Nat,
+ Eq.ndrec,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq.symm,
+ Eq,
+ Option]
+theorem IndependentDuodenary.exact_key_encode_length : ∀ (q : IndependentDuodenary.RepresentedKey),
+  (IndependentDuodenary.encodeExactKey q).length = 17 :=
+fun q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => (11 :: IndependentDuodenary.encodeKeyMetadata q.metadata :: (x ++ [10])).length = 17)
+        (Eq.trans (List.ofFn_succ fun i => IndependentDuodenary.encodeKeyBit (IndependentDuodenary.packKeyBits q i))
+          (congrArg (List.cons (IndependentDuodenary.encodeKeyBit (IndependentDuodenary.packKeyBits q 0)))
+            (Eq.trans
+              (List.ofFn_succ fun i => IndependentDuodenary.encodeKeyBit (IndependentDuodenary.packKeyBits q i.succ))
+              (congrArg (List.cons (IndependentDuodenary.encodeKeyBit (IndependentDuodenary.packKeyBits q 1)))
+                (Eq.trans
+                  (List.ofFn_succ fun i =>
+                    IndependentDuodenary.encodeKeyBit (IndependentDuodenary.packKeyBits q i.succ.succ))
+                  (congrArg (List.cons (IndependentDuodenary.encodeKeyBit (IndependentDuodenary.packKeyBits q 2)))
+                    (Eq.trans
+                      (List.ofFn_succ fun i =>
+                        IndependentDuodenary.encodeKeyBit (IndependentDuodenary.packKeyBits q i.succ.succ.succ))
+                      (congrArg
+                        (List.cons
+                          (IndependentDuodenary.encodeKeyBit (IndependentDuodenary.packKeyBits q (Fin.succ 2))))
+                        (Eq.trans
+                          (List.ofFn_succ fun i =>
+                            IndependentDuodenary.encodeKeyBit
+                              (IndependentDuodenary.packKeyBits q i.succ.succ.succ.succ))
+                          (congrArg
+                            (List.cons
+                              (IndependentDuodenary.encodeKeyBit
+                                (IndependentDuodenary.packKeyBits q (Fin.succ 2).succ)))
+                            (Eq.trans
+                              (List.ofFn_succ fun i =>
+                                IndependentDuodenary.encodeKeyBit
+                                  (IndependentDuodenary.packKeyBits q i.succ.succ.succ.succ.succ))
+                              (congrArg
+                                (List.cons
+                                  (IndependentDuodenary.encodeKeyBit
+                                    (IndependentDuodenary.packKeyBits q (Fin.succ 2).succ.succ)))
+                                (Eq.trans
+                                  (List.ofFn_succ fun i =>
+                                    IndependentDuodenary.encodeKeyBit
+                                      (IndependentDuodenary.packKeyBits q i.succ.succ.succ.succ.succ.succ))
+                                  (congrArg
+                                    (List.cons
+                                      (IndependentDuodenary.encodeKeyBit
+                                        (IndependentDuodenary.packKeyBits q (Fin.succ 2).succ.succ.succ)))
+                                    (Eq.trans
+                                      (List.ofFn_succ fun i =>
+                                        IndependentDuodenary.encodeKeyBit
+                                          (IndependentDuodenary.packKeyBits q i.succ.succ.succ.succ.succ.succ.succ))
+                                      (congrArg
+                                        (List.cons
+                                          (IndependentDuodenary.encodeKeyBit
+                                            (IndependentDuodenary.packKeyBits q (Fin.succ 2).succ.succ.succ.succ)))
+                                        (Eq.trans
+                                          (List.ofFn_succ fun i =>
+                                            IndependentDuodenary.encodeKeyBit
+                                              (IndependentDuodenary.packKeyBits q
+                                                i.succ.succ.succ.succ.succ.succ.succ.succ))
+                                          (congrArg
+                                            (List.cons
+                                              (IndependentDuodenary.encodeKeyBit
+                                                (IndependentDuodenary.packKeyBits q
+                                                  (Fin.succ 2).succ.succ.succ.succ.succ)))
+                                            (Eq.trans
+                                              (List.ofFn_succ fun i =>
+                                                IndependentDuodenary.encodeKeyBit
+                                                  (IndependentDuodenary.packKeyBits q
+                                                    i.succ.succ.succ.succ.succ.succ.succ.succ.succ))
+                                              (congrArg
+                                                (List.cons
+                                                  (IndependentDuodenary.encodeKeyBit
+                                                    (IndependentDuodenary.packKeyBits q
+                                                      (Fin.succ 2).succ.succ.succ.succ.succ.succ)))
+                                                (Eq.trans
+                                                  (List.ofFn_succ fun i =>
+                                                    IndependentDuodenary.encodeKeyBit
+                                                      (IndependentDuodenary.packKeyBits q
+                                                        i.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ))
+                                                  (congrArg
+                                                    (List.cons
+                                                      (IndependentDuodenary.encodeKeyBit
+                                                        (IndependentDuodenary.packKeyBits q
+                                                          (Fin.succ 2).succ.succ.succ.succ.succ.succ.succ)))
+                                                    (Eq.trans
+                                                      (List.ofFn_succ fun i =>
+                                                        IndependentDuodenary.encodeKeyBit
+                                                          (IndependentDuodenary.packKeyBits q
+                                                            i.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ))
+                                                      (congrArg
+                                                        (List.cons
+                                                          (IndependentDuodenary.encodeKeyBit
+                                                            (IndependentDuodenary.packKeyBits q
+                                                              (Fin.succ 2).succ.succ.succ.succ.succ.succ.succ.succ)))
+                                                        (Eq.trans
+                                                          (List.ofFn_succ fun i =>
+                                                            IndependentDuodenary.encodeKeyBit
+                                                              (IndependentDuodenary.packKeyBits q
+                                                                i.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ))
+                                                          (congrArg
+                                                            (List.cons
+                                                              (IndependentDuodenary.encodeKeyBit
+                                                                (IndependentDuodenary.packKeyBits q
+                                                                  (Fin.succ
+                                                                                      2).succ.succ.succ.succ.succ.succ.succ.succ.succ)))
+                                                            (Eq.trans
+                                                              (List.ofFn_succ fun i =>
+                                                                IndependentDuodenary.encodeKeyBit
+                                                                  (IndependentDuodenary.packKeyBits q
+                                                                    i.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ))
+                                                              (congrArg
+                                                                (List.cons
+                                                                  (IndependentDuodenary.encodeKeyBit
+                                                                    (IndependentDuodenary.packKeyBits q
+                                                                      (Fin.succ
+                                                                                            2).succ.succ.succ.succ.succ.succ.succ.succ.succ.succ)))
+                                                                (List.ofFn_zero fun i =>
+                                                                  IndependentDuodenary.encodeKeyBit
+                                                                    (IndependentDuodenary.packKeyBits q
+                                                                      i.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ.succ)))))))))))))))))))))))))))))))
+      (eq_self 17))
+'IndependentDuodenary.exact_key_encode_length' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_encode_length: [Semiring.toNatCast,
+ IndependentDuodenary.KeyBinary,
+ ZMod.commRing,
+ Fin.succ,
+ congrArg,
+ CommSemiring.toSemiring,
+ List.ofFn,
+ IndependentDuodenary.RepresentedKey,
+ Fin.instOfNat,
+ IndependentDuodenary.encodeExactKey,
+ instOfNatNat,
+ ZMod,
+ List.cons,
+ instHAppendOfAppend,
+ List,
+ List.ofFn_zero,
+ instHAdd,
+ CommRing.toCommSemiring,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ IndependentDuodenary.encodeExactKey.proof_2,
+ Nat,
+ True,
+ IndependentDuodenary.encodeKeyMetadata,
+ eq_self,
+ IndependentDuodenary.encodeExactKey.proof_1,
+ of_eq_true,
+ instAddNat,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.packKeyBits,
+ List.instAppend,
+ OfNat.ofNat,
+ Fin,
+ Nat.succ,
+ Eq,
+ List.length,
+ IndependentDuodenary.ExactKey.metadata,
+ instOfNatAtLeastTwo,
+ List.ofFn_succ,
+ HAppend.hAppend,
+ IndependentDuodenary.encodeKeyBit,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ List.nil]
+theorem IndependentDuodenary.exact_key_reject_length : ∀ (xs : List (ZMod 12)),
+  xs.length ≠ 17 → IndependentDuodenary.decodeExactKey xs = none :=
+fun xs h =>
+  IndependentDuodenary.exact_key_reject_malformed xs fun q heq =>
+    h
+      (Eq.mpr (id (congrArg (fun _a => _a.length = 17) heq))
+        (Eq.mpr (id (congrArg (fun _a => _a = 17) (IndependentDuodenary.exact_key_encode_length q))) (Eq.refl 17)))
+'IndependentDuodenary.exact_key_reject_length' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_reject_length: [Eq.mpr,
+ congrArg,
+ IndependentDuodenary.decodeExactKey,
+ IndependentDuodenary.exact_key_encode_length,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.exact_key_reject_malformed,
+ id,
+ IndependentDuodenary.encodeExactKey,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ Option.none,
+ List,
+ Nat,
+ Eq.refl,
+ OfNat.ofNat,
+ Eq,
+ List.length,
+ Option]
+theorem IndependentDuodenary.exact_key_encode_injective : Function.Injective IndependentDuodenary.encodeExactKey :=
+fun ⦃q r⦄ heq =>
+  let_fun h := congrArg IndependentDuodenary.decodeExactKey heq;
+  Eq.mp
+    (Eq.trans
+      (congr (congrArg Eq (IndependentDuodenary.exact_key_decode_encode q))
+        (IndependentDuodenary.exact_key_decode_encode r))
+      (Option.some.injEq q r))
+    h
+'IndependentDuodenary.exact_key_encode_injective' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_encode_injective: [IndependentDuodenary.exact_key_decode_encode,
+ congrArg,
+ IndependentDuodenary.decodeExactKey,
+ IndependentDuodenary.RepresentedKey,
+ Option.some.injEq,
+ Option.some,
+ Eq.mp,
+ IndependentDuodenary.encodeExactKey,
+ instOfNatNat,
+ ZMod,
+ List,
+ Nat,
+ congr,
+ Function.Injective,
+ OfNat.ofNat,
+ Eq,
+ letFun,
+ Eq.trans,
+ Option]
+theorem IndependentDuodenary.exact_key_reject_header : ∀ (header metadata : ZMod 12) (body : List (ZMod 12)),
+  header ≠ 11 → IndependentDuodenary.decodeExactKey (header :: metadata :: body) = none :=
+fun header metadata body h =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = none)
+        (ite_cond_eq_false
+          (do
+            let m ← IndependentDuodenary.decodeKeyMetadata metadata
+            let b ← IndependentDuodenary.decodeFramedKeyBits 14 body
+            pure (IndependentDuodenary.unpackKeyBits m b))
+          none (eq_false h)))
+      (eq_self none))
+'IndependentDuodenary.exact_key_reject_header' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_reject_header: [Pure.pure,
+ Semiring.toNatCast,
+ IndependentDuodenary.decodeExactKey.proof_1,
+ instAlternativeOption,
+ ZMod.commRing,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.decodeExactKey,
+ ZMod.decidableEq,
+ IndependentDuodenary.RepresentedKey,
+ IndependentDuodenary.unpackKeyBits,
+ Ne,
+ instOfNatNat,
+ Applicative.toPure,
+ ZMod,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ instMonadOption,
+ Option.none,
+ List,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ IndependentDuodenary.decodeKeyMetadata,
+ Alternative.toApplicative,
+ Monad.toBind,
+ Bind.bind,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ Eq,
+ instOfNatAtLeastTwo,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ Option,
+ ite]
+theorem IndependentDuodenary.exact_key_reject_metadata : ∀ (metadata : ZMod 12) (body : List (ZMod 12)),
+  ¬metadata.val < 3 → IndependentDuodenary.decodeExactKey (11 :: metadata :: body) = none :=
+fun metadata body h =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = none)
+        (Eq.trans
+          (ite_cond_eq_true
+            (do
+              let m ← IndependentDuodenary.decodeKeyMetadata metadata
+              let b ← IndependentDuodenary.decodeFramedKeyBits 14 body
+              pure (IndependentDuodenary.unpackKeyBits m b))
+            none (eq_self 11))
+          (congrArg
+            (fun x => do
+              let m ← x
+              (IndependentDuodenary.decodeFramedKeyBits 14 body).bind fun b =>
+                  some (IndependentDuodenary.unpackKeyBits m b))
+            (dite_cond_eq_false (eq_false h)))))
+      (eq_self none))
+'IndependentDuodenary.exact_key_reject_metadata' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_reject_metadata: [Pure.pure,
+ Semiring.toNatCast,
+ IndependentDuodenary.decodeExactKey.proof_1,
+ instAlternativeOption,
+ ZMod.commRing,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.decodeExactKey,
+ ZMod.decidableEq,
+ IndependentDuodenary.RepresentedKey,
+ Option.some,
+ Option.bind,
+ IndependentDuodenary.unpackKeyBits,
+ Fin.mk,
+ instOfNatNat,
+ ite_cond_eq_true,
+ Applicative.toPure,
+ ZMod,
+ dite,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ instMonadOption,
+ Option.none,
+ List,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ Nat,
+ LT.lt,
+ True,
+ eq_self,
+ of_eq_true,
+ Nat.decLt,
+ IndependentDuodenary.decodeKeyMetadata,
+ Alternative.toApplicative,
+ Monad.toBind,
+ Bind.bind,
+ instLTNat,
+ dite_cond_eq_false,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ instOfNatAtLeastTwo,
+ Not,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ Option,
+ ZMod.val,
+ ite]
+theorem IndependentDuodenary.exact_key_reject_suffix : ∀ (q : IndependentDuodenary.RepresentedKey)
+  (tail : List (ZMod 12)),
+  tail ≠ [10] →
+    IndependentDuodenary.decodeExactKey
+        (11 ::
+          IndependentDuodenary.encodeKeyMetadata q.metadata ::
+            (IndependentDuodenary.encodeKeyBits (IndependentDuodenary.packKeyBits q) ++ tail)) =
+      none :=
+fun q tail h =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = none)
+        (Eq.trans
+          (ite_cond_eq_true
+            (do
+              let m ← IndependentDuodenary.decodeKeyMetadata (IndependentDuodenary.encodeKeyMetadata q.metadata)
+              let b ←
+                IndependentDuodenary.decodeFramedKeyBits 14
+                    (IndependentDuodenary.encodeKeyBits (IndependentDuodenary.packKeyBits q) ++ tail)
+              pure (IndependentDuodenary.unpackKeyBits m b))
+            none (eq_self 11))
+          (Eq.trans
+            (congr (congrArg bind (IndependentDuodenary.key_metadata_roundtrip q.metadata))
+              (funext fun m =>
+                congrArg
+                  (fun x => do
+                    let b ← x
+                    some (IndependentDuodenary.unpackKeyBits m b))
+                  (Eq.trans (IndependentDuodenary.framed_key_bits_suffix 14 (IndependentDuodenary.packKeyBits q) tail)
+                    (ite_cond_eq_false (some (IndependentDuodenary.packKeyBits q)) none (eq_false h)))))
+            (Option.bind_none (some q.metadata)))))
+      (eq_self none))
+'IndependentDuodenary.exact_key_reject_suffix' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_reject_suffix: [Pure.pure,
+ Semiring.toNatCast,
+ IndependentDuodenary.decodeExactKey.proof_1,
+ IndependentDuodenary.KeyBinary,
+ instAlternativeOption,
+ ZMod.commRing,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.key_metadata_roundtrip,
+ IndependentDuodenary.decodeExactKey,
+ ZMod.decidableEq,
+ IndependentDuodenary.RepresentedKey,
+ Option.some,
+ IndependentDuodenary.unpackKeyBits,
+ Ne,
+ instOfNatNat,
+ ite_cond_eq_true,
+ Applicative.toPure,
+ ZMod,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ instMonadOption,
+ funext,
+ Option.none,
+ instHAppendOfAppend,
+ List,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ instDecidableEqList,
+ Option.bind_none,
+ IndependentDuodenary.encodeKeyBits,
+ Nat,
+ congr,
+ True,
+ IndependentDuodenary.encodeKeyMetadata,
+ eq_self,
+ of_eq_true,
+ IndependentDuodenary.decodeKeyMetadata,
+ Alternative.toApplicative,
+ Monad.toBind,
+ IndependentDuodenary.KeyComplement,
+ Bind.bind,
+ IndependentDuodenary.packKeyBits,
+ List.instAppend,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ IndependentDuodenary.framed_key_bits_suffix,
+ Fin,
+ Eq,
+ IndependentDuodenary.ExactKey.metadata,
+ instOfNatAtLeastTwo,
+ HAppend.hAppend,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ List.nil,
+ Option,
+ ite]
+theorem IndependentDuodenary.exact_key_reject_nonbinary_first : ∀ (metadata x : ZMod 12) (xs : List (ZMod 12)),
+  x ≠ 0 → x ≠ 1 → IndependentDuodenary.decodeExactKey (11 :: metadata :: x :: xs) = none :=
+fun metadata x xs hzero hone =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x => x = none)
+        (Eq.trans
+          (ite_cond_eq_true
+            (do
+              let m ← IndependentDuodenary.decodeKeyMetadata metadata
+              let b ← IndependentDuodenary.decodeFramedKeyBits 14 (x :: xs)
+              pure (IndependentDuodenary.unpackKeyBits m b))
+            none (eq_self 11))
+          (Eq.trans
+            (congrArg (bind (IndependentDuodenary.decodeKeyMetadata metadata))
+              (funext fun m =>
+                congrArg
+                  (fun x => do
+                    let b ←
+                      do
+                        let b ← x
+                        (IndependentDuodenary.decodeFramedKeyBits 13 xs).bind fun bs => some (Fin.cons b bs)
+                    some (IndependentDuodenary.unpackKeyBits m b))
+                  (Eq.trans (ite_cond_eq_false (some 0) (if x = 1 then some 1 else none) (eq_false hzero))
+                    (ite_cond_eq_false (some 1) none (eq_false hone)))))
+            (Option.bind_none (IndependentDuodenary.decodeKeyMetadata metadata)))))
+      (eq_self none))
+'IndependentDuodenary.exact_key_reject_nonbinary_first' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_reject_nonbinary_first: [Pure.pure,
+ Semiring.toNatCast,
+ IndependentDuodenary.decodeExactKey.proof_1,
+ instAlternativeOption,
+ Semiring.toOne,
+ ZMod.commRing,
+ eq_false,
+ congrArg,
+ CommSemiring.toSemiring,
+ IndependentDuodenary.decodeExactKey,
+ ZMod.decidableEq,
+ Fin.cons,
+ IndependentDuodenary.RepresentedKey,
+ Option.some,
+ CommSemiring.toCommMonoidWithZero,
+ Option.bind,
+ IndependentDuodenary.unpackKeyBits,
+ Ne,
+ instOfNatNat,
+ ite_cond_eq_true,
+ Applicative.toPure,
+ Field.toSemifield,
+ ZMod,
+ List.cons,
+ IndependentDuodenary.decodeFramedKeyBits,
+ instMonadOption,
+ funext,
+ Option.none,
+ List,
+ ZMod.instField,
+ CommRing.toCommSemiring,
+ Semifield.toDivisionSemiring,
+ instNatAtLeastTwo,
+ CommMonoidWithZero.toZero,
+ Option.bind_none,
+ Nat.fact_prime_two,
+ Nat,
+ Semifield.toCommGroupWithZero,
+ True,
+ eq_self,
+ DivisionSemiring.toSemiring,
+ of_eq_true,
+ IndependentDuodenary.decodeKeyMetadata,
+ Alternative.toApplicative,
+ One.toOfNat1,
+ Monad.toBind,
+ Zero.toOfNat0,
+ Bind.bind,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ ite_cond_eq_false,
+ Fin,
+ Eq,
+ instOfNatAtLeastTwo,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ Option,
+ ite]
+theorem IndependentDuodenary.exact_key_word_translation : ∀ (h : IndependentDuodenary.KeyBinary)
+  (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.translateKeyWord h (IndependentDuodenary.encodeExactKey q) =
+    IndependentDuodenary.encodeExactKey (IndependentDuodenary.translateKey h q) :=
+fun h q =>
+  of_eq_true
+    (Eq.trans
+      (congrArg
+        (fun x =>
+          (match x with
+            | none => []
+            | some q => IndependentDuodenary.encodeExactKey (IndependentDuodenary.translateKey h q)) =
+            IndependentDuodenary.encodeExactKey (IndependentDuodenary.translateKey h q))
+        (IndependentDuodenary.exact_key_decode_encode q))
+      (eq_self (IndependentDuodenary.encodeExactKey (IndependentDuodenary.translateKey h q))))
+'IndependentDuodenary.exact_key_word_translation' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_word_translation: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ IndependentDuodenary.exact_key_decode_encode,
+ congrArg,
+ IndependentDuodenary.decodeExactKey,
+ IndependentDuodenary.RepresentedKey,
+ Option.some,
+ Distrib.toAdd,
+ IndependentDuodenary.translateKeyWord,
+ IndependentDuodenary.encodeExactKey,
+ instOfNatNat,
+ IndependentDuodenary.translateKeyWord.match_1,
+ ZMod,
+ IndependentDuodenary.translateKey,
+ List,
+ Unit,
+ Pi.instAdd,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.KeyComplement,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ List.nil,
+ Option]
+theorem IndependentDuodenary.exact_key_word_translation_invalid : ∀ (h : IndependentDuodenary.KeyBinary)
+  (word : List (ZMod 12)),
+  IndependentDuodenary.decodeExactKey word = none → IndependentDuodenary.translateKeyWord h word = [] :=
+fun h word hinvalid =>
+  of_eq_true
+    (Eq.trans
+      (congrArg
+        (fun x =>
+          (match x with
+            | none => []
+            | some q => IndependentDuodenary.encodeExactKey (IndependentDuodenary.translateKey h q)) =
+            [])
+        hinvalid)
+      (eq_self []))
+'IndependentDuodenary.exact_key_word_translation_invalid' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_word_translation_invalid: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ congrArg,
+ IndependentDuodenary.decodeExactKey,
+ IndependentDuodenary.RepresentedKey,
+ Distrib.toAdd,
+ IndependentDuodenary.translateKeyWord,
+ IndependentDuodenary.encodeExactKey,
+ instOfNatNat,
+ IndependentDuodenary.translateKeyWord.match_1,
+ ZMod,
+ IndependentDuodenary.translateKey,
+ Option.none,
+ List,
+ Unit,
+ Pi.instAdd,
+ Nat,
+ True,
+ eq_self,
+ of_eq_true,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ IndependentDuodenary.KeyComplement,
+ OfNat.ofNat,
+ Fin,
+ Eq,
+ Eq.trans,
+ IndependentDuodenary.KeyMetadata,
+ List.nil,
+ Option]
+theorem IndependentDuodenary.exact_key_word_translation_involution : ∀ (h : IndependentDuodenary.KeyBinary)
+  (q : IndependentDuodenary.RepresentedKey),
+  IndependentDuodenary.translateKeyWord h
+      (IndependentDuodenary.translateKeyWord h (IndependentDuodenary.encodeExactKey q)) =
+    IndependentDuodenary.encodeExactKey q :=
+fun h q =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => IndependentDuodenary.translateKeyWord h _a = IndependentDuodenary.encodeExactKey q)
+        (IndependentDuodenary.exact_key_word_translation h q)))
+    (Eq.mpr
+      (id
+        (congrArg (fun _a => _a = IndependentDuodenary.encodeExactKey q)
+          (IndependentDuodenary.exact_key_word_translation h (IndependentDuodenary.translateKey h q))))
+      (Eq.mpr
+        (id
+          (congrArg (fun _a => IndependentDuodenary.encodeExactKey _a = IndependentDuodenary.encodeExactKey q)
+            (IndependentDuodenary.translateKey_add h h q)))
+        (Eq.mpr
+          (id
+            (congrArg
+              (fun _a =>
+                IndependentDuodenary.encodeExactKey (IndependentDuodenary.translateKey _a q) =
+                  IndependentDuodenary.encodeExactKey q)
+              (IndependentDuodenary.binary_vector_double_zero h)))
+          (Eq.mpr
+            (id
+              (congrArg (fun _a => IndependentDuodenary.encodeExactKey _a = IndependentDuodenary.encodeExactKey q)
+                (IndependentDuodenary.translateKey_zero q)))
+            (Eq.refl (IndependentDuodenary.encodeExactKey q))))))
+'IndependentDuodenary.exact_key_word_translation_involution' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES exact_key_word_translation_involution: [NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ Eq.mpr,
+ IndependentDuodenary.KeyBinary,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Pi.addSemigroup,
+ CommRing.toNonUnitalCommRing,
+ ZMod.commRing,
+ AddMonoid.toAddSemigroup,
+ congrArg,
+ AddMonoid.toAddZeroClass,
+ AddGroupWithOne.toAddMonoidWithOne,
+ IndependentDuodenary.RepresentedKey,
+ Field.toDivisionRing,
+ id,
+ Distrib.toAdd,
+ IndependentDuodenary.translateKeyWord,
+ Pi.instZero,
+ IndependentDuodenary.encodeExactKey,
+ DivisionRing.toRing,
+ instOfNatNat,
+ Field.toSemifield,
+ ZMod,
+ IndependentDuodenary.ExactKey,
+ IndependentDuodenary.translateKey,
+ List,
+ instHAdd,
+ AddSemigroup.toAdd,
+ ZMod.instField,
+ Pi.instAdd,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Pi.addZeroClass,
+ Nat.fact_prime_two,
+ Nat,
+ AddZeroClass.toZero,
+ Semifield.toCommGroupWithZero,
+ IndependentDuodenary.exact_key_word_translation,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Zero.toOfNat0,
+ Eq.refl,
+ IndependentDuodenary.KeyComplement,
+ IndependentDuodenary.translateKey_zero,
+ AddMonoidWithOne.toAddMonoid,
+ IndependentDuodenary.translateKey_add,
+ IndependentDuodenary.binary_vector_double_zero,
+ CommGroupWithZero.toCommMonoidWithZero,
+ OfNat.ofNat,
+ Fin,
+ AddZeroClass.toAdd,
+ Eq,
+ Ring.toAddGroupWithOne,
+ IndependentDuodenary.KeyMetadata]
 theorem IndependentDuodenary.translateKey_zero.{u_1, u_2, u_3} : ∀ {M : Type u_1} {K : Type u_2} {W : Type u_3}
   [inst : AddZeroClass K] (q : IndependentDuodenary.ExactKey M K W), IndependentDuodenary.translateKey 0 q = q :=
 fun {M} {K} {W} [AddZeroClass K] q =>
@@ -12980,4 +15747,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 211 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 245 theorem declarations; only standard Lean axioms permitted.

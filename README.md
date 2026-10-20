@@ -32,6 +32,9 @@ connects the supplied claims to the checked results and identifies the remaining
 - `CipherValidator`: exact arithmetic semantics for the supplied Mod-144
   calculator, periodicity and information-loss proofs, and protected result
   transport. See [source rules and proof boundaries](verification/CIPHER_VALIDATOR.md).
+- `SourceKeyRepresentation`: a chosen binary-coordinate cycle of exact order
+  twelve, a lossless framed full-key codec, malformed-word rejection, and
+  compatible translated-word operations. See [exact scope](verification/KEY_DIRECTIVES.md).
 - `MappingBoundary`: an explicit internal map from natural addition to modular
   addition; a general image-closure theorem **assuming** operation preservation;
   and a level-return statement **assuming** the stated level and step values.

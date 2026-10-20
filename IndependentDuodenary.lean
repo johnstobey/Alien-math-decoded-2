@@ -12,3 +12,4 @@ import IndependentDuodenary.AffineStations
 import IndependentDuodenary.StationGrammar
 import IndependentDuodenary.StationCodec
 import IndependentDuodenary.CipherValidator
+import IndependentDuodenary.SourceKeyRepresentation
