@@ -156,3 +156,13 @@ equivalence, certified bounded rewrite execution and its preservation theorem,
 and a no-affine-AND result for the chosen 0/6 encoding. The current count is 408.
 All 65 registered open obligations remain open; the target is circuit SAT with
 conditional gates, not fixed-operator reachability. See [FULGURITE_SAT.md](FULGURITE_SAT.md).
+
+## Anchored phase-alignment experiment
+
+`examples/PhaseAlignmentBridge.lean` adds 16 experimental declarations checked
+separately by `scripts/audit_phase_alignment.py`. They do not change the 408
+library inventory or the 65-open obligation count. The code proves rotation
+invariance, an anchored sum criterion for AND, conditional-free 0/1 ring
+semantics for arbitrary Boolean formulas, both directions of satisfiability
+equivalence, lossless assignment encoding and exact cardinality 2^n.
+See [PHASE_ALIGNMENT.md](PHASE_ALIGNMENT.md) for the precise scope.

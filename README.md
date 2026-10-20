@@ -130,3 +130,10 @@ preservation, guarded rewrite soundness and a lossless assignment space of
 `2^n`. Conditional AND/OR gates are explicit additions; they are not the fixed
 cyclic register operator. This adds 22 named theorems (408 total) and closes no
 registered machine-simulation or SAT-to-fixed-protocol obligation.
+
+[Anchored phase-alignment experiment](verification/PHASE_ALIGNMENT.md) adds 16
+separately audited experimental theorem declarations, outside the 408-library
+inventory. A 0/1 phase encoding removes conditional gates via ring arithmetic
+and proves an anchored geometric AND criterion. Pairwise zero displacement alone
+expresses equality, not Boolean AND. The fixed-operator and complexity bridges
+remain open. Run `python3 scripts/audit_phase_alignment.py` after `lake build`.

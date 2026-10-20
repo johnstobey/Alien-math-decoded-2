@@ -1,0 +1,827 @@
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.zero_ne_one_phase : 0 ≠ 1 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.PhaseAlignmentInvestigation.zero_ne_one_phase' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.alignment_iff_equal : ∀ (x y : ZMod 12),
+  IndependentDuodenary.PhaseAlignmentInvestigation.aligned x y ↔ x = y :=
+fun x y =>
+  of_eq_true
+    (Eq.trans
+      (congrArg (fun x_1 => x_1 ↔ x = y)
+        (Eq.trans «.lake».PhaseAlignmentAudit._auxLemma.1 «.lake».PhaseAlignmentAudit._auxLemma.2))
+      (iff_self (x = y)))
+'IndependentDuodenary.PhaseAlignmentInvestigation.alignment_iff_equal' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.alignment_rotation_invariant : ∀ (x y t : ZMod 12),
+  IndependentDuodenary.PhaseAlignmentInvestigation.aligned (x + t) (y + t) ↔
+    IndependentDuodenary.PhaseAlignmentInvestigation.aligned x y :=
+fun x y t =>
+  of_eq_true
+    (Eq.trans
+      (congr
+        (congrArg Iff
+          (Eq.trans («.lake».PhaseAlignmentAudit._auxLemma.3 (x + t) (y + t))
+            (Mathlib.Algebra.Group.Basic._auxLemma.4 t)))
+        («.lake».PhaseAlignmentAudit._auxLemma.3 x y))
+      (iff_self (x = y)))
+'IndependentDuodenary.PhaseAlignmentInvestigation.alignment_rotation_invariant' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.alignment_is_boolean_equality : ∀ (a b : Bool),
+  IndependentDuodenary.PhaseAlignmentInvestigation.aligned (IndependentDuodenary.PhaseAlignmentInvestigation.bit a)
+      (IndependentDuodenary.PhaseAlignmentInvestigation.bit b) ↔
+    a = b :=
+fun a b =>
+  Bool.casesOn (motive := fun t =>
+    a = t →
+      (IndependentDuodenary.PhaseAlignmentInvestigation.aligned (IndependentDuodenary.PhaseAlignmentInvestigation.bit a)
+          (IndependentDuodenary.PhaseAlignmentInvestigation.bit b) ↔
+        a = b))
+    a
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          b = t →
+            (IndependentDuodenary.PhaseAlignmentInvestigation.aligned
+                (IndependentDuodenary.PhaseAlignmentInvestigation.bit false)
+                (IndependentDuodenary.PhaseAlignmentInvestigation.bit b) ↔
+              false = b))
+          b (fun h => Eq.symm h ▸ id (id (of_decide_eq_true (id (Eq.refl true)))))
+          (fun h => Eq.symm h ▸ id (id (of_decide_eq_true (id (Eq.refl true))))) (Eq.refl b))
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          b = t →
+            (IndependentDuodenary.PhaseAlignmentInvestigation.aligned
+                (IndependentDuodenary.PhaseAlignmentInvestigation.bit true)
+                (IndependentDuodenary.PhaseAlignmentInvestigation.bit b) ↔
+              true = b))
+          b (fun h => Eq.symm h ▸ id (id (of_decide_eq_true (id (Eq.refl true)))))
+          (fun h => Eq.symm h ▸ id (id (of_decide_eq_true (id (Eq.refl true))))) (Eq.refl b))
+    (Eq.refl a)
+'IndependentDuodenary.PhaseAlignmentInvestigation.alignment_is_boolean_equality' depends on axioms: [propext,
+ Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.unanchored_alignment_is_not_and : ¬∀ (a b : Bool),
+    IndependentDuodenary.PhaseAlignmentInvestigation.aligned (IndependentDuodenary.PhaseAlignmentInvestigation.bit a)
+        (IndependentDuodenary.PhaseAlignmentInvestigation.bit b) ↔
+      (a && b) = true :=
+fun h =>
+  let_fun hh := (h false false).mp (id (id (of_decide_eq_true (id (Eq.refl true)))));
+  Bool.noConfusion hh
+'IndependentDuodenary.PhaseAlignmentInvestigation.unanchored_alignment_is_not_and' depends on axioms: [propext,
+ Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.anchored_sum_encodes_and : ∀ (origin : ZMod 12) (a b : Bool),
+  IndependentDuodenary.PhaseAlignmentInvestigation.aligned
+      (origin + IndependentDuodenary.PhaseAlignmentInvestigation.bit a +
+        (origin + IndependentDuodenary.PhaseAlignmentInvestigation.bit b))
+      (origin + 1 + (origin + 1)) ↔
+    (a && b) = true :=
+fun origin a b =>
+  Bool.casesOn (motive := fun t =>
+    a = t →
+      (IndependentDuodenary.PhaseAlignmentInvestigation.aligned
+          (origin + IndependentDuodenary.PhaseAlignmentInvestigation.bit a +
+            (origin + IndependentDuodenary.PhaseAlignmentInvestigation.bit b))
+          (origin + 1 + (origin + 1)) ↔
+        (a && b) = true))
+    a
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          b = t →
+            (IndependentDuodenary.PhaseAlignmentInvestigation.aligned
+                (origin + IndependentDuodenary.PhaseAlignmentInvestigation.bit false +
+                  (origin + IndependentDuodenary.PhaseAlignmentInvestigation.bit b))
+                (origin + 1 + (origin + 1)) ↔
+              (false && b) = true))
+          b
+          (fun h =>
+            Eq.symm h ▸
+              id
+                (Eq.mpr
+                  (id
+                    (congrArg (fun x => x = 0 ↔ (false && false) = true)
+                      (Eq.trans
+                        (Mathlib.Tactic.Ring.sub_congr
+                          (Mathlib.Tactic.Ring.add_congr
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                              (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                              (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                            (Mathlib.Tactic.Ring.add_pf_add_overlap
+                              (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                  (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                  (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2)))
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                (Mathlib.Tactic.Ring.add_overlap_pf origin (Nat.rawCast 1)
+                                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                    (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2))))
+                                (Mathlib.Tactic.Ring.add_pf_zero_add 0))))
+                          (Mathlib.Tactic.Ring.add_congr
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero))
+                              (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero))
+                              (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                            (Mathlib.Tactic.Ring.add_pf_add_overlap
+                              (Mathlib.Tactic.Ring.add_overlap_pf origin (Nat.rawCast 1)
+                                (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                  (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                    (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                    (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2))))
+                              (Mathlib.Tactic.Ring.add_pf_zero_add 0)))
+                          (Mathlib.Tactic.Ring.sub_pf
+                            (Mathlib.Tactic.Ring.neg_add
+                              (Mathlib.Tactic.Ring.neg_mul origin (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.neg_one_mul
+                                  (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                    (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                      (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                      (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                      (Eq.refl (Int.negOfNat 2))))))
+                              Mathlib.Tactic.Ring.neg_zero)
+                            (Mathlib.Tactic.Ring.add_pf_add_lt (Nat.rawCast 2)
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                                (Mathlib.Tactic.Ring.add_overlap_pf_zero origin (Nat.rawCast 1)
+                                  (Mathlib.Meta.NormNum.IsInt.to_isNat
+                                    (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                                      (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                      (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 2))
+                                      (Eq.refl (Int.ofNat 0)))))
+                                (Mathlib.Tactic.Ring.add_pf_zero_add 0)))))
+                        (add_zero 2))))
+                  (of_decide_eq_true (id (Eq.refl true)))))
+          (fun h =>
+            Eq.symm h ▸
+              id
+                (Eq.mpr
+                  (id
+                    (congrArg (fun x => x = 0 ↔ (false && true) = true)
+                      (Eq.trans
+                        (Mathlib.Tactic.Ring.sub_congr
+                          (Mathlib.Tactic.Ring.add_congr
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                              (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                              (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                            (Mathlib.Tactic.Ring.add_pf_add_overlap
+                              (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                  (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                  (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2)))
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                (Mathlib.Tactic.Ring.add_overlap_pf origin (Nat.rawCast 1)
+                                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                    (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2))))
+                                (Mathlib.Tactic.Ring.add_pf_zero_add 0))))
+                          (Mathlib.Tactic.Ring.add_congr
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero))
+                              (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                              (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                            (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                (Mathlib.Tactic.Ring.add_overlap_pf origin (Nat.rawCast 1)
+                                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                    (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2))))
+                                (Mathlib.Tactic.Ring.add_pf_zero_add 0))))
+                          (Mathlib.Tactic.Ring.sub_pf
+                            (Mathlib.Tactic.Ring.neg_add
+                              (Mathlib.Tactic.Ring.neg_one_mul
+                                (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                  (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                    (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                    (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                    (Eq.refl (Int.negOfNat 1)))))
+                              (Mathlib.Tactic.Ring.neg_add
+                                (Mathlib.Tactic.Ring.neg_mul origin (Nat.rawCast 1)
+                                  (Mathlib.Tactic.Ring.neg_one_mul
+                                    (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                      (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                        (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                        (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                          (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                        (Eq.refl (Int.negOfNat 2))))))
+                                Mathlib.Tactic.Ring.neg_zero))
+                            (Mathlib.Tactic.Ring.add_pf_add_overlap
+                              (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                (Mathlib.Meta.NormNum.IsInt.to_isNat
+                                  (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                                    (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                    (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                    (Eq.refl (Int.ofNat 1)))))
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                                (Mathlib.Tactic.Ring.add_overlap_pf_zero origin (Nat.rawCast 1)
+                                  (Mathlib.Meta.NormNum.IsInt.to_isNat
+                                    (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                                      (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                      (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 2))
+                                      (Eq.refl (Int.ofNat 0)))))
+                                (Mathlib.Tactic.Ring.add_pf_zero_add 0)))))
+                        (Eq.trans (congrArg (fun x => x + 0) Mathlib.Tactic.RingNF.nat_rawCast_1) (add_zero 1)))))
+                  (of_decide_eq_true (id (Eq.refl true)))))
+          (Eq.refl b))
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          b = t →
+            (IndependentDuodenary.PhaseAlignmentInvestigation.aligned
+                (origin + IndependentDuodenary.PhaseAlignmentInvestigation.bit true +
+                  (origin + IndependentDuodenary.PhaseAlignmentInvestigation.bit b))
+                (origin + 1 + (origin + 1)) ↔
+              (true && b) = true))
+          b
+          (fun h =>
+            Eq.symm h ▸
+              id
+                (Eq.mpr
+                  (id
+                    (congrArg (fun x => x = 0 ↔ (true && false) = true)
+                      (Eq.trans
+                        (Mathlib.Tactic.Ring.sub_congr
+                          (Mathlib.Tactic.Ring.add_congr
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                              (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                              (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                            (Mathlib.Tactic.Ring.add_pf_add_overlap
+                              (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                  (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                  (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2)))
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                (Mathlib.Tactic.Ring.add_overlap_pf origin (Nat.rawCast 1)
+                                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                    (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2))))
+                                (Mathlib.Tactic.Ring.add_pf_zero_add 0))))
+                          (Mathlib.Tactic.Ring.add_congr
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                              (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                            (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                              (Mathlib.Tactic.Ring.cast_zero (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_zero))
+                              (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0)))
+                            (Mathlib.Tactic.Ring.add_pf_add_lt (Nat.rawCast 1)
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                (Mathlib.Tactic.Ring.add_overlap_pf origin (Nat.rawCast 1)
+                                  (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                    (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2))))
+                                (Mathlib.Tactic.Ring.add_pf_zero_add 0))))
+                          (Mathlib.Tactic.Ring.sub_pf
+                            (Mathlib.Tactic.Ring.neg_add
+                              (Mathlib.Tactic.Ring.neg_one_mul
+                                (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                  (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                    (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                    (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1))
+                                    (Eq.refl (Int.negOfNat 1)))))
+                              (Mathlib.Tactic.Ring.neg_add
+                                (Mathlib.Tactic.Ring.neg_mul origin (Nat.rawCast 1)
+                                  (Mathlib.Tactic.Ring.neg_one_mul
+                                    (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                      (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                        (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                        (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                          (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                        (Eq.refl (Int.negOfNat 2))))))
+                                Mathlib.Tactic.Ring.neg_zero))
+                            (Mathlib.Tactic.Ring.add_pf_add_overlap
+                              (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                (Mathlib.Meta.NormNum.IsInt.to_isNat
+                                  (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                                    (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                    (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                    (Eq.refl (Int.ofNat 1)))))
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                                (Mathlib.Tactic.Ring.add_overlap_pf_zero origin (Nat.rawCast 1)
+                                  (Mathlib.Meta.NormNum.IsInt.to_isNat
+                                    (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                                      (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                      (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 2))
+                                      (Eq.refl (Int.ofNat 0)))))
+                                (Mathlib.Tactic.Ring.add_pf_zero_add 0)))))
+                        (Eq.trans (congrArg (fun x => x + 0) Mathlib.Tactic.RingNF.nat_rawCast_1) (add_zero 1)))))
+                  (of_decide_eq_true (id (Eq.refl true)))))
+          (fun h =>
+            Eq.symm h ▸
+              id
+                (Eq.mpr
+                  (id
+                    (congrArg (fun x => x ↔ (true && true) = true)
+                      (Eq.trans
+                        (congrArg (fun x => x = 0)
+                          (Mathlib.Tactic.Ring.sub_congr
+                            (Mathlib.Tactic.Ring.add_congr
+                              (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                                (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                                (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                  (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                              (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                                (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                                (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                  (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                  (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                    (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                    (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2)))
+                                (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                  (Mathlib.Tactic.Ring.add_overlap_pf origin (Nat.rawCast 1)
+                                    (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                      (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2))))
+                                  (Mathlib.Tactic.Ring.add_pf_zero_add 0))))
+                            (Mathlib.Tactic.Ring.add_congr
+                              (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                                (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                                (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                  (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                              (Mathlib.Tactic.Ring.add_congr (Mathlib.Tactic.Ring.atom_pf origin)
+                                (Mathlib.Tactic.Ring.cast_pos (Mathlib.Meta.NormNum.isNat_ofNat (ZMod 12) Nat.cast_one))
+                                (Mathlib.Tactic.Ring.add_pf_add_gt (Nat.rawCast 1)
+                                  (Mathlib.Tactic.Ring.add_pf_add_zero (origin ^ Nat.rawCast 1 * Nat.rawCast 1 + 0))))
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                  (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                    (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                    (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2)))
+                                (Mathlib.Tactic.Ring.add_pf_add_overlap
+                                  (Mathlib.Tactic.Ring.add_overlap_pf origin (Nat.rawCast 1)
+                                    (Mathlib.Meta.NormNum.IsNat.to_raw_eq
+                                      (Mathlib.Meta.NormNum.isNat_add (Eq.refl HAdd.hAdd)
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1)
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 1) (Eq.refl 2))))
+                                  (Mathlib.Tactic.Ring.add_pf_zero_add 0))))
+                            (Mathlib.Tactic.Ring.sub_pf
+                              (Mathlib.Tactic.Ring.neg_add
+                                (Mathlib.Tactic.Ring.neg_one_mul
+                                  (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                    (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                      (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                      (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                        (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                      (Eq.refl (Int.negOfNat 2)))))
+                                (Mathlib.Tactic.Ring.neg_add
+                                  (Mathlib.Tactic.Ring.neg_mul origin (Nat.rawCast 1)
+                                    (Mathlib.Tactic.Ring.neg_one_mul
+                                      (Mathlib.Meta.NormNum.IsInt.to_raw_eq
+                                        (Mathlib.Meta.NormNum.isInt_mul (Eq.refl HMul.hMul)
+                                          (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 1))
+                                          (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                            (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                          (Eq.refl (Int.negOfNat 2))))))
+                                  Mathlib.Tactic.Ring.neg_zero))
+                              (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                                (Mathlib.Meta.NormNum.IsInt.to_isNat
+                                  (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                                    (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                      (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                    (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 2))
+                                    (Eq.refl (Int.ofNat 0))))
+                                (Mathlib.Tactic.Ring.add_pf_add_overlap_zero
+                                  (Mathlib.Tactic.Ring.add_overlap_pf_zero origin (Nat.rawCast 1)
+                                    (Mathlib.Meta.NormNum.IsInt.to_isNat
+                                      (Mathlib.Meta.NormNum.isInt_add (Eq.refl HAdd.hAdd)
+                                        (Mathlib.Meta.NormNum.IsNat.to_isInt
+                                          (Mathlib.Meta.NormNum.IsNat.of_raw (ZMod 12) 2))
+                                        (Mathlib.Meta.NormNum.IsInt.of_raw (ZMod 12) (Int.negOfNat 2))
+                                        (Eq.refl (Int.ofNat 0)))))
+                                  (Mathlib.Tactic.Ring.add_pf_zero_add 0))))))
+                        (eq_self 0))))
+                  (of_decide_eq_true (id (Eq.refl true)))))
+          (Eq.refl b))
+    (Eq.refl a)
+'IndependentDuodenary.PhaseAlignmentInvestigation.anchored_sum_encodes_and' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.multiplication_encodes_and : ∀ (a b : Bool),
+  IndependentDuodenary.PhaseAlignmentInvestigation.bit a * IndependentDuodenary.PhaseAlignmentInvestigation.bit b =
+    IndependentDuodenary.PhaseAlignmentInvestigation.bit (a && b) :=
+fun a b =>
+  Bool.casesOn (motive := fun t =>
+    a = t →
+      IndependentDuodenary.PhaseAlignmentInvestigation.bit a * IndependentDuodenary.PhaseAlignmentInvestigation.bit b =
+        IndependentDuodenary.PhaseAlignmentInvestigation.bit (a && b))
+    a
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          b = t →
+            IndependentDuodenary.PhaseAlignmentInvestigation.bit false *
+                IndependentDuodenary.PhaseAlignmentInvestigation.bit b =
+              IndependentDuodenary.PhaseAlignmentInvestigation.bit (false && b))
+          b (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+          (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl b))
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          b = t →
+            IndependentDuodenary.PhaseAlignmentInvestigation.bit true *
+                IndependentDuodenary.PhaseAlignmentInvestigation.bit b =
+              IndependentDuodenary.PhaseAlignmentInvestigation.bit (true && b))
+          b (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+          (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl b))
+    (Eq.refl a)
+'IndependentDuodenary.PhaseAlignmentInvestigation.multiplication_encodes_and' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.ring_encodes_or : ∀ (a b : Bool),
+  IndependentDuodenary.PhaseAlignmentInvestigation.bit a + IndependentDuodenary.PhaseAlignmentInvestigation.bit b -
+      IndependentDuodenary.PhaseAlignmentInvestigation.bit a * IndependentDuodenary.PhaseAlignmentInvestigation.bit b =
+    IndependentDuodenary.PhaseAlignmentInvestigation.bit (a || b) :=
+fun a b =>
+  Bool.casesOn (motive := fun t =>
+    a = t →
+      IndependentDuodenary.PhaseAlignmentInvestigation.bit a + IndependentDuodenary.PhaseAlignmentInvestigation.bit b -
+          IndependentDuodenary.PhaseAlignmentInvestigation.bit a *
+            IndependentDuodenary.PhaseAlignmentInvestigation.bit b =
+        IndependentDuodenary.PhaseAlignmentInvestigation.bit (a || b))
+    a
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          b = t →
+            IndependentDuodenary.PhaseAlignmentInvestigation.bit false +
+                  IndependentDuodenary.PhaseAlignmentInvestigation.bit b -
+                IndependentDuodenary.PhaseAlignmentInvestigation.bit false *
+                  IndependentDuodenary.PhaseAlignmentInvestigation.bit b =
+              IndependentDuodenary.PhaseAlignmentInvestigation.bit (false || b))
+          b (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+          (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl b))
+    (fun h =>
+      Eq.symm h ▸
+        Bool.casesOn (motive := fun t =>
+          b = t →
+            IndependentDuodenary.PhaseAlignmentInvestigation.bit true +
+                  IndependentDuodenary.PhaseAlignmentInvestigation.bit b -
+                IndependentDuodenary.PhaseAlignmentInvestigation.bit true *
+                  IndependentDuodenary.PhaseAlignmentInvestigation.bit b =
+              IndependentDuodenary.PhaseAlignmentInvestigation.bit (true || b))
+          b (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+          (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl b))
+    (Eq.refl a)
+'IndependentDuodenary.PhaseAlignmentInvestigation.ring_encodes_or' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.ring_encodes_not : ∀ (a : Bool),
+  1 - IndependentDuodenary.PhaseAlignmentInvestigation.bit a =
+    IndependentDuodenary.PhaseAlignmentInvestigation.bit !a :=
+fun a =>
+  Bool.casesOn (motive := fun t =>
+    a = t →
+      1 - IndependentDuodenary.PhaseAlignmentInvestigation.bit a =
+        IndependentDuodenary.PhaseAlignmentInvestigation.bit !a)
+    a (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true)))
+    (fun h => Eq.symm h ▸ of_decide_eq_true (id (Eq.refl true))) (Eq.refl a)
+'IndependentDuodenary.PhaseAlignmentInvestigation.ring_encodes_not' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.encode_valid : ∀ {n : ℕ} (a : Fin n → Bool),
+  IndependentDuodenary.PhaseAlignmentInvestigation.valid (IndependentDuodenary.PhaseAlignmentInvestigation.encode a) :=
+fun {n} a i =>
+  Bool.casesOn (motive := fun t =>
+    a i = t →
+      IndependentDuodenary.PhaseAlignmentInvestigation.encode a i = 0 ∨
+        IndependentDuodenary.PhaseAlignmentInvestigation.encode a i = 1)
+    (a i)
+    (fun h =>
+      Eq.ndrec (motive := fun x =>
+        a i = x →
+          IndependentDuodenary.PhaseAlignmentInvestigation.encode a i = 0 ∨
+            IndependentDuodenary.PhaseAlignmentInvestigation.encode a i = 1)
+        (fun h =>
+          of_eq_true
+            (Eq.trans
+              (congr
+                (congrArg Or
+                  (Eq.trans
+                    (congrArg
+                      (fun x =>
+                        (match x with
+                          | false => 0
+                          | true => 1) =
+                          0)
+                      h)
+                    (eq_self 0)))
+                (congrArg
+                  (fun x =>
+                    (match x with
+                      | false => 0
+                      | true => 1) =
+                      1)
+                  h))
+              (true_or (0 = 1))))
+        (Eq.symm h) (Eq.refl (a i)))
+    (fun h =>
+      Eq.ndrec (motive := fun x =>
+        a i = x →
+          IndependentDuodenary.PhaseAlignmentInvestigation.encode a i = 0 ∨
+            IndependentDuodenary.PhaseAlignmentInvestigation.encode a i = 1)
+        (fun h =>
+          of_eq_true
+            (Eq.trans
+              (congr
+                (congrArg
+                  (fun x =>
+                    Or
+                      ((match x with
+                        | false => 0
+                        | true => 1) =
+                        0))
+                  h)
+                (Eq.trans
+                  (congrArg
+                    (fun x =>
+                      (match x with
+                        | false => 0
+                        | true => 1) =
+                        1)
+                    h)
+                  (eq_self 1)))
+              (or_true (1 = 0))))
+        (Eq.symm h) (Eq.refl (a i)))
+    (Eq.refl (a i))
+'IndependentDuodenary.PhaseAlignmentInvestigation.encode_valid' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.decode_encode : ∀ {n : ℕ} (a : Fin n → Bool),
+  IndependentDuodenary.PhaseAlignmentInvestigation.decode (IndependentDuodenary.PhaseAlignmentInvestigation.encode a) =
+    a :=
+fun {n} a =>
+  funext fun i =>
+    Bool.casesOn (motive := fun t =>
+      a i = t →
+        IndependentDuodenary.PhaseAlignmentInvestigation.decode
+            (IndependentDuodenary.PhaseAlignmentInvestigation.encode a) i =
+          a i)
+      (a i)
+      (fun h =>
+        Eq.ndrec (motive := fun x =>
+          a i = x →
+            IndependentDuodenary.PhaseAlignmentInvestigation.decode
+                (IndependentDuodenary.PhaseAlignmentInvestigation.encode a) i =
+              x)
+          (fun h =>
+            of_eq_true
+              (Eq.trans
+                (congrArg (fun x => x = false)
+                  ((fun p p_1 e_p =>
+                      @Eq.rec Prop p (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                        (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                    (IndependentDuodenary.PhaseAlignmentInvestigation.encode a i = 1) False
+                    (Eq.trans
+                      (congrArg
+                        (fun x =>
+                          (match x with
+                            | false => 0
+                            | true => 1) =
+                            1)
+                        h)
+                      «.lake».PhaseAlignmentAudit._auxLemma.4)))
+                (eq_self false)))
+          (Eq.symm h) (Eq.refl (a i)))
+      (fun h =>
+        Eq.ndrec (motive := fun x =>
+          a i = x →
+            IndependentDuodenary.PhaseAlignmentInvestigation.decode
+                (IndependentDuodenary.PhaseAlignmentInvestigation.encode a) i =
+              x)
+          (fun h =>
+            of_eq_true
+              (Eq.trans
+                (congrArg (fun x => x = true)
+                  ((fun p p_1 e_p =>
+                      @Eq.rec Prop p (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                        (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                    (IndependentDuodenary.PhaseAlignmentInvestigation.encode a i = 1) True
+                    (Eq.trans
+                      (congrArg
+                        (fun x =>
+                          (match x with
+                            | false => 0
+                            | true => 1) =
+                            1)
+                        h)
+                      (eq_self 1))))
+                (eq_self true)))
+          (Eq.symm h) (Eq.refl (a i)))
+      (Eq.refl (a i))
+'IndependentDuodenary.PhaseAlignmentInvestigation.decode_encode' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.encode_decode : ∀ {n : ℕ}
+  (p : IndependentDuodenary.RegisterPhase n),
+  IndependentDuodenary.PhaseAlignmentInvestigation.valid p →
+    IndependentDuodenary.PhaseAlignmentInvestigation.encode
+        (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) =
+      p :=
+fun {n} p law =>
+  funext fun i =>
+    Or.casesOn (law i)
+      (fun h =>
+        of_eq_true
+          (Eq.trans
+            (congr
+              (congrArg
+                (fun x =>
+                  Eq
+                    (match x with
+                    | false => 0
+                    | true => 1))
+                ((fun p p_1 e_p =>
+                    @Eq.rec Prop p (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                      (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                  (p i = 1) False (Eq.trans (congrArg (fun x => x = 1) h) «.lake».PhaseAlignmentAudit._auxLemma.4)))
+              h)
+            (eq_self 0)))
+      fun h =>
+      of_eq_true
+        (Eq.trans
+          (congr
+            (congrArg
+              (fun x =>
+                Eq
+                  (match x with
+                  | false => 0
+                  | true => 1))
+              ((fun p p_1 e_p =>
+                  @Eq.rec Prop p (fun p_2 e_p => ∀ {h : Decidable p} [h_1 : Decidable p_2], decide p = decide p_2)
+                    (fun {h} [h_1 : Decidable p] => Subsingleton.elim h h_1 ▸ Eq.refl (decide p)) p_1 e_p)
+                (p i = 1) True (Eq.trans (congrArg (fun x => x = 1) h) (eq_self 1))))
+            h)
+          (eq_self 1))
+'IndependentDuodenary.PhaseAlignmentInvestigation.encode_decode' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.arithmetic_correct : ∀ {n : ℕ}
+  (f : IndependentDuodenary.DiscoveryFormula n) (a : Fin n → Bool),
+  IndependentDuodenary.PhaseAlignmentInvestigation.arithmeticEval
+      (IndependentDuodenary.PhaseAlignmentInvestigation.encode a) f =
+    IndependentDuodenary.PhaseAlignmentInvestigation.bit (IndependentDuodenary.discoveryEval a f) :=
+fun {n} f a =>
+  IndependentDuodenary.DiscoveryFormula.rec
+    (fun i =>
+      Eq.refl
+        (IndependentDuodenary.PhaseAlignmentInvestigation.arithmeticEval
+          (IndependentDuodenary.PhaseAlignmentInvestigation.encode a) (IndependentDuodenary.DiscoveryFormula.atom i)))
+    (fun f ih =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun x =>
+              1 - x = IndependentDuodenary.PhaseAlignmentInvestigation.bit !IndependentDuodenary.discoveryEval a f)
+            ih))
+        (IndependentDuodenary.PhaseAlignmentInvestigation.ring_encodes_not (IndependentDuodenary.discoveryEval a f)))
+    (fun f g ihf ihg =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun x =>
+              x =
+                IndependentDuodenary.PhaseAlignmentInvestigation.bit
+                  (IndependentDuodenary.discoveryEval a f && IndependentDuodenary.discoveryEval a g))
+            (congr (congrArg HMul.hMul ihf) ihg)))
+        (IndependentDuodenary.PhaseAlignmentInvestigation.multiplication_encodes_and
+          (IndependentDuodenary.discoveryEval a f) (IndependentDuodenary.discoveryEval a g)))
+    (fun f g ihf ihg =>
+      Eq.mpr
+        (id
+          (congrArg
+            (fun x =>
+              x =
+                IndependentDuodenary.PhaseAlignmentInvestigation.bit
+                  (IndependentDuodenary.discoveryEval a f || IndependentDuodenary.discoveryEval a g))
+            (congr (congrArg HSub.hSub (congr (congrArg HAdd.hAdd ihf) ihg)) (congr (congrArg HMul.hMul ihf) ihg))))
+        (IndependentDuodenary.PhaseAlignmentInvestigation.ring_encodes_or (IndependentDuodenary.discoveryEval a f)
+          (IndependentDuodenary.discoveryEval a g)))
+    f
+'IndependentDuodenary.PhaseAlignmentInvestigation.arithmetic_correct' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.alignment_sat_equivalence : ∀ {n : ℕ}
+  (f : IndependentDuodenary.DiscoveryFormula n),
+  (∃ a, IndependentDuodenary.discoveryEval a f = true) ↔
+    ∃ p,
+      IndependentDuodenary.PhaseAlignmentInvestigation.valid p ∧
+        IndependentDuodenary.PhaseAlignmentInvestigation.aligned
+          (IndependentDuodenary.PhaseAlignmentInvestigation.arithmeticEval p f) 1 :=
+fun {n} f =>
+  {
+    mp := fun a =>
+      Exists.casesOn a fun a h =>
+        Exists.intro (IndependentDuodenary.PhaseAlignmentInvestigation.encode a)
+          ⟨IndependentDuodenary.PhaseAlignmentInvestigation.encode_valid a,
+            Eq.mpr
+              (id
+                (congrArg (fun _a => IndependentDuodenary.PhaseAlignmentInvestigation.aligned _a 1)
+                  (IndependentDuodenary.PhaseAlignmentInvestigation.arithmetic_correct f a)))
+              (Eq.mpr
+                (id
+                  (congrArg
+                    (fun _a =>
+                      IndependentDuodenary.PhaseAlignmentInvestigation.aligned
+                        (IndependentDuodenary.PhaseAlignmentInvestigation.bit _a) 1)
+                    h))
+                (id (id (of_decide_eq_true (id (Eq.refl true))))))⟩,
+    mpr := fun a =>
+      Exists.casesOn a fun p h =>
+        And.casesOn h fun law h =>
+          Exists.intro (IndependentDuodenary.PhaseAlignmentInvestigation.decode p)
+            (let_fun correct :=
+              IndependentDuodenary.PhaseAlignmentInvestigation.arithmetic_correct f
+                (IndependentDuodenary.PhaseAlignmentInvestigation.decode p);
+            let_fun output :=
+              (IndependentDuodenary.PhaseAlignmentInvestigation.alignment_iff_equal
+                    (IndependentDuodenary.PhaseAlignmentInvestigation.arithmeticEval p f) 1).mp
+                h;
+            Bool.casesOn (motive := fun t =>
+              IndependentDuodenary.discoveryEval (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f = t →
+                IndependentDuodenary.discoveryEval (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f = true)
+              (IndependentDuodenary.discoveryEval (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f)
+              (fun h =>
+                Eq.ndrec (motive := fun x =>
+                  IndependentDuodenary.discoveryEval (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f = x →
+                    x = true)
+                  (fun hv =>
+                    False.elim
+                      (Eq.mp
+                        (Eq.trans
+                          (congrArg
+                            (fun x =>
+                              (match x with
+                                | false => 0
+                                | true => 1) =
+                                1)
+                            hv)
+                          «.lake».PhaseAlignmentAudit._auxLemma.4)
+                        (Eq.mp
+                          (congrArg (fun _a => _a = 1)
+                            (Eq.mp
+                              (congrArg
+                                (fun _a =>
+                                  IndependentDuodenary.PhaseAlignmentInvestigation.arithmeticEval _a f =
+                                    IndependentDuodenary.PhaseAlignmentInvestigation.bit
+                                      (IndependentDuodenary.discoveryEval
+                                        (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f))
+                                (IndependentDuodenary.PhaseAlignmentInvestigation.encode_decode p law))
+                              correct))
+                          output)))
+                  (Eq.symm h)
+                  (Eq.refl
+                    (IndependentDuodenary.discoveryEval (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f)))
+              (fun h =>
+                Eq.ndrec (motive := fun x =>
+                  IndependentDuodenary.discoveryEval (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f = x →
+                    x = true)
+                  (fun hv => Eq.refl true) (Eq.symm h)
+                  (Eq.refl
+                    (IndependentDuodenary.discoveryEval (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f)))
+              (Eq.refl
+                (IndependentDuodenary.discoveryEval (IndependentDuodenary.PhaseAlignmentInvestigation.decode p) f))) }
+'IndependentDuodenary.PhaseAlignmentInvestigation.alignment_sat_equivalence' depends on axioms: [propext, Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.valid_phase_cardinality : ∀ (n : ℕ),
+  Nat.card { p // IndependentDuodenary.PhaseAlignmentInvestigation.valid p } = 2 ^ n :=
+fun n =>
+  Eq.mpr
+    (id
+      (congrArg (fun _a => _a = 2 ^ n)
+        (Eq.symm (Nat.card_congr (IndependentDuodenary.PhaseAlignmentInvestigation.assignmentEquiv n)))))
+    (of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x = 2 ^ n)
+          (Eq.trans Nat.card_eq_fintype_card
+            (Eq.trans Fintype.card_pi
+              (Eq.trans (Eq.trans (Finset.prod_congr (Eq.refl Finset.univ) fun x a => Eq.refl 2) (Finset.prod_const 2))
+                (congrArg (HPow.hPow 2) (Fintype.card_fin n))))))
+        (eq_self (2 ^ n))))
+'IndependentDuodenary.PhaseAlignmentInvestigation.valid_phase_cardinality' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+theorem IndependentDuodenary.PhaseAlignmentInvestigation.represented_register_phase_roundtrip : ∀ {n : ℕ}
+  (a : Fin n → Bool),
+  IndependentDuodenary.registerPhases
+      (IndependentDuodenary.phaseRegisterState (IndependentDuodenary.PhaseAlignmentInvestigation.encode a)) =
+    IndependentDuodenary.PhaseAlignmentInvestigation.encode a :=
+fun {n} a =>
+  funext fun i => IndependentDuodenary.key_one_hot_phase (IndependentDuodenary.PhaseAlignmentInvestigation.encode a i)
+'IndependentDuodenary.PhaseAlignmentInvestigation.represented_register_phase_roundtrip' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+PHASE AUDIT PASSED: 16 experimental theorem declarations; only standard Lean axioms permitted.

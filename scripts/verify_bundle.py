@@ -38,7 +38,7 @@ def main():
     if args.all:
         metadata = json.loads((root / 'BUNDLE.json').read_text())
         build = ['lake', '--no-cache', 'build'] if metadata['vendor_dependencies'] else ['lake', 'build']
-        for cmd in [build, ['python3', 'scripts/audit.py'], ['lake', 'exe', 'verifyPipeline']]:
+        for cmd in [build, ['python3', 'scripts/audit.py'], ['python3', 'scripts/audit_phase_alignment.py'], ['lake', 'exe', 'verifyPipeline']]:
             subprocess.run(cmd, cwd=root, check=True)
 
 

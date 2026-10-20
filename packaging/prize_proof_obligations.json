@@ -129,5 +129,16 @@
     "scope": "arbitrary finite Boolean formulas to guarded twelve-position circuits; not fixed registerStep reachability",
     "registered_obligations_closed": [],
     "polynomial_machine_runtime_proved": false
+  },
+  "experimental_phase_alignment": {
+    "source": "examples/PhaseAlignmentBridge.lean",
+    "audit_script": "scripts/audit_phase_alignment.py",
+    "experimental_theorem_declarations": 16,
+    "included_in_library_theorem_count": false,
+    "encoding": "false=0, true=1 in ZMod 12",
+    "conditional_free_ring_semantics": true,
+    "all_formula_sizes": true,
+    "fixed_protocol_reduction_proved": false,
+    "registered_obligations_closed": []
   }
 }
