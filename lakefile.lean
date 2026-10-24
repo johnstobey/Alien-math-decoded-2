@@ -14,3 +14,6 @@ lean_lib IndependentDuodenary
 @[default_target]
 lean_exe verifyPipeline where
   root := `PipelineMain
+
+@[default_target]
+lean_lib extended_modules
