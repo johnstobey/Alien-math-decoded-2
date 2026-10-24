@@ -1,5 +1,15 @@
 # Verification evidence
 
+## Dual-ring research branch
+
+The dual-ring consistency and observation batch adds eight checked declarations,
+bringing the current main-library inventory to 455. The integration build,
+455-declaration axiom audit, 13 pipeline checks, eight adversarial Lean examples,
+16-declaration experimental audit and 10,000-specialization audit passed locally.
+See [results and source boundaries](research/DUAL_RING_RESULTS.md). The evidence
+below records the preceding 447-declaration baseline and historical batches.
+Remote CI for the research branch is reported separately from local checks.
+
 - Lean: 4.14.0, compiler commit `410fab728470` (Linux release).
 - mathlib: v4.14.0, Git commit `4bbdccd9c5f862bf90ff12f0a9e2c8be032b9a84`.
 - Project library: twenty-nine modules; 447 theorem declarations.

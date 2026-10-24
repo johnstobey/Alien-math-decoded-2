@@ -1,6 +1,6 @@
 # Theorem-by-theorem audit
 
-All 447 named library declarations in namespace `IndependentDuodenary` compiled and passed the axiom audit. Complete source propositions are reproduced below. Exact elaborated propositions, proof terms and direct dependencies are retained in [axioms-and-proofs.txt](axioms-and-proofs.txt).
+All 455 named library declarations in namespace `IndependentDuodenary` compiled and passed the axiom audit. Complete source propositions are reproduced below. Exact elaborated propositions, proof terms and direct dependencies are retained in [axioms-and-proofs.txt](axioms-and-proofs.txt).
 
 ## `normalization_control_cardinality`
 
@@ -2092,6 +2092,83 @@ Axioms: `propext, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES prize_accepts_by_bound_iff` and the printed proof in the machine-generated audit.
 
+## `dual_ring_admissible_closed`
+
+Source: `IndependentDuodenary/DualRingConsistency.lean`. Compilation: **passed**.
+
+```lean
+theorem dual_ring_admissible_closed (x : DualRingSourceState) :
+    AntipodallyClosed (dualRingAdmissible x)
+```
+
+Proof method: Apply each active constraint's closure equivalence in both directions under the intersection quantifier.
+
+Axioms: `propext, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dual_ring_admissible_closed` and the printed proof in the machine-generated audit.
+
+## `clearing_pointer_reset_classification`
+
+Source: `IndependentDuodenary/DualRingConsistency.lean`. Compilation: **passed**.
+
+```lean
+theorem clearing_pointer_reset_classification {G : Type*} [AddGroup G] (n r : G) :
+    ((0 : G) = n + r ↔ r = -n) ∧ ((0 : G) = n + 0 ↔ n = 0)
+```
+
+Proof method: Additive-group cancellation classifies the unique compensating offset and the zero-offset boundary.
+
+Axioms: `propext`.
+
+Dependencies: see `DIRECT DEPENDENCIES clearing_pointer_reset_classification` and the printed proof in the machine-generated audit.
+
+## `quincunx_midpoint_obstruction`
+
+Source: `IndependentDuodenary/DualRingConsistency.lean`. Compilation: **passed**.
+
+```lean
+theorem quincunx_midpoint_obstruction : ¬ ∃ m : ZMod 12, m + m = 5
+```
+
+Proof method: Kernel-checked finite decision over all twelve possible midpoint residues.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES quincunx_midpoint_obstruction` and the printed proof in the machine-generated audit.
+
+## `dual_ring_common_anchor_insufficient`
+
+Source: `IndependentDuodenary/DualRingConsistency.lean`. Compilation: **passed**.
+
+```lean
+theorem dual_ring_common_anchor_insufficient :
+    ∃ A B : Set (ZMod 12), AntipodallyClosed A ∧ AntipodallyClosed B ∧
+      (0 : ZMod 12) ∈ A ∧ (0 : ZMod 12) ∈ B ∧ A ≠ B
+```
+
+Proof method: Explicit closed-set witnesses univ and {0,6}, separated by residue one.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dual_ring_common_anchor_insufficient` and the printed proof in the machine-generated audit.
+
+## `dual_view_integration_iff`
+
+Source: `IndependentDuodenary/DualRingConsistency.lean`. Compilation: **passed**.
+
+```lean
+theorem dual_view_integration_iff {X : Type*} (a : X → X) (z : X) (A B : Set X)
+    (hA : ∀ x, x ∈ A ↔ a x ∈ A) (hB : ∀ x, x ∈ B ↔ a x ∈ B) :
+    A ∩ B = {z, a z} ↔
+      (z ∈ A ∧ z ∈ B) ∧ ∀ x, x ≠ z → x ≠ a z → x ∉ A ∨ x ∉ B
+```
+
+Proof method: Set extensionality separates retained anchor pair from necessary and sufficient exclusion of every outside point.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES dual_view_integration_iff` and the printed proof in the machine-generated audit.
+
 ## `semantic_decoder_no_collision`
 
 Source: `IndependentDuodenary/EncodingIntegrity.lean`. Compilation: **passed**.
@@ -3160,6 +3237,58 @@ Proof method: Kernel-checked decidable computation (decide).
 Axioms: `propext, Quot.sound`.
 
 Dependencies: see `DIRECT DEPENDENCIES zero_divisor_mod_144` and the printed proof in the machine-generated audit.
+
+## `observation_dynamics_iff_kernel_stable`
+
+Source: `IndependentDuodenary/ObservationReconstruction.lean`. Compilation: **passed**.
+
+```lean
+theorem observation_dynamics_iff_kernel_stable {X Y : Type*} (T : X → X) (O : X → Y) :
+    (∃ U : Y → Y, Function.Semiconj O T U) ↔
+      ∀ x y, O x = O y → O (T x) = O (T y)
+```
+
+Proof method: Factorization through observation fibers using Function.extend with identity off the image.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES observation_dynamics_iff_kernel_stable` and the printed proof in the machine-generated audit.
+
+## `observation_trace_universal`
+
+Source: `IndependentDuodenary/ObservationReconstruction.lean`. Compilation: **passed**.
+
+```lean
+theorem observation_trace_universal {X Y : Type*} (T : X → X) (O : X → Y) :
+    (∀ x y, observationTrace T O x = observationTrace T O y →
+      O x = O y ∧ observationTrace T O (T x) = observationTrace T O (T y)) ∧
+    (∀ R : X → X → Prop,
+      (∀ x y, R x y → O x = O y) →
+      (∀ x y, R x y → R (T x) (T y)) →
+      ∀ x y, R x y → observationTrace T O x = observationTrace T O y)
+```
+
+Proof method: Trace evaluation at zero and successor; induction propagates every stable observation-respecting relation.
+
+Axioms: `Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES observation_trace_universal` and the printed proof in the machine-generated audit.
+
+## `observation_trace_reconstruction_iff`
+
+Source: `IndependentDuodenary/ObservationReconstruction.lean`. Compilation: **passed**.
+
+```lean
+theorem observation_trace_reconstruction_iff {X Y : Type*} (T : X → X) (O : X → Y) :
+    (∃ D : (ℕ → Y) → Option X, ∀ x, D (observationTrace T O x) = some x) ↔
+      Function.Injective (observationTrace T O)
+```
+
+Proof method: Decoder collision cancellation and injective extension into Option, including empty carriers.
+
+Axioms: `propext, Classical.choice, Quot.sound`.
+
+Dependencies: see `DIRECT DEPENDENCIES observation_trace_reconstruction_iff` and the printed proof in the machine-generated audit.
 
 ## `station_word_action_composition`
 
