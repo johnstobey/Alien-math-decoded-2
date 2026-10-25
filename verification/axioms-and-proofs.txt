@@ -9149,6 +9149,277 @@ DIRECT DEPENDENCIES prize_accepts_by_bound_iff: [IndependentDuodenary.prize_halt
  letFun,
  Turing.TM0.Cfg,
  Option]
+theorem IndependentDuodenary.dual_ring_admissible_closed : ∀ (x : IndependentDuodenary.DualRingSourceState),
+  IndependentDuodenary.AntipodallyClosed (IndependentDuodenary.dualRingAdmissible x) :=
+fun x k => { mp := fun h p hp => (p.property k).mp (h p hp), mpr := fun h p hp => (p.property k).mpr (h p hp) }
+'IndependentDuodenary.dual_ring_admissible_closed' depends on axioms: [propext, Quot.sound]
+DIRECT DEPENDENCIES dual_ring_admissible_closed: [Iff.mpr,
+ IndependentDuodenary.AntipodallyClosed,
+ IndependentDuodenary.DualRingSourceState,
+ IndependentDuodenary.dualRingAdmissible,
+ Membership.mem,
+ IndependentDuodenary.antipode,
+ Subtype,
+ instOfNatNat,
+ IndependentDuodenary.DualRingSourceState.constraints,
+ ZMod,
+ Nat,
+ Iff.intro,
+ Iff.mp,
+ OfNat.ofNat,
+ Subtype.val,
+ Set.instMembership,
+ Subtype.property,
+ Set]
+theorem IndependentDuodenary.clearing_pointer_reset_classification.{u_1} : ∀ {G : Type u_1} [inst : AddGroup G]
+  (n r : G), (0 = n + r ↔ r = -n) ∧ (0 = n + 0 ↔ n = 0) :=
+fun {G} [AddGroup G] n r =>
+  ⟨{
+      mp := fun h =>
+        Trans.trans
+          (Trans.trans (of_eq_true (Eq.trans (congrArg (Eq r) (neg_add_cancel_left n r)) (eq_self r)))
+            (Eq.mpr (id (congrArg (fun _a => -n + _a = -n + 0) (Eq.symm h))) (Eq.refl (-n + 0))))
+          (add_zero (-n)),
+      mpr := fun h =>
+        of_eq_true (Eq.trans (congrArg (Eq 0) (Eq.trans (congrArg (HAdd.hAdd n) h) (add_neg_cancel n))) (eq_self 0)) },
+    of_eq_true
+      (Eq.trans
+        (congrArg (fun x => x ↔ n = 0)
+          (Eq.trans (congrArg (Eq 0) (add_zero n)) IndependentDuodenary.DualRingConsistency._auxLemma.1))
+        (iff_self (n = 0)))⟩
+'IndependentDuodenary.clearing_pointer_reset_classification' depends on axioms: [propext]
+DIRECT DEPENDENCIES clearing_pointer_reset_classification: [AddGroup.toSubtractionMonoid,
+ Eq.mpr,
+ add_neg_cancel,
+ NegZeroClass.toNeg,
+ Trans.trans,
+ AddMonoid.toAddSemigroup,
+ congrArg,
+ AddMonoid.toAddZeroClass,
+ AddMonoid.toZero,
+ IndependentDuodenary.DualRingConsistency._auxLemma.1,
+ id,
+ SubtractionMonoid.toSubNegZeroMonoid,
+ SubNegZeroMonoid.toNegZeroClass,
+ iff_self,
+ instTransEq,
+ instHAdd,
+ AddSemigroup.toAdd,
+ And,
+ AddGroup,
+ Iff,
+ AddGroup.toSubNegMonoid,
+ HAdd.hAdd,
+ And.intro,
+ AddZeroClass.toZero,
+ True,
+ Iff.intro,
+ eq_self,
+ SubNegMonoid.toNeg,
+ of_eq_true,
+ Zero.toOfNat0,
+ Eq.refl,
+ SubNegMonoid.toAddMonoid,
+ add_zero,
+ OfNat.ofNat,
+ Eq.symm,
+ AddZeroClass.toAdd,
+ NegZeroClass.toZero,
+ Eq,
+ neg_add_cancel_left,
+ Neg.neg,
+ Eq.trans]
+theorem IndependentDuodenary.quincunx_midpoint_obstruction : ¬∃ m, m + m = 5 :=
+of_decide_eq_true (id (Eq.refl true))
+'IndependentDuodenary.quincunx_midpoint_obstruction' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES quincunx_midpoint_obstruction: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ instDecidableNot,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ CommSemiring.toSemiring,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ Exists,
+ id,
+ Distrib.toAdd,
+ instOfNatNat,
+ ZMod,
+ Bool.true,
+ Fintype.decidableExistsFintype,
+ instHAdd,
+ CommRing.toCommSemiring,
+ instNatAtLeastTwo,
+ HAdd.hAdd,
+ Nat.instNeZeroSucc,
+ Nat,
+ Bool,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Eq.refl,
+ OfNat.ofNat,
+ Decidable.decide,
+ Eq,
+ instOfNatAtLeastTwo,
+ Not]
+theorem IndependentDuodenary.dual_ring_common_anchor_insufficient : ∃ A B,
+  IndependentDuodenary.AntipodallyClosed A ∧ IndependentDuodenary.AntipodallyClosed B ∧ 0 ∈ A ∧ 0 ∈ B ∧ A ≠ B :=
+Exists.intro Set.univ
+  (Exists.intro {0, 6}
+    ⟨fun k =>
+      of_eq_true
+        (Eq.trans
+          (congr (congrArg Iff (Mathlib.Data.Set.Operations._auxLemma.1 k))
+            (Mathlib.Data.Set.Operations._auxLemma.1 (IndependentDuodenary.antipode k)))
+          (iff_self True)),
+      ⟨fun k =>
+        let_fun this := of_decide_eq_true (id (Eq.refl true)) k;
+        this,
+        ⟨Set.mem_univ 0,
+          ⟨Or.inl rfl, fun h =>
+            let_fun h1 := h ▸ Set.mem_univ 1;
+            of_decide_eq_true (id (Eq.refl true)) h1⟩⟩⟩⟩)
+'IndependentDuodenary.dual_ring_common_anchor_insufficient' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES dual_ring_common_anchor_insufficient: [Semiring.toNatCast,
+ NonUnitalNonAssocCommRing.toNonUnitalNonAssocCommSemiring,
+ instDecidableNot,
+ False,
+ NonUnitalCommRing.toNonUnitalNonAssocCommRing,
+ Semiring.toOne,
+ IndependentDuodenary.AntipodallyClosed,
+ CommRing.toNonUnitalCommRing,
+ of_decide_eq_true,
+ ZMod.commRing,
+ congrArg,
+ CommSemiring.toSemiring,
+ Set.univ,
+ ZMod.fintype,
+ ZMod.decidableEq,
+ CommSemiring.toCommMonoidWithZero,
+ Membership.mem,
+ IndependentDuodenary.antipode,
+ Exists,
+ Eq.rec,
+ Set.instSingletonSet,
+ id,
+ Distrib.toAdd,
+ Insert.insert,
+ Ne,
+ instOfNatNat,
+ ZMod,
+ iff_self,
+ Bool.true,
+ instHAdd,
+ And,
+ CommRing.toCommSemiring,
+ Iff,
+ instNatAtLeastTwo,
+ Set.instInsert,
+ HAdd.hAdd,
+ CommMonoidWithZero.toZero,
+ Nat.instNeZeroSucc,
+ Nat,
+ And.intro,
+ congr,
+ True,
+ Exists.intro,
+ Set.mem_univ,
+ Bool,
+ of_eq_true,
+ One.toOfNat1,
+ NonUnitalNonAssocCommSemiring.toNonUnitalNonAssocSemiring,
+ NonUnitalNonAssocSemiring.toDistrib,
+ Fintype.decidableForallFintype,
+ Zero.toOfNat0,
+ Eq.refl,
+ Or.inl,
+ Or,
+ Singleton.singleton,
+ OfNat.ofNat,
+ Mathlib.Data.Set.Operations._auxLemma.1,
+ Decidable.decide,
+ Eq,
+ Set.instMembership,
+ instDecidableOr,
+ instDecidableIff,
+ instOfNatAtLeastTwo,
+ Not,
+ letFun,
+ rfl,
+ Eq.trans,
+ Set]
+theorem IndependentDuodenary.dual_view_integration_iff.{u_1} : ∀ {X : Type u_1} (a : X → X) (z : X) (A B : Set X),
+  (∀ (x : X), x ∈ A ↔ a x ∈ A) →
+    (∀ (x : X), x ∈ B ↔ a x ∈ B) → (A ∩ B = {z, a z} ↔ (z ∈ A ∧ z ∈ B) ∧ ∀ (x : X), x ≠ z → x ≠ a z → x ∉ A ∨ x ∉ B) :=
+fun {X} a z A B hA hB =>
+  {
+    mp := fun h =>
+      ⟨let_fun hz := Or.inl rfl;
+        Eq.mp (congrArg (fun _a => z ∈ _a) (Eq.symm h)) hz,
+        fun x hx hax =>
+        if hm : x ∈ A then
+          Or.inr fun hb =>
+            let_fun hp :=
+              h ▸
+                let_fun this := ⟨hm, hb⟩;
+                this;
+            Or.elim hp hx hax
+        else Or.inl hm⟩,
+    mpr := fun a_1 =>
+      And.casesOn a_1 fun hz he =>
+        Set.ext fun x =>
+          {
+            mp := fun hx =>
+              if h : x = z then Or.inl h
+              else
+                if h' : x = a z then Or.inr h'
+                else False.elim (Or.elim (he x h h') (fun hn => hn hx.left) fun hn => hn hx.right),
+            mpr := fun hx =>
+              Or.casesOn hx
+                (fun h =>
+                  Eq.ndrec (motive := fun z => z ∈ A ∧ z ∈ B → (∀ (x : X), x ≠ z → x ≠ a z → x ∉ A ∨ x ∉ B) → x ∈ A ∩ B)
+                    (fun hz he => hz) h hz he)
+                fun h => Eq.symm h ▸ ⟨(hA z).mp hz.left, (hB z).mp hz.right⟩ } }
+'IndependentDuodenary.dual_view_integration_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES dual_view_integration_iff: [Set.ext,
+ False,
+ congrArg,
+ False.elim,
+ Classical.propDecidable,
+ Membership.mem,
+ Eq.rec,
+ Eq.mp,
+ Set.instSingletonSet,
+ Insert.insert,
+ Ne,
+ Set.instInter,
+ dite,
+ Or.casesOn,
+ Inter.inter,
+ And.casesOn,
+ And,
+ Iff,
+ Set.instInsert,
+ And.right,
+ And.left,
+ And.intro,
+ Iff.intro,
+ Iff.mp,
+ Eq.ndrec,
+ Or.inl,
+ Or,
+ Or.elim,
+ Singleton.singleton,
+ Eq.symm,
+ Eq,
+ Set.instMembership,
+ Not,
+ letFun,
+ Or.inr,
+ rfl,
+ Set]
 theorem IndependentDuodenary.semantic_decoder_no_collision.{u_1, u_2} : ∀ {L : Type u_1} {S : Type u_2} (r : Setoid L)
   (encode : L → S) (decode : S → Quotient r),
   (∀ (x : L), decode (encode x) = ⟦x⟧) → ∀ (x y : L), encode x = encode y → r x y :=
@@ -12547,6 +12818,99 @@ DIRECT DEPENDENCIES zero_divisor_mod_144: [Semiring.toNatCast,
  Eq,
  instOfNatAtLeastTwo,
  instHMul]
+theorem IndependentDuodenary.observation_dynamics_iff_kernel_stable.{u_1, u_2} : ∀ {X : Type u_1} {Y : Type u_2}
+  (T : X → X) (O : X → Y), (∃ U, Function.Semiconj O T U) ↔ ∀ (x y : X), O x = O y → O (T x) = O (T y) :=
+fun {X} {Y} T O =>
+  {
+    mp := fun a =>
+      Exists.casesOn (motive := fun x => ∀ (x y : X), O x = O y → O (T x) = O (T y)) a fun U h x y hxy =>
+        Eq.mpr (id (congrArg (fun _a => _a = O (T y)) (h x)))
+          (Eq.mpr (id (congrArg (fun _a => U (O x) = _a) (h y)))
+            (Eq.mpr (id (congrArg (fun _a => U _a = U (O y)) hxy)) (Eq.refl (U (O y))))),
+    mpr := fun h =>
+      let_fun hf := fun {x y} hxy => h x y hxy;
+      Exists.intro (Function.extend O (O ∘ T) id) fun x => Eq.symm (Function.FactorsThrough.extend_apply hf id x) }
+'IndependentDuodenary.observation_dynamics_iff_kernel_stable' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES observation_dynamics_iff_kernel_stable: [Eq.mpr,
+ congrArg,
+ Function.FactorsThrough.extend_apply,
+ Function.comp,
+ Exists,
+ Function.FactorsThrough,
+ id,
+ Function.extend,
+ Iff,
+ Exists.casesOn,
+ Iff.intro,
+ Exists.intro,
+ Eq.refl,
+ Function.Semiconj,
+ Eq.symm,
+ Eq,
+ letFun]
+theorem IndependentDuodenary.observation_trace_universal.{u_1, u_2} : ∀ {X : Type u_1} {Y : Type u_2} (T : X → X)
+  (O : X → Y),
+  (∀ (x y : X),
+      IndependentDuodenary.observationTrace T O x = IndependentDuodenary.observationTrace T O y →
+        O x = O y ∧ IndependentDuodenary.observationTrace T O (T x) = IndependentDuodenary.observationTrace T O (T y)) ∧
+    ∀ (R : X → X → Prop),
+      (∀ (x y : X), R x y → O x = O y) →
+        (∀ (x y : X), R x y → R (T x) (T y)) →
+          ∀ (x y : X),
+            R x y → IndependentDuodenary.observationTrace T O x = IndependentDuodenary.observationTrace T O y :=
+fun {X} {Y} T O =>
+  ⟨fun x y h => ⟨congrFun h 0, funext fun n => congrFun h (n + 1)⟩, fun R hO hT x y hxy =>
+    let_fun hi := fun n =>
+      Nat.recAux (motive := fun n => ∀ (x y : X), R x y → R (T^[n] x) (T^[n] y)) (fun x x_1 h => h)
+        (fun n ih x y h => ih (T x) (T y) (hT x y h)) n;
+    funext fun n => hO (T^[n] x) (T^[n] y) (hi n x y hxy)⟩
+'IndependentDuodenary.observation_trace_universal' depends on axioms: [Quot.sound]
+DIRECT DEPENDENCIES observation_trace_universal: [Nat.recAux,
+ instOfNatNat,
+ Nat.iterate,
+ IndependentDuodenary.observationTrace,
+ funext,
+ instHAdd,
+ And,
+ HAdd.hAdd,
+ congrFun,
+ Nat,
+ And.intro,
+ instAddNat,
+ OfNat.ofNat,
+ Eq,
+ letFun]
+theorem IndependentDuodenary.observation_trace_reconstruction_iff.{u_1, u_2} : ∀ {X : Type u_1} {Y : Type u_2}
+  (T : X → X) (O : X → Y),
+  (∃ D, ∀ (x : X), D (IndependentDuodenary.observationTrace T O x) = some x) ↔
+    Function.Injective (IndependentDuodenary.observationTrace T O) :=
+fun {X} {Y} T O =>
+  {
+    mp := fun a =>
+      Exists.casesOn a fun D hD ⦃x y⦄ hxy =>
+        Option.some.inj (Eq.trans (Eq.symm (hD x)) (Eq.trans (congrArg D hxy) (hD y))),
+    mpr := fun h =>
+      Exists.intro (Function.extend (IndependentDuodenary.observationTrace T O) some fun x => none) fun x =>
+        Function.Injective.extend_apply h some (fun x => none) x }
+'IndependentDuodenary.observation_trace_reconstruction_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+DIRECT DEPENDENCIES observation_trace_reconstruction_iff: [congrArg,
+ Option.some,
+ Exists,
+ Option.some.inj,
+ Function.Injective.extend_apply,
+ IndependentDuodenary.observationTrace,
+ Option.none,
+ Function.extend,
+ Iff,
+ Exists.casesOn,
+ Nat,
+ Iff.intro,
+ Exists.intro,
+ Function.Injective,
+ Eq.symm,
+ Eq,
+ Eq.trans,
+ Option]
 theorem IndependentDuodenary.station_word_action_composition : ∀ (outer inner : IndependentDuodenary.StationExpr)
   {r : ℕ} (words : IndependentDuodenary.RegisterWords r),
   IndependentDuodenary.stationWordAction (outer.compose inner) words =
@@ -32697,4 +33061,4 @@ DIRECT DEPENDENCIES cyclic_station_isometry_card: [Eq.mpr,
  Eq,
  IndependentDuodenary.dihedral_twelve_card,
  Nat.card_eq_fintype_card]
-AUDIT PASSED: 447 theorem declarations; only standard Lean axioms permitted.
+AUDIT PASSED: 455 theorem declarations; only standard Lean axioms permitted.

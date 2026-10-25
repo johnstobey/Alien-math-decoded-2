@@ -2,7 +2,7 @@
   "generator": "scripts/generate_incremental_proofs.py",
   "generated_theorems": 10000,
   "proof_families": 10,
-  "baseline_declarations": 463,
+  "baseline_declarations": 471,
   "baseline": {
     "declarations": [
       {
@@ -671,6 +671,31 @@
         "line": 176
       },
       {
+        "file": "IndependentDuodenary/DualRingConsistency.lean",
+        "name": "dual_ring_admissible_closed",
+        "line": 32
+      },
+      {
+        "file": "IndependentDuodenary/DualRingConsistency.lean",
+        "name": "clearing_pointer_reset_classification",
+        "line": 39
+      },
+      {
+        "file": "IndependentDuodenary/DualRingConsistency.lean",
+        "name": "quincunx_midpoint_obstruction",
+        "line": 53
+      },
+      {
+        "file": "IndependentDuodenary/DualRingConsistency.lean",
+        "name": "dual_ring_common_anchor_insufficient",
+        "line": 56
+      },
+      {
+        "file": "IndependentDuodenary/DualRingConsistency.lean",
+        "name": "dual_view_integration_iff",
+        "line": 72
+      },
+      {
         "file": "IndependentDuodenary/EncodingIntegrity.lean",
         "name": "semantic_decoder_no_collision",
         "line": 7
@@ -1019,6 +1044,21 @@
         "file": "IndependentDuodenary/ModularCore.lean",
         "name": "zero_divisor_mod_144",
         "line": 53
+      },
+      {
+        "file": "IndependentDuodenary/ObservationReconstruction.lean",
+        "name": "observation_dynamics_iff_kernel_stable",
+        "line": 7
+      },
+      {
+        "file": "IndependentDuodenary/ObservationReconstruction.lean",
+        "name": "observation_trace_universal",
+        "line": 21
+      },
+      {
+        "file": "IndependentDuodenary/ObservationReconstruction.lean",
+        "name": "observation_trace_reconstruction_iff",
+        "line": 40
       },
       {
         "file": "IndependentDuodenary/PipelineSynthesis.lean",
@@ -2322,7 +2362,7 @@
       }
     ],
     "source_sha256": {
-      "IndependentDuodenary.lean": "c6de32f89d4da270a59876372088a104cb1406a84254f07e38f008d8526bd6d2",
+      "IndependentDuodenary.lean": "704559b5a175571f2ec518c6ec74be7f280fd73ec753e2828266c06e17f1b02b",
       "IndependentDuodenary/AcceptanceNormalization.lean": "252d6847114950d597fbb9a2e04021466712d9d93331ffae2b8ae091249fdadf",
       "IndependentDuodenary/AffineStations.lean": "cec28ffd74ff7761156826eb23021fd4417b45612a0e9b50cb30c4f469922f8d",
       "IndependentDuodenary/BinaryBridge.lean": "229b7fc2c9baa2eb0153fa30293efb1e85ec1cd9e209e2b8a711482ca555499d",
@@ -2330,11 +2370,13 @@
       "IndependentDuodenary/CanonicalArchitecture.lean": "a8cb4ab116a1fa3fd9917295a917e3ed4930228124555fac216b9b8ff8065096",
       "IndependentDuodenary/CipherValidator.lean": "4cbe04a4e05749207aee0091aecf902817aab1317902c60a3426c61afe4b6e40",
       "IndependentDuodenary/ComplexityEncoding.lean": "6f46a8e7b9d3ff6dab5483642bd49df6dbfbb6db1663ef18e7f4b1e638398eee",
+      "IndependentDuodenary/DualRingConsistency.lean": "b9f63374d10c5c7285aba465194fa0a764a92c6093451facebff6184d1d882d5",
       "IndependentDuodenary/EncodingIntegrity.lean": "799575c011dd618ee095cb2456ee493ba38805796aa14181f88d0cef44cc0f46",
       "IndependentDuodenary/FulguriteSAT.lean": "ad1f3da9fb441480122ae30f1f06a515ece5a64636837a0046287fd07e3668b8",
       "IndependentDuodenary/MappingBoundary.lean": "75281f116347ced502576c32d6285e05c0c22372dac6bdc893a6e64f8a9ebd88",
       "IndependentDuodenary/MillenniumBridge.lean": "fbf5758de1955cd128ead4906559036c37d75028e42839171668c27b5d888056",
       "IndependentDuodenary/ModularCore.lean": "397788a4e2a900560e6b1b46a63383ee7a622ae23a204fd876a964ffdfc7a8c7",
+      "IndependentDuodenary/ObservationReconstruction.lean": "cd64a2d7535196d2bf490fd628ac7716da05c6c00fa31ab60f21f42527a2a5c4",
       "IndependentDuodenary/PipelineHarness.lean": "91faa28f3e443a339335e75b1905a879fae485f4bd23b1a4a53772db0b0e0d56",
       "IndependentDuodenary/PipelineSynthesis.lean": "b585e5ef3179210677e92a2273b8e67ca717cac5843cf812306001b71f1add08",
       "IndependentDuodenary/PostMicrocode.lean": "d2bb70fab816a831d96804d29f106051c6ba474941fdb820231d2c8fb17d0f46",
@@ -2356,6 +2398,7 @@
       "examples/CipherWalkthrough.lean": "e74d204081d024b125a2e0741f27174b16f4f880b7333d9feafadf57c8986a9f",
       "examples/ComplexityEncodingBoundary.lean": "f6bd50171ec8cc4aed048a145ac648e9c64b285280019af17695097a08bca2b2",
       "examples/ComplexityParserBoundary.lean": "d027315f179ab15a1ff97ecb4ddc62a2f6e7df3ae1d7f27910226ac11cd50187",
+      "examples/DualRingBoundary.lean": "cbe47cb65f85c3e949fd0c3c2f11d11f89ec419f9e40b4971346b855e64c06fa",
       "examples/FulguriteSATBoundary.lean": "fde0c0e1ae11b6ebeb027b74b5ce1ccabf70723e43fea639f2591f9f932d71a2",
       "examples/KeyDirectives.lean": "3562f36cc95938774c13448c9f2926bef4f79cdacc68477e875c287c3a573599",
       "examples/MillenniumBoundary.lean": "5b8262db233d82d59a37b48abf76430cda8d57a2fe5a62bde33bd68ff0ec9d91",
