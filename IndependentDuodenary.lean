@@ -26,3 +26,5 @@ import IndependentDuodenary.ReferenceMachines
 import IndependentDuodenary.FulguriteSAT
 import IndependentDuodenary.AcceptanceNormalization
 import IndependentDuodenary.PostMicrocode
+import IndependentDuodenary.ObservationReconstruction
+import IndependentDuodenary.DualRingConsistency
