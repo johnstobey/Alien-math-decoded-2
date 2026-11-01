@@ -1,0 +1,7 @@
+{
+  "replicated_ring_order": 24,
+  "replicated_group_center": [[1,0],[1,6]],
+  "replicated_vortex_holdout": [0.06145144426463337,0.16261026743146165,0.13986498222472576],
+  "max_deviation": 1.9520130234429445e-09,
+  "status": "PASS"
+}
