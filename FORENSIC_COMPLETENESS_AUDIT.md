@@ -4,7 +4,7 @@ Source archive integrity: PASS. 16 original files extracted unaltered, each hash
 
 **Completed verification:** 48/48 transport; independent 24-order group; two group-center elements; nine conjugacy classes; 12/12 element–modality positions; 72/72 sector observations preserved; original supplied replication PASS; NumPy independent replication PASS; 46/46 finite tests SOURCE-RECORDED.
 
-**Source and proof classification:** Proven facts separated from reported tests, reconstructed source statements, and inferences. No simulated image observations generated.
+**Source and proof classification:** Proofed facts separated from reported tests, reconstructed source statements, and inferences. No simulated image observations generated.
 
 **Material limitations and blockers:**
 
