@@ -1,0 +1,66 @@
+{
+  "image": "/mnt/data/Emergent Artifact .jpeg",
+  "sha256": "4b85fca871c31b5f57e169cb8b7056f5a63d3c6d2581c6cebfc07dfa27128e1b",
+  "size": [
+    1162,
+    1056
+  ],
+  "center": [
+    460,
+    455
+  ],
+  "center_status": "visual candidate, not mathematically optimized",
+  "feature": "mean Sobel magnitude in twelve 30-degree sectors, six radial annuli",
+  "radii": [
+    [
+      24,
+      44
+    ],
+    [
+      44,
+      64
+    ],
+    [
+      64,
+      84
+    ],
+    [
+      84,
+      104
+    ],
+    [
+      104,
+      124
+    ],
+    [
+      124,
+      144
+    ]
+  ],
+  "train_selected_shift": 2,
+  "train_correlation": 0.6453411235085909,
+  "heldout_correlations": [
+    0.06145144433612502,
+    0.16261026547944862,
+    0.13986498196647826
+  ],
+  "heldout_mean": 0.12130889726068396,
+  "all_twelve_shift_control_means": [
+    0.44777471188501355,
+    0.365251218257901,
+    0.12130889726068396,
+    -0.0959440820240041,
+    -0.32983335421819004,
+    -0.45810604751644374,
+    -0.5096992294202694,
+    -0.39736384985288814,
+    -0.08644500100634907,
+    0.11379961172982526,
+    0.3838809662186811,
+    0.44537615868603925
+  ],
+  "heldout_rank": 5,
+  "exact_shift_null_p": 0.4166666666666667,
+  "source_to_image_semantic_operator_verified": false,
+  "limitation": "Annular cross-scale angular shifts were not specified by Tobey as an image operator; test assesses engineered local recurrence, not direct physical spacetime mapping."
+}
