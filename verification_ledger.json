@@ -1,8 +1,547 @@
 {
-  "fixed_points": 6,
-  "attractor_cycles": 23,
-  "scalar_outputs": 72,
-  "total_states": 144,
-  "masks_closed": 64,
-  "mask_pairs": 4096
+  "protocol": "TM-LCCAM-OMEGA-REPORT-01",
+  "status": "persisted_verification_evidence_with_scope_limits",
+  "source": "CPRX_RAW_EVIDENCE_REISSUED_20261031(1).zip",
+  "source_archive_sha256": "ecb2207ec90334b5fd68cb44650c7007bf4bfa9d9b51af4cf7a306766bb903bd",
+  "group": {
+    "ring": "Z/12Z",
+    "order": 24,
+    "center_order": 2,
+    "conjugacy_classes": 9,
+    "stabilizers": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2
+    ],
+    "named_operators": [
+      "T(k)=(k+1)%12",
+      "I(k)=(-k)%12",
+      "A(k)=(k+6)%12",
+      "rho(k)=(11-k)%12"
+    ],
+    "source_reported_finite_tests": {
+      "passed": 46,
+      "total": 46
+    },
+    "angular_transport": {
+      "passed": 48,
+      "total": 48,
+      "vectors": [
+        {
+          "operator": "T",
+          "k": 0,
+          "result": 1,
+          "degrees": 30,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 1,
+          "result": 2,
+          "degrees": 60,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 2,
+          "result": 3,
+          "degrees": 90,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 3,
+          "result": 4,
+          "degrees": 120,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 4,
+          "result": 5,
+          "degrees": 150,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 5,
+          "result": 6,
+          "degrees": 180,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 6,
+          "result": 7,
+          "degrees": 210,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 7,
+          "result": 8,
+          "degrees": 240,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 8,
+          "result": 9,
+          "degrees": 270,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 9,
+          "result": 10,
+          "degrees": 300,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 10,
+          "result": 11,
+          "degrees": 330,
+          "verified": true
+        },
+        {
+          "operator": "T",
+          "k": 11,
+          "result": 0,
+          "degrees": 0,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 0,
+          "result": 0,
+          "degrees": 0,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 1,
+          "result": 11,
+          "degrees": 330,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 2,
+          "result": 10,
+          "degrees": 300,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 3,
+          "result": 9,
+          "degrees": 270,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 4,
+          "result": 8,
+          "degrees": 240,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 5,
+          "result": 7,
+          "degrees": 210,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 6,
+          "result": 6,
+          "degrees": 180,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 7,
+          "result": 5,
+          "degrees": 150,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 8,
+          "result": 4,
+          "degrees": 120,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 9,
+          "result": 3,
+          "degrees": 90,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 10,
+          "result": 2,
+          "degrees": 60,
+          "verified": true
+        },
+        {
+          "operator": "I",
+          "k": 11,
+          "result": 1,
+          "degrees": 30,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 0,
+          "result": 6,
+          "degrees": 180,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 1,
+          "result": 7,
+          "degrees": 210,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 2,
+          "result": 8,
+          "degrees": 240,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 3,
+          "result": 9,
+          "degrees": 270,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 4,
+          "result": 10,
+          "degrees": 300,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 5,
+          "result": 11,
+          "degrees": 330,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 6,
+          "result": 0,
+          "degrees": 0,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 7,
+          "result": 1,
+          "degrees": 30,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 8,
+          "result": 2,
+          "degrees": 60,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 9,
+          "result": 3,
+          "degrees": 90,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 10,
+          "result": 4,
+          "degrees": 120,
+          "verified": true
+        },
+        {
+          "operator": "A",
+          "k": 11,
+          "result": 5,
+          "degrees": 150,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 0,
+          "result": 11,
+          "degrees": 330,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 1,
+          "result": 10,
+          "degrees": 300,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 2,
+          "result": 9,
+          "degrees": 270,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 3,
+          "result": 8,
+          "degrees": 240,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 4,
+          "result": 7,
+          "degrees": 210,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 5,
+          "result": 6,
+          "degrees": 180,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 6,
+          "result": 5,
+          "degrees": 150,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 7,
+          "result": 4,
+          "degrees": 120,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 8,
+          "result": 3,
+          "degrees": 90,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 9,
+          "result": 2,
+          "degrees": 60,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 10,
+          "result": 1,
+          "degrees": 30,
+          "verified": true
+        },
+        {
+          "operator": "rho",
+          "k": 11,
+          "result": 0,
+          "degrees": 0,
+          "verified": true
+        }
+      ]
+    }
+  },
+  "vortex": {
+    "original_image_sha256": "4b85fca871c31b5f57e169cb8b7056f5a63d3c6d2581c6cebfc07dfa27128e1b",
+    "dimensions": [
+      1162,
+      1056
+    ],
+    "center": [
+      460,
+      455
+    ],
+    "center_status": "visual candidate",
+    "scalar_count": 72,
+    "radial_bands": [
+      [
+        24,
+        44
+      ],
+      [
+        44,
+        64
+      ],
+      [
+        64,
+        84
+      ],
+      [
+        84,
+        104
+      ],
+      [
+        104,
+        124
+      ],
+      [
+        124,
+        144
+      ]
+    ],
+    "gradient_energy_by_band_and_sector": [
+      [
+        0.735221565,
+        0.414749324,
+        0.233708054,
+        0.327984333,
+        0.488376409,
+        0.421771556,
+        0.430417031,
+        0.576763391,
+        0.762705982,
+        0.617552698,
+        0.459517449,
+        0.652413428
+      ],
+      [
+        0.494822711,
+        0.128131002,
+        0.453990102,
+        0.743929923,
+        0.789414704,
+        0.74764955,
+        0.897993207,
+        0.669888437,
+        0.64627248,
+        0.87986207,
+        0.707894683,
+        0.627804577
+      ],
+      [
+        0.169273168,
+        0.390259683,
+        0.611249804,
+        0.628653526,
+        0.211365968,
+        0.243191391,
+        0.179426923,
+        0.390953392,
+        0.850562036,
+        0.900528491,
+        0.843756616,
+        0.874076605
+      ],
+      [
+        0.374965072,
+        0.771479607,
+        0.534220278,
+        0.321638703,
+        0.268715531,
+        0.128317311,
+        0.584757268,
+        0.236686736,
+        0.376909524,
+        0.928464532,
+        0.829146504,
+        0.897429109
+      ],
+      [
+        0.788242698,
+        0.544514537,
+        0.493518174,
+        0.564169347,
+        0.531218767,
+        0.614305913,
+        0.686304629,
+        0.55184871,
+        0.69322145,
+        0.622636855,
+        0.85560286,
+        0.775320113
+      ],
+      [
+        0.733455479,
+        0.750820279,
+        0.669459462,
+        0.494157195,
+        0.427923054,
+        0.258080781,
+        0.248870045,
+        0.383513004,
+        0.672444344,
+        0.78516084,
+        0.817413211,
+        0.690081358
+      ]
+    ],
+    "training_shift": 2,
+    "training_correlation": 0.6453411235085909,
+    "holdout": [
+      0.06145144433612502,
+      0.16261026547944862,
+      0.13986498196647826
+    ],
+    "holdout_mean": 0.12130889726068396,
+    "control_means": [
+      0.44777471188501355,
+      0.365251218257901,
+      0.12130889726068396,
+      -0.0959440820240041,
+      -0.32983335421819004,
+      -0.45810604751644374,
+      -0.5096992294202694,
+      -0.39736384985288814,
+      -0.08644500100634907,
+      0.11379961172982526,
+      0.3838809662186811,
+      0.44537615868603925
+    ],
+    "rank": 5,
+    "shift_null_fraction": 0.4166666666666667,
+    "source_to_image_semantic_operator_verified": false
+  },
+  "not_independently_documented": [
+    "144-state grid",
+    "six fixed points",
+    "23 attractor cycles"
+  ],
+  "source_files": [
+    "CPRX_raw_evidence/FINITE_RING_TESTS/actual_results.json",
+    "CPRX_raw_evidence/VORTEX_MEASUREMENTS.tsv",
+    "CPRX_raw_evidence/vortex_test_results.json"
+  ],
+  "legacy_reported_metrics": {
+    "total_states": 144,
+    "fixed_points": 6,
+    "attractor_cycles": 23,
+    "scalar_outputs": 72,
+    "masks_closed": 64,
+    "mask_pairs": 4096,
+    "verification_status": "prior repository assertions; no matching executable cycle/fixed-point harness in supplied CP-RX ZIP"
+  }
 }
