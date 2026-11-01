@@ -1,383 +1,673 @@
 {
   "protocol": "TM-LCCAM-OMEGA-REPORT-01",
-  "status": "persisted_verification_evidence_with_scope_limits",
-  "source": "CPRX_RAW_EVIDENCE_REISSUED_20261031(1).zip",
+  "record_type": "evidence_ledger",
+  "source_archive": "CPRX_RAW_EVIDENCE_REISSUED_20261031(1).zip",
   "source_archive_sha256": "ecb2207ec90334b5fd68cb44650c7007bf4bfa9d9b51af4cf7a306766bb903bd",
-  "group": {
-    "ring": "Z/12Z",
-    "order": 24,
+  "status": "finite_algebra_verified_image_mapping_unverified",
+  "operators": {
+    "T": "(k+1)%12",
+    "I": "(-k)%12",
+    "A": "(k+6)%12",
+    "rho": "(11-k)%12"
+  },
+  "group_verification": {
+    "group_order": 24,
     "center_order": 2,
-    "conjugacy_classes": 9,
-    "stabilizers": [
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2,
-      2
-    ],
-    "named_operators": [
-      "T(k)=(k+1)%12",
-      "I(k)=(-k)%12",
-      "A(k)=(k+6)%12",
-      "rho(k)=(11-k)%12"
-    ],
-    "source_reported_finite_tests": {
-      "passed": 46,
-      "total": 46
-    },
-    "angular_transport": {
-      "passed": 48,
-      "total": 48,
-      "vectors": [
-        {
-          "operator": "T",
-          "k": 0,
-          "result": 1,
-          "degrees": 30,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 1,
-          "result": 2,
-          "degrees": 60,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 2,
-          "result": 3,
-          "degrees": 90,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 3,
-          "result": 4,
-          "degrees": 120,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 4,
-          "result": 5,
-          "degrees": 150,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 5,
-          "result": 6,
-          "degrees": 180,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 6,
-          "result": 7,
-          "degrees": 210,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 7,
-          "result": 8,
-          "degrees": 240,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 8,
-          "result": 9,
-          "degrees": 270,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 9,
-          "result": 10,
-          "degrees": 300,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 10,
-          "result": 11,
-          "degrees": 330,
-          "verified": true
-        },
-        {
-          "operator": "T",
-          "k": 11,
-          "result": 0,
-          "degrees": 0,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 0,
-          "result": 0,
-          "degrees": 0,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 1,
-          "result": 11,
-          "degrees": 330,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 2,
-          "result": 10,
-          "degrees": 300,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 3,
-          "result": 9,
-          "degrees": 270,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 4,
-          "result": 8,
-          "degrees": 240,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 5,
-          "result": 7,
-          "degrees": 210,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 6,
-          "result": 6,
-          "degrees": 180,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 7,
-          "result": 5,
-          "degrees": 150,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 8,
-          "result": 4,
-          "degrees": 120,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 9,
-          "result": 3,
-          "degrees": 90,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 10,
-          "result": 2,
-          "degrees": 60,
-          "verified": true
-        },
-        {
-          "operator": "I",
-          "k": 11,
-          "result": 1,
-          "degrees": 30,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 0,
-          "result": 6,
-          "degrees": 180,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 1,
-          "result": 7,
-          "degrees": 210,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 2,
-          "result": 8,
-          "degrees": 240,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 3,
-          "result": 9,
-          "degrees": 270,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 4,
-          "result": 10,
-          "degrees": 300,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 5,
-          "result": 11,
-          "degrees": 330,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 6,
-          "result": 0,
-          "degrees": 0,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 7,
-          "result": 1,
-          "degrees": 30,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 8,
-          "result": 2,
-          "degrees": 60,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 9,
-          "result": 3,
-          "degrees": 90,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 10,
-          "result": 4,
-          "degrees": 120,
-          "verified": true
-        },
-        {
-          "operator": "A",
-          "k": 11,
-          "result": 5,
-          "degrees": 150,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 0,
-          "result": 11,
-          "degrees": 330,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 1,
-          "result": 10,
-          "degrees": 300,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 2,
-          "result": 9,
-          "degrees": 270,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 3,
-          "result": 8,
-          "degrees": 240,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 4,
-          "result": 7,
-          "degrees": 210,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 5,
-          "result": 6,
-          "degrees": 180,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 6,
-          "result": 5,
-          "degrees": 150,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 7,
-          "result": 4,
-          "degrees": 120,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 8,
-          "result": 3,
-          "degrees": 90,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 9,
-          "result": 2,
-          "degrees": 60,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 10,
-          "result": 1,
-          "degrees": 30,
-          "verified": true
-        },
-        {
-          "operator": "rho",
-          "k": 11,
-          "result": 0,
-          "degrees": 0,
-          "verified": true
-        }
+    "conjugacy_class_count": 9,
+    "orbits": [
+      [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
       ]
-    }
+    ],
+    "stabilizers": {
+      "0": 2,
+      "1": 2,
+      "2": 2,
+      "3": 2,
+      "4": 2,
+      "5": 2,
+      "6": 2,
+      "7": 2,
+      "8": 2,
+      "9": 2,
+      "10": 2,
+      "11": 2
+    },
+    "tests_reported": 46,
+    "tests_passed_reported": 46,
+    "test_records": [
+      {
+        "test": "bijection_T",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "angular_transport_T",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "bijection_I",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "angular_transport_I",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "bijection_A",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "angular_transport_A",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "bijection_rho",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "angular_transport_rho",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "involution_I",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "involution_A",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "involution_rho",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_0",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_1",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_2",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_3",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_4",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_5",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_6",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_7",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_8",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_9",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_10",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "offset_11",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_0",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_1",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_2",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_3",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_4",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_5",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_6",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_7",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_8",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_9",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_10",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "element_modality_crt_11",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "dihedral_size_24",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "center_size_2",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "single_transitive_orbit",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "point_stabilizer_order_2",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "conjugacy_classes_9",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "parity_subgroup_size_12",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "RAP_rho_Tinv_I",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "negative_A0_not5",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "negative_rho0_not0",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "negative_quotient_not6",
+        "passed": true,
+        "details": null
+      },
+      {
+        "test": "negative_empty_intersection",
+        "passed": true,
+        "details": null
+      }
+    ],
+    "angular_transport_vectors": [
+      {
+        "operator": "T",
+        "input": 0,
+        "output": 1,
+        "angle_input": 0,
+        "angle_output": 30,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 1,
+        "output": 2,
+        "angle_input": 30,
+        "angle_output": 60,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 2,
+        "output": 3,
+        "angle_input": 60,
+        "angle_output": 90,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 3,
+        "output": 4,
+        "angle_input": 90,
+        "angle_output": 120,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 4,
+        "output": 5,
+        "angle_input": 120,
+        "angle_output": 150,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 5,
+        "output": 6,
+        "angle_input": 150,
+        "angle_output": 180,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 6,
+        "output": 7,
+        "angle_input": 180,
+        "angle_output": 210,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 7,
+        "output": 8,
+        "angle_input": 210,
+        "angle_output": 240,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 8,
+        "output": 9,
+        "angle_input": 240,
+        "angle_output": 270,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 9,
+        "output": 10,
+        "angle_input": 270,
+        "angle_output": 300,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 10,
+        "output": 11,
+        "angle_input": 300,
+        "angle_output": 330,
+        "passed": true
+      },
+      {
+        "operator": "T",
+        "input": 11,
+        "output": 0,
+        "angle_input": 330,
+        "angle_output": 0,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 0,
+        "output": 0,
+        "angle_input": 0,
+        "angle_output": 0,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 1,
+        "output": 11,
+        "angle_input": 30,
+        "angle_output": 330,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 2,
+        "output": 10,
+        "angle_input": 60,
+        "angle_output": 300,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 3,
+        "output": 9,
+        "angle_input": 90,
+        "angle_output": 270,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 4,
+        "output": 8,
+        "angle_input": 120,
+        "angle_output": 240,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 5,
+        "output": 7,
+        "angle_input": 150,
+        "angle_output": 210,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 6,
+        "output": 6,
+        "angle_input": 180,
+        "angle_output": 180,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 7,
+        "output": 5,
+        "angle_input": 210,
+        "angle_output": 150,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 8,
+        "output": 4,
+        "angle_input": 240,
+        "angle_output": 120,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 9,
+        "output": 3,
+        "angle_input": 270,
+        "angle_output": 90,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 10,
+        "output": 2,
+        "angle_input": 300,
+        "angle_output": 60,
+        "passed": true
+      },
+      {
+        "operator": "I",
+        "input": 11,
+        "output": 1,
+        "angle_input": 330,
+        "angle_output": 30,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 0,
+        "output": 6,
+        "angle_input": 0,
+        "angle_output": 180,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 1,
+        "output": 7,
+        "angle_input": 30,
+        "angle_output": 210,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 2,
+        "output": 8,
+        "angle_input": 60,
+        "angle_output": 240,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 3,
+        "output": 9,
+        "angle_input": 90,
+        "angle_output": 270,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 4,
+        "output": 10,
+        "angle_input": 120,
+        "angle_output": 300,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 5,
+        "output": 11,
+        "angle_input": 150,
+        "angle_output": 330,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 6,
+        "output": 0,
+        "angle_input": 180,
+        "angle_output": 0,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 7,
+        "output": 1,
+        "angle_input": 210,
+        "angle_output": 30,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 8,
+        "output": 2,
+        "angle_input": 240,
+        "angle_output": 60,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 9,
+        "output": 3,
+        "angle_input": 270,
+        "angle_output": 90,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 10,
+        "output": 4,
+        "angle_input": 300,
+        "angle_output": 120,
+        "passed": true
+      },
+      {
+        "operator": "A",
+        "input": 11,
+        "output": 5,
+        "angle_input": 330,
+        "angle_output": 150,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 0,
+        "output": 11,
+        "angle_input": 0,
+        "angle_output": 330,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 1,
+        "output": 10,
+        "angle_input": 30,
+        "angle_output": 300,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 2,
+        "output": 9,
+        "angle_input": 60,
+        "angle_output": 270,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 3,
+        "output": 8,
+        "angle_input": 90,
+        "angle_output": 240,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 4,
+        "output": 7,
+        "angle_input": 120,
+        "angle_output": 210,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 5,
+        "output": 6,
+        "angle_input": 150,
+        "angle_output": 180,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 6,
+        "output": 5,
+        "angle_input": 180,
+        "angle_output": 150,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 7,
+        "output": 4,
+        "angle_input": 210,
+        "angle_output": 120,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 8,
+        "output": 3,
+        "angle_input": 240,
+        "angle_output": 90,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 9,
+        "output": 2,
+        "angle_input": 270,
+        "angle_output": 60,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 10,
+        "output": 1,
+        "angle_input": 300,
+        "angle_output": 30,
+        "passed": true
+      },
+      {
+        "operator": "rho",
+        "input": 11,
+        "output": 0,
+        "angle_input": 330,
+        "angle_output": 0,
+        "passed": true
+      }
+    ]
   },
   "vortex": {
-    "original_image_sha256": "4b85fca871c31b5f57e169cb8b7056f5a63d3c6d2581c6cebfc07dfa27128e1b",
-    "dimensions": [
+    "source_file_sha256": "4b85fca871c31b5f57e169cb8b7056f5a63d3c6d2581c6cebfc07dfa27128e1b",
+    "image_size": [
       1162,
       1056
     ],
@@ -385,9 +675,9 @@
       460,
       455
     ],
-    "center_status": "visual candidate",
-    "scalar_count": 72,
-    "radial_bands": [
+    "center_status": "visual candidate, not mathematically optimized",
+    "feature": "mean Sobel magnitude in twelve 30-degree sectors, six radial annuli",
+    "radii": [
       [
         24,
         44
@@ -413,135 +703,298 @@
         144
       ]
     ],
-    "gradient_energy_by_band_and_sector": [
-      [
-        0.735221565,
-        0.414749324,
-        0.233708054,
-        0.327984333,
-        0.488376409,
-        0.421771556,
-        0.430417031,
-        0.576763391,
-        0.762705982,
-        0.617552698,
-        0.459517449,
-        0.652413428
-      ],
-      [
-        0.494822711,
-        0.128131002,
-        0.453990102,
-        0.743929923,
-        0.789414704,
-        0.74764955,
-        0.897993207,
-        0.669888437,
-        0.64627248,
-        0.87986207,
-        0.707894683,
-        0.627804577
-      ],
-      [
-        0.169273168,
-        0.390259683,
-        0.611249804,
-        0.628653526,
-        0.211365968,
-        0.243191391,
-        0.179426923,
-        0.390953392,
-        0.850562036,
-        0.900528491,
-        0.843756616,
-        0.874076605
-      ],
-      [
-        0.374965072,
-        0.771479607,
-        0.534220278,
-        0.321638703,
-        0.268715531,
-        0.128317311,
-        0.584757268,
-        0.236686736,
-        0.376909524,
-        0.928464532,
-        0.829146504,
-        0.897429109
-      ],
-      [
-        0.788242698,
-        0.544514537,
-        0.493518174,
-        0.564169347,
-        0.531218767,
-        0.614305913,
-        0.686304629,
-        0.55184871,
-        0.69322145,
-        0.622636855,
-        0.85560286,
-        0.775320113
-      ],
-      [
-        0.733455479,
-        0.750820279,
-        0.669459462,
-        0.494157195,
-        0.427923054,
-        0.258080781,
-        0.248870045,
-        0.383513004,
-        0.672444344,
-        0.78516084,
-        0.817413211,
-        0.690081358
-      ]
-    ],
-    "training_shift": 2,
-    "training_correlation": 0.6453411235085909,
-    "holdout": [
-      0.06145144433612502,
-      0.16261026547944862,
-      0.13986498196647826
-    ],
-    "holdout_mean": 0.12130889726068396,
-    "control_means": [
-      0.44777471188501355,
-      0.365251218257901,
-      0.12130889726068396,
-      -0.0959440820240041,
-      -0.32983335421819004,
-      -0.45810604751644374,
-      -0.5096992294202694,
-      -0.39736384985288814,
-      -0.08644500100634907,
-      0.11379961172982526,
-      0.3838809662186811,
-      0.44537615868603925
-    ],
-    "rank": 5,
-    "shift_null_fraction": 0.4166666666666667,
-    "source_to_image_semantic_operator_verified": false
-  },
-  "not_independently_documented": [
-    "144-state grid",
-    "six fixed points",
-    "23 attractor cycles"
-  ],
-  "source_files": [
-    "CPRX_raw_evidence/FINITE_RING_TESTS/actual_results.json",
-    "CPRX_raw_evidence/VORTEX_MEASUREMENTS.tsv",
-    "CPRX_raw_evidence/vortex_test_results.json"
-  ],
-  "legacy_reported_metrics": {
-    "total_states": 144,
-    "fixed_points": 6,
-    "attractor_cycles": 23,
-    "scalar_outputs": 72,
-    "masks_closed": 64,
-    "mask_pairs": 4096,
-    "verification_status": "prior repository assertions; no matching executable cycle/fixed-point harness in supplied CP-RX ZIP"
-  }
-}
+    "raw_measurements": [
+      {
+        "radial_band": 0,
+        "sector": 0,
+        "gradient_energy": "0.735221565"
+      },
+      {
+        "radial_band": 0,
+        "sector": 1,
+        "gradient_energy": "0.414749324"
+      },
+      {
+        "radial_band": 0,
+        "sector": 2,
+        "gradient_energy": "0.233708054"
+      },
+      {
+        "radial_band": 0,
+        "sector": 3,
+        "gradient_energy": "0.327984333"
+      },
+      {
+        "radial_band": 0,
+        "sector": 4,
+        "gradient_energy": "0.488376409"
+      },
+      {
+        "radial_band": 0,
+        "sector": 5,
+        "gradient_energy": "0.421771556"
+      },
+      {
+        "radial_band": 0,
+        "sector": 6,
+        "gradient_energy": "0.430417031"
+      },
+      {
+        "radial_band": 0,
+        "sector": 7,
+        "gradient_energy": "0.576763391"
+      },
+      {
+        "radial_band": 0,
+        "sector": 8,
+        "gradient_energy": "0.762705982"
+      },
+      {
+        "radial_band": 0,
+        "sector": 9,
+        "gradient_energy": "0.617552698"
+      },
+      {
+        "radial_band": 0,
+        "sector": 10,
+        "gradient_energy": "0.459517449"
+      },
+      {
+        "radial_band": 0,
+        "sector": 11,
+        "gradient_energy": "0.652413428"
+      },
+      {
+        "radial_band": 1,
+        "sector": 0,
+        "gradient_energy": "0.494822711"
+      },
+      {
+        "radial_band": 1,
+        "sector": 1,
+        "gradient_energy": "0.128131002"
+      },
+      {
+        "radial_band": 1,
+        "sector": 2,
+        "gradient_energy": "0.453990102"
+      },
+      {
+        "radial_band": 1,
+        "sector": 3,
+        "gradient_energy": "0.743929923"
+      },
+      {
+        "radial_band": 1,
+        "sector": 4,
+        "gradient_energy": "0.789414704"
+      },
+      {
+        "radial_band": 1,
+        "sector": 5,
+        "gradient_energy": "0.74764955"
+      },
+      {
+        "radial_band": 1,
+        "sector": 6,
+        "gradient_energy": "0.897993207"
+      },
+      {
+        "radial_band": 1,
+        "sector": 7,
+        "gradient_energy": "0.669888437"
+      },
+      {
+        "radial_band": 1,
+        "sector": 8,
+        "gradient_energy": "0.64627248"
+      },
+      {
+        "radial_band": 1,
+        "sector": 9,
+        "gradient_energy": "0.87986207"
+      },
+      {
+        "radial_band": 1,
+        "sector": 10,
+        "gradient_energy": "0.707894683"
+      },
+      {
+        "radial_band": 1,
+        "sector": 11,
+        "gradient_energy": "0.627804577"
+      },
+      {
+        "radial_band": 2,
+        "sector": 0,
+        "gradient_energy": "0.169273168"
+      },
+      {
+        "radial_band": 2,
+        "sector": 1,
+        "gradient_energy": "0.390259683"
+      },
+      {
+        "radial_band": 2,
+        "sector": 2,
+        "gradient_energy": "0.611249804"
+      },
+      {
+        "radial_band": 2,
+        "sector": 3,
+        "gradient_energy": "0.628653526"
+      },
+      {
+        "radial_band": 2,
+        "sector": 4,
+        "gradient_energy": "0.211365968"
+      },
+      {
+        "radial_band": 2,
+        "sector": 5,
+        "gradient_energy": "0.243191391"
+      },
+      {
+        "radial_band": 2,
+        "sector": 6,
+        "gradient_energy": "0.179426923"
+      },
+      {
+        "radial_band": 2,
+        "sector": 7,
+        "gradient_energy": "0.390953392"
+      },
+      {
+        "radial_band": 2,
+        "sector": 8,
+        "gradient_energy": "0.850562036"
+      },
+      {
+        "radial_band": 2,
+        "sector": 9,
+        "gradient_energy": "0.900528491"
+      },
+      {
+        "radial_band": 2,
+        "sector": 10,
+        "gradient_energy": "0.843756616"
+      },
+      {
+        "radial_band": 2,
+        "sector": 11,
+        "gradient_energy": "0.874076605"
+      },
+      {
+        "radial_band": 3,
+        "sector": 0,
+        "gradient_energy": "0.374965072"
+      },
+      {
+        "radial_band": 3,
+        "sector": 1,
+        "gradient_energy": "0.771479607"
+      },
+      {
+        "radial_band": 3,
+        "sector": 2,
+        "gradient_energy": "0.534220278"
+      },
+      {
+        "radial_band": 3,
+        "sector": 3,
+        "gradient_energy": "0.321638703"
+      },
+      {
+        "radial_band": 3,
+        "sector": 4,
+        "gradient_energy": "0.268715531"
+      },
+      {
+        "radial_band": 3,
+        "sector": 5,
+        "gradient_energy": "0.128317311"
+      },
+      {
+        "radial_band": 3,
+        "sector": 6,
+        "gradient_energy": "0.584757268"
+      },
+      {
+        "radial_band": 3,
+        "sector": 7,
+        "gradient_energy": "0.236686736"
+      },
+      {
+        "radial_band": 3,
+        "sector": 8,
+        "gradient_energy": "0.376909524"
+      },
+      {
+        "radial_band": 3,
+        "sector": 9,
+        "gradient_energy": "0.928464532"
+      },
+      {
+        "radial_band": 3,
+        "sector": 10,
+        "gradient_energy": "0.829146504"
+      },
+      {
+        "radial_band": 3,
+        "sector": 11,
+        "gradient_energy": "0.897429109"
+      },
+      {
+        "radial_band": 4,
+        "sector": 0,
+        "gradient_energy": "0.788242698"
+      },
+      {
+        "radial_band": 4,
+        "sector": 1,
+        "gradient_energy": "0.544514537"
+      },
+      {
+        "radial_band": 4,
+        "sector": 2,
+        "gradient_energy": "0.493518174"
+      },
+      {
+        "radial_band": 4,
+        "sector": 3,
+        "gradient_energy": "0.564169347"
+      },
+      {
+        "radial_band": 4,
+        "sector": 4,
+        "gradient_energy": "0.531218767"
+      },
+      {
+        "radial_band": 4,
+        "sector": 5,
+        "gradient_energy": "0.614305913"
+      },
+      {
+        "radial_band": 4,
+        "sector": 6,
+        "gradient_energy": "0.686304629"
+      },
+      {
+        "radial_band": 4,
+        "sector": 7,
+        "gradient_energy": "0.55184871"
+      },
+      {
+        "radial_band": 4,
+        "sector": 8,
+        "gradient_energy": "0.69322145"
+      },
+      {
+        "radial_band": 4,
+        "sector": 9,
+        "gradient_energy": "0.622636855"
+      },
+      {
+        "radial_band": 4,
+        "sector": 10,
+        "gradient_energy": "0.85560286"
