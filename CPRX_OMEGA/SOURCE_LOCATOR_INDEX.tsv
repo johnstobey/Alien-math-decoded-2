@@ -1,0 +1,23 @@
+id	lesson	web_lines	url	relation	status
+OP01	1	74-78	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.01.html	equal twelve sectors	inferred from explicit geometry
+OP02	1	106-113	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.01.html	triplicities separated by 120 degrees	direct angular transformation
+OP03	1	106-113	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.01.html	element partition of twelve signs	inferred partition indexing
+OP04	1	106-113	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.01.html	three modality positions per element	inferred partition indexing
+OP05	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	conjunction 0 degrees	direct aspect
+OP06	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	semisextile 30 degrees	direct aspect
+OP07	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	sextile 60 degrees	direct aspect
+OP08	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	square 90 degrees	direct aspect
+OP09	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	trine 120 degrees	direct aspect
+OP10	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	quincunx 150 degrees	direct aspect
+OP11	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	opposition 180 degrees	direct aspect
+OP12	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	aspect distance considered undirected	inferred reflection quotient
+OP13	4	109-129	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.04.html	water/earth past, fire/air future	direct classification formalized
+OP14	9	152-193	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	alternating past and future aspect classes	direct classification formalized
+OP15	18	14-17	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.18.html	progressions link one day to one year	hypothesis; numeric operator underdetermined
+OP16	18	32-44	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.18.html	rotation/revolution and projection between planes	hypothesis; no map specified
+OP17	8	74-81	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.08.html	arrangement enumeration and likelihood model	explicit counting; probability model contingent
+OP18	1	23-28	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.01.html	abstract relations independent of causal physical effects	interpretive principle
+OP19	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	reflection of aspect displacement d and -d	reconstructed, not verbatim operator
+OP20	9	82-97	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.09.html	reflection offset by one sector	engineered RAP-12; not course asserted
+OP21	1	74-78	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.01.html	antipodal reflection opposite sector	deduced from aspect opposition
+OP22	1	74-78	https://www.bonniehill.net/pages.aux/astrology/tobey/tobey.01.html	360-degree circle closure	deduced finite ring relation
