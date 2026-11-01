@@ -1,0 +1,269 @@
+{
+  "test_count": 46,
+  "passed": 46,
+  "group_order": 24,
+  "center_order": 2,
+  "conjugacy_class_count": 9,
+  "orbit": [
+    [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ]
+  ],
+  "stabilizers": {
+    "0": 2,
+    "1": 2,
+    "2": 2,
+    "3": 2,
+    "4": 2,
+    "5": 2,
+    "6": 2,
+    "7": 2,
+    "8": 2,
+    "9": 2,
+    "10": 2,
+    "11": 2
+  },
+  "tests": [
+    {
+      "test": "bijection_T",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "angular_transport_T",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "bijection_I",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "angular_transport_I",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "bijection_A",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "angular_transport_A",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "bijection_rho",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "angular_transport_rho",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "involution_I",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "involution_A",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "involution_rho",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_0",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_3",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_4",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_5",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_6",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_7",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_8",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_9",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_10",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "offset_11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_0",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_1",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_3",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_4",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_5",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_6",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_7",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_8",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_9",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_10",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "element_modality_crt_11",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "dihedral_size_24",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "center_size_2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "single_transitive_orbit",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "point_stabilizer_order_2",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "conjugacy_classes_9",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "parity_subgroup_size_12",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "RAP_rho_Tinv_I",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "negative_A0_not5",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "negative_rho0_not0",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "negative_quotient_not6",
+      "passed": true,
+      "details": null
+    },
+    {
+      "test": "negative_empty_intersection",
+      "passed": true,
+      "details": null
+    }
+  ]
+}
