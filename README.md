@@ -1,5 +1,12 @@
 # Independent Duodenary Mathematics
 
+**Organizing invariant: preservation of geometric identity across supported representations and execution.**
+The same structured object must retain its defining relationships and permitted
+operations through translation, execution and recovery.
+Read [this repository's role and evidence](INVARIANT.md) and the
+[executable cross-representation example](https://github.com/johnstobey/The-Duodenary-Mathematical-Proof-Atlas-/blob/atlas-workbench-01/INVARIANT.md).
+
+
 An independent Lean 4 project about finite residue rings and binary vectors.
 No predecessor project is a source or dependency.
 
