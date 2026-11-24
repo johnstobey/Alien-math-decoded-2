@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dtolnay/rust-toolchain@stable
       - name: Rust 2021 compile with warnings denied
         run: rustc --edition=2021 -D warnings --test IndependentDuodenary/omega_duodenary_closure.rs -o /tmp/omega_duodenary_2021_tests
